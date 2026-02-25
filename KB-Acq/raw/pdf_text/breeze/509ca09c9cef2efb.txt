@@ -1,0 +1,284 @@
+# PulseX-WDD Vision Extraction
+# Project: breeze
+# PDF: breeze__phase_brochure__aeaa3281.pdf
+# Pages: 17
+# Extracted: 2026-02-25
+# Source URL: https://wadidegladevelopments.com/wp-content/uploads/2023/10/CT-Breeze-Brochure.pdf
+# DocIntel pages: 15 | GPT-4o pages: 0 | No-text: 2
+# Total chars: 4752
+================================================================================
+
+--- PAGE 1 [DocIntel] ---
+<figure>
+
+![](figures/0)
+
+<!-- FigureContent="CLUBTown" -->
+
+</figure>
+
+
+A CLUB LIVING EXPERIENCE
+
+--- PAGE 2 [DocIntel] ---
+CLUB TOWN IS ALL IN THE NAME
+===
+
+A standout project where the enthusiasm of our club and the carefree spirit of Wadi Degla living meet. Club Town residential overlooks the club and the adjoining commercial area, giving its members a fresh perspective to wake up to everyday for all the family.
+
+We've built Club Town in the living heart of New Degla: a destination known for its sought-after amenities, easy accessibility. and proximity to all things splendid.
+
+7
+
+--- PAGE 3 [NO TEXT EXTRACTED] ---
+
+--- PAGE 4 [DocIntel] ---
+24
+
+CLUB VIEW
+
+More than 80% of the units have a direct view of the club
+
+THIS IS AN ILLUSTRATIVE PICTURE FOR INDICATIVE PURPOSES ONLY
+
+--- PAGE 5 [DocIntel] ---
+Nasr City
+
+Zamalek
+
+El Nasr Rd
+
+El Nasr Rd
+
+Emtedad Ramses
+
+
+# LOCATION
+
+5 MINUTE PROXIMITY:
+
+WADI DEGLA PROTECTORATE CIVIL REGISTRY SCHOOL BANKS COMMERCIAL AREA MOSQUE CHURCH HOSPITAL
+
+10 MINUTE PROXIMITY: MAADI CARREFOUR SOKHNA ROAD
+
+20 MINUTE PROXIMITY: NEW CAIRO NASR CITY DOWNTOWN HELIOPOLIS
+
+Ring Rd
+ :selected:
+Carrefour Maadi
+
+Ring Rd
+
+Ring Rd
+
+Giza City
+ :selected:
+Zahraa Al Maadi
+
+New Cairo
+
+Katameya Rd
+
+Katameya Rd
+
+Wadi
+
+Degla Club
+
+El Nasr Rd
+ :selected:
+O New Degla
+
+0
+
+Breeze
+
+<figure>
+
+![](figures/0)
+
+<!-- FigureContent="CLUB Town" -->
+
+</figure>
+
+--- PAGE 6 [DocIntel] ---
+<!-- PageFooter="THIS IS AN ILLUSTRATIVE PICTURE FOR INDICATIVE PURPOSES ONLY" -->
+
+--- PAGE 7 [DocIntel] ---
+<figure>
+
+![](figures/0)
+
+</figure>
+
+
+THIS IS AN ILLUSTRATIVE PICTURE FOR INDICATIVE PURPOSES ONLY
+
+--- PAGE 8 [DocIntel] ---
+<figure>
+
+![](figures/0)
+
+<!-- FigureContent="N" -->
+
+</figure>
+
+
+DISCLAIMER:
+
+DRAWINGS ARE NOT TO SCALE AND THE DIMENSIONS ARE APPROXIMATE. WADI DEOLA RESERVES THE RIGHT TO CHANGE IN THE MASTER PLAN, ALL DRAWING DIMENSIONS, AREAS, AND MATERIALS WITHOUT NOTIFICATION \* ANY COLORED IMAGES SHOWN ARE INDICATIVE ONLY, ACTUJAL COLORS MAY VARY
+
+\* FLOOR PLANS MAY BE MIRRORED DEPENDING ON THE LOCATION OF THE MASTER PLAN
+
+Breeze
+
+
+# CLUB TOWN MASTER PLAN
+
+<figure>
+
+![](figures/1)
+
+<!-- FigureContent="Horizon ZONE D COMMERCIAL AREA" -->
+
+</figure>
+
+--- PAGE 9 [DocIntel] ---
+A CLUB LIVING EXPERIENCE
+
+<figure>
+
+![](figures/0)
+
+</figure>
+
+--- PAGE 10 [DocIntel] ---
+<figure>
+
+![](figures/0)
+
+</figure>
+
+
+I OUTDOOR FITNESS AREA
+
+SWIMMING POOLS
+
+NURSERIES & KIDS GARDENS
+
+RETAIL
+
+ADMIN
+
+SPORTS COURTS
+
+OUTDOOR FITNESS AREA
+
+CLUB HOUSE
+
+MOSQUE
+
+FOOD COURT
+
+BANKS
+
+GYM
+
+PADEL TENNIS
+
+CLUB TOWN'S FACILITIES
+:selected: :selected: :selected: :unselected:
+
+--- PAGE 11 [NO TEXT EXTRACTED] ---
+
+--- PAGE 12 [DocIntel] ---
+<figure>
+
+![](figures/0)
+
+<!-- FigureContent="N" -->
+
+</figure>
+
+
+<figure>
+
+![](figures/1)
+
+<!-- FigureContent="Breeze Horizon" -->
+
+</figure>
+
+
+DISCLAIMER: DRAWINGS ARE NOT TO SCALE AND THE DIMENSIONS ARE APPROXIMATE. WADI DECLA RESERVES THE RIGHT TO CHANGE IN THE MASTER PLAN, ALL DRAWING DIMENSIONS, AREAS, AND MATERIALS WITHOUT NOTIFICATION \* ANY COLORED IMAGES SHOWN ARE INDICATIVE ONLY, ACTUJAL COLORS MAY VARY \* FLOOR PLANS MAY BE MIRRORED DEPENDING ON THE LOCATION OF THE MASTER PLAN
+
+<figure>
+
+![](figures/2)
+
+<!-- FigureContent="BREEZE MASTER PLAN" -->
+
+</figure>
+
+--- PAGE 13 [DocIntel] ---
+<!-- PageFooter="THIS IS AN ILLUSTRATIVE PICTURE FOR INDICATIVE PURPOSES ONLY" -->
+
+--- PAGE 14 [DocIntel] ---
+THE UNIQUE EXPERIENCE Relish a unique experience with a friendly day stroll along the ravishing land- scapes of Breeze, around the lakes, and water cascades.
+
+<!-- PageFooter="THIS IS AN ILLUSTRATIVE PICTURE FOR INDICATIVE PURPOSES ONLY" -->
+
+--- PAGE 15 [DocIntel] ---
+THIS IS AN ILLUSTRATIVE PICTURE FOR INDICATIVE PURPOSES ONLY
+
+--- PAGE 16 [DocIntel] ---
+MESMERIZING VIEW
+===
+
+The windows and balconies are exclusively designed so your home can absorb immense levels of sunlight and boundless views from all areas of your home.
+
+THIS IS AN ILLUSTRATIVE PICTURE FOR INDICATIVE PURPOSES ONLY
+
+--- PAGE 17 [DocIntel] ---
+SALES OFFICES
+===
+
+MAADI: WADI DECLA SPORTING CLUB - 4TH DISTRICT. ZAHRAA AL MAADI
+
+
+# NEW CAIRO:
+
+WADI DEGLA SPORTING CLUB - AL TAGMDA AL AWAL WADI DEGLA SPORTING CLUB - LOTUS, NEW CAIRO
+
+ALEX: WADI DEGLA SPORTING CLUB - MOHARAM BEK, ALEX
+
+ASSIUT:
+
+WADI DEGLA SPORTING CLUB - NEW ASSIUT, ASSIUT
+
+6TH OCTOBER:
+
+WADI DEGLA SPORTING CLUB, AL WAHAT ROAD, AL RAWDA COMPOUND WADI DEGLA SPORTING CLUB, AL CENTRAL 5T., FIRST DISTRICT
+
+HELIOPOLIS: WADI DEGLA SPORTING CLUB, AUTOSTRADE - CAIRO AIRPORT
+
+DAMIETTA:
+
+WADI DEGLA SPORTING CLUB - NEW DAMIETTA, DAMIETTA
+
+CLUB Town
+
+A CLUB LIVING EXPERIENCE
+
+<figure>
+
+![](figures/0)
+
+<!-- FigureContent="WADI DEGLA DEVELOPMENTS" -->
+
+</figure>
+
+
+19917
+
+<!-- PageFooter="WADIDEGLADEVELOPMENTS.COM" -->

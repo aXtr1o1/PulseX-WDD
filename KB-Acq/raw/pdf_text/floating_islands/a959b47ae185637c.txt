@@ -1,0 +1,549 @@
+# PulseX-WDD Vision Extraction
+# Project: floating_islands
+# PDF: floating_islands__phase_brochure__75d002bc.pdf
+# Pages: 28
+# Extracted: 2026-02-25
+# Source URL: https://wadidegladevelopments.com/wp-content/uploads/2024/07/Floating-Islands-Brochure.pdf
+# DocIntel pages: 27 | GPT-4o pages: 0 | No-text: 1
+# Total chars: 12705
+================================================================================
+
+--- PAGE 1 [DocIntel] ---
+FIOATING ISLANDS .
+
+<!-- PageFooter="murano The Closest Beach To Your Home" -->
+
+--- PAGE 2 [DocIntel] ---
+<figure>
+
+![](figures/0)
+
+</figure>
+
+
+THE CLOSEST BEACH TO YOUR HOME
+
+--- PAGE 3 [DocIntel] ---
+<figure>
+
+![](figures/0)
+
+<!-- FigureContent="WADI DEGLA DEVELOPMENTS" -->
+
+</figure>
+
+
+Founded in 2005, Wadi Degla Developments, a subsidiary of Wadi Degla Holding, has established itself as a leading real estate developer in Egypt.
+
+Over the past 18 years, we developed a total of 5.5 million square me- ters across 16 projects, with 12 successfully delivered and over 10,000 units delivered in Cairo, Giza, Sahel, and Ain El Sokhna.
+
+Wadi Degla is committed to transforming the concept of urban com- munities in Egypt through their large-scale real estate projects. They meticulously design and construct each project with the Egyptian family in mind.
+
+Their developments offer the highest standards of luxury while also creating spaces with well-developed infrastructure, essential commu- nity services, and ample green spaces - all designed to ensure a bright future for families.
+
+Focusing on the Red Sea, Wadi Degla Developments boasts a presence across 6 projects encompassing 2.1 million square meters.
+
+This prime location offers a vibrant community of 6,000 residences, alongside two unique boutique hotels, Marina Wadi Degla and Blumar El Dome. These hotels provide a comfortable and stylish atmosphere, making them ideal destinations for relaxation and enjoyment.
+
+--- PAGE 4 [DocIntel] ---
+YOU DON'T SEARCH FOR SERENITY. IT FINDS YOU
+===
+
+Murano is a love letter to nature's most- precious gifts. Immerse into a unique and mesmerizing experience.
+
+on the sandy beaches of the Red Sea. Murano is a place where you get the chance to unwind and become one with what nature really has to offer.
+
+With sensational, natural Hot Springs that run straight down the gentle mountains of the Red Sea, and Palms; a marvelous setting designed to indulge every last bit sun, sky, and sand.
+
+Murano is all about absorbing a never-ending world of nat- ural tranquility, with two areas; "Foreshore", and "Views", solely designed for this specific need in mind. Recon- cile and free your mind along the shimmery waters of Waterside that flow all around the complex, offering you a ma- jestic sensation of natural bliss.
+
+THE
+
+CLOSEST BEACH TO YOUR
+
+HOME
+
+THE CLOSEST
+
+BEACH TO YOUR HOME
+
+--- PAGE 5 [DocIntel] ---
+<figure>
+
+![](figures/0)
+
+</figure>
+
+
+RELAX, RECHARGE AND REJUVENATE
+
+--- PAGE 6 [DocIntel] ---
+<!-- PageHeader="LOCATION" -->
+
+To Cairo
+
+Toll Station
+
+Ain Sokhana Rd.
+
+murano
+
+El Galala Rd.
+
+Red Sea
+
+Zafarana Rd.
+
+<!-- PageFooter="50 minutes away from Cairo" -->
+
+LOCATION MAP
+
+50 MINUTES away from Cairo!
+
+Closest shoreline to the Capital
+
+Murano is ideally situated at the end of the Ain El Sokhna Road. and at the start of Zaafarana Road . Just a one hour drive away from Cairo, being the closest shoreline to the capital.
+
+--- PAGE 7 [DocIntel] ---
+unw
+
+THE CLOSEST BEACH TO YOUR
+ :unselected:
+FIND YOUR WAY WITHIN
+===
+
+Taking a midday stroll through the walkways of Murano, you'll find all the facilities and services you'll need. With a beach walk promenade connecting all 3 phases of the compound, and water features wherever you go.
+
+Murano is all about unwinding and attaining a peace of mind, nev- ertheless we did not ignore your fitness and wellness needs; with beach football, and volleyballcourts andan outdoor gym.Bringing the Murano community together with an events area, a main beach club house, and pool bars overlooking the water features in ev- ery phase.
+
+<!-- PageFooter="Real Picture" -->
+
+HOME
+ :unselected:
+THE CLOSEST BEACH TO YOUR HOME
+:unselected: :unselected:
+
+--- PAGE 8 [DocIntel] ---
+<!-- PageHeader="BEACH" -->
+
+<figure>
+
+![](figures/0)
+
+</figure>
+
+
+
+# 750M SANDY BEACH
+
+Indulge in the ultimate coastal living experience with our 750m sandy beach, perfect for relaxing and enjoying the crystal-clear waters of the Red Sea.
+
+--- PAGE 9 [DocIntel] ---
+<!-- PageHeader="WATER FEATURES" -->
+
+
+ 100 % WATER FEATURES & SEA VIEW
+
+Experience tranquil living at our residential compound on the Red Sea, where all our units offer stunning water feature views.
+
+Whether it be the infinity pools or the marina, our units are designed to fully immerse you in the beauty and tranquility of coastal living, with the soothing sounds of water offering the ultimate relaxation.
+
+Enjoy stunning sea views from 90% of our units at our residential compound on the Red Sea.
+
+Wake up every morning to the serene beauty of the sea right outside your window.
+
+Our units have been carefully designed to maximize the views, allowing you to fully immerse yourself in the beauty and tranquil- ity of coastal living.
+
+<figure>
+
+![](figures/0)
+
+<!-- FigureContent="8" -->
+
+</figure>
+
+--- PAGE 10 [DocIntel] ---
+<!-- PageHeader="MARINA" -->
+
+<figure>
+
+![](figures/0)
+
+</figure>
+
+
+
+# 10OM MARINA
+
+Enjoy easy access to the Red Sea with our 400m marina, offer- ing stunning views and the perfect spot to launch your boat or enjoy a leisurely stroll along the water.
+
+--- PAGE 11 [DocIntel] ---
+<!-- PageHeader="HOTEL" -->
+
+
+ STAR HOTEL ALMASSA
+
+Experience a luxurious 4-star hotel stay at our Red Sea location, with comfortable rooms and world-class dining options.
+
+Whether you're here for business or pleasure, our hotel offers the perfect blend of comfort and sophistication for an unforget- table stay.
+
+<figure>
+
+![](figures/0)
+
+</figure>
+
+--- PAGE 12 [DocIntel] ---
+<!-- PageHeader="F&B FACILITIES" -->
+
+<figure>
+
+![](figures/0)
+
+<!-- FigureContent="Real Picture bianca" -->
+
+</figure>
+
+ :unselected:
+
+# PRESTIGIOUS F& B FACILITIES
+
+\- BIANCA
+
+Enjoy world-class dining at our prestigious F&B facilities offer a range of dining options, from casual bites to fine dining, all pre- pared with the freshest local ingredients.
+
+With stunning sea views and state-of-the-art facilities, you can enjoy an unforgettable dining experience.
+
+--- PAGE 13 [DocIntel] ---
+<!-- PageHeader="RESTAURANT" -->
+
+
+ BIANCA RESTAURANT
+
+Real Picture
+
+<figure>
+
+![](figures/0)
+
+</figure>
+
+
+<figure>
+
+![](figures/1)
+
+<!-- FigureContent="Real Picture bianca" -->
+
+</figure>
+
+
+<figure>
+
+![](figures/2)
+
+<!-- FigureContent="Real Picture" -->
+
+</figure>
+
+--- PAGE 14 [DocIntel] ---
+<!-- PageHeader="COMMMUNITY" -->
+
+
+ COMMERCIAL AREA
+
+Experience convenience and community, with our on-site com- mercial area offering a range of shops and services at your doorstep.
+
+From a supermarket to a beauty salon, our commercial area has it all, making everyday living easy and enjoyable.
+
+<figure>
+
+![](figures/0)
+
+</figure>
+
+--- PAGE 15 [DocIntel] ---
+<!-- PageHeader="WELLNESS" -->
+
+<figure>
+
+![](figures/0)
+
+</figure>
+
+
+
+# SPA
+
+Indulge in pure relaxation at our Red Sea location with our world- class spa facilities.
+
+Designed to rejuvenate your mind, body, and soul, our spa of- fers a range of treatments and therapies to help you unwind and recharge.
+
+With highly skilled therapists and state-of-the-art facilities, you can rest assured that you will receive the utmost care and at- tention during your visit.
+
+Whether you're looking for a quick escape or a complete spa experience, our spa facilities provide the perfect retreat for ul- timate relaxation.
+
+--- PAGE 16 [DocIntel] ---
+<!-- PageHeader="EXPERIENCE" -->
+
+
+ UTMOST PRIVACY
+
+Experience peace of mind and the utmost privacy at our Red Sea location, with our secluded and secure environment ensuring a truly tranquil living experience.
+
+<figure>
+
+![](figures/0)
+
+</figure>
+
+ :selected: :selected: :selected: :selected: :selected: :selected: :selected:
+
+--- PAGE 17 [DocIntel] ---
+<!-- PageHeader="FEATURES" -->
+
+<figure>
+
+![](figures/0)
+
+<!-- FigureContent="\- - HOT FLOATING VIEWS & FORESHORE SPRING ! PALMS . WATERSIDE! ISLANDS" -->
+
+</figure>
+
+
+
+# MASTERPLAN
+
+The masterplan focuses on creating different themes along ev- ery corner of murano setting the mood through distinctive fea- tures offering a unique experience for the residents.
+
+<figure>
+
+![](figures/1)
+
+<!-- FigureContent="Swimming Pools Pool Bars Outdoor Gym Events Area Sitting Area Beach Clubhouse Wooden Deck Beach Walk Infinity Pool Beach Volleyball Beach Football" -->
+
+</figure>
+
+--- PAGE 18 [DocIntel] ---
+|||
+| - | - |
+| | |
+| | |
+| MURANO + | VALLEYS |
+
+<figure>
+
+![](figures/0)
+
+</figure>
+
+
+<figure>
+
+![](figures/1)
+
+</figure>
+
+--- PAGE 19 [DocIntel] ---
+<!-- PageHeader="THE CLOSEST BEACH TO YOUR HOME" -->
+
+<figure>
+
+![](figures/0)
+
+</figure>
+
+
+
+# VIEWS
+
+Tailored and designed to serve every unit in the first valley with extraordinary "Views", relishing an ideal peace of mind, reassuring your desires to enjoy the tranquilizing, dreamy views of the blue sky intersecting the calm realm of the Red Sea.
+
+<figure>
+
+![](figures/1)
+
+</figure>
+
+
+
+# FORESHORE
+
+Surrounded by the Red Sea's spectacular mountain range while resting on the water side, we took the opportunity to craft around this miraculous aspect to trigger a natural feeling of comfort.
+
+<figure>
+
+![](figures/2)
+
+</figure>
+
+
+
+# HOT SPRING
+
+Tailored and designed to serve every unit in the first valley with extraordinary "Views", relishing an ideal peace of mind, reassuring your desires to enjoy the tranquilizing, dreamy views of the blue sky intersecting the calm realm of the Red Sea.
+
+--- PAGE 20 [DocIntel] ---
+<!-- PageHeader="THE CLOSEST BEACH TO YOUR HOME" -->
+
+<figure>
+
+![](figures/0)
+
+</figure>
+
+
+<figure>
+
+![](figures/1)
+
+</figure>
+
+
+
+# PALMS WATERSIDE
+
+Feel at ease when you're in the Palms. An area designed for residents to sit back on huge wooden decks centered in the middle of its large pools, and indulge everything around them.
+
+Designed with wide open landscapes filled with tropical palm trees and green areas everywhere.
+
+the new concept behind Waterside is to follow a more linear landscape scheme, with bound- less infinity pools and tall palm trees driving your eyes straight to the sea getting a tre- mendous view of the waterside.
+
+<figure>
+
+![](figures/2)
+
+</figure>
+
+--- PAGE 21 [DocIntel] ---
+<figure>
+
+![](figures/0)
+
+<!-- FigureContent="FLOATING ISLANDS ." -->
+
+</figure>
+
+
+Masterplan
+
+
+# There's an island for every mood!
+
+Floating Islands redefines luxury, offering a collection of incredible floating islands to choose from. Whether you crave beachfront luxury, adventures, total relaxation, or unforgettable times with friends, there's an island perfectly suited to your desires.
+
+Stretch to the horizon and unparalleled beachfront living, designed for you.
+
+<figure>
+
+![](figures/1)
+
+<!-- FigureContent="THE CLOSEST BEACH TO YOUR :unselected: :unselected: HOME :unselected: min THE CLOSEST BEACH TO YOUR HOME" -->
+
+</figure>
+
+ :unselected:
+
+--- PAGE 22 [NO TEXT EXTRACTED] ---
+
+--- PAGE 23 [DocIntel] ---
+<figure>
+
+![](figures/0)
+
+</figure>
+
+
+<!-- PageFooter="THE CLOSEST BEACH TO YOUR" -->
+
+<!-- PageFooter="HOME" -->
+ :unselected:
+<!-- PageFooter="THE CLOSEST BEACH TO YOUR" -->
+ :unselected:
+<!-- PageNumber="HOME" -->
+
+--- PAGE 24 [DocIntel] ---
+<figure>
+
+![](figures/0)
+
+<!-- FigureContent="UNIT" -->
+
+</figure>
+
+
+<figure>
+
+![](figures/1)
+
+<!-- FigureContent="1 TYPES" -->
+
+</figure>
+
+--- PAGE 25 [DocIntel] ---
+BLUE CORNER
+===
+
+
+# An endless blue horizon.
+
+Surround yourself with sunlight, dancing on the turquoise water, washing away stress and leaving pure serenity.
+
+<figure>
+
+![](figures/0)
+
+</figure>
+
+--- PAGE 26 [DocIntel] ---
+BLUE CORNER
+===
+
+This corner of paradise offers a daily escape into a world painted with endless shades of blue.
+
+<figure>
+
+![](figures/0)
+
+</figure>
+
+
+<figure>
+
+![](figures/1)
+
+</figure>
+
+--- PAGE 27 [DocIntel] ---
+Disclaimer
+
+Drawings are not to scale and the dimensions are approximate, wadi degla reserves the right to change in the master plan all drawing dimensions, areas, and materials without notification.
+
+any colored images shown are indicative only, actual colors may vary.
+
+floor plans may be mirrored depending on the location of the master plan.
+
+. in the case of gardens level option, stairs and terrace details may vary.
+
+--- PAGE 28 [DocIntel] ---
+<figure>
+
+![](figures/0)
+
+<!-- FigureContent="WADI DEGLA DEVELOPMENTS" -->
+
+</figure>
+
+
+Head Quarters: 4th District , Zahraa El Maadi, Maadi, Cairo, Egypt
+
+|||
+| - | - |
+| Sales Office | |
+| Maadi: | Wadi Degla Sporting Club - 4th District , Zahraa El Maadi |
+| New Cairo: | Wadi Degla Sporting Club - Al Tagmoa Al Awal Wadi Degla Sporting Club - Lotus, New Cairo |
+| Sheraton: | The District , Autostrade - Cairo Airport |
+|| Sheraton Club Ext .: Autostrade - Cairo Airport  |
+| 6th of October | Wadi Degla Sporting Club - Al Wahat Road, Al Rawda Compound Wadi Degla Sporting Club - Al Central St., First District |
+
+<!-- PageFooter="19917" -->

@@ -1,0 +1,566 @@
+[2026-02-25T17:39:55Z] INFO Azure DocIntel credentials loaded (endpoint masked for security).
+[2026-02-25T17:39:55Z] INFO ======================================================================
+[2026-02-25T17:39:55Z] INFO PulseX-WDD — Brochure Enrichment Pipeline
+[2026-02-25T17:39:55Z] INFO Run date: 2026-02-25
+[2026-02-25T17:39:55Z] INFO ======================================================================
+[2026-02-25T17:39:55Z] INFO Loaded KB: 28 rows × 52 columns
+[2026-02-25T17:39:55Z] INFO Backup saved: /Volumes/ReserveDisk/codeBase/PulseX-WDD/engine-KB/backups/PulseX-WDD_buyerKB_2026-02-25_1739.csv
+[2026-02-25T17:39:55Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:39:55Z] INFO PASS A — Gap Analysis
+[2026-02-25T17:39:55Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:39:55Z] INFO   [A] murano: 17/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] clubtown: 16/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] neo: 17/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] vero: 17/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] promenade_new_cairo: 17/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] blumar_el_sokhna: 18/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] blumar_hills: 18/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] tijan_maadi: 18/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] blumar_el_dome: 18/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] pyramids_walk: 18/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] blumar_sidi_abd_el_rahman: 18/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] tijan_zahraa_el_maadi: 18/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] canal_residence: 18/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] river_walk: 18/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] marina_wadi_degla: 18/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] living_community: 17/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] waterside: 17/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] floating_islands: 17/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] ojo: 17/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] neo_lakes: 17/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] neo_gardens: 17/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] breeze: 17/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] horizon: 17/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] edge: 17/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] vyon: 17/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] neopolis: 18/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] mada: 18/21 missing
+[2026-02-25T17:39:55Z] INFO   [A] camuse: 18/21 missing
+[2026-02-25T17:39:55Z] INFO Gap report: /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/outputs/intermediate/wdd_gap_report.csv
+[2026-02-25T17:39:55Z] INFO Gap summary: /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/outputs/intermediate/wdd_gap_summary.json
+[2026-02-25T17:39:55Z] INFO Tier A (most gaps): 28  B: 0  C: 0
+[2026-02-25T17:39:55Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:39:55Z] INFO PASS B/C — Brochure DocIntel Extraction
+[2026-02-25T17:39:55Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:39:55Z] INFO Entities with brochures: 18
+[2026-02-25T17:39:55Z] INFO 
+── Entity: blumar_el_sokhna (1 PDFs)
+[2026-02-25T17:39:56Z] INFO   ⊘  Skipping generic magazine: blumar_el_sokhna__unknown_pdf__c479efe0.pdf
+[2026-02-25T17:39:56Z] INFO 
+── Entity: blumar_hills (1 PDFs)
+[2026-02-25T17:39:56Z] INFO   ⊘  Skipping generic magazine: blumar_hills__unknown_pdf__c479efe0.pdf
+[2026-02-25T17:39:56Z] INFO 
+── Entity: breeze (1 PDFs)
+[2026-02-25T17:39:56Z] INFO   PDF: breeze__phase_brochure__aeaa3281.pdf
+[2026-02-25T17:39:56Z] INFO   Submitting breeze__phase_brochure__aeaa3281.pdf (13048KB) to DocIntel...
+[2026-02-25T17:40:04Z] ERROR   DocIntel submit error 400: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:40:04Z] WARNING   ✗ DocIntel failed for breeze__phase_brochure__aeaa3281.pdf
+[2026-02-25T17:40:04Z] INFO 
+── Entity: clubtown (1 PDFs)
+[2026-02-25T17:40:04Z] INFO   ⊘  Skipping generic magazine: clubtown__unknown_pdf__c479efe0.pdf
+[2026-02-25T17:40:04Z] INFO 
+── Entity: edge (1 PDFs)
+[2026-02-25T17:40:04Z] INFO   PDF: edge__phase_brochure__f80df447.pdf
+[2026-02-25T17:40:04Z] INFO   Submitting edge__phase_brochure__f80df447.pdf (34005KB) to DocIntel...
+[2026-02-25T17:40:16Z] ERROR   DocIntel submit error 400: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:40:16Z] WARNING   ✗ DocIntel failed for edge__phase_brochure__f80df447.pdf
+[2026-02-25T17:40:16Z] INFO 
+── Entity: floating_islands (1 PDFs)
+[2026-02-25T17:40:16Z] INFO   PDF: floating_islands__phase_brochure__75d002bc.pdf
+[2026-02-25T17:40:16Z] INFO   Submitting floating_islands__phase_brochure__75d002bc.pdf (2606KB) to DocIntel...
+[2026-02-25T17:40:23Z] INFO   DocIntel succeeded — cached to a959b47ae185.json
+[2026-02-25T17:40:23Z] INFO   ✓ Got 150 chars of text from DocIntel
+[2026-02-25T17:40:23Z] INFO 
+── Entity: horizon (1 PDFs)
+[2026-02-25T17:40:23Z] INFO   PDF: horizon__phase_brochure__fb03a146.pdf
+[2026-02-25T17:40:23Z] INFO   Submitting horizon__phase_brochure__fb03a146.pdf (11382KB) to DocIntel...
+[2026-02-25T17:40:30Z] ERROR   DocIntel submit error 400: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:40:30Z] WARNING   ✗ DocIntel failed for horizon__phase_brochure__fb03a146.pdf
+[2026-02-25T17:40:30Z] INFO 
+── Entity: living_community (1 PDFs)
+[2026-02-25T17:40:30Z] INFO   PDF: living_community__phase_brochure__61f82a41.pdf
+[2026-02-25T17:40:30Z] INFO   Submitting living_community__phase_brochure__61f82a41.pdf (9806KB) to DocIntel...
+[2026-02-25T17:40:35Z] ERROR   DocIntel submit error 400: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:40:35Z] WARNING   ✗ DocIntel failed for living_community__phase_brochure__61f82a41.pdf
+[2026-02-25T17:40:35Z] INFO 
+── Entity: murano (2 PDFs)
+[2026-02-25T17:40:35Z] INFO   ⊘  Skipping generic magazine: murano__unknown_pdf__c479efe0.pdf
+[2026-02-25T17:40:35Z] INFO   PDF: murano__phase_brochure__61f82a41.pdf
+[2026-02-25T17:40:35Z] INFO   ↔  Shared brochure (same as living_community) — using cached extraction
+[2026-02-25T17:40:35Z] INFO 
+── Entity: neo (1 PDFs)
+[2026-02-25T17:40:35Z] INFO   PDF: neo__project_brochure__5926f3b9.pdf
+[2026-02-25T17:40:35Z] INFO   Submitting neo__project_brochure__5926f3b9.pdf (8113KB) to DocIntel...
+[2026-02-25T17:40:38Z] ERROR   DocIntel submit error 400: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:40:38Z] WARNING   ✗ DocIntel failed for neo__project_brochure__5926f3b9.pdf
+[2026-02-25T17:40:38Z] INFO 
+── Entity: neo_gardens (1 PDFs)
+[2026-02-25T17:40:38Z] INFO   PDF: neo_gardens__project_brochure__5926f3b9.pdf
+[2026-02-25T17:40:38Z] INFO   ↔  Shared brochure (same as neo) — using cached extraction
+[2026-02-25T17:40:38Z] INFO 
+── Entity: neo_lakes (1 PDFs)
+[2026-02-25T17:40:38Z] INFO   PDF: neo_lakes__project_brochure__1bfb1a62.pdf
+[2026-02-25T17:40:38Z] INFO   Submitting neo_lakes__project_brochure__1bfb1a62.pdf (5945KB) to DocIntel...
+[2026-02-25T17:40:41Z] ERROR   DocIntel submit error 400: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:40:41Z] WARNING   ✗ DocIntel failed for neo_lakes__project_brochure__1bfb1a62.pdf
+[2026-02-25T17:40:41Z] INFO 
+── Entity: neopolis (1 PDFs)
+[2026-02-25T17:40:41Z] INFO   PDF: neopolis__project_brochure__5926f3b9.pdf
+[2026-02-25T17:40:41Z] INFO   ↔  Shared brochure (same as neo) — using cached extraction
+[2026-02-25T17:40:41Z] INFO 
+── Entity: ojo (1 PDFs)
+[2026-02-25T17:40:41Z] INFO   PDF: ojo__phase_brochure__fcd04cec.pdf
+[2026-02-25T17:40:42Z] INFO   Submitting ojo__phase_brochure__fcd04cec.pdf (74867KB) to DocIntel...
+[2026-02-25T17:42:20Z] INFO Azure DocIntel credentials loaded (endpoint masked for security).
+[2026-02-25T17:42:20Z] INFO ======================================================================
+[2026-02-25T17:42:20Z] INFO PulseX-WDD — Brochure Enrichment Pipeline
+[2026-02-25T17:42:20Z] INFO Run date: 2026-02-25
+[2026-02-25T17:42:20Z] INFO ======================================================================
+[2026-02-25T17:42:20Z] INFO Loaded KB: 28 rows × 52 columns
+[2026-02-25T17:42:20Z] INFO Backup saved: /Volumes/ReserveDisk/codeBase/PulseX-WDD/engine-KB/backups/PulseX-WDD_buyerKB_2026-02-25_1742.csv
+[2026-02-25T17:42:20Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:42:20Z] INFO PASS A — Gap Analysis
+[2026-02-25T17:42:20Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:42:20Z] INFO   [A] murano: 17/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] clubtown: 16/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] neo: 17/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] vero: 17/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] promenade_new_cairo: 17/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] blumar_el_sokhna: 18/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] blumar_hills: 18/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] tijan_maadi: 18/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] blumar_el_dome: 18/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] pyramids_walk: 18/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] blumar_sidi_abd_el_rahman: 18/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] tijan_zahraa_el_maadi: 18/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] canal_residence: 18/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] river_walk: 18/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] marina_wadi_degla: 18/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] living_community: 17/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] waterside: 17/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] floating_islands: 17/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] ojo: 17/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] neo_lakes: 17/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] neo_gardens: 17/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] breeze: 17/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] horizon: 17/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] edge: 17/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] vyon: 17/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] neopolis: 18/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] mada: 18/21 missing
+[2026-02-25T17:42:20Z] INFO   [A] camuse: 18/21 missing
+[2026-02-25T17:42:20Z] INFO Gap report: /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/outputs/intermediate/wdd_gap_report.csv
+[2026-02-25T17:42:20Z] INFO Gap summary: /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/outputs/intermediate/wdd_gap_summary.json
+[2026-02-25T17:42:20Z] INFO Tier A (most gaps): 28  B: 0  C: 0
+[2026-02-25T17:42:20Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:42:20Z] INFO PASS B/C — Brochure DocIntel Extraction
+[2026-02-25T17:42:20Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:42:20Z] INFO Entities with brochures: 18
+[2026-02-25T17:42:20Z] INFO 
+── Entity: blumar_el_sokhna (1 PDFs)
+[2026-02-25T17:42:20Z] INFO   ⊘  Skipping generic magazine: blumar_el_sokhna__unknown_pdf__c479efe0.pdf
+[2026-02-25T17:42:20Z] INFO 
+── Entity: blumar_hills (1 PDFs)
+[2026-02-25T17:42:20Z] INFO   ⊘  Skipping generic magazine: blumar_hills__unknown_pdf__c479efe0.pdf
+[2026-02-25T17:42:20Z] INFO 
+── Entity: breeze (1 PDFs)
+[2026-02-25T17:42:20Z] INFO   PDF: breeze__phase_brochure__aeaa3281.pdf
+[2026-02-25T17:42:20Z] INFO   PDF size: 13048KB — limit: 3710KB
+[2026-02-25T17:42:20Z] INFO   PDF too large (13048KB) — splitting into page chunks...
+[2026-02-25T17:42:20Z] INFO   Splitting 17-page PDF into chunks (max 3710KB each)
+[2026-02-25T17:42:20Z] INFO   Chunk 1: pages 1–4 (4530KB)
+[2026-02-25T17:42:20Z] INFO   Chunk 2: pages 5–10 (4209KB)
+[2026-02-25T17:42:20Z] INFO   Chunk 3: pages 11–14 (3974KB)
+[2026-02-25T17:42:20Z] INFO   Chunk 4: pages 15–17 (2011KB)
+[2026-02-25T17:42:20Z] INFO   Submitting breeze__phase_brochure__aeaa3281.pdf chunk 1/4 (4530KB)...
+[2026-02-25T17:42:24Z] ERROR   DocIntel submit error 400 for breeze__phase_brochure__aeaa3281.pdf chunk 1/4: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:42:24Z] WARNING   Chunk 1 failed — continuing
+[2026-02-25T17:42:24Z] INFO   Submitting breeze__phase_brochure__aeaa3281.pdf chunk 2/4 (4209KB)...
+[2026-02-25T17:42:28Z] ERROR   DocIntel submit error 400 for breeze__phase_brochure__aeaa3281.pdf chunk 2/4: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:42:28Z] WARNING   Chunk 2 failed — continuing
+[2026-02-25T17:42:28Z] INFO   Submitting breeze__phase_brochure__aeaa3281.pdf chunk 3/4 (3974KB)...
+[2026-02-25T17:42:35Z] INFO   Chunk 3: 598 chars extracted
+[2026-02-25T17:42:35Z] INFO   Submitting breeze__phase_brochure__aeaa3281.pdf chunk 4/4 (2011KB)...
+[2026-02-25T17:44:08Z] INFO Azure DocIntel credentials loaded (endpoint masked for security).
+[2026-02-25T17:44:08Z] INFO ======================================================================
+[2026-02-25T17:44:08Z] INFO PulseX-WDD — Brochure Enrichment Pipeline
+[2026-02-25T17:44:08Z] INFO Run date: 2026-02-25
+[2026-02-25T17:44:08Z] INFO ======================================================================
+[2026-02-25T17:44:08Z] INFO Loaded KB: 28 rows × 52 columns
+[2026-02-25T17:44:08Z] INFO Backup saved: /Volumes/ReserveDisk/codeBase/PulseX-WDD/engine-KB/backups/PulseX-WDD_buyerKB_2026-02-25_1744.csv
+[2026-02-25T17:44:08Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:44:08Z] INFO PASS A — Gap Analysis
+[2026-02-25T17:44:08Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:44:08Z] INFO   [A] murano: 17/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] clubtown: 16/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] neo: 17/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] vero: 17/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] promenade_new_cairo: 17/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] blumar_el_sokhna: 18/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] blumar_hills: 18/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] tijan_maadi: 18/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] blumar_el_dome: 18/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] pyramids_walk: 18/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] blumar_sidi_abd_el_rahman: 18/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] tijan_zahraa_el_maadi: 18/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] canal_residence: 18/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] river_walk: 18/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] marina_wadi_degla: 18/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] living_community: 17/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] waterside: 17/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] floating_islands: 17/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] ojo: 17/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] neo_lakes: 17/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] neo_gardens: 17/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] breeze: 17/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] horizon: 17/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] edge: 17/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] vyon: 17/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] neopolis: 18/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] mada: 18/21 missing
+[2026-02-25T17:44:08Z] INFO   [A] camuse: 18/21 missing
+[2026-02-25T17:44:08Z] INFO Gap report: /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/outputs/intermediate/wdd_gap_report.csv
+[2026-02-25T17:44:08Z] INFO Gap summary: /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/outputs/intermediate/wdd_gap_summary.json
+[2026-02-25T17:44:08Z] INFO Tier A (most gaps): 28  B: 0  C: 0
+[2026-02-25T17:44:08Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:44:08Z] INFO PASS B/C — Brochure DocIntel Extraction
+[2026-02-25T17:44:08Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:44:08Z] INFO Entities with brochures: 18
+[2026-02-25T17:44:08Z] INFO 
+── Entity: blumar_el_sokhna (1 PDFs)
+[2026-02-25T17:44:08Z] INFO   ⊘  Skipping generic magazine: blumar_el_sokhna__unknown_pdf__c479efe0.pdf
+[2026-02-25T17:44:08Z] INFO 
+── Entity: blumar_hills (1 PDFs)
+[2026-02-25T17:44:08Z] INFO   ⊘  Skipping generic magazine: blumar_hills__unknown_pdf__c479efe0.pdf
+[2026-02-25T17:44:08Z] INFO 
+── Entity: breeze (1 PDFs)
+[2026-02-25T17:44:08Z] INFO   PDF: breeze__phase_brochure__aeaa3281.pdf
+[2026-02-25T17:44:08Z] INFO   PDF size: 13048KB — limit: 1855KB
+[2026-02-25T17:44:08Z] INFO   Large PDF — submitting via CDN URL: https://wadidegladevelopments.com/wp-content/uploads/2023/10/CT-Breeze-Brochure.pdf
+[2026-02-25T17:44:10Z] WARNING   URL-mode failed (400): {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}} — falling back to page chunks
+[2026-02-25T17:44:10Z] INFO   PDF too large (13048KB) — splitting into 1.9MB page chunks...
+[2026-02-25T17:44:10Z] INFO   Splitting 17-page PDF into chunks (max 1855KB each)
+[2026-02-25T17:44:10Z] INFO   Chunk 1: pages 1–2 (3419KB)
+[2026-02-25T17:44:10Z] INFO   Chunk 2: pages 3–3 (2649KB)
+[2026-02-25T17:44:10Z] INFO   Chunk 3: pages 4–4 (3748KB)
+[2026-02-25T17:44:10Z] INFO   Chunk 4: pages 5–8 (2284KB)
+[2026-02-25T17:44:10Z] INFO   Chunk 5: pages 9–10 (1927KB)
+[2026-02-25T17:44:10Z] INFO   Chunk 6: pages 11–13 (2384KB)
+[2026-02-25T17:44:10Z] INFO   Chunk 7: pages 14–14 (2619KB)
+[2026-02-25T17:44:10Z] INFO   Chunk 8: pages 15–16 (1948KB)
+[2026-02-25T17:44:10Z] INFO   Chunk 9: pages 17–17 (65KB)
+[2026-02-25T17:44:10Z] INFO   Submitting breeze__phase_brochure__aeaa3281.pdf chunk 1/9 (3419KB)...
+[2026-02-25T17:44:18Z] INFO   Chunk 1: 564 chars extracted
+[2026-02-25T17:44:18Z] INFO   Submitting breeze__phase_brochure__aeaa3281.pdf chunk 2/9 (2649KB)...
+[2026-02-25T17:44:25Z] INFO   Chunk 2: 25 chars extracted
+[2026-02-25T17:44:25Z] INFO   Submitting breeze__phase_brochure__aeaa3281.pdf chunk 3/9 (3748KB)...
+[2026-02-25T17:44:33Z] INFO   Chunk 3: 134 chars extracted
+[2026-02-25T17:44:33Z] INFO   Submitting breeze__phase_brochure__aeaa3281.pdf chunk 4/9 (2284KB)...
+[2026-02-25T17:44:44Z] INFO   Chunk 4: 661 chars extracted
+[2026-02-25T17:44:44Z] INFO   Submitting breeze__phase_brochure__aeaa3281.pdf chunk 5/9 (1927KB)...
+[2026-02-25T17:44:52Z] INFO   Chunk 5: 411 chars extracted
+[2026-02-25T17:44:52Z] INFO   Submitting breeze__phase_brochure__aeaa3281.pdf chunk 6/9 (2384KB)...
+[2026-02-25T17:44:59Z] INFO   Chunk 6: 598 chars extracted
+[2026-02-25T17:44:59Z] INFO   Submitting breeze__phase_brochure__aeaa3281.pdf chunk 7/9 (2619KB)...
+[2026-02-25T17:45:06Z] INFO   Chunk 7: 232 chars extracted
+[2026-02-25T17:45:06Z] INFO   Submitting breeze__phase_brochure__aeaa3281.pdf chunk 8/9 (1948KB)...
+[2026-02-25T17:45:13Z] INFO   Chunk 8: 348 chars extracted
+[2026-02-25T17:45:13Z] INFO   Submitting breeze__phase_brochure__aeaa3281.pdf chunk 9/9 (65KB)...
+[2026-02-25T17:45:19Z] INFO   Chunk 9: 730 chars extracted
+[2026-02-25T17:45:19Z] INFO   DocIntel chunked succeeded — 3719 chars total, cached to 509ca09c9cef.json
+[2026-02-25T17:45:19Z] INFO   ✓ Got 3719 chars of text from DocIntel
+[2026-02-25T17:45:19Z] INFO     unit_types: ['retail']
+[2026-02-25T17:45:19Z] INFO 
+── Entity: clubtown (1 PDFs)
+[2026-02-25T17:45:19Z] INFO   ⊘  Skipping generic magazine: clubtown__unknown_pdf__c479efe0.pdf
+[2026-02-25T17:45:19Z] INFO 
+── Entity: edge (1 PDFs)
+[2026-02-25T17:45:19Z] INFO   PDF: edge__phase_brochure__f80df447.pdf
+[2026-02-25T17:45:19Z] INFO   PDF size: 34005KB — limit: 1855KB
+[2026-02-25T17:45:19Z] INFO   Large PDF — submitting via CDN URL: https://wadidegladevelopments.com/wp-content/uploads/2024/07/Edge-Brochure-2.pdf
+[2026-02-25T17:45:22Z] WARNING   URL-mode failed (400): {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}} — falling back to page chunks
+[2026-02-25T17:45:22Z] INFO   PDF too large (34005KB) — splitting into 1.9MB page chunks...
+[2026-02-25T17:45:22Z] INFO   Splitting 21-page PDF into chunks (max 1855KB each)
+[2026-02-25T17:45:22Z] INFO   Chunk 1: pages 1–7 (1935KB)
+[2026-02-25T17:45:22Z] INFO   Chunk 2: pages 8–8 (2846KB)
+[2026-02-25T17:45:22Z] INFO   Chunk 3: pages 9–11 (22049KB)
+[2026-02-25T17:45:22Z] INFO   Chunk 4: pages 12–12 (21408KB)
+[2026-02-25T17:45:22Z] INFO   Chunk 5: pages 13–13 (2019KB)
+[2026-02-25T17:45:22Z] INFO   Chunk 6: pages 14–14 (2455KB)
+[2026-02-25T17:45:22Z] INFO   Chunk 7: pages 15–15 (24124KB)
+[2026-02-25T17:45:22Z] INFO   Chunk 8: pages 16–16 (24513KB)
+[2026-02-25T17:45:22Z] INFO   Chunk 9: pages 17–18 (4282KB)
+[2026-02-25T17:45:22Z] INFO   Chunk 10: pages 19–19 (23515KB)
+[2026-02-25T17:45:22Z] INFO   Chunk 11: pages 20–20 (23706KB)
+[2026-02-25T17:45:22Z] INFO   Chunk 12: pages 21–21 (1451KB)
+[2026-02-25T17:45:22Z] INFO   Submitting edge__phase_brochure__f80df447.pdf chunk 1/12 (1935KB)...
+[2026-02-25T17:45:29Z] INFO   Chunk 1: 612 chars extracted
+[2026-02-25T17:45:29Z] INFO   Submitting edge__phase_brochure__f80df447.pdf chunk 2/12 (2846KB)...
+[2026-02-25T17:45:37Z] INFO   Chunk 2: 524 chars extracted
+[2026-02-25T17:45:37Z] INFO   Submitting edge__phase_brochure__f80df447.pdf chunk 3/12 (22049KB)...
+[2026-02-25T17:45:49Z] ERROR   DocIntel submit error 400 for edge__phase_brochure__f80df447.pdf chunk 3/12: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:45:49Z] WARNING   Chunk 3 failed — continuing
+[2026-02-25T17:45:49Z] INFO   Submitting edge__phase_brochure__f80df447.pdf chunk 4/12 (21408KB)...
+[2026-02-25T17:45:56Z] ERROR   DocIntel submit error 400 for edge__phase_brochure__f80df447.pdf chunk 4/12: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:45:56Z] WARNING   Chunk 4 failed — continuing
+[2026-02-25T17:45:56Z] INFO   Submitting edge__phase_brochure__f80df447.pdf chunk 5/12 (2019KB)...
+[2026-02-25T17:46:04Z] INFO   Chunk 5: 104 chars extracted
+[2026-02-25T17:46:04Z] INFO   Submitting edge__phase_brochure__f80df447.pdf chunk 6/12 (2455KB)...
+[2026-02-25T17:46:11Z] INFO   Chunk 6: 230 chars extracted
+[2026-02-25T17:46:11Z] INFO   Submitting edge__phase_brochure__f80df447.pdf chunk 7/12 (24124KB)...
+[2026-02-25T17:46:39Z] ERROR   DocIntel submit error 400 for edge__phase_brochure__f80df447.pdf chunk 7/12: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:46:39Z] WARNING   Chunk 7 failed — continuing
+[2026-02-25T17:46:39Z] INFO   Submitting edge__phase_brochure__f80df447.pdf chunk 8/12 (24513KB)...
+[2026-02-25T17:46:50Z] ERROR   DocIntel submit error 400 for edge__phase_brochure__f80df447.pdf chunk 8/12: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:46:50Z] WARNING   Chunk 8 failed — continuing
+[2026-02-25T17:46:50Z] INFO   Submitting edge__phase_brochure__f80df447.pdf chunk 9/12 (4282KB)...
+[2026-02-25T17:46:54Z] ERROR   DocIntel submit error 400 for edge__phase_brochure__f80df447.pdf chunk 9/12: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:46:54Z] WARNING   Chunk 9 failed — continuing
+[2026-02-25T17:46:54Z] INFO   Submitting edge__phase_brochure__f80df447.pdf chunk 10/12 (23515KB)...
+[2026-02-25T17:47:02Z] ERROR   DocIntel submit error 400 for edge__phase_brochure__f80df447.pdf chunk 10/12: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:47:02Z] WARNING   Chunk 10 failed — continuing
+[2026-02-25T17:47:02Z] INFO   Submitting edge__phase_brochure__f80df447.pdf chunk 11/12 (23706KB)...
+[2026-02-25T17:47:39Z] ERROR   DocIntel submit error 400 for edge__phase_brochure__f80df447.pdf chunk 11/12: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:47:39Z] WARNING   Chunk 11 failed — continuing
+[2026-02-25T17:47:39Z] INFO   Submitting edge__phase_brochure__f80df447.pdf chunk 12/12 (1451KB)...
+[2026-02-25T17:47:47Z] INFO   Chunk 12: 850 chars extracted
+[2026-02-25T17:47:47Z] INFO   DocIntel chunked succeeded — 2328 chars total, cached to c764c7ca5601.json
+[2026-02-25T17:47:47Z] INFO   ✓ Got 2328 chars of text from DocIntel
+[2026-02-25T17:47:47Z] INFO     installment_years: 19–19
+[2026-02-25T17:47:47Z] INFO 
+── Entity: floating_islands (1 PDFs)
+[2026-02-25T17:47:47Z] INFO   PDF: floating_islands__phase_brochure__75d002bc.pdf
+[2026-02-25T17:47:47Z] INFO   [CACHE HIT] DocIntel cache: a959b47ae185.json
+[2026-02-25T17:47:47Z] INFO   ✓ Got 150 chars of text from DocIntel
+[2026-02-25T17:47:47Z] INFO 
+── Entity: horizon (1 PDFs)
+[2026-02-25T17:47:47Z] INFO   PDF: horizon__phase_brochure__fb03a146.pdf
+[2026-02-25T17:47:47Z] INFO   PDF size: 11382KB — limit: 1855KB
+[2026-02-25T17:47:47Z] INFO   Large PDF — submitting via CDN URL: https://wadidegladevelopments.com/wp-content/uploads/2023/10/CT-Horizon-Brochure-Wadi-Degla-Developments_.pdf
+[2026-02-25T17:47:49Z] WARNING   URL-mode failed (400): {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}} — falling back to page chunks
+[2026-02-25T17:47:49Z] INFO   PDF too large (11382KB) — splitting into 1.9MB page chunks...
+[2026-02-25T17:47:49Z] INFO   Splitting 22-page PDF into chunks (max 1855KB each)
+[2026-02-25T17:47:49Z] INFO   Chunk 1: pages 1–4 (2149KB)
+[2026-02-25T17:47:49Z] INFO   Chunk 2: pages 5–8 (2077KB)
+[2026-02-25T17:47:49Z] INFO   Chunk 3: pages 9–13 (1934KB)
+[2026-02-25T17:47:49Z] INFO   Chunk 4: pages 14–14 (2109KB)
+[2026-02-25T17:47:49Z] INFO   Chunk 5: pages 15–17 (2870KB)
+[2026-02-25T17:47:49Z] INFO   Chunk 6: pages 18–20 (2742KB)
+[2026-02-25T17:47:49Z] INFO   Chunk 7: pages 21–22 (84KB)
+[2026-02-25T17:47:49Z] INFO   Submitting horizon__phase_brochure__fb03a146.pdf chunk 1/7 (2149KB)...
+[2026-02-25T17:47:56Z] INFO   Chunk 1: 564 chars extracted
+[2026-02-25T17:47:56Z] INFO   Submitting horizon__phase_brochure__fb03a146.pdf chunk 2/7 (2077KB)...
+[2026-02-25T17:48:03Z] INFO   Chunk 2: 768 chars extracted
+[2026-02-25T17:48:03Z] INFO   Submitting horizon__phase_brochure__fb03a146.pdf chunk 3/7 (1934KB)...
+[2026-02-25T17:48:10Z] INFO   Chunk 3: 376 chars extracted
+[2026-02-25T17:48:10Z] INFO   Submitting horizon__phase_brochure__fb03a146.pdf chunk 4/7 (2109KB)...
+[2026-02-25T17:48:17Z] INFO   Chunk 4: 198 chars extracted
+[2026-02-25T17:48:17Z] INFO   Submitting horizon__phase_brochure__fb03a146.pdf chunk 5/7 (2870KB)...
+[2026-02-25T17:48:24Z] INFO   Chunk 5: 324 chars extracted
+[2026-02-25T17:48:24Z] INFO   Submitting horizon__phase_brochure__fb03a146.pdf chunk 6/7 (2742KB)...
+[2026-02-25T17:48:32Z] INFO   Chunk 6: 314 chars extracted
+[2026-02-25T17:48:32Z] INFO   Submitting horizon__phase_brochure__fb03a146.pdf chunk 7/7 (84KB)...
+[2026-02-25T17:48:38Z] INFO   Chunk 7: 731 chars extracted
+[2026-02-25T17:48:38Z] INFO   DocIntel chunked succeeded — 3287 chars total, cached to 38d394706a5f.json
+[2026-02-25T17:48:38Z] INFO   ✓ Got 3287 chars of text from DocIntel
+[2026-02-25T17:48:38Z] INFO     unit_types: ['retail']
+[2026-02-25T17:48:38Z] INFO 
+── Entity: living_community (1 PDFs)
+[2026-02-25T17:48:38Z] INFO   PDF: living_community__phase_brochure__61f82a41.pdf
+[2026-02-25T17:48:38Z] INFO   PDF size: 9806KB — limit: 1855KB
+[2026-02-25T17:48:38Z] INFO   Large PDF — submitting via CDN URL: https://wadidegladevelopments.com/wp-content/uploads/2023/09/Waterside-Brochure.pdf
+[2026-02-25T17:48:40Z] WARNING   URL-mode failed (400): {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}} — falling back to page chunks
+[2026-02-25T17:48:40Z] INFO   PDF too large (9806KB) — splitting into 1.9MB page chunks...
+[2026-02-25T17:48:40Z] INFO   Splitting 65-page PDF into chunks (max 1855KB each)
+[2026-02-25T17:48:40Z] INFO   Chunk 1: pages 1–19 (2042KB)
+[2026-02-25T17:48:40Z] INFO   Chunk 2: pages 20–25 (1929KB)
+[2026-02-25T17:48:40Z] INFO   Chunk 3: pages 26–32 (1944KB)
+[2026-02-25T17:48:40Z] INFO   Chunk 4: pages 33–43 (2045KB)
+[2026-02-25T17:48:40Z] INFO   Chunk 5: pages 44–65 (1856KB)
+[2026-02-25T17:48:40Z] INFO   Submitting living_community__phase_brochure__61f82a41.pdf chunk 1/5 (2042KB)...
+[2026-02-25T17:48:47Z] INFO   Chunk 1: 177 chars extracted
+[2026-02-25T17:48:47Z] INFO   Submitting living_community__phase_brochure__61f82a41.pdf chunk 2/5 (1929KB)...
+[2026-02-25T17:48:54Z] INFO   Chunk 2: 958 chars extracted
+[2026-02-25T17:48:54Z] INFO   Submitting living_community__phase_brochure__61f82a41.pdf chunk 3/5 (1944KB)...
+[2026-02-25T17:49:01Z] INFO   Chunk 3: 74 chars extracted
+[2026-02-25T17:49:01Z] INFO   Submitting living_community__phase_brochure__61f82a41.pdf chunk 4/5 (2045KB)...
+[2026-02-25T17:49:09Z] INFO   Chunk 4: 1338 chars extracted
+[2026-02-25T17:49:09Z] INFO   Submitting living_community__phase_brochure__61f82a41.pdf chunk 5/5 (1856KB)...
+[2026-02-25T17:49:16Z] INFO   Chunk 5: 1000 chars extracted
+[2026-02-25T17:49:16Z] INFO   DocIntel chunked succeeded — 3555 chars total, cached to 6826d5347e2e.json
+[2026-02-25T17:49:16Z] INFO   ✓ Got 3555 chars of text from DocIntel
+[2026-02-25T17:49:16Z] INFO     bedrooms: 2–4 BR
+[2026-02-25T17:49:16Z] INFO     BUA: 50–260 sqm
+[2026-02-25T17:49:16Z] INFO     unit_types: ['loft', 'penthouse']
+[2026-02-25T17:49:16Z] INFO 
+── Entity: murano (2 PDFs)
+[2026-02-25T17:49:16Z] INFO   ⊘  Skipping generic magazine: murano__unknown_pdf__c479efe0.pdf
+[2026-02-25T17:49:16Z] INFO   PDF: murano__phase_brochure__61f82a41.pdf
+[2026-02-25T17:49:16Z] INFO   ↔  Shared brochure (same as living_community) — using cached extraction
+[2026-02-25T17:49:16Z] INFO 
+── Entity: neo (1 PDFs)
+[2026-02-25T17:49:16Z] INFO   PDF: neo__project_brochure__5926f3b9.pdf
+[2026-02-25T17:49:16Z] INFO   PDF size: 8113KB — limit: 1855KB
+[2026-02-25T17:49:16Z] INFO   Large PDF — submitting via CDN URL: https://wadidegladevelopments.com/wp-content/uploads/2023/09/Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf
+[2026-02-25T17:49:18Z] WARNING   URL-mode failed (400): {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}} — falling back to page chunks
+[2026-02-25T17:49:18Z] INFO   PDF too large (8113KB) — splitting into 1.9MB page chunks...
+[2026-02-25T17:49:18Z] INFO   Splitting 11-page PDF into chunks (max 1855KB each)
+[2026-02-25T17:49:18Z] INFO   Chunk 1: pages 1–5 (2277KB)
+[2026-02-25T17:49:18Z] INFO   Chunk 2: pages 6–7 (3011KB)
+[2026-02-25T17:49:18Z] INFO   Chunk 3: pages 8–8 (3008KB)
+[2026-02-25T17:49:18Z] INFO   Chunk 4: pages 9–9 (2504KB)
+[2026-02-25T17:49:18Z] INFO   Chunk 5: pages 10–10 (2585KB)
+[2026-02-25T17:49:18Z] INFO   Chunk 6: pages 11–11 (52KB)
+[2026-02-25T17:49:18Z] INFO   Submitting neo__project_brochure__5926f3b9.pdf chunk 1/6 (2277KB)...
+[2026-02-25T17:49:25Z] INFO   Chunk 1: 175 chars extracted
+[2026-02-25T17:49:25Z] INFO   Submitting neo__project_brochure__5926f3b9.pdf chunk 2/6 (3011KB)...
+[2026-02-25T17:49:33Z] INFO   Chunk 2: 1674 chars extracted
+[2026-02-25T17:49:33Z] INFO   Submitting neo__project_brochure__5926f3b9.pdf chunk 3/6 (3008KB)...
+[2026-02-25T17:49:40Z] INFO   Chunk 3: 348 chars extracted
+[2026-02-25T17:49:40Z] INFO   Submitting neo__project_brochure__5926f3b9.pdf chunk 4/6 (2504KB)...
+[2026-02-25T17:49:47Z] INFO   Chunk 4: 86 chars extracted
+[2026-02-25T17:49:47Z] INFO   Submitting neo__project_brochure__5926f3b9.pdf chunk 5/6 (2585KB)...
+[2026-02-25T17:49:55Z] INFO   Chunk 5: 96 chars extracted
+[2026-02-25T17:49:55Z] INFO   Submitting neo__project_brochure__5926f3b9.pdf chunk 6/6 (52KB)...
+[2026-02-25T17:50:01Z] INFO   Chunk 6: 716 chars extracted
+[2026-02-25T17:50:01Z] INFO   DocIntel chunked succeeded — 3105 chars total, cached to 2938e53e7b0f.json
+[2026-02-25T17:50:01Z] INFO   ✓ Got 3105 chars of text from DocIntel
+[2026-02-25T17:50:01Z] INFO 
+── Entity: neo_gardens (1 PDFs)
+[2026-02-25T17:50:01Z] INFO   PDF: neo_gardens__project_brochure__5926f3b9.pdf
+[2026-02-25T17:50:01Z] INFO   ↔  Shared brochure (same as neo) — using cached extraction
+[2026-02-25T17:50:01Z] INFO 
+── Entity: neo_lakes (1 PDFs)
+[2026-02-25T17:50:01Z] INFO   PDF: neo_lakes__project_brochure__1bfb1a62.pdf
+[2026-02-25T17:50:01Z] INFO   PDF size: 5945KB — limit: 1855KB
+[2026-02-25T17:50:01Z] INFO   Large PDF — submitting via CDN URL: https://wadidegladevelopments.com/wp-content/uploads/2023/10/Neo-Lakes.pdf
+[2026-02-25T17:50:03Z] WARNING   URL-mode failed (400): {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}} — falling back to page chunks
+[2026-02-25T17:50:03Z] INFO   PDF too large (5945KB) — splitting into 1.9MB page chunks...
+[2026-02-25T17:50:03Z] INFO   Splitting 11-page PDF into chunks (max 1855KB each)
+[2026-02-25T17:50:03Z] INFO   Chunk 1: pages 1–4 (2173KB)
+[2026-02-25T17:50:03Z] INFO   Chunk 2: pages 5–8 (2541KB)
+[2026-02-25T17:50:03Z] INFO   Chunk 3: pages 9–10 (1880KB)
+[2026-02-25T17:50:03Z] INFO   Chunk 4: pages 11–11 (52KB)
+[2026-02-25T17:50:03Z] INFO   Submitting neo_lakes__project_brochure__1bfb1a62.pdf chunk 1/4 (2173KB)...
+[2026-02-25T17:50:10Z] INFO   Chunk 1: 171 chars extracted
+[2026-02-25T17:50:10Z] INFO   Submitting neo_lakes__project_brochure__1bfb1a62.pdf chunk 2/4 (2541KB)...
+[2026-02-25T17:50:18Z] INFO   Chunk 2: 849 chars extracted
+[2026-02-25T17:50:18Z] INFO   Submitting neo_lakes__project_brochure__1bfb1a62.pdf chunk 3/4 (1880KB)...
+[2026-02-25T17:50:25Z] INFO   Chunk 3: 310 chars extracted
+[2026-02-25T17:50:25Z] INFO   Submitting neo_lakes__project_brochure__1bfb1a62.pdf chunk 4/4 (52KB)...
+[2026-02-25T17:50:31Z] INFO   Chunk 4: 716 chars extracted
+[2026-02-25T17:50:31Z] INFO   DocIntel chunked succeeded — 2052 chars total, cached to 3bf893d6c9ee.json
+[2026-02-25T17:50:31Z] INFO   ✓ Got 2052 chars of text from DocIntel
+[2026-02-25T17:50:31Z] INFO 
+── Entity: neopolis (1 PDFs)
+[2026-02-25T17:50:31Z] INFO   PDF: neopolis__project_brochure__5926f3b9.pdf
+[2026-02-25T17:50:31Z] INFO   ↔  Shared brochure (same as neo) — using cached extraction
+[2026-02-25T17:50:31Z] INFO 
+── Entity: ojo (1 PDFs)
+[2026-02-25T17:50:31Z] INFO   PDF: ojo__phase_brochure__fcd04cec.pdf
+[2026-02-25T17:50:31Z] INFO   PDF size: 74867KB — limit: 1855KB
+[2026-02-25T17:50:31Z] INFO   Large PDF — submitting via CDN URL: https://wadidegladevelopments.com/wp-content/uploads/2025/12/Ojo-Brochure.pdf
+[2026-02-25T17:50:36Z] WARNING   URL-mode failed (400): {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}} — falling back to page chunks
+[2026-02-25T17:50:36Z] INFO   PDF too large (74867KB) — splitting into 1.9MB page chunks...
+[2026-02-25T17:50:36Z] INFO   Splitting 3-page PDF into chunks (max 1855KB each)
+[2026-02-25T17:50:36Z] INFO   Chunk 1: pages 1–1 (20021KB)
+[2026-02-25T17:50:36Z] INFO   Chunk 2: pages 2–2 (26266KB)
+[2026-02-25T17:50:36Z] INFO   Chunk 3: pages 3–3 (28543KB)
+[2026-02-25T17:50:36Z] INFO   Submitting ojo__phase_brochure__fcd04cec.pdf chunk 1/3 (20021KB)...
+[2026-02-25T17:50:43Z] ERROR   DocIntel submit error 400 for ojo__phase_brochure__fcd04cec.pdf chunk 1/3: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:50:43Z] WARNING   Chunk 1 failed — continuing
+[2026-02-25T17:50:43Z] INFO   Submitting ojo__phase_brochure__fcd04cec.pdf chunk 2/3 (26266KB)...
+[2026-02-25T17:50:51Z] ERROR   DocIntel submit error 400 for ojo__phase_brochure__fcd04cec.pdf chunk 2/3: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:50:51Z] WARNING   Chunk 2 failed — continuing
+[2026-02-25T17:50:51Z] INFO   Submitting ojo__phase_brochure__fcd04cec.pdf chunk 3/3 (28543KB)...
+[2026-02-25T17:50:58Z] ERROR   DocIntel submit error 400 for ojo__phase_brochure__fcd04cec.pdf chunk 3/3: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:50:58Z] WARNING   Chunk 3 failed — continuing
+[2026-02-25T17:50:58Z] ERROR   All chunks failed for ojo__phase_brochure__fcd04cec.pdf
+[2026-02-25T17:50:58Z] WARNING   ✗ DocIntel failed for ojo__phase_brochure__fcd04cec.pdf
+[2026-02-25T17:50:58Z] INFO 
+── Entity: promenade_new_cairo (1 PDFs)
+[2026-02-25T17:50:58Z] INFO   ⊘  Skipping generic magazine: promenade_new_cairo__unknown_pdf__c479efe0.pdf
+[2026-02-25T17:50:58Z] INFO 
+── Entity: vero (1 PDFs)
+[2026-02-25T17:50:58Z] INFO   ⊘  Skipping generic magazine: vero__unknown_pdf__c479efe0.pdf
+[2026-02-25T17:50:58Z] INFO 
+── Entity: vyon (1 PDFs)
+[2026-02-25T17:50:58Z] INFO   PDF: vyon__phase_brochure__127bb95e.pdf
+[2026-02-25T17:50:58Z] INFO   PDF size: 14812KB — limit: 1855KB
+[2026-02-25T17:50:58Z] INFO   Large PDF — submitting via CDN URL: https://wadidegladevelopments.com/wp-content/uploads/2025/07/VYON-Brochure.pdf
+[2026-02-25T17:51:01Z] WARNING   URL-mode failed (400): {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}} — falling back to page chunks
+[2026-02-25T17:51:01Z] INFO   PDF too large (14812KB) — splitting into 1.9MB page chunks...
+[2026-02-25T17:51:01Z] INFO   Splitting 19-page PDF into chunks (max 1855KB each)
+[2026-02-25T17:51:01Z] INFO   Chunk 1: pages 1–4 (4369KB)
+[2026-02-25T17:51:01Z] INFO   Chunk 2: pages 5–7 (2292KB)
+[2026-02-25T17:51:01Z] INFO   Chunk 3: pages 8–10 (2359KB)
+[2026-02-25T17:51:01Z] INFO   Chunk 4: pages 11–13 (2311KB)
+[2026-02-25T17:51:01Z] INFO   Chunk 5: pages 14–15 (2175KB)
+[2026-02-25T17:51:01Z] INFO   Chunk 6: pages 16–18 (2749KB)
+[2026-02-25T17:51:01Z] INFO   Chunk 7: pages 19–19 (305KB)
+[2026-02-25T17:51:01Z] INFO   Submitting vyon__phase_brochure__127bb95e.pdf chunk 1/7 (4369KB)...
+[2026-02-25T17:51:04Z] ERROR   DocIntel submit error 400 for vyon__phase_brochure__127bb95e.pdf chunk 1/7: {"error":{"code":"InvalidRequest","message":"Invalid request.","innererror":{"code":"InvalidContentLength","message":"The input image is too large. Refer to documentation for the maximum file size."}}}
+[2026-02-25T17:51:04Z] WARNING   Chunk 1 failed — continuing
+[2026-02-25T17:51:04Z] INFO   Submitting vyon__phase_brochure__127bb95e.pdf chunk 2/7 (2292KB)...
+[2026-02-25T17:51:11Z] INFO   Chunk 2: 1248 chars extracted
+[2026-02-25T17:51:11Z] INFO   Submitting vyon__phase_brochure__127bb95e.pdf chunk 3/7 (2359KB)...
+[2026-02-25T17:51:18Z] INFO   Chunk 3: 1074 chars extracted
+[2026-02-25T17:51:18Z] INFO   Submitting vyon__phase_brochure__127bb95e.pdf chunk 4/7 (2311KB)...
+[2026-02-25T17:51:27Z] INFO   Chunk 4: 608 chars extracted
+[2026-02-25T17:51:27Z] INFO   Submitting vyon__phase_brochure__127bb95e.pdf chunk 5/7 (2175KB)...
+[2026-02-25T17:51:34Z] INFO   Chunk 5: 812 chars extracted
+[2026-02-25T17:51:34Z] INFO   Submitting vyon__phase_brochure__127bb95e.pdf chunk 6/7 (2749KB)...
+[2026-02-25T17:51:41Z] INFO   Chunk 6: 1101 chars extracted
+[2026-02-25T17:51:41Z] INFO   Submitting vyon__phase_brochure__127bb95e.pdf chunk 7/7 (305KB)...
+[2026-02-25T17:51:48Z] INFO   Chunk 7: 416 chars extracted
+[2026-02-25T17:51:48Z] INFO   DocIntel chunked succeeded — 5269 chars total, cached to 0cdceab5d9ce.json
+[2026-02-25T17:51:48Z] INFO   ✓ Got 5269 chars of text from DocIntel
+[2026-02-25T17:51:48Z] INFO 
+── Entity: waterside (1 PDFs)
+[2026-02-25T17:51:48Z] INFO   PDF: waterside__phase_brochure__61f82a41.pdf
+[2026-02-25T17:51:48Z] INFO   ↔  Shared brochure (same as living_community) — using cached extraction
+[2026-02-25T17:51:48Z] INFO 
+DocIntel pass complete. Entities with extracted data: 6
+[2026-02-25T17:51:48Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:51:48Z] INFO PASS D — Merge extracted fields into KB
+[2026-02-25T17:51:48Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:51:48Z] INFO   murano.bedrooms_range_min: (empty) → '2'
+[2026-02-25T17:51:48Z] INFO   murano.bedrooms_range_max: (empty) → '4'
+[2026-02-25T17:51:48Z] INFO   murano.bua_range_min_sqm: (empty) → '50'
+[2026-02-25T17:51:48Z] INFO   murano.bua_range_max_sqm: (empty) → '260'
+[2026-02-25T17:51:48Z] INFO   living_community.bedrooms_range_min: (empty) → '2'
+[2026-02-25T17:51:48Z] INFO   living_community.bedrooms_range_max: (empty) → '4'
+[2026-02-25T17:51:48Z] INFO   living_community.bua_range_min_sqm: (empty) → '50'
+[2026-02-25T17:51:48Z] INFO   living_community.bua_range_max_sqm: (empty) → '260'
+[2026-02-25T17:51:48Z] INFO   waterside.bedrooms_range_min: (empty) → '2'
+[2026-02-25T17:51:48Z] INFO   waterside.bedrooms_range_max: (empty) → '4'
+[2026-02-25T17:51:48Z] INFO   waterside.bua_range_min_sqm: (empty) → '50'
+[2026-02-25T17:51:48Z] INFO   waterside.bua_range_max_sqm: (empty) → '260'
+[2026-02-25T17:51:48Z] INFO   edge.installment_years_min: (empty) → '19'
+[2026-02-25T17:51:48Z] INFO   edge.installment_years_max: (empty) → '19'
+[2026-02-25T17:51:48Z] INFO Merge report: /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/outputs/intermediate/wdd_merge_report.csv (19 rows)
+[2026-02-25T17:51:48Z] INFO Audit: 14 new rows appended to /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/outputs/wdd_sources_audit.csv
+[2026-02-25T17:51:48Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:51:48Z] INFO PASS E — Validation
+[2026-02-25T17:51:48Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:51:48Z] INFO   ✓ All 28 rows valid
+[2026-02-25T17:51:48Z] INFO KB written to engine-KB + outputs (28 rows)
+[2026-02-25T17:51:48Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:51:48Z] INFO COVERAGE REPORT
+[2026-02-25T17:51:48Z] INFO ════════════════════════════════════════════════════════════
+[2026-02-25T17:51:48Z] INFO   total_rows: 28
+[2026-02-25T17:51:48Z] INFO   with_official_url: 26/28
+[2026-02-25T17:51:48Z] INFO   with_brochure_urls: 18/28
+[2026-02-25T17:51:48Z] INFO   with_bedrooms: 3/28
+[2026-02-25T17:51:48Z] INFO   with_bua: 3/28
+[2026-02-25T17:51:48Z] INFO   with_starting_price: 0/28
+[2026-02-25T17:51:48Z] INFO   with_price_range: 0/28
+[2026-02-25T17:51:48Z] INFO   with_payment_plan: 0/28
+[2026-02-25T17:51:48Z] INFO   with_delivery: 0/28
+[2026-02-25T17:51:48Z] INFO   with_finishing: 28/28
+[2026-02-25T17:51:48Z] INFO   price_status_official: 0/28
+[2026-02-25T17:51:48Z] INFO   price_status_on_request: 15/28
+[2026-02-25T17:51:48Z] INFO   still_all_missing_specs: 25/28
+[2026-02-25T17:51:48Z] INFO ======================================================================
+[2026-02-25T17:51:48Z] INFO ENRICHMENT COMPLETE
+[2026-02-25T17:51:48Z] INFO ======================================================================

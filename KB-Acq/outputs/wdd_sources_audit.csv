@@ -1,417 +1,431 @@
-project_id,field_name,field_value,source_url,evidence_type,evidence_snippet,asset_pointer,captured_date
-murano,official_project_url,https://wadidegladevelopments.com/project-phases/murano/,https://wadidegladevelopments.com/project-phases/murano/,dom,Crawled https://wadidegladevelopments.com/project-phases/murano/; card or page URL captured,raw/screens/murano_top_1771723938584.png,2026-02-22
-murano,region,Ain Sokhna,https://wadidegladevelopments.com/project-phases/murano/,dom,Location text extracted from page: Ain Sokhna | Ain Sokhna Road,raw/screens/murano_top_1771723938584.png,2026-02-22
-murano,city_area,Ain Sokhna Road,https://wadidegladevelopments.com/project-phases/murano/,dom,Location text: Ain Sokhna Road,raw/screens/murano_top_1771723938584.png,2026-02-22
-murano,micro_location,"750 meters of beach, 50 minutes from Cairo",https://wadidegladevelopments.com/project-phases/murano/,dom,"Micro-location from page: 750 meters of beach, 50 minutes from Cairo",raw/screens/murano_top_1771723938584.png,2026-02-22
-murano,project_type,resort,https://wadidegladevelopments.com/project-phases/murano/,dom,Project type determined from page content: resort,raw/screens/murano_top_1771723938584.png,2026-02-22
-murano,current_sales_status,selling,https://wadidegladevelopments.com/project-phases/murano/,dom,Sales status: selling; index card checked,raw/screens/murano_top_1771723938584.png,2026-02-22
-murano,unit_types_offered_json,"[""Villas"", ""Attached Villas"", ""Duplexes"", ""Chalets""]",https://wadidegladevelopments.com/project-phases/murano/,dom,"Unit types from DOM: Villas, Attached Villas, Duplexes, Chalets",raw/screens/murano_top_1771723938584.png,2026-02-22
-murano,key_amenities_json,"[""Swimming Pools"", ""Entertainment Area"", ""Supermarket"", ""Green Areas""]",https://wadidegladevelopments.com/project-phases/murano/,dom,"Amenities from DOM: Swimming Pools, Entertainment Area, Supermarket, Green Areas",raw/screens/murano_top_1771723938584.png,2026-02-22
-murano,beach_access_flag,true,https://wadidegladevelopments.com/project-phases/murano/,dom,beach_access_flag=true from amenities/DOM,raw/screens/murano_top_1771723938584.png,2026-02-22
-murano,lagoons_flag,true,https://wadidegladevelopments.com/project-phases/murano/,dom,lagoons_flag=true from amenities/DOM,raw/screens/murano_top_1771723938584.png,2026-02-22
-murano,pools_flag,true,https://wadidegladevelopments.com/project-phases/murano/,dom,pools_flag=true from amenities/DOM,raw/screens/murano_top_1771723938584.png,2026-02-22
-murano,golf_flag,false,https://wadidegladevelopments.com/project-phases/murano/,dom,golf_flag=false from amenities/DOM,raw/screens/murano_top_1771723938584.png,2026-02-22
-murano,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/09/Waterside-Brochure.pdf"", ""https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf""]",https://wadidegladevelopments.com/project-phases/murano/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/09/Waterside-Brochure.pdf,raw/screens/murano_top_1771723938584.png,2026-02-22
-murano,confidence_score,0.60,https://wadidegladevelopments.com/project-phases/murano/,dom,Confidence scored per scoring rubric,raw/screens/murano_top_1771723938584.png,2026-02-22
-murano,price_status,on_request,https://wadidegladevelopments.com/project-phases/murano/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/murano_top_1771723938584.png,2026-02-22
-clubtown,official_project_url,https://wadidegladevelopments.com/project-phases/clubtown/,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Crawled https://wadidegladevelopments.com/project-phases/clubtown/; card or page URL captured,raw/screens/clubtown_top.png,2026-02-22
-clubtown,region,Cairo,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Location text extracted from page: Cairo | Maadi,raw/screens/clubtown_top.png,2026-02-22
-clubtown,city_area,Maadi,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Location text: Maadi,raw/screens/clubtown_top.png,2026-02-22
-clubtown,micro_location,New Degla,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Micro-location from page: New Degla,raw/screens/clubtown_top.png,2026-02-22
-clubtown,project_type,residential,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Project type determined from page content: residential,raw/screens/clubtown_top.png,2026-02-22
-clubtown,project_status,under_construction,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Status from page/index: under_construction,raw/screens/clubtown_top.png,2026-02-22
-clubtown,current_sales_status,selling,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Sales status: selling; index card checked,raw/screens/clubtown_top.png,2026-02-22
-clubtown,unit_types_offered_json,"[""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/project-phases/clubtown/,dom,"Unit types from DOM: Apartments, Duplexes",raw/screens/clubtown_top.png,2026-02-22
-clubtown,key_amenities_json,"[""Retail"", ""Admin"", ""Sports Courts"", ""Outdoor Fitness Area""]",https://wadidegladevelopments.com/project-phases/clubtown/,dom,"Amenities from DOM: Retail, Admin, Sports Courts, Outdoor Fitness Area",raw/screens/clubtown_top.png,2026-02-22
-clubtown,beach_access_flag,false,https://wadidegladevelopments.com/project-phases/clubtown/,dom,beach_access_flag=false from amenities/DOM,raw/screens/clubtown_top.png,2026-02-22
-clubtown,lagoons_flag,false,https://wadidegladevelopments.com/project-phases/clubtown/,dom,lagoons_flag=false from amenities/DOM,raw/screens/clubtown_top.png,2026-02-22
-clubtown,clubhouse_flag,true,https://wadidegladevelopments.com/project-phases/clubtown/,dom,clubhouse_flag=true from amenities/DOM,raw/screens/clubtown_top.png,2026-02-22
-clubtown,pools_flag,true,https://wadidegladevelopments.com/project-phases/clubtown/,dom,pools_flag=true from amenities/DOM,raw/screens/clubtown_top.png,2026-02-22
-clubtown,gym_flag,true,https://wadidegladevelopments.com/project-phases/clubtown/,dom,gym_flag=true from amenities/DOM,raw/screens/clubtown_top.png,2026-02-22
-clubtown,golf_flag,false,https://wadidegladevelopments.com/project-phases/clubtown/,dom,golf_flag=false from amenities/DOM,raw/screens/clubtown_top.png,2026-02-22
-clubtown,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf""]",https://wadidegladevelopments.com/project-phases/clubtown/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf,raw/screens/clubtown_top.png,2026-02-22
-clubtown,delivery_year_min,2022,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Delivery year from page text or metadata,raw/screens/clubtown_top.png,2026-02-22
-clubtown,confidence_score,0.60,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Confidence scored per scoring rubric,raw/screens/clubtown_top.png,2026-02-22
-clubtown,price_status,on_request,https://wadidegladevelopments.com/project-phases/clubtown/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/clubtown_top.png,2026-02-22
-neo,official_project_url,https://wadidegladevelopments.com/project-phases/neo/,https://wadidegladevelopments.com/project-phases/neo/,dom,Crawled https://wadidegladevelopments.com/project-phases/neo/; card or page URL captured,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,region,East Cairo,https://wadidegladevelopments.com/project-phases/neo/,dom,Location text extracted from page: East Cairo | Mostakbal City,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,city_area,Mostakbal City,https://wadidegladevelopments.com/project-phases/neo/,dom,Location text: Mostakbal City,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,micro_location,Heart of Mostakbal City,https://wadidegladevelopments.com/project-phases/neo/,dom,Micro-location from page: Heart of Mostakbal City,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,project_type,residential,https://wadidegladevelopments.com/project-phases/neo/,dom,Project type determined from page content: residential,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,project_status,under_construction,https://wadidegladevelopments.com/project-phases/neo/,dom,Status from page/index: under_construction,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,current_sales_status,selling,https://wadidegladevelopments.com/project-phases/neo/,dom,Sales status: selling; index card checked,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,unit_types_offered_json,"[""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/project-phases/neo/,dom,"Unit types from DOM: Apartments, Duplexes",raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,key_amenities_json,"[""Green Areas"", ""Parking"", ""International School"", ""Nursery""]",https://wadidegladevelopments.com/project-phases/neo/,dom,"Amenities from DOM: Green Areas, Parking, International School, Nursery",raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,beach_access_flag,false,https://wadidegladevelopments.com/project-phases/neo/,dom,beach_access_flag=false from amenities/DOM,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,lagoons_flag,false,https://wadidegladevelopments.com/project-phases/neo/,dom,lagoons_flag=false from amenities/DOM,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,clubhouse_flag,false,https://wadidegladevelopments.com/project-phases/neo/,dom,clubhouse_flag=false from amenities/DOM,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,pools_flag,false,https://wadidegladevelopments.com/project-phases/neo/,dom,pools_flag=false from amenities/DOM,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,gym_flag,false,https://wadidegladevelopments.com/project-phases/neo/,dom,gym_flag=false from amenities/DOM,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,golf_flag,false,https://wadidegladevelopments.com/project-phases/neo/,dom,golf_flag=false from amenities/DOM,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/09/Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf""]",https://wadidegladevelopments.com/project-phases/neo/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/09/Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,confidence_score,0.65,https://wadidegladevelopments.com/project-phases/neo/,dom,Confidence scored per scoring rubric,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-neo,price_status,on_request,https://wadidegladevelopments.com/project-phases/neo/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/neo_hero_section_1771725070544.png,2026-02-22
-vero,official_project_url,https://wadidegladevelopments.com/projects/vero/,https://wadidegladevelopments.com/projects/vero/,dom,Crawled https://wadidegladevelopments.com/projects/vero/; card or page URL captured,raw/screens/vero_top_1771726235415.png,2026-02-22
-vero,region,North Coast,https://wadidegladevelopments.com/projects/vero/,dom,Location text extracted from page: North Coast | Sidi Abd El Rahman,raw/screens/vero_top_1771726235415.png,2026-02-22
-vero,city_area,Sidi Abd El Rahman,https://wadidegladevelopments.com/projects/vero/,dom,Location text: Sidi Abd El Rahman,raw/screens/vero_top_1771726235415.png,2026-02-22
-vero,micro_location,"Sidi Abd El Rahman, elevated coastal retreat",https://wadidegladevelopments.com/projects/vero/,dom,"Micro-location from page: Sidi Abd El Rahman, elevated coastal retreat",raw/screens/vero_top_1771726235415.png,2026-02-22
-vero,project_type,resort,https://wadidegladevelopments.com/projects/vero/,dom,Project type determined from page content: resort,raw/screens/vero_top_1771726235415.png,2026-02-22
-vero,current_sales_status,selling,https://wadidegladevelopments.com/projects/vero/,dom,Sales status: selling; index card checked,raw/screens/vero_top_1771726235415.png,2026-02-22
-vero,unit_types_offered_json,"[""Serviced Apartments"", ""Residential Apartments""]",https://wadidegladevelopments.com/projects/vero/,dom,"Unit types from DOM: Serviced Apartments, Residential Apartments",raw/screens/vero_top_1771726235415.png,2026-02-22
-vero,key_amenities_json,"[""Horizon Pool"", ""24/7 Lounge Reception & Concierge"", ""Housekeeping"", ""Fitness Center""]",https://wadidegladevelopments.com/projects/vero/,dom,"Amenities from DOM: Horizon Pool, 24/7 Lounge Reception & Concierge, Housekeeping, Fitness Center",raw/screens/vero_top_1771726235415.png,2026-02-22
-vero,beach_access_flag,true,https://wadidegladevelopments.com/projects/vero/,dom,beach_access_flag=true from amenities/DOM,raw/screens/vero_top_1771726235415.png,2026-02-22
-vero,pools_flag,true,https://wadidegladevelopments.com/projects/vero/,dom,pools_flag=true from amenities/DOM,raw/screens/vero_top_1771726235415.png,2026-02-22
-vero,gym_flag,true,https://wadidegladevelopments.com/projects/vero/,dom,gym_flag=true from amenities/DOM,raw/screens/vero_top_1771726235415.png,2026-02-22
-vero,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf""]",https://wadidegladevelopments.com/projects/vero/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf,raw/screens/vero_top_1771726235415.png,2026-02-22
-vero,confidence_score,0.60,https://wadidegladevelopments.com/projects/vero/,dom,Confidence scored per scoring rubric,raw/screens/vero_top_1771726235415.png,2026-02-22
-vero,price_status,on_request,https://wadidegladevelopments.com/projects/vero/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/vero_top_1771726235415.png,2026-02-22
-promenade_new_cairo,official_project_url,https://wadidegladevelopments.com/projects/promnade-new-cairo/,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,Crawled https://wadidegladevelopments.com/projects/promnade-new-cairo/; card or page URL captured,raw/screens/promenade_top_1771726387275.png,2026-02-22
-promenade_new_cairo,region,East Cairo,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,Location text extracted from page: East Cairo | New Cairo,raw/screens/promenade_top_1771726387275.png,2026-02-22
-promenade_new_cairo,city_area,New Cairo,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,Location text: New Cairo,raw/screens/promenade_top_1771726387275.png,2026-02-22
-promenade_new_cairo,micro_location,5 minutes from AUC and Road 90,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,Micro-location from page: 5 minutes from AUC and Road 90,raw/screens/promenade_top_1771726387275.png,2026-02-22
-promenade_new_cairo,project_type,residential,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,Project type determined from page content: residential,raw/screens/promenade_top_1771726387275.png,2026-02-22
-promenade_new_cairo,current_sales_status,selling,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,Sales status: selling; index card checked,raw/screens/promenade_top_1771726387275.png,2026-02-22
-promenade_new_cairo,unit_types_offered_json,"[""Apartments"", ""Penthouses""]",https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,"Unit types from DOM: Apartments, Penthouses",raw/screens/promenade_top_1771726387275.png,2026-02-22
-promenade_new_cairo,key_amenities_json,"[""Walking Track"", ""Gym"", ""Swimming Pools"", ""Secured Parking""]",https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,"Amenities from DOM: Walking Track, Gym, Swimming Pools, Secured Parking",raw/screens/promenade_top_1771726387275.png,2026-02-22
-promenade_new_cairo,pools_flag,true,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,pools_flag=true from amenities/DOM,raw/screens/promenade_top_1771726387275.png,2026-02-22
-promenade_new_cairo,gym_flag,true,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,gym_flag=true from amenities/DOM,raw/screens/promenade_top_1771726387275.png,2026-02-22
-promenade_new_cairo,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf""]",https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf,raw/screens/promenade_top_1771726387275.png,2026-02-22
-promenade_new_cairo,confidence_score,0.60,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,Confidence scored per scoring rubric,raw/screens/promenade_top_1771726387275.png,2026-02-22
-promenade_new_cairo,price_status,on_request,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/promenade_top_1771726387275.png,2026-02-22
-blumar_el_sokhna,official_project_url,https://wadidegladevelopments.com/projects/blumarelsokhna/,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Crawled https://wadidegladevelopments.com/projects/blumarelsokhna/; card or page URL captured,raw/screens/index/blumar_el_sokhna_card.png,2026-02-22
-blumar_el_sokhna,region,Ain Sokhna,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Location text extracted from page: Ain Sokhna | Suez Road,raw/screens/index/blumar_el_sokhna_card.png,2026-02-22
-blumar_el_sokhna,city_area,Suez Road,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Location text: Suez Road,raw/screens/index/blumar_el_sokhna_card.png,2026-02-22
-blumar_el_sokhna,project_type,resort,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Project type determined from page content: resort,raw/screens/index/blumar_el_sokhna_card.png,2026-02-22
-blumar_el_sokhna,project_status,delivered,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Status from page/index: delivered,raw/screens/index/blumar_el_sokhna_card.png,2026-02-22
-blumar_el_sokhna,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Sales status: not_selling; index card checked,raw/screens/index/blumar_el_sokhna_card.png,2026-02-22
-blumar_el_sokhna,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Sold-out label on /projects/ index card,raw/screens/index/blumar_el_sokhna_card.png,2026-02-22
-blumar_el_sokhna,key_amenities_json,"[""Swimming Pools"", ""Green Areas"", ""Restaurants"", ""Supermarket""]",https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,"Amenities from DOM: Swimming Pools, Green Areas, Restaurants, Supermarket",raw/screens/index/blumar_el_sokhna_card.png,2026-02-22
-blumar_el_sokhna,beach_access_flag,true,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,beach_access_flag=true from amenities/DOM,raw/screens/index/blumar_el_sokhna_card.png,2026-02-22
-blumar_el_sokhna,pools_flag,true,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,pools_flag=true from amenities/DOM,raw/screens/index/blumar_el_sokhna_card.png,2026-02-22
-blumar_el_sokhna,gym_flag,false,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,gym_flag=false from amenities/DOM,raw/screens/index/blumar_el_sokhna_card.png,2026-02-22
-blumar_el_sokhna,golf_flag,false,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,golf_flag=false from amenities/DOM,raw/screens/index/blumar_el_sokhna_card.png,2026-02-22
-blumar_el_sokhna,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf""]",https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf,raw/screens/index/blumar_el_sokhna_card.png,2026-02-22
-blumar_el_sokhna,confidence_score,0.50,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Confidence scored per scoring rubric,raw/screens/index/blumar_el_sokhna_card.png,2026-02-22
-blumar_hills,official_project_url,https://wadidegladevelopments.com/projects/blumar-hills/,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Crawled https://wadidegladevelopments.com/projects/blumar-hills/; card or page URL captured,raw/screens/index/blumar_hills_card.png,2026-02-22
-blumar_hills,region,Ain Sokhna,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Location text extracted from page: Ain Sokhna | Zaafarana Road,raw/screens/index/blumar_hills_card.png,2026-02-22
-blumar_hills,city_area,Zaafarana Road,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Location text: Zaafarana Road,raw/screens/index/blumar_hills_card.png,2026-02-22
-blumar_hills,project_type,resort,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Project type determined from page content: resort,raw/screens/index/blumar_hills_card.png,2026-02-22
-blumar_hills,project_status,delivered,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Status from page/index: delivered,raw/screens/index/blumar_hills_card.png,2026-02-22
-blumar_hills,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Sales status: not_selling; index card checked,raw/screens/index/blumar_hills_card.png,2026-02-22
-blumar_hills,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Sold-out label on /projects/ index card,raw/screens/index/blumar_hills_card.png,2026-02-22
-blumar_hills,unit_types_offered_json,"[""Chalets""]",https://wadidegladevelopments.com/projects/blumar-hills/,dom,Unit types from DOM: Chalets,raw/screens/index/blumar_hills_card.png,2026-02-22
-blumar_hills,key_amenities_json,"[""Swimming Pools""]",https://wadidegladevelopments.com/projects/blumar-hills/,dom,Amenities from DOM: Swimming Pools,raw/screens/index/blumar_hills_card.png,2026-02-22
-blumar_hills,beach_access_flag,true,https://wadidegladevelopments.com/projects/blumar-hills/,dom,beach_access_flag=true from amenities/DOM,raw/screens/index/blumar_hills_card.png,2026-02-22
-blumar_hills,pools_flag,true,https://wadidegladevelopments.com/projects/blumar-hills/,dom,pools_flag=true from amenities/DOM,raw/screens/index/blumar_hills_card.png,2026-02-22
-blumar_hills,gym_flag,false,https://wadidegladevelopments.com/projects/blumar-hills/,dom,gym_flag=false from amenities/DOM,raw/screens/index/blumar_hills_card.png,2026-02-22
-blumar_hills,golf_flag,false,https://wadidegladevelopments.com/projects/blumar-hills/,dom,golf_flag=false from amenities/DOM,raw/screens/index/blumar_hills_card.png,2026-02-22
-blumar_hills,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf""]",https://wadidegladevelopments.com/projects/blumar-hills/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf,raw/screens/index/blumar_hills_card.png,2026-02-22
-blumar_hills,confidence_score,0.50,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Confidence scored per scoring rubric,raw/screens/index/blumar_hills_card.png,2026-02-22
-tijan_maadi,official_project_url,https://wadidegladevelopments.com/projects/tijan-maadi/,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Crawled https://wadidegladevelopments.com/projects/tijan-maadi/; card or page URL captured,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,region,Cairo,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Location text extracted from page: Cairo | Maadi,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,city_area,Maadi,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Location text: Maadi,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,micro_location,New Degla,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Micro-location from page: New Degla,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,project_type,residential,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Project type determined from page content: residential,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,project_status,delivered,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Status from page/index: delivered,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Sales status: not_selling; index card checked,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Sold-out label on /projects/ index card,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,unit_types_offered_json,"[""Apartments""]",https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Unit types from DOM: Apartments,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,key_amenities_json,"[""Green Areas"", ""Secured Parking"", ""Water Feature"", ""Walking Track""]",https://wadidegladevelopments.com/projects/tijan-maadi/,dom,"Amenities from DOM: Green Areas, Secured Parking, Water Feature, Walking Track",raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,beach_access_flag,false,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,beach_access_flag=false from amenities/DOM,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,lagoons_flag,false,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,lagoons_flag=false from amenities/DOM,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,clubhouse_flag,true,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,clubhouse_flag=true from amenities/DOM,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,pools_flag,true,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,pools_flag=true from amenities/DOM,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,gym_flag,false,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,gym_flag=false from amenities/DOM,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,golf_flag,false,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,golf_flag=false from amenities/DOM,raw/screens/index/tijan_maadi_card.png,2026-02-22
-tijan_maadi,confidence_score,0.50,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Confidence scored per scoring rubric,raw/screens/index/tijan_maadi_card.png,2026-02-22
-blumar_el_dome,official_project_url,https://wadidegladevelopments.com/projects/blumar-el-dome/,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Crawled https://wadidegladevelopments.com/projects/blumar-el-dome/; card or page URL captured,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,region,Ain Sokhna,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Location text extracted from page: Ain Sokhna | Zaafarana Road,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,city_area,Zaafarana Road,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Location text: Zaafarana Road,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,project_type,resort,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Project type determined from page content: resort,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,project_status,delivered,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Status from page/index: delivered,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Sales status: not_selling; index card checked,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Sold-out label on /projects/ index card,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,unit_types_offered_json,"[""Chalets""]",https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Unit types from DOM: Chalets,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,key_amenities_json,"[""Restaurants"", ""Hotel"", ""Swimming Pools""]",https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,"Amenities from DOM: Restaurants, Hotel, Swimming Pools",raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,beach_access_flag,true,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,beach_access_flag=true from amenities/DOM,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,lagoons_flag,false,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,lagoons_flag=false from amenities/DOM,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,clubhouse_flag,false,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,clubhouse_flag=false from amenities/DOM,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,pools_flag,true,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,pools_flag=true from amenities/DOM,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,gym_flag,false,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,gym_flag=false from amenities/DOM,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,golf_flag,false,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,golf_flag=false from amenities/DOM,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-blumar_el_dome,confidence_score,0.50,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Confidence scored per scoring rubric,raw/screens/index/blumar_el_dome_card.png,2026-02-22
-pyramids_walk,official_project_url,https://wadidegladevelopments.com/projects/pyramids-walk/,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Crawled https://wadidegladevelopments.com/projects/pyramids-walk/; card or page URL captured,raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,region,West Cairo,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Location text extracted from page: West Cairo | 6th of October,raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,city_area,6th of October,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Location text: 6th of October,raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,project_type,residential,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Project type determined from page content: residential,raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,project_status,delivered,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Status from page/index: delivered,raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Sales status: not_selling; index card checked,raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Sold-out label on /projects/ index card,raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,unit_types_offered_json,"[""Twin Houses"", ""Town Houses""]",https://wadidegladevelopments.com/projects/pyramids-walk/,dom,"Unit types from DOM: Twin Houses, Town Houses",raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,key_amenities_json,"[""Swimming Pools"", ""Green Areas"", ""Secured Parking"", ""360-degree view""]",https://wadidegladevelopments.com/projects/pyramids-walk/,dom,"Amenities from DOM: Swimming Pools, Green Areas, Secured Parking, 360-degree view",raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,beach_access_flag,false,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,beach_access_flag=false from amenities/DOM,raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,lagoons_flag,false,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,lagoons_flag=false from amenities/DOM,raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,clubhouse_flag,false,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,clubhouse_flag=false from amenities/DOM,raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,pools_flag,true,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,pools_flag=true from amenities/DOM,raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,gym_flag,true,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,gym_flag=true from amenities/DOM,raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,golf_flag,false,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,golf_flag=false from amenities/DOM,raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-pyramids_walk,confidence_score,0.50,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Confidence scored per scoring rubric,raw/screens/pyramids_walk_project_1771728438187.png,2026-02-22
-blumar_sidi_abd_el_rahman,official_project_url,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Crawled https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/; card or page URL captured,raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,region,North Coast,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Location text extracted from page: North Coast | Sidi Abdel Rahman,raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,city_area,Sidi Abdel Rahman,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Location text: Sidi Abdel Rahman,raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,project_type,resort,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Project type determined from page content: resort,raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,project_status,delivered,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Status from page/index: delivered,raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Sales status: not_selling; index card checked,raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Sold-out label on /projects/ index card,raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,unit_types_offered_json,"[""Chalets"", ""Villas""]",https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,"Unit types from DOM: Chalets, Villas",raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,key_amenities_json,"[""Green Areas"", ""Swimming Pools"", ""Restaurants"", ""Hotel""]",https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,"Amenities from DOM: Green Areas, Swimming Pools, Restaurants, Hotel",raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,beach_access_flag,true,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,beach_access_flag=true from amenities/DOM,raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,lagoons_flag,false,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,lagoons_flag=false from amenities/DOM,raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,clubhouse_flag,false,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,clubhouse_flag=false from amenities/DOM,raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,pools_flag,true,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,pools_flag=true from amenities/DOM,raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,gym_flag,false,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,gym_flag=false from amenities/DOM,raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,golf_flag,false,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,golf_flag=false from amenities/DOM,raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-blumar_sidi_abd_el_rahman,confidence_score,0.50,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Confidence scored per scoring rubric,raw/screens/blumar_sidi_abdel_rahman_1771728548479.png,2026-02-22
-tijan_zahraa_el_maadi,official_project_url,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Crawled https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/; card or page URL captured,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,region,Cairo,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Location text extracted from page: Cairo | Zahraa El Maadi,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,city_area,Zahraa El Maadi,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Location text: Zahraa El Maadi,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,project_type,residential,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Project type determined from page content: residential,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,project_status,delivered,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Status from page/index: delivered,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Sales status: not_selling; index card checked,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Sold-out label on /projects/ index card,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,unit_types_offered_json,"[""Apartments""]",https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Unit types from DOM: Apartments,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,key_amenities_json,"[""Green Areas"", ""Secured Parking"", ""Water Feature""]",https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,"Amenities from DOM: Green Areas, Secured Parking, Water Feature",raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,beach_access_flag,false,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,beach_access_flag=false from amenities/DOM,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,lagoons_flag,false,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,lagoons_flag=false from amenities/DOM,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,clubhouse_flag,false,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,clubhouse_flag=false from amenities/DOM,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,pools_flag,false,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,pools_flag=false from amenities/DOM,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,gym_flag,false,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,gym_flag=false from amenities/DOM,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,golf_flag,false,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,golf_flag=false from amenities/DOM,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-tijan_zahraa_el_maadi,confidence_score,0.50,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Confidence scored per scoring rubric,raw/screens/tijan_zahraa_maadi_1771728598658.png,2026-02-22
-canal_residence,official_project_url,https://wadidegladevelopments.com/projects/canal_residence/,https://wadidegladevelopments.com/projects/canal_residence/,dom,Crawled https://wadidegladevelopments.com/projects/canal_residence/; card or page URL captured,raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,region,Cairo,https://wadidegladevelopments.com/projects/canal_residence/,dom,Location text extracted from page: Cairo | Maadi,raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,city_area,Maadi,https://wadidegladevelopments.com/projects/canal_residence/,dom,Location text: Maadi,raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,micro_location,Sarayat el Maadi,https://wadidegladevelopments.com/projects/canal_residence/,dom,Micro-location from page: Sarayat el Maadi,raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,project_type,residential,https://wadidegladevelopments.com/projects/canal_residence/,dom,Project type determined from page content: residential,raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,project_status,delivered,https://wadidegladevelopments.com/projects/canal_residence/,dom,Status from page/index: delivered,raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/canal_residence/,dom,Sales status: not_selling; index card checked,raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/canal_residence/,dom,Sold-out label on /projects/ index card,raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,unit_types_offered_json,"[""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/projects/canal_residence/,dom,"Unit types from DOM: Apartments, Duplexes",raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,key_amenities_json,"[""Secured Parking"", ""Swimming Pool""]",https://wadidegladevelopments.com/projects/canal_residence/,dom,"Amenities from DOM: Secured Parking, Swimming Pool",raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,beach_access_flag,false,https://wadidegladevelopments.com/projects/canal_residence/,dom,beach_access_flag=false from amenities/DOM,raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,lagoons_flag,false,https://wadidegladevelopments.com/projects/canal_residence/,dom,lagoons_flag=false from amenities/DOM,raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,clubhouse_flag,false,https://wadidegladevelopments.com/projects/canal_residence/,dom,clubhouse_flag=false from amenities/DOM,raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,pools_flag,true,https://wadidegladevelopments.com/projects/canal_residence/,dom,pools_flag=true from amenities/DOM,raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,gym_flag,false,https://wadidegladevelopments.com/projects/canal_residence/,dom,gym_flag=false from amenities/DOM,raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,golf_flag,false,https://wadidegladevelopments.com/projects/canal_residence/,dom,golf_flag=false from amenities/DOM,raw/screens/canal_residence_1771728668330.png,2026-02-22
-canal_residence,confidence_score,0.50,https://wadidegladevelopments.com/projects/canal_residence/,dom,Confidence scored per scoring rubric,raw/screens/canal_residence_1771728668330.png,2026-02-22
-river_walk,official_project_url,https://wadidegladevelopments.com/projects/river-walk/,https://wadidegladevelopments.com/projects/river-walk/,dom,Crawled https://wadidegladevelopments.com/projects/river-walk/; card or page URL captured,raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,region,East Cairo,https://wadidegladevelopments.com/projects/river-walk/,dom,Location text extracted from page: East Cairo | New Cairo,raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,city_area,New Cairo,https://wadidegladevelopments.com/projects/river-walk/,dom,Location text: New Cairo,raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,project_type,residential,https://wadidegladevelopments.com/projects/river-walk/,dom,Project type determined from page content: residential,raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,project_status,delivered,https://wadidegladevelopments.com/projects/river-walk/,dom,Status from page/index: delivered,raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/river-walk/,dom,Sales status: not_selling; index card checked,raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/river-walk/,dom,Sold-out label on /projects/ index card,raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,unit_types_offered_json,"[""Villas"", ""Attached Villas""]",https://wadidegladevelopments.com/projects/river-walk/,dom,"Unit types from DOM: Villas, Attached Villas",raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,key_amenities_json,"[""Swimming Pools"", ""Green Areas"", ""Secured Parking"", ""Commercial Area""]",https://wadidegladevelopments.com/projects/river-walk/,dom,"Amenities from DOM: Swimming Pools, Green Areas, Secured Parking, Commercial Area",raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,beach_access_flag,false,https://wadidegladevelopments.com/projects/river-walk/,dom,beach_access_flag=false from amenities/DOM,raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,lagoons_flag,false,https://wadidegladevelopments.com/projects/river-walk/,dom,lagoons_flag=false from amenities/DOM,raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,clubhouse_flag,false,https://wadidegladevelopments.com/projects/river-walk/,dom,clubhouse_flag=false from amenities/DOM,raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,pools_flag,true,https://wadidegladevelopments.com/projects/river-walk/,dom,pools_flag=true from amenities/DOM,raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,gym_flag,false,https://wadidegladevelopments.com/projects/river-walk/,dom,gym_flag=false from amenities/DOM,raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,golf_flag,false,https://wadidegladevelopments.com/projects/river-walk/,dom,golf_flag=false from amenities/DOM,raw/screens/river_walk_1771728741501.png,2026-02-22
-river_walk,confidence_score,0.50,https://wadidegladevelopments.com/projects/river-walk/,dom,Confidence scored per scoring rubric,raw/screens/river_walk_1771728741501.png,2026-02-22
-marina_wadi_degla,official_project_url,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Crawled https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/; card or page URL captured,raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,region,Ain Sokhna,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Location text extracted from page: Ain Sokhna | Suez Road,raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,city_area,Suez Road,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Location text: Suez Road,raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,project_type,resort,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Project type determined from page content: resort,raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,project_status,delivered,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Status from page/index: delivered,raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Sales status: not_selling; index card checked,raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Sold-out label on /projects/ index card,raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,unit_types_offered_json,"[""Villas"", ""Attached Villas"", ""Chalets""]",https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,"Unit types from DOM: Villas, Attached Villas, Chalets",raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,key_amenities_json,"[""Swimming Pools"", ""Green Areas"", ""Restaurants"", ""Entertainment Area""]",https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,"Amenities from DOM: Swimming Pools, Green Areas, Restaurants, Entertainment Area",raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,beach_access_flag,true,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,beach_access_flag=true from amenities/DOM,raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,lagoons_flag,false,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,lagoons_flag=false from amenities/DOM,raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,clubhouse_flag,false,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,clubhouse_flag=false from amenities/DOM,raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,pools_flag,true,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,pools_flag=true from amenities/DOM,raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,gym_flag,true,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,gym_flag=true from amenities/DOM,raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,golf_flag,false,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,golf_flag=false from amenities/DOM,raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-marina_wadi_degla,confidence_score,0.50,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Confidence scored per scoring rubric,raw/screens/marina_wadi_degla_project_1771728818699.png,2026-02-22
-living_community,official_project_url,https://wadidegladevelopments.com/projects/murano/,https://wadidegladevelopments.com/projects/murano/,dom,Crawled https://wadidegladevelopments.com/projects/murano/; card or page URL captured,raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,region,Ain Sokhna,https://wadidegladevelopments.com/projects/murano/,dom,Location text extracted from page: Ain Sokhna | El Sokhna,raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,city_area,El Sokhna,https://wadidegladevelopments.com/projects/murano/,dom,Location text: El Sokhna,raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,micro_location,Zaafarana Road,https://wadidegladevelopments.com/projects/murano/,dom,Micro-location from page: Zaafarana Road,raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,project_type,resort,https://wadidegladevelopments.com/projects/murano/,dom,Project type determined from page content: resort,raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,current_sales_status,selling,https://wadidegladevelopments.com/projects/murano/,dom,Sales status: selling; index card checked,raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,unit_types_offered_json,"[""Villas"", ""Attached Villas"", ""Duplexes"", ""Chalets""]",https://wadidegladevelopments.com/projects/murano/,dom,"Unit types from DOM: Villas, Attached Villas, Duplexes, Chalets",raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,key_amenities_json,"[""750-metre beachfront"", ""Private beaches"", ""Six pools"", ""Green Areas""]",https://wadidegladevelopments.com/projects/murano/,dom,"Amenities from DOM: 750-metre beachfront, Private beaches, Six pools, Green Areas",raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,beach_access_flag,true,https://wadidegladevelopments.com/projects/murano/,dom,beach_access_flag=true from amenities/DOM,raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,lagoons_flag,false,https://wadidegladevelopments.com/projects/murano/,dom,lagoons_flag=false from amenities/DOM,raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,clubhouse_flag,false,https://wadidegladevelopments.com/projects/murano/,dom,clubhouse_flag=false from amenities/DOM,raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,pools_flag,true,https://wadidegladevelopments.com/projects/murano/,dom,pools_flag=true from amenities/DOM,raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,gym_flag,false,https://wadidegladevelopments.com/projects/murano/,dom,gym_flag=false from amenities/DOM,raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,golf_flag,false,https://wadidegladevelopments.com/projects/murano/,dom,golf_flag=false from amenities/DOM,raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/09/Waterside-Brochure.pdf""]",https://wadidegladevelopments.com/projects/murano/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/09/Waterside-Brochure.pdf,raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,confidence_score,0.65,https://wadidegladevelopments.com/projects/murano/,dom,Confidence scored per scoring rubric,raw/screens/murano_top_1771729128709.png,2026-02-22
-living_community,price_status,on_request,https://wadidegladevelopments.com/projects/murano/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/murano_top_1771729128709.png,2026-02-22
-waterside,official_project_url,https://wadidegladevelopments.com/projects/water-side/,https://wadidegladevelopments.com/projects/water-side/,dom,Crawled https://wadidegladevelopments.com/projects/water-side/; card or page URL captured,raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,region,Ain Sokhna,https://wadidegladevelopments.com/projects/water-side/,dom,Location text extracted from page: Ain Sokhna | Ain Sokhna,raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,city_area,Ain Sokhna,https://wadidegladevelopments.com/projects/water-side/,dom,Location text: Ain Sokhna,raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,micro_location,Murano,https://wadidegladevelopments.com/projects/water-side/,dom,Micro-location from page: Murano,raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,project_type,resort,https://wadidegladevelopments.com/projects/water-side/,dom,Project type determined from page content: resort,raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,current_sales_status,selling,https://wadidegladevelopments.com/projects/water-side/,dom,Sales status: selling; index card checked,raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,unit_types_offered_json,"[""Villas"", ""Duplexes"", ""Chalets""]",https://wadidegladevelopments.com/projects/water-side/,dom,"Unit types from DOM: Villas, Duplexes, Chalets",raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,key_amenities_json,"[""Swimming Pools"", ""Green Areas"", ""Entertainment Area"", ""Restaurants""]",https://wadidegladevelopments.com/projects/water-side/,dom,"Amenities from DOM: Swimming Pools, Green Areas, Entertainment Area, Restaurants",raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,beach_access_flag,true,https://wadidegladevelopments.com/projects/water-side/,dom,beach_access_flag=true from amenities/DOM,raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,lagoons_flag,false,https://wadidegladevelopments.com/projects/water-side/,dom,lagoons_flag=false from amenities/DOM,raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,clubhouse_flag,false,https://wadidegladevelopments.com/projects/water-side/,dom,clubhouse_flag=false from amenities/DOM,raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,pools_flag,true,https://wadidegladevelopments.com/projects/water-side/,dom,pools_flag=true from amenities/DOM,raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,gym_flag,false,https://wadidegladevelopments.com/projects/water-side/,dom,gym_flag=false from amenities/DOM,raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,golf_flag,false,https://wadidegladevelopments.com/projects/water-side/,dom,golf_flag=false from amenities/DOM,raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/09/Waterside-Brochure.pdf""]",https://wadidegladevelopments.com/projects/water-side/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/09/Waterside-Brochure.pdf,raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,confidence_score,0.65,https://wadidegladevelopments.com/projects/water-side/,dom,Confidence scored per scoring rubric,raw/screens/waterside_top_1771728890379.png,2026-02-22
-waterside,price_status,on_request,https://wadidegladevelopments.com/projects/water-side/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/waterside_top_1771728890379.png,2026-02-22
-floating_islands,official_project_url,https://wadidegladevelopments.com/projects/floating-islands/,https://wadidegladevelopments.com/projects/floating-islands/,dom,Crawled https://wadidegladevelopments.com/projects/floating-islands/; card or page URL captured,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,region,Ain Sokhna,https://wadidegladevelopments.com/projects/floating-islands/,dom,Location text extracted from page: Ain Sokhna | Ain Sokhna,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,city_area,Ain Sokhna,https://wadidegladevelopments.com/projects/floating-islands/,dom,Location text: Ain Sokhna,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,micro_location,Murano,https://wadidegladevelopments.com/projects/floating-islands/,dom,Micro-location from page: Murano,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,project_type,resort,https://wadidegladevelopments.com/projects/floating-islands/,dom,Project type determined from page content: resort,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,current_sales_status,selling,https://wadidegladevelopments.com/projects/floating-islands/,dom,Sales status: selling; index card checked,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,unit_types_offered_json,"[""Duplexes"", ""Chalets"", ""Villas""]",https://wadidegladevelopments.com/projects/floating-islands/,dom,"Unit types from DOM: Duplexes, Chalets, Villas",raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,key_amenities_json,"[""Entertainment Area"", ""Green Areas"", ""Swimming Pools"", ""Restaurants""]",https://wadidegladevelopments.com/projects/floating-islands/,dom,"Amenities from DOM: Entertainment Area, Green Areas, Swimming Pools, Restaurants",raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,beach_access_flag,true,https://wadidegladevelopments.com/projects/floating-islands/,dom,beach_access_flag=true from amenities/DOM,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,lagoons_flag,false,https://wadidegladevelopments.com/projects/floating-islands/,dom,lagoons_flag=false from amenities/DOM,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,clubhouse_flag,false,https://wadidegladevelopments.com/projects/floating-islands/,dom,clubhouse_flag=false from amenities/DOM,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,pools_flag,true,https://wadidegladevelopments.com/projects/floating-islands/,dom,pools_flag=true from amenities/DOM,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,gym_flag,false,https://wadidegladevelopments.com/projects/floating-islands/,dom,gym_flag=false from amenities/DOM,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,golf_flag,false,https://wadidegladevelopments.com/projects/floating-islands/,dom,golf_flag=false from amenities/DOM,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2024/07/Floating-Islands-Brochure.pdf""]",https://wadidegladevelopments.com/projects/floating-islands/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2024/07/Floating-Islands-Brochure.pdf,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,confidence_score,0.65,https://wadidegladevelopments.com/projects/floating-islands/,dom,Confidence scored per scoring rubric,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-floating_islands,price_status,on_request,https://wadidegladevelopments.com/projects/floating-islands/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/floating_islands_top_1771729005634.png,2026-02-22
-ojo,official_project_url,https://wadidegladevelopments.com/projects/ojo-2/,https://wadidegladevelopments.com/projects/ojo-2/,dom,Crawled https://wadidegladevelopments.com/projects/ojo-2/; card or page URL captured,raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,region,Ain Sokhna,https://wadidegladevelopments.com/projects/ojo-2/,dom,Location text extracted from page: Ain Sokhna | Ain Sokhna,raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,city_area,Ain Sokhna,https://wadidegladevelopments.com/projects/ojo-2/,dom,Location text: Ain Sokhna,raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,micro_location,Murano,https://wadidegladevelopments.com/projects/ojo-2/,dom,Micro-location from page: Murano,raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,project_type,resort,https://wadidegladevelopments.com/projects/ojo-2/,dom,Project type determined from page content: resort,raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,current_sales_status,selling,https://wadidegladevelopments.com/projects/ojo-2/,dom,Sales status: selling; index card checked,raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,unit_types_offered_json,"[""Standalone Villas"", ""Town Houses"", ""Chalets""]",https://wadidegladevelopments.com/projects/ojo-2/,dom,"Unit types from DOM: Standalone Villas, Town Houses, Chalets",raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,key_amenities_json,"[""Serene lagoons and edge pools"", ""Beach access"", ""Commercial promenade"", ""Casa Club""]",https://wadidegladevelopments.com/projects/ojo-2/,dom,"Amenities from DOM: Serene lagoons and edge pools, Beach access, Commercial promenade, Casa Club",raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,beach_access_flag,true,https://wadidegladevelopments.com/projects/ojo-2/,dom,beach_access_flag=true from amenities/DOM,raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,lagoons_flag,true,https://wadidegladevelopments.com/projects/ojo-2/,dom,lagoons_flag=true from amenities/DOM,raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,clubhouse_flag,true,https://wadidegladevelopments.com/projects/ojo-2/,dom,clubhouse_flag=true from amenities/DOM,raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,pools_flag,true,https://wadidegladevelopments.com/projects/ojo-2/,dom,pools_flag=true from amenities/DOM,raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,gym_flag,false,https://wadidegladevelopments.com/projects/ojo-2/,dom,gym_flag=false from amenities/DOM,raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,golf_flag,false,https://wadidegladevelopments.com/projects/ojo-2/,dom,golf_flag=false from amenities/DOM,raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2025/12/Ojo-Brochure.pdf""]",https://wadidegladevelopments.com/projects/ojo-2/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2025/12/Ojo-Brochure.pdf,raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,confidence_score,0.65,https://wadidegladevelopments.com/projects/ojo-2/,dom,Confidence scored per scoring rubric,raw/screens/ojo_top_1771729061413.png,2026-02-22
-ojo,price_status,on_request,https://wadidegladevelopments.com/projects/ojo-2/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/ojo_top_1771729061413.png,2026-02-22
-neo_lakes,official_project_url,https://wadidegladevelopments.com/projects/neo-lakes/,https://wadidegladevelopments.com/projects/neo-lakes/,dom,Crawled https://wadidegladevelopments.com/projects/neo-lakes/; card or page URL captured,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,region,East Cairo,https://wadidegladevelopments.com/projects/neo-lakes/,dom,Location text extracted from page: East Cairo | Mostakbal City,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,city_area,Mostakbal City,https://wadidegladevelopments.com/projects/neo-lakes/,dom,Location text: Mostakbal City,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,micro_location,Heart of Mostakbal City,https://wadidegladevelopments.com/projects/neo-lakes/,dom,Micro-location from page: Heart of Mostakbal City,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,project_type,residential,https://wadidegladevelopments.com/projects/neo-lakes/,dom,Project type determined from page content: residential,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,current_sales_status,selling,https://wadidegladevelopments.com/projects/neo-lakes/,dom,Sales status: selling; index card checked,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,unit_types_offered_json,"[""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/projects/neo-lakes/,dom,"Unit types from DOM: Apartments, Duplexes",raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,key_amenities_json,"[""International School"", ""Parking"", ""Nursery"", ""Green Areas""]",https://wadidegladevelopments.com/projects/neo-lakes/,dom,"Amenities from DOM: International School, Parking, Nursery, Green Areas",raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,beach_access_flag,false,https://wadidegladevelopments.com/projects/neo-lakes/,dom,beach_access_flag=false from amenities/DOM,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,lagoons_flag,true,https://wadidegladevelopments.com/projects/neo-lakes/,dom,lagoons_flag=true from amenities/DOM,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,clubhouse_flag,false,https://wadidegladevelopments.com/projects/neo-lakes/,dom,clubhouse_flag=false from amenities/DOM,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,pools_flag,false,https://wadidegladevelopments.com/projects/neo-lakes/,dom,pools_flag=false from amenities/DOM,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,gym_flag,false,https://wadidegladevelopments.com/projects/neo-lakes/,dom,gym_flag=false from amenities/DOM,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,golf_flag,false,https://wadidegladevelopments.com/projects/neo-lakes/,dom,golf_flag=false from amenities/DOM,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/10/Neo-Lakes.pdf""]",https://wadidegladevelopments.com/projects/neo-lakes/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/10/Neo-Lakes.pdf,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,confidence_score,0.65,https://wadidegladevelopments.com/projects/neo-lakes/,dom,Confidence scored per scoring rubric,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_lakes,price_status,on_request,https://wadidegladevelopments.com/projects/neo-lakes/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/neo_lakes_top_1771729210282.png,2026-02-22
-neo_gardens,official_project_url,https://wadidegladevelopments.com/projects/neo-gardens/,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Crawled https://wadidegladevelopments.com/projects/neo-gardens/; card or page URL captured,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,region,East Cairo,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Location text extracted from page: East Cairo | Mostakbal City,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,city_area,Mostakbal City,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Location text: Mostakbal City,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,micro_location,Heart of Mostakbal City,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Micro-location from page: Heart of Mostakbal City,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,project_type,residential,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Project type determined from page content: residential,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,current_sales_status,selling,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Sales status: selling; index card checked,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,unit_types_offered_json,"[""Apartments""]",https://wadidegladevelopments.com/projects/neo-gardens/,dom,Unit types from DOM: Apartments,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,key_amenities_json,"[""Commercial Area"", ""Green Areas"", ""Mosque"", ""Nursery""]",https://wadidegladevelopments.com/projects/neo-gardens/,dom,"Amenities from DOM: Commercial Area, Green Areas, Mosque, Nursery",raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,beach_access_flag,false,https://wadidegladevelopments.com/projects/neo-gardens/,dom,beach_access_flag=false from amenities/DOM,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,lagoons_flag,false,https://wadidegladevelopments.com/projects/neo-gardens/,dom,lagoons_flag=false from amenities/DOM,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,clubhouse_flag,false,https://wadidegladevelopments.com/projects/neo-gardens/,dom,clubhouse_flag=false from amenities/DOM,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,pools_flag,false,https://wadidegladevelopments.com/projects/neo-gardens/,dom,pools_flag=false from amenities/DOM,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,gym_flag,false,https://wadidegladevelopments.com/projects/neo-gardens/,dom,gym_flag=false from amenities/DOM,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,golf_flag,false,https://wadidegladevelopments.com/projects/neo-gardens/,dom,golf_flag=false from amenities/DOM,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/09/Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf""]",https://wadidegladevelopments.com/projects/neo-gardens/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/09/Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,confidence_score,0.65,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Confidence scored per scoring rubric,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neo_gardens,price_status,on_request,https://wadidegladevelopments.com/projects/neo-gardens/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-breeze,official_project_url,https://wadidegladevelopments.com/projects/breeze/,https://wadidegladevelopments.com/projects/breeze/,dom,Crawled https://wadidegladevelopments.com/projects/breeze/; card or page URL captured,raw/screens/breeze_page.png,2026-02-22
-breeze,region,Cairo,https://wadidegladevelopments.com/projects/breeze/,dom,Location text extracted from page: Cairo | Maadi,raw/screens/breeze_page.png,2026-02-22
-breeze,city_area,Maadi,https://wadidegladevelopments.com/projects/breeze/,dom,Location text: Maadi,raw/screens/breeze_page.png,2026-02-22
-breeze,micro_location,New Degla,https://wadidegladevelopments.com/projects/breeze/,dom,Micro-location from page: New Degla,raw/screens/breeze_page.png,2026-02-22
-breeze,project_type,residential,https://wadidegladevelopments.com/projects/breeze/,dom,Project type determined from page content: residential,raw/screens/breeze_page.png,2026-02-22
-breeze,current_sales_status,selling,https://wadidegladevelopments.com/projects/breeze/,dom,Sales status: selling; index card checked,raw/screens/breeze_page.png,2026-02-22
-breeze,unit_types_offered_json,"[""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/projects/breeze/,dom,"Unit types from DOM: Apartments, Duplexes",raw/screens/breeze_page.png,2026-02-22
-breeze,key_amenities_json,"[""Swimming Pools"", ""Nurseries & Kids Gardens"", ""Retail"", ""Admin""]",https://wadidegladevelopments.com/projects/breeze/,dom,"Amenities from DOM: Swimming Pools, Nurseries & Kids Gardens, Retail, Admin",raw/screens/breeze_page.png,2026-02-22
-breeze,beach_access_flag,false,https://wadidegladevelopments.com/projects/breeze/,dom,beach_access_flag=false from amenities/DOM,raw/screens/breeze_page.png,2026-02-22
-breeze,lagoons_flag,false,https://wadidegladevelopments.com/projects/breeze/,dom,lagoons_flag=false from amenities/DOM,raw/screens/breeze_page.png,2026-02-22
-breeze,clubhouse_flag,true,https://wadidegladevelopments.com/projects/breeze/,dom,clubhouse_flag=true from amenities/DOM,raw/screens/breeze_page.png,2026-02-22
-breeze,pools_flag,true,https://wadidegladevelopments.com/projects/breeze/,dom,pools_flag=true from amenities/DOM,raw/screens/breeze_page.png,2026-02-22
-breeze,gym_flag,true,https://wadidegladevelopments.com/projects/breeze/,dom,gym_flag=true from amenities/DOM,raw/screens/breeze_page.png,2026-02-22
-breeze,golf_flag,false,https://wadidegladevelopments.com/projects/breeze/,dom,golf_flag=false from amenities/DOM,raw/screens/breeze_page.png,2026-02-22
-breeze,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/10/CT-Breeze-Brochure.pdf""]",https://wadidegladevelopments.com/projects/breeze/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/10/CT-Breeze-Brochure.pdf,raw/screens/breeze_page.png,2026-02-22
-breeze,confidence_score,0.65,https://wadidegladevelopments.com/projects/breeze/,dom,Confidence scored per scoring rubric,raw/screens/breeze_page.png,2026-02-22
-breeze,price_status,on_request,https://wadidegladevelopments.com/projects/breeze/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/breeze_page.png,2026-02-22
-horizon,official_project_url,https://wadidegladevelopments.com/projects/horizon/,https://wadidegladevelopments.com/projects/horizon/,dom,Crawled https://wadidegladevelopments.com/projects/horizon/; card or page URL captured,raw/screens/horizon_page.png,2026-02-22
-horizon,region,Cairo,https://wadidegladevelopments.com/projects/horizon/,dom,Location text extracted from page: Cairo | Maadi,raw/screens/horizon_page.png,2026-02-22
-horizon,city_area,Maadi,https://wadidegladevelopments.com/projects/horizon/,dom,Location text: Maadi,raw/screens/horizon_page.png,2026-02-22
-horizon,micro_location,New Degla,https://wadidegladevelopments.com/projects/horizon/,dom,Micro-location from page: New Degla,raw/screens/horizon_page.png,2026-02-22
-horizon,project_type,residential,https://wadidegladevelopments.com/projects/horizon/,dom,Project type determined from page content: residential,raw/screens/horizon_page.png,2026-02-22
-horizon,current_sales_status,selling,https://wadidegladevelopments.com/projects/horizon/,dom,Sales status: selling; index card checked,raw/screens/horizon_page.png,2026-02-22
-horizon,unit_types_offered_json,"[""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/projects/horizon/,dom,"Unit types from DOM: Apartments, Duplexes",raw/screens/horizon_page.png,2026-02-22
-horizon,key_amenities_json,"[""Swimming Pools"", ""Nurseries & Kids Gardens"", ""Retail"", ""Admin""]",https://wadidegladevelopments.com/projects/horizon/,dom,"Amenities from DOM: Swimming Pools, Nurseries & Kids Gardens, Retail, Admin",raw/screens/horizon_page.png,2026-02-22
-horizon,beach_access_flag,false,https://wadidegladevelopments.com/projects/horizon/,dom,beach_access_flag=false from amenities/DOM,raw/screens/horizon_page.png,2026-02-22
-horizon,lagoons_flag,false,https://wadidegladevelopments.com/projects/horizon/,dom,lagoons_flag=false from amenities/DOM,raw/screens/horizon_page.png,2026-02-22
-horizon,clubhouse_flag,true,https://wadidegladevelopments.com/projects/horizon/,dom,clubhouse_flag=true from amenities/DOM,raw/screens/horizon_page.png,2026-02-22
-horizon,pools_flag,true,https://wadidegladevelopments.com/projects/horizon/,dom,pools_flag=true from amenities/DOM,raw/screens/horizon_page.png,2026-02-22
-horizon,gym_flag,true,https://wadidegladevelopments.com/projects/horizon/,dom,gym_flag=true from amenities/DOM,raw/screens/horizon_page.png,2026-02-22
-horizon,golf_flag,false,https://wadidegladevelopments.com/projects/horizon/,dom,golf_flag=false from amenities/DOM,raw/screens/horizon_page.png,2026-02-22
-horizon,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/10/CT-Horizon-Brochure-Wadi-Degla-Developments_.pdf""]",https://wadidegladevelopments.com/projects/horizon/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/10/CT-Horizon-Brochure-Wadi-Degla-Developments_.pdf,raw/screens/horizon_page.png,2026-02-22
-horizon,confidence_score,0.65,https://wadidegladevelopments.com/projects/horizon/,dom,Confidence scored per scoring rubric,raw/screens/horizon_page.png,2026-02-22
-horizon,price_status,on_request,https://wadidegladevelopments.com/projects/horizon/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/horizon_page.png,2026-02-22
-edge,official_project_url,https://wadidegladevelopments.com/projects/edge/,https://wadidegladevelopments.com/projects/edge/,dom,Crawled https://wadidegladevelopments.com/projects/edge/; card or page URL captured,raw/screens/edge_page.png,2026-02-22
-edge,region,Cairo,https://wadidegladevelopments.com/projects/edge/,dom,Location text extracted from page: Cairo | Maadi,raw/screens/edge_page.png,2026-02-22
-edge,city_area,Maadi,https://wadidegladevelopments.com/projects/edge/,dom,Location text: Maadi,raw/screens/edge_page.png,2026-02-22
-edge,micro_location,New Degla,https://wadidegladevelopments.com/projects/edge/,dom,Micro-location from page: New Degla,raw/screens/edge_page.png,2026-02-22
-edge,project_type,residential,https://wadidegladevelopments.com/projects/edge/,dom,Project type determined from page content: residential,raw/screens/edge_page.png,2026-02-22
-edge,current_sales_status,selling,https://wadidegladevelopments.com/projects/edge/,dom,Sales status: selling; index card checked,raw/screens/edge_page.png,2026-02-22
-edge,unit_types_offered_json,"[""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/projects/edge/,dom,"Unit types from DOM: Apartments, Duplexes",raw/screens/edge_page.png,2026-02-22
-edge,key_amenities_json,"[""Swimming Pools"", ""Gym"", ""Mosque"", ""Nurseries & Kids Gardens""]",https://wadidegladevelopments.com/projects/edge/,dom,"Amenities from DOM: Swimming Pools, Gym, Mosque, Nurseries & Kids Gardens",raw/screens/edge_page.png,2026-02-22
-edge,beach_access_flag,false,https://wadidegladevelopments.com/projects/edge/,dom,beach_access_flag=false from amenities/DOM,raw/screens/edge_page.png,2026-02-22
-edge,lagoons_flag,false,https://wadidegladevelopments.com/projects/edge/,dom,lagoons_flag=false from amenities/DOM,raw/screens/edge_page.png,2026-02-22
-edge,clubhouse_flag,true,https://wadidegladevelopments.com/projects/edge/,dom,clubhouse_flag=true from amenities/DOM,raw/screens/edge_page.png,2026-02-22
-edge,pools_flag,true,https://wadidegladevelopments.com/projects/edge/,dom,pools_flag=true from amenities/DOM,raw/screens/edge_page.png,2026-02-22
-edge,gym_flag,true,https://wadidegladevelopments.com/projects/edge/,dom,gym_flag=true from amenities/DOM,raw/screens/edge_page.png,2026-02-22
-edge,golf_flag,false,https://wadidegladevelopments.com/projects/edge/,dom,golf_flag=false from amenities/DOM,raw/screens/edge_page.png,2026-02-22
-edge,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2024/07/Edge-Brochure-2.pdf""]",https://wadidegladevelopments.com/projects/edge/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2024/07/Edge-Brochure-2.pdf,raw/screens/edge_page.png,2026-02-22
-edge,confidence_score,0.65,https://wadidegladevelopments.com/projects/edge/,dom,Confidence scored per scoring rubric,raw/screens/edge_page.png,2026-02-22
-edge,price_status,on_request,https://wadidegladevelopments.com/projects/edge/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/edge_page.png,2026-02-22
-vyon,official_project_url,https://wadidegladevelopments.com/projects/vyon/,https://wadidegladevelopments.com/projects/vyon/,dom,Crawled https://wadidegladevelopments.com/projects/vyon/; card or page URL captured,raw/screens/vyon_top.png,2026-02-22
-vyon,region,Cairo,https://wadidegladevelopments.com/projects/vyon/,dom,Location text extracted from page: Cairo | Maadi,raw/screens/vyon_top.png,2026-02-22
-vyon,city_area,Maadi,https://wadidegladevelopments.com/projects/vyon/,dom,Location text: Maadi,raw/screens/vyon_top.png,2026-02-22
-vyon,micro_location,New Degla,https://wadidegladevelopments.com/projects/vyon/,dom,Micro-location from page: New Degla,raw/screens/vyon_top.png,2026-02-22
-vyon,project_type,residential,https://wadidegladevelopments.com/projects/vyon/,dom,Project type determined from page content: residential,raw/screens/vyon_top.png,2026-02-22
-vyon,current_sales_status,selling,https://wadidegladevelopments.com/projects/vyon/,dom,Sales status: selling; index card checked,raw/screens/vyon_top.png,2026-02-22
-vyon,unit_types_offered_json,"[""Lofts"", ""Penthouses"", ""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/projects/vyon/,dom,"Unit types from DOM: Lofts, Penthouses, Apartments, Duplexes",raw/screens/vyon_top.png,2026-02-22
-vyon,key_amenities_json,"[""Outdoor Dining & BBQ Area"", ""Rooftop Cinema"", ""Rooftop Social Lounges"", ""Co-Working & Meeting Pods""]",https://wadidegladevelopments.com/projects/vyon/,dom,"Amenities from DOM: Outdoor Dining & BBQ Area, Rooftop Cinema, Rooftop Social Lounges, Co-Working & Meeting Pods",raw/screens/vyon_top.png,2026-02-22
-vyon,beach_access_flag,false,https://wadidegladevelopments.com/projects/vyon/,dom,beach_access_flag=false from amenities/DOM,raw/screens/vyon_top.png,2026-02-22
-vyon,lagoons_flag,false,https://wadidegladevelopments.com/projects/vyon/,dom,lagoons_flag=false from amenities/DOM,raw/screens/vyon_top.png,2026-02-22
-vyon,clubhouse_flag,false,https://wadidegladevelopments.com/projects/vyon/,dom,clubhouse_flag=false from amenities/DOM,raw/screens/vyon_top.png,2026-02-22
-vyon,pools_flag,true,https://wadidegladevelopments.com/projects/vyon/,dom,pools_flag=true from amenities/DOM,raw/screens/vyon_top.png,2026-02-22
-vyon,gym_flag,false,https://wadidegladevelopments.com/projects/vyon/,dom,gym_flag=false from amenities/DOM,raw/screens/vyon_top.png,2026-02-22
-vyon,golf_flag,false,https://wadidegladevelopments.com/projects/vyon/,dom,golf_flag=false from amenities/DOM,raw/screens/vyon_top.png,2026-02-22
-vyon,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2025/07/VYON-Brochure.pdf""]",https://wadidegladevelopments.com/projects/vyon/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2025/07/VYON-Brochure.pdf,raw/screens/vyon_top.png,2026-02-22
-vyon,confidence_score,0.65,https://wadidegladevelopments.com/projects/vyon/,dom,Confidence scored per scoring rubric,raw/screens/vyon_top.png,2026-02-22
-vyon,price_status,on_request,https://wadidegladevelopments.com/projects/vyon/,dom,No numeric pricing found on page; on_request or null applied,raw/screens/vyon_top.png,2026-02-22
-neopolis,official_project_url,https://wadidegladevelopments.com/projects/neo-gardens/,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Crawled https://wadidegladevelopments.com/projects/neo-gardens/; card or page URL captured,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neopolis,region,East Cairo,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Location text extracted from page: East Cairo | Mostakbal City,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neopolis,city_area,Mostakbal City,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Location text: Mostakbal City,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neopolis,project_type,residential,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Project type determined from page content: residential,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neopolis,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/09/Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf""]",https://wadidegladevelopments.com/projects/neo-gardens/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/09/Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-neopolis,confidence_score,0.35,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Confidence scored per scoring rubric,raw/screens/neo_gardens_top_1771729801748.png,2026-02-22
-mada,confidence_score,0.30,https://wadidegladevelopments.com/,dom,Confidence scored per scoring rubric,raw/screens/index/projects_full_page_1771723527631.png,2026-02-22
-camuse,confidence_score,0.30,https://wadidegladevelopments.com/,dom,Confidence scored per scoring rubric,raw/screens/index/projects_full_page_1771723527631.png,2026-02-22
+project_id,field_name,field_value,source_url,evidence_type,evidence_snippet,asset_path_or_pdf_page,captured_date,parser_confidence,overwrite_flag,notes
+murano,official_project_url,https://wadidegladevelopments.com/project-phases/murano/,https://wadidegladevelopments.com/project-phases/murano/,dom,Crawled https://wadidegladevelopments.com/project-phases/murano/; card or page URL captured,,2026-02-22,,,
+murano,region,Ain Sokhna,https://wadidegladevelopments.com/project-phases/murano/,dom,Location text extracted from page: Ain Sokhna | Ain Sokhna Road,,2026-02-22,,,
+murano,city_area,Ain Sokhna Road,https://wadidegladevelopments.com/project-phases/murano/,dom,Location text: Ain Sokhna Road,,2026-02-22,,,
+murano,micro_location,"750 meters of beach, 50 minutes from Cairo",https://wadidegladevelopments.com/project-phases/murano/,dom,"Micro-location from page: 750 meters of beach, 50 minutes from Cairo",,2026-02-22,,,
+murano,project_type,resort,https://wadidegladevelopments.com/project-phases/murano/,dom,Project type determined from page content: resort,,2026-02-22,,,
+murano,current_sales_status,selling,https://wadidegladevelopments.com/project-phases/murano/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+murano,unit_types_offered_json,"[""Villas"", ""Attached Villas"", ""Duplexes"", ""Chalets""]",https://wadidegladevelopments.com/project-phases/murano/,dom,"Unit types from DOM: Villas, Attached Villas, Duplexes, Chalets",,2026-02-22,,,
+murano,key_amenities_json,"[""Swimming Pools"", ""Entertainment Area"", ""Supermarket"", ""Green Areas""]",https://wadidegladevelopments.com/project-phases/murano/,dom,"Amenities from DOM: Swimming Pools, Entertainment Area, Supermarket, Green Areas",,2026-02-22,,,
+murano,beach_access_flag,true,https://wadidegladevelopments.com/project-phases/murano/,dom,beach_access_flag=true from amenities/DOM,,2026-02-22,,,
+murano,lagoons_flag,true,https://wadidegladevelopments.com/project-phases/murano/,dom,lagoons_flag=true from amenities/DOM,,2026-02-22,,,
+murano,pools_flag,true,https://wadidegladevelopments.com/project-phases/murano/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+murano,golf_flag,false,https://wadidegladevelopments.com/project-phases/murano/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+murano,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/09/Waterside-Brochure.pdf"", ""https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf""]",https://wadidegladevelopments.com/project-phases/murano/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/09/Waterside-Brochure.pdf,,2026-02-22,,,
+murano,confidence_score,0.60,https://wadidegladevelopments.com/project-phases/murano/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+murano,price_status,on_request,https://wadidegladevelopments.com/project-phases/murano/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+clubtown,official_project_url,https://wadidegladevelopments.com/project-phases/clubtown/,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Crawled https://wadidegladevelopments.com/project-phases/clubtown/; card or page URL captured,,2026-02-22,,,
+clubtown,region,Cairo,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Location text extracted from page: Cairo | Maadi,,2026-02-22,,,
+clubtown,city_area,Maadi,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Location text: Maadi,,2026-02-22,,,
+clubtown,micro_location,New Degla,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Micro-location from page: New Degla,,2026-02-22,,,
+clubtown,project_type,residential,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Project type determined from page content: residential,,2026-02-22,,,
+clubtown,project_status,under_construction,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Status from page/index: under_construction,,2026-02-22,,,
+clubtown,current_sales_status,selling,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+clubtown,unit_types_offered_json,"[""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/project-phases/clubtown/,dom,"Unit types from DOM: Apartments, Duplexes",,2026-02-22,,,
+clubtown,key_amenities_json,"[""Retail"", ""Admin"", ""Sports Courts"", ""Outdoor Fitness Area""]",https://wadidegladevelopments.com/project-phases/clubtown/,dom,"Amenities from DOM: Retail, Admin, Sports Courts, Outdoor Fitness Area",,2026-02-22,,,
+clubtown,beach_access_flag,false,https://wadidegladevelopments.com/project-phases/clubtown/,dom,beach_access_flag=false from amenities/DOM,,2026-02-22,,,
+clubtown,lagoons_flag,false,https://wadidegladevelopments.com/project-phases/clubtown/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+clubtown,clubhouse_flag,true,https://wadidegladevelopments.com/project-phases/clubtown/,dom,clubhouse_flag=true from amenities/DOM,,2026-02-22,,,
+clubtown,pools_flag,true,https://wadidegladevelopments.com/project-phases/clubtown/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+clubtown,gym_flag,true,https://wadidegladevelopments.com/project-phases/clubtown/,dom,gym_flag=true from amenities/DOM,,2026-02-22,,,
+clubtown,golf_flag,false,https://wadidegladevelopments.com/project-phases/clubtown/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+clubtown,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf""]",https://wadidegladevelopments.com/project-phases/clubtown/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf,,2026-02-22,,,
+clubtown,delivery_year_min,2022,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Delivery year from page text or metadata,,2026-02-22,,,
+clubtown,confidence_score,0.60,https://wadidegladevelopments.com/project-phases/clubtown/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+clubtown,price_status,on_request,https://wadidegladevelopments.com/project-phases/clubtown/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+neo,official_project_url,https://wadidegladevelopments.com/project-phases/neo/,https://wadidegladevelopments.com/project-phases/neo/,dom,Crawled https://wadidegladevelopments.com/project-phases/neo/; card or page URL captured,,2026-02-22,,,
+neo,region,East Cairo,https://wadidegladevelopments.com/project-phases/neo/,dom,Location text extracted from page: East Cairo | Mostakbal City,,2026-02-22,,,
+neo,city_area,Mostakbal City,https://wadidegladevelopments.com/project-phases/neo/,dom,Location text: Mostakbal City,,2026-02-22,,,
+neo,micro_location,Heart of Mostakbal City,https://wadidegladevelopments.com/project-phases/neo/,dom,Micro-location from page: Heart of Mostakbal City,,2026-02-22,,,
+neo,project_type,residential,https://wadidegladevelopments.com/project-phases/neo/,dom,Project type determined from page content: residential,,2026-02-22,,,
+neo,project_status,under_construction,https://wadidegladevelopments.com/project-phases/neo/,dom,Status from page/index: under_construction,,2026-02-22,,,
+neo,current_sales_status,selling,https://wadidegladevelopments.com/project-phases/neo/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+neo,unit_types_offered_json,"[""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/project-phases/neo/,dom,"Unit types from DOM: Apartments, Duplexes",,2026-02-22,,,
+neo,key_amenities_json,"[""Green Areas"", ""Parking"", ""International School"", ""Nursery""]",https://wadidegladevelopments.com/project-phases/neo/,dom,"Amenities from DOM: Green Areas, Parking, International School, Nursery",,2026-02-22,,,
+neo,beach_access_flag,false,https://wadidegladevelopments.com/project-phases/neo/,dom,beach_access_flag=false from amenities/DOM,,2026-02-22,,,
+neo,lagoons_flag,false,https://wadidegladevelopments.com/project-phases/neo/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+neo,clubhouse_flag,false,https://wadidegladevelopments.com/project-phases/neo/,dom,clubhouse_flag=false from amenities/DOM,,2026-02-22,,,
+neo,pools_flag,false,https://wadidegladevelopments.com/project-phases/neo/,dom,pools_flag=false from amenities/DOM,,2026-02-22,,,
+neo,gym_flag,false,https://wadidegladevelopments.com/project-phases/neo/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+neo,golf_flag,false,https://wadidegladevelopments.com/project-phases/neo/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+neo,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/09/Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf""]",https://wadidegladevelopments.com/project-phases/neo/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/09/Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf,,2026-02-22,,,
+neo,confidence_score,0.65,https://wadidegladevelopments.com/project-phases/neo/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+neo,price_status,on_request,https://wadidegladevelopments.com/project-phases/neo/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+vero,official_project_url,https://wadidegladevelopments.com/projects/vero/,https://wadidegladevelopments.com/projects/vero/,dom,Crawled https://wadidegladevelopments.com/projects/vero/; card or page URL captured,,2026-02-22,,,
+vero,region,North Coast,https://wadidegladevelopments.com/projects/vero/,dom,Location text extracted from page: North Coast | Sidi Abd El Rahman,,2026-02-22,,,
+vero,city_area,Sidi Abd El Rahman,https://wadidegladevelopments.com/projects/vero/,dom,Location text: Sidi Abd El Rahman,,2026-02-22,,,
+vero,micro_location,"Sidi Abd El Rahman, elevated coastal retreat",https://wadidegladevelopments.com/projects/vero/,dom,"Micro-location from page: Sidi Abd El Rahman, elevated coastal retreat",,2026-02-22,,,
+vero,project_type,resort,https://wadidegladevelopments.com/projects/vero/,dom,Project type determined from page content: resort,,2026-02-22,,,
+vero,current_sales_status,selling,https://wadidegladevelopments.com/projects/vero/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+vero,unit_types_offered_json,"[""Serviced Apartments"", ""Residential Apartments""]",https://wadidegladevelopments.com/projects/vero/,dom,"Unit types from DOM: Serviced Apartments, Residential Apartments",,2026-02-22,,,
+vero,key_amenities_json,"[""Horizon Pool"", ""24/7 Lounge Reception & Concierge"", ""Housekeeping"", ""Fitness Center""]",https://wadidegladevelopments.com/projects/vero/,dom,"Amenities from DOM: Horizon Pool, 24/7 Lounge Reception & Concierge, Housekeeping, Fitness Center",,2026-02-22,,,
+vero,beach_access_flag,true,https://wadidegladevelopments.com/projects/vero/,dom,beach_access_flag=true from amenities/DOM,,2026-02-22,,,
+vero,pools_flag,true,https://wadidegladevelopments.com/projects/vero/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+vero,gym_flag,true,https://wadidegladevelopments.com/projects/vero/,dom,gym_flag=true from amenities/DOM,,2026-02-22,,,
+vero,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf""]",https://wadidegladevelopments.com/projects/vero/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf,,2026-02-22,,,
+vero,confidence_score,0.60,https://wadidegladevelopments.com/projects/vero/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+vero,price_status,on_request,https://wadidegladevelopments.com/projects/vero/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+promenade_new_cairo,official_project_url,https://wadidegladevelopments.com/projects/promnade-new-cairo/,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,Crawled https://wadidegladevelopments.com/projects/promnade-new-cairo/; card or page URL captured,,2026-02-22,,,
+promenade_new_cairo,region,East Cairo,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,Location text extracted from page: East Cairo | New Cairo,,2026-02-22,,,
+promenade_new_cairo,city_area,New Cairo,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,Location text: New Cairo,,2026-02-22,,,
+promenade_new_cairo,micro_location,5 minutes from AUC and Road 90,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,Micro-location from page: 5 minutes from AUC and Road 90,,2026-02-22,,,
+promenade_new_cairo,project_type,residential,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,Project type determined from page content: residential,,2026-02-22,,,
+promenade_new_cairo,current_sales_status,selling,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+promenade_new_cairo,unit_types_offered_json,"[""Apartments"", ""Penthouses""]",https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,"Unit types from DOM: Apartments, Penthouses",,2026-02-22,,,
+promenade_new_cairo,key_amenities_json,"[""Walking Track"", ""Gym"", ""Swimming Pools"", ""Secured Parking""]",https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,"Amenities from DOM: Walking Track, Gym, Swimming Pools, Secured Parking",,2026-02-22,,,
+promenade_new_cairo,pools_flag,true,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+promenade_new_cairo,gym_flag,true,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,gym_flag=true from amenities/DOM,,2026-02-22,,,
+promenade_new_cairo,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf""]",https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf,,2026-02-22,,,
+promenade_new_cairo,confidence_score,0.60,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+promenade_new_cairo,price_status,on_request,https://wadidegladevelopments.com/projects/promnade-new-cairo/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+blumar_el_sokhna,official_project_url,https://wadidegladevelopments.com/projects/blumarelsokhna/,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Crawled https://wadidegladevelopments.com/projects/blumarelsokhna/; card or page URL captured,,2026-02-22,,,
+blumar_el_sokhna,region,Ain Sokhna,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Location text extracted from page: Ain Sokhna | Suez Road,,2026-02-22,,,
+blumar_el_sokhna,city_area,Suez Road,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Location text: Suez Road,,2026-02-22,,,
+blumar_el_sokhna,project_type,resort,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Project type determined from page content: resort,,2026-02-22,,,
+blumar_el_sokhna,project_status,delivered,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Status from page/index: delivered,,2026-02-22,,,
+blumar_el_sokhna,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Sales status: not_selling; index card checked,,2026-02-22,,,
+blumar_el_sokhna,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Sold-out label on /projects/ index card,,2026-02-22,,,
+blumar_el_sokhna,key_amenities_json,"[""Swimming Pools"", ""Green Areas"", ""Restaurants"", ""Supermarket""]",https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,"Amenities from DOM: Swimming Pools, Green Areas, Restaurants, Supermarket",,2026-02-22,,,
+blumar_el_sokhna,beach_access_flag,true,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,beach_access_flag=true from amenities/DOM,,2026-02-22,,,
+blumar_el_sokhna,pools_flag,true,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+blumar_el_sokhna,gym_flag,false,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+blumar_el_sokhna,golf_flag,false,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+blumar_el_sokhna,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf""]",https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf,,2026-02-22,,,
+blumar_el_sokhna,confidence_score,0.50,https://wadidegladevelopments.com/projects/blumarelsokhna/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+blumar_hills,official_project_url,https://wadidegladevelopments.com/projects/blumar-hills/,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Crawled https://wadidegladevelopments.com/projects/blumar-hills/; card or page URL captured,,2026-02-22,,,
+blumar_hills,region,Ain Sokhna,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Location text extracted from page: Ain Sokhna | Zaafarana Road,,2026-02-22,,,
+blumar_hills,city_area,Zaafarana Road,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Location text: Zaafarana Road,,2026-02-22,,,
+blumar_hills,project_type,resort,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Project type determined from page content: resort,,2026-02-22,,,
+blumar_hills,project_status,delivered,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Status from page/index: delivered,,2026-02-22,,,
+blumar_hills,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Sales status: not_selling; index card checked,,2026-02-22,,,
+blumar_hills,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Sold-out label on /projects/ index card,,2026-02-22,,,
+blumar_hills,unit_types_offered_json,"[""Chalets""]",https://wadidegladevelopments.com/projects/blumar-hills/,dom,Unit types from DOM: Chalets,,2026-02-22,,,
+blumar_hills,key_amenities_json,"[""Swimming Pools""]",https://wadidegladevelopments.com/projects/blumar-hills/,dom,Amenities from DOM: Swimming Pools,,2026-02-22,,,
+blumar_hills,beach_access_flag,true,https://wadidegladevelopments.com/projects/blumar-hills/,dom,beach_access_flag=true from amenities/DOM,,2026-02-22,,,
+blumar_hills,pools_flag,true,https://wadidegladevelopments.com/projects/blumar-hills/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+blumar_hills,gym_flag,false,https://wadidegladevelopments.com/projects/blumar-hills/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+blumar_hills,golf_flag,false,https://wadidegladevelopments.com/projects/blumar-hills/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+blumar_hills,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf""]",https://wadidegladevelopments.com/projects/blumar-hills/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2025/09/WDD-Magazine-25-Digital.pdf,,2026-02-22,,,
+blumar_hills,confidence_score,0.50,https://wadidegladevelopments.com/projects/blumar-hills/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+tijan_maadi,official_project_url,https://wadidegladevelopments.com/projects/tijan-maadi/,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Crawled https://wadidegladevelopments.com/projects/tijan-maadi/; card or page URL captured,,2026-02-22,,,
+tijan_maadi,region,Cairo,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Location text extracted from page: Cairo | Maadi,,2026-02-22,,,
+tijan_maadi,city_area,Maadi,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Location text: Maadi,,2026-02-22,,,
+tijan_maadi,micro_location,New Degla,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Micro-location from page: New Degla,,2026-02-22,,,
+tijan_maadi,project_type,residential,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Project type determined from page content: residential,,2026-02-22,,,
+tijan_maadi,project_status,delivered,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Status from page/index: delivered,,2026-02-22,,,
+tijan_maadi,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Sales status: not_selling; index card checked,,2026-02-22,,,
+tijan_maadi,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Sold-out label on /projects/ index card,,2026-02-22,,,
+tijan_maadi,unit_types_offered_json,"[""Apartments""]",https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Unit types from DOM: Apartments,,2026-02-22,,,
+tijan_maadi,key_amenities_json,"[""Green Areas"", ""Secured Parking"", ""Water Feature"", ""Walking Track""]",https://wadidegladevelopments.com/projects/tijan-maadi/,dom,"Amenities from DOM: Green Areas, Secured Parking, Water Feature, Walking Track",,2026-02-22,,,
+tijan_maadi,beach_access_flag,false,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,beach_access_flag=false from amenities/DOM,,2026-02-22,,,
+tijan_maadi,lagoons_flag,false,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+tijan_maadi,clubhouse_flag,true,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,clubhouse_flag=true from amenities/DOM,,2026-02-22,,,
+tijan_maadi,pools_flag,true,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+tijan_maadi,gym_flag,false,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+tijan_maadi,golf_flag,false,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+tijan_maadi,confidence_score,0.50,https://wadidegladevelopments.com/projects/tijan-maadi/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+blumar_el_dome,official_project_url,https://wadidegladevelopments.com/projects/blumar-el-dome/,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Crawled https://wadidegladevelopments.com/projects/blumar-el-dome/; card or page URL captured,,2026-02-22,,,
+blumar_el_dome,region,Ain Sokhna,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Location text extracted from page: Ain Sokhna | Zaafarana Road,,2026-02-22,,,
+blumar_el_dome,city_area,Zaafarana Road,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Location text: Zaafarana Road,,2026-02-22,,,
+blumar_el_dome,project_type,resort,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Project type determined from page content: resort,,2026-02-22,,,
+blumar_el_dome,project_status,delivered,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Status from page/index: delivered,,2026-02-22,,,
+blumar_el_dome,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Sales status: not_selling; index card checked,,2026-02-22,,,
+blumar_el_dome,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Sold-out label on /projects/ index card,,2026-02-22,,,
+blumar_el_dome,unit_types_offered_json,"[""Chalets""]",https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Unit types from DOM: Chalets,,2026-02-22,,,
+blumar_el_dome,key_amenities_json,"[""Restaurants"", ""Hotel"", ""Swimming Pools""]",https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,"Amenities from DOM: Restaurants, Hotel, Swimming Pools",,2026-02-22,,,
+blumar_el_dome,beach_access_flag,true,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,beach_access_flag=true from amenities/DOM,,2026-02-22,,,
+blumar_el_dome,lagoons_flag,false,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+blumar_el_dome,clubhouse_flag,false,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,clubhouse_flag=false from amenities/DOM,,2026-02-22,,,
+blumar_el_dome,pools_flag,true,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+blumar_el_dome,gym_flag,false,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+blumar_el_dome,golf_flag,false,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+blumar_el_dome,confidence_score,0.50,https://wadidegladevelopments.com/projects/blumar-el-dome/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+pyramids_walk,official_project_url,https://wadidegladevelopments.com/projects/pyramids-walk/,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Crawled https://wadidegladevelopments.com/projects/pyramids-walk/; card or page URL captured,,2026-02-22,,,
+pyramids_walk,region,West Cairo,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Location text extracted from page: West Cairo | 6th of October,,2026-02-22,,,
+pyramids_walk,city_area,6th of October,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Location text: 6th of October,,2026-02-22,,,
+pyramids_walk,project_type,residential,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Project type determined from page content: residential,,2026-02-22,,,
+pyramids_walk,project_status,delivered,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Status from page/index: delivered,,2026-02-22,,,
+pyramids_walk,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Sales status: not_selling; index card checked,,2026-02-22,,,
+pyramids_walk,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Sold-out label on /projects/ index card,,2026-02-22,,,
+pyramids_walk,unit_types_offered_json,"[""Twin Houses"", ""Town Houses""]",https://wadidegladevelopments.com/projects/pyramids-walk/,dom,"Unit types from DOM: Twin Houses, Town Houses",,2026-02-22,,,
+pyramids_walk,key_amenities_json,"[""Swimming Pools"", ""Green Areas"", ""Secured Parking"", ""360-degree view""]",https://wadidegladevelopments.com/projects/pyramids-walk/,dom,"Amenities from DOM: Swimming Pools, Green Areas, Secured Parking, 360-degree view",,2026-02-22,,,
+pyramids_walk,beach_access_flag,false,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,beach_access_flag=false from amenities/DOM,,2026-02-22,,,
+pyramids_walk,lagoons_flag,false,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+pyramids_walk,clubhouse_flag,false,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,clubhouse_flag=false from amenities/DOM,,2026-02-22,,,
+pyramids_walk,pools_flag,true,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+pyramids_walk,gym_flag,true,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,gym_flag=true from amenities/DOM,,2026-02-22,,,
+pyramids_walk,golf_flag,false,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+pyramids_walk,confidence_score,0.50,https://wadidegladevelopments.com/projects/pyramids-walk/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+blumar_sidi_abd_el_rahman,official_project_url,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Crawled https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/; card or page URL captured,,2026-02-22,,,
+blumar_sidi_abd_el_rahman,region,North Coast,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Location text extracted from page: North Coast | Sidi Abdel Rahman,,2026-02-22,,,
+blumar_sidi_abd_el_rahman,city_area,Sidi Abdel Rahman,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Location text: Sidi Abdel Rahman,,2026-02-22,,,
+blumar_sidi_abd_el_rahman,project_type,resort,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Project type determined from page content: resort,,2026-02-22,,,
+blumar_sidi_abd_el_rahman,project_status,delivered,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Status from page/index: delivered,,2026-02-22,,,
+blumar_sidi_abd_el_rahman,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Sales status: not_selling; index card checked,,2026-02-22,,,
+blumar_sidi_abd_el_rahman,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Sold-out label on /projects/ index card,,2026-02-22,,,
+blumar_sidi_abd_el_rahman,unit_types_offered_json,"[""Chalets"", ""Villas""]",https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,"Unit types from DOM: Chalets, Villas",,2026-02-22,,,
+blumar_sidi_abd_el_rahman,key_amenities_json,"[""Green Areas"", ""Swimming Pools"", ""Restaurants"", ""Hotel""]",https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,"Amenities from DOM: Green Areas, Swimming Pools, Restaurants, Hotel",,2026-02-22,,,
+blumar_sidi_abd_el_rahman,beach_access_flag,true,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,beach_access_flag=true from amenities/DOM,,2026-02-22,,,
+blumar_sidi_abd_el_rahman,lagoons_flag,false,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+blumar_sidi_abd_el_rahman,clubhouse_flag,false,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,clubhouse_flag=false from amenities/DOM,,2026-02-22,,,
+blumar_sidi_abd_el_rahman,pools_flag,true,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+blumar_sidi_abd_el_rahman,gym_flag,false,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+blumar_sidi_abd_el_rahman,golf_flag,false,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+blumar_sidi_abd_el_rahman,confidence_score,0.50,https://wadidegladevelopments.com/projects/blumar-sidi-abdel-rahman-2/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+tijan_zahraa_el_maadi,official_project_url,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Crawled https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/; card or page URL captured,,2026-02-22,,,
+tijan_zahraa_el_maadi,region,Cairo,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Location text extracted from page: Cairo | Zahraa El Maadi,,2026-02-22,,,
+tijan_zahraa_el_maadi,city_area,Zahraa El Maadi,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Location text: Zahraa El Maadi,,2026-02-22,,,
+tijan_zahraa_el_maadi,project_type,residential,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Project type determined from page content: residential,,2026-02-22,,,
+tijan_zahraa_el_maadi,project_status,delivered,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Status from page/index: delivered,,2026-02-22,,,
+tijan_zahraa_el_maadi,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Sales status: not_selling; index card checked,,2026-02-22,,,
+tijan_zahraa_el_maadi,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Sold-out label on /projects/ index card,,2026-02-22,,,
+tijan_zahraa_el_maadi,unit_types_offered_json,"[""Apartments""]",https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Unit types from DOM: Apartments,,2026-02-22,,,
+tijan_zahraa_el_maadi,key_amenities_json,"[""Green Areas"", ""Secured Parking"", ""Water Feature""]",https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,"Amenities from DOM: Green Areas, Secured Parking, Water Feature",,2026-02-22,,,
+tijan_zahraa_el_maadi,beach_access_flag,false,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,beach_access_flag=false from amenities/DOM,,2026-02-22,,,
+tijan_zahraa_el_maadi,lagoons_flag,false,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+tijan_zahraa_el_maadi,clubhouse_flag,false,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,clubhouse_flag=false from amenities/DOM,,2026-02-22,,,
+tijan_zahraa_el_maadi,pools_flag,false,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,pools_flag=false from amenities/DOM,,2026-02-22,,,
+tijan_zahraa_el_maadi,gym_flag,false,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+tijan_zahraa_el_maadi,golf_flag,false,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+tijan_zahraa_el_maadi,confidence_score,0.50,https://wadidegladevelopments.com/projects/tijan-zahraa-maadi/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+canal_residence,official_project_url,https://wadidegladevelopments.com/projects/canal_residence/,https://wadidegladevelopments.com/projects/canal_residence/,dom,Crawled https://wadidegladevelopments.com/projects/canal_residence/; card or page URL captured,,2026-02-22,,,
+canal_residence,region,Cairo,https://wadidegladevelopments.com/projects/canal_residence/,dom,Location text extracted from page: Cairo | Maadi,,2026-02-22,,,
+canal_residence,city_area,Maadi,https://wadidegladevelopments.com/projects/canal_residence/,dom,Location text: Maadi,,2026-02-22,,,
+canal_residence,micro_location,Sarayat el Maadi,https://wadidegladevelopments.com/projects/canal_residence/,dom,Micro-location from page: Sarayat el Maadi,,2026-02-22,,,
+canal_residence,project_type,residential,https://wadidegladevelopments.com/projects/canal_residence/,dom,Project type determined from page content: residential,,2026-02-22,,,
+canal_residence,project_status,delivered,https://wadidegladevelopments.com/projects/canal_residence/,dom,Status from page/index: delivered,,2026-02-22,,,
+canal_residence,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/canal_residence/,dom,Sales status: not_selling; index card checked,,2026-02-22,,,
+canal_residence,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/canal_residence/,dom,Sold-out label on /projects/ index card,,2026-02-22,,,
+canal_residence,unit_types_offered_json,"[""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/projects/canal_residence/,dom,"Unit types from DOM: Apartments, Duplexes",,2026-02-22,,,
+canal_residence,key_amenities_json,"[""Secured Parking"", ""Swimming Pool""]",https://wadidegladevelopments.com/projects/canal_residence/,dom,"Amenities from DOM: Secured Parking, Swimming Pool",,2026-02-22,,,
+canal_residence,beach_access_flag,false,https://wadidegladevelopments.com/projects/canal_residence/,dom,beach_access_flag=false from amenities/DOM,,2026-02-22,,,
+canal_residence,lagoons_flag,false,https://wadidegladevelopments.com/projects/canal_residence/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+canal_residence,clubhouse_flag,false,https://wadidegladevelopments.com/projects/canal_residence/,dom,clubhouse_flag=false from amenities/DOM,,2026-02-22,,,
+canal_residence,pools_flag,true,https://wadidegladevelopments.com/projects/canal_residence/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+canal_residence,gym_flag,false,https://wadidegladevelopments.com/projects/canal_residence/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+canal_residence,golf_flag,false,https://wadidegladevelopments.com/projects/canal_residence/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+canal_residence,confidence_score,0.50,https://wadidegladevelopments.com/projects/canal_residence/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+river_walk,official_project_url,https://wadidegladevelopments.com/projects/river-walk/,https://wadidegladevelopments.com/projects/river-walk/,dom,Crawled https://wadidegladevelopments.com/projects/river-walk/; card or page URL captured,,2026-02-22,,,
+river_walk,region,East Cairo,https://wadidegladevelopments.com/projects/river-walk/,dom,Location text extracted from page: East Cairo | New Cairo,,2026-02-22,,,
+river_walk,city_area,New Cairo,https://wadidegladevelopments.com/projects/river-walk/,dom,Location text: New Cairo,,2026-02-22,,,
+river_walk,project_type,residential,https://wadidegladevelopments.com/projects/river-walk/,dom,Project type determined from page content: residential,,2026-02-22,,,
+river_walk,project_status,delivered,https://wadidegladevelopments.com/projects/river-walk/,dom,Status from page/index: delivered,,2026-02-22,,,
+river_walk,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/river-walk/,dom,Sales status: not_selling; index card checked,,2026-02-22,,,
+river_walk,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/river-walk/,dom,Sold-out label on /projects/ index card,,2026-02-22,,,
+river_walk,unit_types_offered_json,"[""Villas"", ""Attached Villas""]",https://wadidegladevelopments.com/projects/river-walk/,dom,"Unit types from DOM: Villas, Attached Villas",,2026-02-22,,,
+river_walk,key_amenities_json,"[""Swimming Pools"", ""Green Areas"", ""Secured Parking"", ""Commercial Area""]",https://wadidegladevelopments.com/projects/river-walk/,dom,"Amenities from DOM: Swimming Pools, Green Areas, Secured Parking, Commercial Area",,2026-02-22,,,
+river_walk,beach_access_flag,false,https://wadidegladevelopments.com/projects/river-walk/,dom,beach_access_flag=false from amenities/DOM,,2026-02-22,,,
+river_walk,lagoons_flag,false,https://wadidegladevelopments.com/projects/river-walk/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+river_walk,clubhouse_flag,false,https://wadidegladevelopments.com/projects/river-walk/,dom,clubhouse_flag=false from amenities/DOM,,2026-02-22,,,
+river_walk,pools_flag,true,https://wadidegladevelopments.com/projects/river-walk/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+river_walk,gym_flag,false,https://wadidegladevelopments.com/projects/river-walk/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+river_walk,golf_flag,false,https://wadidegladevelopments.com/projects/river-walk/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+river_walk,confidence_score,0.50,https://wadidegladevelopments.com/projects/river-walk/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+marina_wadi_degla,official_project_url,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Crawled https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/; card or page URL captured,,2026-02-22,,,
+marina_wadi_degla,region,Ain Sokhna,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Location text extracted from page: Ain Sokhna | Suez Road,,2026-02-22,,,
+marina_wadi_degla,city_area,Suez Road,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Location text: Suez Road,,2026-02-22,,,
+marina_wadi_degla,project_type,resort,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Project type determined from page content: resort,,2026-02-22,,,
+marina_wadi_degla,project_status,delivered,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Status from page/index: delivered,,2026-02-22,,,
+marina_wadi_degla,current_sales_status,not_selling,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Sales status: not_selling; index card checked,,2026-02-22,,,
+marina_wadi_degla,developer_inventory_status,sold_out,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Sold-out label on /projects/ index card,,2026-02-22,,,
+marina_wadi_degla,unit_types_offered_json,"[""Villas"", ""Attached Villas"", ""Chalets""]",https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,"Unit types from DOM: Villas, Attached Villas, Chalets",,2026-02-22,,,
+marina_wadi_degla,key_amenities_json,"[""Swimming Pools"", ""Green Areas"", ""Restaurants"", ""Entertainment Area""]",https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,"Amenities from DOM: Swimming Pools, Green Areas, Restaurants, Entertainment Area",,2026-02-22,,,
+marina_wadi_degla,beach_access_flag,true,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,beach_access_flag=true from amenities/DOM,,2026-02-22,,,
+marina_wadi_degla,lagoons_flag,false,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+marina_wadi_degla,clubhouse_flag,false,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,clubhouse_flag=false from amenities/DOM,,2026-02-22,,,
+marina_wadi_degla,pools_flag,true,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+marina_wadi_degla,gym_flag,true,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,gym_flag=true from amenities/DOM,,2026-02-22,,,
+marina_wadi_degla,golf_flag,false,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+marina_wadi_degla,confidence_score,0.50,https://wadidegladevelopments.com/projects/blumar-marina-wadi-degla/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+living_community,official_project_url,https://wadidegladevelopments.com/projects/murano/,https://wadidegladevelopments.com/projects/murano/,dom,Crawled https://wadidegladevelopments.com/projects/murano/; card or page URL captured,,2026-02-22,,,
+living_community,region,Ain Sokhna,https://wadidegladevelopments.com/projects/murano/,dom,Location text extracted from page: Ain Sokhna | El Sokhna,,2026-02-22,,,
+living_community,city_area,El Sokhna,https://wadidegladevelopments.com/projects/murano/,dom,Location text: El Sokhna,,2026-02-22,,,
+living_community,micro_location,Zaafarana Road,https://wadidegladevelopments.com/projects/murano/,dom,Micro-location from page: Zaafarana Road,,2026-02-22,,,
+living_community,project_type,resort,https://wadidegladevelopments.com/projects/murano/,dom,Project type determined from page content: resort,,2026-02-22,,,
+living_community,current_sales_status,selling,https://wadidegladevelopments.com/projects/murano/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+living_community,unit_types_offered_json,"[""Villas"", ""Attached Villas"", ""Duplexes"", ""Chalets""]",https://wadidegladevelopments.com/projects/murano/,dom,"Unit types from DOM: Villas, Attached Villas, Duplexes, Chalets",,2026-02-22,,,
+living_community,key_amenities_json,"[""750-metre beachfront"", ""Private beaches"", ""Six pools"", ""Green Areas""]",https://wadidegladevelopments.com/projects/murano/,dom,"Amenities from DOM: 750-metre beachfront, Private beaches, Six pools, Green Areas",,2026-02-22,,,
+living_community,beach_access_flag,true,https://wadidegladevelopments.com/projects/murano/,dom,beach_access_flag=true from amenities/DOM,,2026-02-22,,,
+living_community,lagoons_flag,false,https://wadidegladevelopments.com/projects/murano/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+living_community,clubhouse_flag,false,https://wadidegladevelopments.com/projects/murano/,dom,clubhouse_flag=false from amenities/DOM,,2026-02-22,,,
+living_community,pools_flag,true,https://wadidegladevelopments.com/projects/murano/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+living_community,gym_flag,false,https://wadidegladevelopments.com/projects/murano/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+living_community,golf_flag,false,https://wadidegladevelopments.com/projects/murano/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+living_community,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/09/Waterside-Brochure.pdf""]",https://wadidegladevelopments.com/projects/murano/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/09/Waterside-Brochure.pdf,,2026-02-22,,,
+living_community,confidence_score,0.65,https://wadidegladevelopments.com/projects/murano/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+living_community,price_status,on_request,https://wadidegladevelopments.com/projects/murano/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+waterside,official_project_url,https://wadidegladevelopments.com/projects/water-side/,https://wadidegladevelopments.com/projects/water-side/,dom,Crawled https://wadidegladevelopments.com/projects/water-side/; card or page URL captured,,2026-02-22,,,
+waterside,region,Ain Sokhna,https://wadidegladevelopments.com/projects/water-side/,dom,Location text extracted from page: Ain Sokhna | Ain Sokhna,,2026-02-22,,,
+waterside,city_area,Ain Sokhna,https://wadidegladevelopments.com/projects/water-side/,dom,Location text: Ain Sokhna,,2026-02-22,,,
+waterside,micro_location,Murano,https://wadidegladevelopments.com/projects/water-side/,dom,Micro-location from page: Murano,,2026-02-22,,,
+waterside,project_type,resort,https://wadidegladevelopments.com/projects/water-side/,dom,Project type determined from page content: resort,,2026-02-22,,,
+waterside,current_sales_status,selling,https://wadidegladevelopments.com/projects/water-side/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+waterside,unit_types_offered_json,"[""Villas"", ""Duplexes"", ""Chalets""]",https://wadidegladevelopments.com/projects/water-side/,dom,"Unit types from DOM: Villas, Duplexes, Chalets",,2026-02-22,,,
+waterside,key_amenities_json,"[""Swimming Pools"", ""Green Areas"", ""Entertainment Area"", ""Restaurants""]",https://wadidegladevelopments.com/projects/water-side/,dom,"Amenities from DOM: Swimming Pools, Green Areas, Entertainment Area, Restaurants",,2026-02-22,,,
+waterside,beach_access_flag,true,https://wadidegladevelopments.com/projects/water-side/,dom,beach_access_flag=true from amenities/DOM,,2026-02-22,,,
+waterside,lagoons_flag,false,https://wadidegladevelopments.com/projects/water-side/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+waterside,clubhouse_flag,false,https://wadidegladevelopments.com/projects/water-side/,dom,clubhouse_flag=false from amenities/DOM,,2026-02-22,,,
+waterside,pools_flag,true,https://wadidegladevelopments.com/projects/water-side/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+waterside,gym_flag,false,https://wadidegladevelopments.com/projects/water-side/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+waterside,golf_flag,false,https://wadidegladevelopments.com/projects/water-side/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+waterside,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/09/Waterside-Brochure.pdf""]",https://wadidegladevelopments.com/projects/water-side/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/09/Waterside-Brochure.pdf,,2026-02-22,,,
+waterside,confidence_score,0.65,https://wadidegladevelopments.com/projects/water-side/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+waterside,price_status,on_request,https://wadidegladevelopments.com/projects/water-side/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+floating_islands,official_project_url,https://wadidegladevelopments.com/projects/floating-islands/,https://wadidegladevelopments.com/projects/floating-islands/,dom,Crawled https://wadidegladevelopments.com/projects/floating-islands/; card or page URL captured,,2026-02-22,,,
+floating_islands,region,Ain Sokhna,https://wadidegladevelopments.com/projects/floating-islands/,dom,Location text extracted from page: Ain Sokhna | Ain Sokhna,,2026-02-22,,,
+floating_islands,city_area,Ain Sokhna,https://wadidegladevelopments.com/projects/floating-islands/,dom,Location text: Ain Sokhna,,2026-02-22,,,
+floating_islands,micro_location,Murano,https://wadidegladevelopments.com/projects/floating-islands/,dom,Micro-location from page: Murano,,2026-02-22,,,
+floating_islands,project_type,resort,https://wadidegladevelopments.com/projects/floating-islands/,dom,Project type determined from page content: resort,,2026-02-22,,,
+floating_islands,current_sales_status,selling,https://wadidegladevelopments.com/projects/floating-islands/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+floating_islands,unit_types_offered_json,"[""Duplexes"", ""Chalets"", ""Villas""]",https://wadidegladevelopments.com/projects/floating-islands/,dom,"Unit types from DOM: Duplexes, Chalets, Villas",,2026-02-22,,,
+floating_islands,key_amenities_json,"[""Entertainment Area"", ""Green Areas"", ""Swimming Pools"", ""Restaurants""]",https://wadidegladevelopments.com/projects/floating-islands/,dom,"Amenities from DOM: Entertainment Area, Green Areas, Swimming Pools, Restaurants",,2026-02-22,,,
+floating_islands,beach_access_flag,true,https://wadidegladevelopments.com/projects/floating-islands/,dom,beach_access_flag=true from amenities/DOM,,2026-02-22,,,
+floating_islands,lagoons_flag,false,https://wadidegladevelopments.com/projects/floating-islands/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+floating_islands,clubhouse_flag,false,https://wadidegladevelopments.com/projects/floating-islands/,dom,clubhouse_flag=false from amenities/DOM,,2026-02-22,,,
+floating_islands,pools_flag,true,https://wadidegladevelopments.com/projects/floating-islands/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+floating_islands,gym_flag,false,https://wadidegladevelopments.com/projects/floating-islands/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+floating_islands,golf_flag,false,https://wadidegladevelopments.com/projects/floating-islands/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+floating_islands,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2024/07/Floating-Islands-Brochure.pdf""]",https://wadidegladevelopments.com/projects/floating-islands/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2024/07/Floating-Islands-Brochure.pdf,,2026-02-22,,,
+floating_islands,confidence_score,0.65,https://wadidegladevelopments.com/projects/floating-islands/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+floating_islands,price_status,on_request,https://wadidegladevelopments.com/projects/floating-islands/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+ojo,official_project_url,https://wadidegladevelopments.com/projects/ojo-2/,https://wadidegladevelopments.com/projects/ojo-2/,dom,Crawled https://wadidegladevelopments.com/projects/ojo-2/; card or page URL captured,,2026-02-22,,,
+ojo,region,Ain Sokhna,https://wadidegladevelopments.com/projects/ojo-2/,dom,Location text extracted from page: Ain Sokhna | Ain Sokhna,,2026-02-22,,,
+ojo,city_area,Ain Sokhna,https://wadidegladevelopments.com/projects/ojo-2/,dom,Location text: Ain Sokhna,,2026-02-22,,,
+ojo,micro_location,Murano,https://wadidegladevelopments.com/projects/ojo-2/,dom,Micro-location from page: Murano,,2026-02-22,,,
+ojo,project_type,resort,https://wadidegladevelopments.com/projects/ojo-2/,dom,Project type determined from page content: resort,,2026-02-22,,,
+ojo,current_sales_status,selling,https://wadidegladevelopments.com/projects/ojo-2/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+ojo,unit_types_offered_json,"[""Standalone Villas"", ""Town Houses"", ""Chalets""]",https://wadidegladevelopments.com/projects/ojo-2/,dom,"Unit types from DOM: Standalone Villas, Town Houses, Chalets",,2026-02-22,,,
+ojo,key_amenities_json,"[""Serene lagoons and edge pools"", ""Beach access"", ""Commercial promenade"", ""Casa Club""]",https://wadidegladevelopments.com/projects/ojo-2/,dom,"Amenities from DOM: Serene lagoons and edge pools, Beach access, Commercial promenade, Casa Club",,2026-02-22,,,
+ojo,beach_access_flag,true,https://wadidegladevelopments.com/projects/ojo-2/,dom,beach_access_flag=true from amenities/DOM,,2026-02-22,,,
+ojo,lagoons_flag,true,https://wadidegladevelopments.com/projects/ojo-2/,dom,lagoons_flag=true from amenities/DOM,,2026-02-22,,,
+ojo,clubhouse_flag,true,https://wadidegladevelopments.com/projects/ojo-2/,dom,clubhouse_flag=true from amenities/DOM,,2026-02-22,,,
+ojo,pools_flag,true,https://wadidegladevelopments.com/projects/ojo-2/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+ojo,gym_flag,false,https://wadidegladevelopments.com/projects/ojo-2/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+ojo,golf_flag,false,https://wadidegladevelopments.com/projects/ojo-2/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+ojo,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2025/12/Ojo-Brochure.pdf""]",https://wadidegladevelopments.com/projects/ojo-2/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2025/12/Ojo-Brochure.pdf,,2026-02-22,,,
+ojo,confidence_score,0.65,https://wadidegladevelopments.com/projects/ojo-2/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+ojo,price_status,on_request,https://wadidegladevelopments.com/projects/ojo-2/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+neo_lakes,official_project_url,https://wadidegladevelopments.com/projects/neo-lakes/,https://wadidegladevelopments.com/projects/neo-lakes/,dom,Crawled https://wadidegladevelopments.com/projects/neo-lakes/; card or page URL captured,,2026-02-22,,,
+neo_lakes,region,East Cairo,https://wadidegladevelopments.com/projects/neo-lakes/,dom,Location text extracted from page: East Cairo | Mostakbal City,,2026-02-22,,,
+neo_lakes,city_area,Mostakbal City,https://wadidegladevelopments.com/projects/neo-lakes/,dom,Location text: Mostakbal City,,2026-02-22,,,
+neo_lakes,micro_location,Heart of Mostakbal City,https://wadidegladevelopments.com/projects/neo-lakes/,dom,Micro-location from page: Heart of Mostakbal City,,2026-02-22,,,
+neo_lakes,project_type,residential,https://wadidegladevelopments.com/projects/neo-lakes/,dom,Project type determined from page content: residential,,2026-02-22,,,
+neo_lakes,current_sales_status,selling,https://wadidegladevelopments.com/projects/neo-lakes/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+neo_lakes,unit_types_offered_json,"[""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/projects/neo-lakes/,dom,"Unit types from DOM: Apartments, Duplexes",,2026-02-22,,,
+neo_lakes,key_amenities_json,"[""International School"", ""Parking"", ""Nursery"", ""Green Areas""]",https://wadidegladevelopments.com/projects/neo-lakes/,dom,"Amenities from DOM: International School, Parking, Nursery, Green Areas",,2026-02-22,,,
+neo_lakes,beach_access_flag,false,https://wadidegladevelopments.com/projects/neo-lakes/,dom,beach_access_flag=false from amenities/DOM,,2026-02-22,,,
+neo_lakes,lagoons_flag,true,https://wadidegladevelopments.com/projects/neo-lakes/,dom,lagoons_flag=true from amenities/DOM,,2026-02-22,,,
+neo_lakes,clubhouse_flag,false,https://wadidegladevelopments.com/projects/neo-lakes/,dom,clubhouse_flag=false from amenities/DOM,,2026-02-22,,,
+neo_lakes,pools_flag,false,https://wadidegladevelopments.com/projects/neo-lakes/,dom,pools_flag=false from amenities/DOM,,2026-02-22,,,
+neo_lakes,gym_flag,false,https://wadidegladevelopments.com/projects/neo-lakes/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+neo_lakes,golf_flag,false,https://wadidegladevelopments.com/projects/neo-lakes/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+neo_lakes,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/10/Neo-Lakes.pdf""]",https://wadidegladevelopments.com/projects/neo-lakes/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/10/Neo-Lakes.pdf,,2026-02-22,,,
+neo_lakes,confidence_score,0.65,https://wadidegladevelopments.com/projects/neo-lakes/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+neo_lakes,price_status,on_request,https://wadidegladevelopments.com/projects/neo-lakes/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+neo_gardens,official_project_url,https://wadidegladevelopments.com/projects/neo-gardens/,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Crawled https://wadidegladevelopments.com/projects/neo-gardens/; card or page URL captured,,2026-02-22,,,
+neo_gardens,region,East Cairo,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Location text extracted from page: East Cairo | Mostakbal City,,2026-02-22,,,
+neo_gardens,city_area,Mostakbal City,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Location text: Mostakbal City,,2026-02-22,,,
+neo_gardens,micro_location,Heart of Mostakbal City,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Micro-location from page: Heart of Mostakbal City,,2026-02-22,,,
+neo_gardens,project_type,residential,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Project type determined from page content: residential,,2026-02-22,,,
+neo_gardens,current_sales_status,selling,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+neo_gardens,unit_types_offered_json,"[""Apartments""]",https://wadidegladevelopments.com/projects/neo-gardens/,dom,Unit types from DOM: Apartments,,2026-02-22,,,
+neo_gardens,key_amenities_json,"[""Commercial Area"", ""Green Areas"", ""Mosque"", ""Nursery""]",https://wadidegladevelopments.com/projects/neo-gardens/,dom,"Amenities from DOM: Commercial Area, Green Areas, Mosque, Nursery",,2026-02-22,,,
+neo_gardens,beach_access_flag,false,https://wadidegladevelopments.com/projects/neo-gardens/,dom,beach_access_flag=false from amenities/DOM,,2026-02-22,,,
+neo_gardens,lagoons_flag,false,https://wadidegladevelopments.com/projects/neo-gardens/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+neo_gardens,clubhouse_flag,false,https://wadidegladevelopments.com/projects/neo-gardens/,dom,clubhouse_flag=false from amenities/DOM,,2026-02-22,,,
+neo_gardens,pools_flag,false,https://wadidegladevelopments.com/projects/neo-gardens/,dom,pools_flag=false from amenities/DOM,,2026-02-22,,,
+neo_gardens,gym_flag,false,https://wadidegladevelopments.com/projects/neo-gardens/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+neo_gardens,golf_flag,false,https://wadidegladevelopments.com/projects/neo-gardens/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+neo_gardens,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/09/Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf""]",https://wadidegladevelopments.com/projects/neo-gardens/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/09/Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf,,2026-02-22,,,
+neo_gardens,confidence_score,0.65,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+neo_gardens,price_status,on_request,https://wadidegladevelopments.com/projects/neo-gardens/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+breeze,official_project_url,https://wadidegladevelopments.com/projects/breeze/,https://wadidegladevelopments.com/projects/breeze/,dom,Crawled https://wadidegladevelopments.com/projects/breeze/; card or page URL captured,,2026-02-22,,,
+breeze,region,Cairo,https://wadidegladevelopments.com/projects/breeze/,dom,Location text extracted from page: Cairo | Maadi,,2026-02-22,,,
+breeze,city_area,Maadi,https://wadidegladevelopments.com/projects/breeze/,dom,Location text: Maadi,,2026-02-22,,,
+breeze,micro_location,New Degla,https://wadidegladevelopments.com/projects/breeze/,dom,Micro-location from page: New Degla,,2026-02-22,,,
+breeze,project_type,residential,https://wadidegladevelopments.com/projects/breeze/,dom,Project type determined from page content: residential,,2026-02-22,,,
+breeze,current_sales_status,selling,https://wadidegladevelopments.com/projects/breeze/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+breeze,unit_types_offered_json,"[""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/projects/breeze/,dom,"Unit types from DOM: Apartments, Duplexes",,2026-02-22,,,
+breeze,key_amenities_json,"[""Swimming Pools"", ""Nurseries & Kids Gardens"", ""Retail"", ""Admin""]",https://wadidegladevelopments.com/projects/breeze/,dom,"Amenities from DOM: Swimming Pools, Nurseries & Kids Gardens, Retail, Admin",,2026-02-22,,,
+breeze,beach_access_flag,false,https://wadidegladevelopments.com/projects/breeze/,dom,beach_access_flag=false from amenities/DOM,,2026-02-22,,,
+breeze,lagoons_flag,false,https://wadidegladevelopments.com/projects/breeze/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+breeze,clubhouse_flag,true,https://wadidegladevelopments.com/projects/breeze/,dom,clubhouse_flag=true from amenities/DOM,,2026-02-22,,,
+breeze,pools_flag,true,https://wadidegladevelopments.com/projects/breeze/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+breeze,gym_flag,true,https://wadidegladevelopments.com/projects/breeze/,dom,gym_flag=true from amenities/DOM,,2026-02-22,,,
+breeze,golf_flag,false,https://wadidegladevelopments.com/projects/breeze/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+breeze,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/10/CT-Breeze-Brochure.pdf""]",https://wadidegladevelopments.com/projects/breeze/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/10/CT-Breeze-Brochure.pdf,,2026-02-22,,,
+breeze,confidence_score,0.65,https://wadidegladevelopments.com/projects/breeze/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+breeze,price_status,on_request,https://wadidegladevelopments.com/projects/breeze/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+horizon,official_project_url,https://wadidegladevelopments.com/projects/horizon/,https://wadidegladevelopments.com/projects/horizon/,dom,Crawled https://wadidegladevelopments.com/projects/horizon/; card or page URL captured,,2026-02-22,,,
+horizon,region,Cairo,https://wadidegladevelopments.com/projects/horizon/,dom,Location text extracted from page: Cairo | Maadi,,2026-02-22,,,
+horizon,city_area,Maadi,https://wadidegladevelopments.com/projects/horizon/,dom,Location text: Maadi,,2026-02-22,,,
+horizon,micro_location,New Degla,https://wadidegladevelopments.com/projects/horizon/,dom,Micro-location from page: New Degla,,2026-02-22,,,
+horizon,project_type,residential,https://wadidegladevelopments.com/projects/horizon/,dom,Project type determined from page content: residential,,2026-02-22,,,
+horizon,current_sales_status,selling,https://wadidegladevelopments.com/projects/horizon/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+horizon,unit_types_offered_json,"[""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/projects/horizon/,dom,"Unit types from DOM: Apartments, Duplexes",,2026-02-22,,,
+horizon,key_amenities_json,"[""Swimming Pools"", ""Nurseries & Kids Gardens"", ""Retail"", ""Admin""]",https://wadidegladevelopments.com/projects/horizon/,dom,"Amenities from DOM: Swimming Pools, Nurseries & Kids Gardens, Retail, Admin",,2026-02-22,,,
+horizon,beach_access_flag,false,https://wadidegladevelopments.com/projects/horizon/,dom,beach_access_flag=false from amenities/DOM,,2026-02-22,,,
+horizon,lagoons_flag,false,https://wadidegladevelopments.com/projects/horizon/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+horizon,clubhouse_flag,true,https://wadidegladevelopments.com/projects/horizon/,dom,clubhouse_flag=true from amenities/DOM,,2026-02-22,,,
+horizon,pools_flag,true,https://wadidegladevelopments.com/projects/horizon/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+horizon,gym_flag,true,https://wadidegladevelopments.com/projects/horizon/,dom,gym_flag=true from amenities/DOM,,2026-02-22,,,
+horizon,golf_flag,false,https://wadidegladevelopments.com/projects/horizon/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+horizon,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/10/CT-Horizon-Brochure-Wadi-Degla-Developments_.pdf""]",https://wadidegladevelopments.com/projects/horizon/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/10/CT-Horizon-Brochure-Wadi-Degla-Developments_.pdf,,2026-02-22,,,
+horizon,confidence_score,0.65,https://wadidegladevelopments.com/projects/horizon/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+horizon,price_status,on_request,https://wadidegladevelopments.com/projects/horizon/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+edge,official_project_url,https://wadidegladevelopments.com/projects/edge/,https://wadidegladevelopments.com/projects/edge/,dom,Crawled https://wadidegladevelopments.com/projects/edge/; card or page URL captured,,2026-02-22,,,
+edge,region,Cairo,https://wadidegladevelopments.com/projects/edge/,dom,Location text extracted from page: Cairo | Maadi,,2026-02-22,,,
+edge,city_area,Maadi,https://wadidegladevelopments.com/projects/edge/,dom,Location text: Maadi,,2026-02-22,,,
+edge,micro_location,New Degla,https://wadidegladevelopments.com/projects/edge/,dom,Micro-location from page: New Degla,,2026-02-22,,,
+edge,project_type,residential,https://wadidegladevelopments.com/projects/edge/,dom,Project type determined from page content: residential,,2026-02-22,,,
+edge,current_sales_status,selling,https://wadidegladevelopments.com/projects/edge/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+edge,unit_types_offered_json,"[""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/projects/edge/,dom,"Unit types from DOM: Apartments, Duplexes",,2026-02-22,,,
+edge,key_amenities_json,"[""Swimming Pools"", ""Gym"", ""Mosque"", ""Nurseries & Kids Gardens""]",https://wadidegladevelopments.com/projects/edge/,dom,"Amenities from DOM: Swimming Pools, Gym, Mosque, Nurseries & Kids Gardens",,2026-02-22,,,
+edge,beach_access_flag,false,https://wadidegladevelopments.com/projects/edge/,dom,beach_access_flag=false from amenities/DOM,,2026-02-22,,,
+edge,lagoons_flag,false,https://wadidegladevelopments.com/projects/edge/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+edge,clubhouse_flag,true,https://wadidegladevelopments.com/projects/edge/,dom,clubhouse_flag=true from amenities/DOM,,2026-02-22,,,
+edge,pools_flag,true,https://wadidegladevelopments.com/projects/edge/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+edge,gym_flag,true,https://wadidegladevelopments.com/projects/edge/,dom,gym_flag=true from amenities/DOM,,2026-02-22,,,
+edge,golf_flag,false,https://wadidegladevelopments.com/projects/edge/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+edge,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2024/07/Edge-Brochure-2.pdf""]",https://wadidegladevelopments.com/projects/edge/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2024/07/Edge-Brochure-2.pdf,,2026-02-22,,,
+edge,confidence_score,0.65,https://wadidegladevelopments.com/projects/edge/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+edge,price_status,on_request,https://wadidegladevelopments.com/projects/edge/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+vyon,official_project_url,https://wadidegladevelopments.com/projects/vyon/,https://wadidegladevelopments.com/projects/vyon/,dom,Crawled https://wadidegladevelopments.com/projects/vyon/; card or page URL captured,,2026-02-22,,,
+vyon,region,Cairo,https://wadidegladevelopments.com/projects/vyon/,dom,Location text extracted from page: Cairo | Maadi,,2026-02-22,,,
+vyon,city_area,Maadi,https://wadidegladevelopments.com/projects/vyon/,dom,Location text: Maadi,,2026-02-22,,,
+vyon,micro_location,New Degla,https://wadidegladevelopments.com/projects/vyon/,dom,Micro-location from page: New Degla,,2026-02-22,,,
+vyon,project_type,residential,https://wadidegladevelopments.com/projects/vyon/,dom,Project type determined from page content: residential,,2026-02-22,,,
+vyon,current_sales_status,selling,https://wadidegladevelopments.com/projects/vyon/,dom,Sales status: selling; index card checked,,2026-02-22,,,
+vyon,unit_types_offered_json,"[""Lofts"", ""Penthouses"", ""Apartments"", ""Duplexes""]",https://wadidegladevelopments.com/projects/vyon/,dom,"Unit types from DOM: Lofts, Penthouses, Apartments, Duplexes",,2026-02-22,,,
+vyon,key_amenities_json,"[""Outdoor Dining & BBQ Area"", ""Rooftop Cinema"", ""Rooftop Social Lounges"", ""Co-Working & Meeting Pods""]",https://wadidegladevelopments.com/projects/vyon/,dom,"Amenities from DOM: Outdoor Dining & BBQ Area, Rooftop Cinema, Rooftop Social Lounges, Co-Working & Meeting Pods",,2026-02-22,,,
+vyon,beach_access_flag,false,https://wadidegladevelopments.com/projects/vyon/,dom,beach_access_flag=false from amenities/DOM,,2026-02-22,,,
+vyon,lagoons_flag,false,https://wadidegladevelopments.com/projects/vyon/,dom,lagoons_flag=false from amenities/DOM,,2026-02-22,,,
+vyon,clubhouse_flag,false,https://wadidegladevelopments.com/projects/vyon/,dom,clubhouse_flag=false from amenities/DOM,,2026-02-22,,,
+vyon,pools_flag,true,https://wadidegladevelopments.com/projects/vyon/,dom,pools_flag=true from amenities/DOM,,2026-02-22,,,
+vyon,gym_flag,false,https://wadidegladevelopments.com/projects/vyon/,dom,gym_flag=false from amenities/DOM,,2026-02-22,,,
+vyon,golf_flag,false,https://wadidegladevelopments.com/projects/vyon/,dom,golf_flag=false from amenities/DOM,,2026-02-22,,,
+vyon,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2025/07/VYON-Brochure.pdf""]",https://wadidegladevelopments.com/projects/vyon/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2025/07/VYON-Brochure.pdf,,2026-02-22,,,
+vyon,confidence_score,0.65,https://wadidegladevelopments.com/projects/vyon/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+vyon,price_status,on_request,https://wadidegladevelopments.com/projects/vyon/,dom,No numeric pricing found on page; on_request or null applied,,2026-02-22,,,
+neopolis,official_project_url,https://wadidegladevelopments.com/projects/neo-gardens/,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Crawled https://wadidegladevelopments.com/projects/neo-gardens/; card or page URL captured,,2026-02-22,,,
+neopolis,region,East Cairo,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Location text extracted from page: East Cairo | Mostakbal City,,2026-02-22,,,
+neopolis,city_area,Mostakbal City,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Location text: Mostakbal City,,2026-02-22,,,
+neopolis,project_type,residential,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Project type determined from page content: residential,,2026-02-22,,,
+neopolis,brochure_urls_json,"[""https://wadidegladevelopments.com/wp-content/uploads/2023/09/Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf""]",https://wadidegladevelopments.com/projects/neo-gardens/,dom,PDF links found on page: https://wadidegladevelopments.com/wp-content/uploads/2023/09/Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf,,2026-02-22,,,
+neopolis,confidence_score,0.35,https://wadidegladevelopments.com/projects/neo-gardens/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+mada,confidence_score,0.30,https://wadidegladevelopments.com/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+camuse,confidence_score,0.30,https://wadidegladevelopments.com/,dom,Confidence scored per scoring rubric,,2026-02-22,,,
+edge,installment_years_min,19,file:///Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/edge/edge__phase_brochure__f80df447.pdf,docintel,"Wadi Degla Developments has crafted a diverse portfolio of residential, commercial, and recreational real estate, boasting 16 iconic developments over 19 years. Each project is strategically located i",edge__phase_brochure__f80df447.pdf::line:20,2026-02-25,medium,false,
+edge,installment_years_max,19,file:///Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/edge/edge__phase_brochure__f80df447.pdf,docintel,"Wadi Degla Developments has crafted a diverse portfolio of residential, commercial, and recreational real estate, boasting 16 iconic developments over 19 years. Each project is strategically located i",edge__phase_brochure__f80df447.pdf::line:20,2026-02-25,medium,false,
+living_community,bedrooms_range_min,2,file:///Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/living_community/living_community__phase_brochure__61f82a41.pdf,docintel,# 4 Bedrooms,living_community__phase_brochure__61f82a41.pdf::line:91,2026-02-25,medium,false,
+living_community,bedrooms_range_max,4,file:///Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/living_community/living_community__phase_brochure__61f82a41.pdf,docintel,# 4 Bedrooms,living_community__phase_brochure__61f82a41.pdf::line:91,2026-02-25,medium,false,
+living_community,bua_range_min_sqm,50,file:///Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/living_community/living_community__phase_brochure__61f82a41.pdf,docintel,Gross Area: 260 sqm Roof Area: 70 sqm,living_community__phase_brochure__61f82a41.pdf::line:93,2026-02-25,medium,false,
+living_community,bua_range_max_sqm,260,file:///Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/living_community/living_community__phase_brochure__61f82a41.pdf,docintel,Gross Area: 260 sqm Roof Area: 70 sqm,living_community__phase_brochure__61f82a41.pdf::line:93,2026-02-25,medium,false,
+murano,bedrooms_range_min,2,file:///Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/living_community/living_community__phase_brochure__61f82a41.pdf,docintel,# 4 Bedrooms,living_community__phase_brochure__61f82a41.pdf::line:91,2026-02-25,medium,false,Shared brochure from living_community
+murano,bedrooms_range_max,4,file:///Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/living_community/living_community__phase_brochure__61f82a41.pdf,docintel,# 4 Bedrooms,living_community__phase_brochure__61f82a41.pdf::line:91,2026-02-25,medium,false,Shared brochure from living_community
+murano,bua_range_min_sqm,50,file:///Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/living_community/living_community__phase_brochure__61f82a41.pdf,docintel,Gross Area: 260 sqm Roof Area: 70 sqm,living_community__phase_brochure__61f82a41.pdf::line:93,2026-02-25,medium,false,Shared brochure from living_community
+murano,bua_range_max_sqm,260,file:///Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/living_community/living_community__phase_brochure__61f82a41.pdf,docintel,Gross Area: 260 sqm Roof Area: 70 sqm,living_community__phase_brochure__61f82a41.pdf::line:93,2026-02-25,medium,false,Shared brochure from living_community
+waterside,bedrooms_range_min,2,file:///Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/living_community/living_community__phase_brochure__61f82a41.pdf,docintel,# 4 Bedrooms,living_community__phase_brochure__61f82a41.pdf::line:91,2026-02-25,medium,false,Shared brochure from living_community
+waterside,bedrooms_range_max,4,file:///Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/living_community/living_community__phase_brochure__61f82a41.pdf,docintel,# 4 Bedrooms,living_community__phase_brochure__61f82a41.pdf::line:91,2026-02-25,medium,false,Shared brochure from living_community
+waterside,bua_range_min_sqm,50,file:///Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/living_community/living_community__phase_brochure__61f82a41.pdf,docintel,Gross Area: 260 sqm Roof Area: 70 sqm,living_community__phase_brochure__61f82a41.pdf::line:93,2026-02-25,medium,false,Shared brochure from living_community
+waterside,bua_range_max_sqm,260,file:///Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/living_community/living_community__phase_brochure__61f82a41.pdf,docintel,Gross Area: 260 sqm Roof Area: 70 sqm,living_community__phase_brochure__61f82a41.pdf::line:93,2026-02-25,medium,false,Shared brochure from living_community

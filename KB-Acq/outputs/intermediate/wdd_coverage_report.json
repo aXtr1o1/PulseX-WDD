@@ -1,0 +1,15 @@
+{
+  "total_rows": 28,
+  "with_official_url": 26,
+  "with_brochure_urls": 18,
+  "with_bedrooms": 3,
+  "with_bua": 3,
+  "with_starting_price": 0,
+  "with_price_range": 0,
+  "with_payment_plan": 0,
+  "with_delivery": 0,
+  "with_finishing": 28,
+  "price_status_official": 0,
+  "price_status_on_request": 15,
+  "still_all_missing_specs": 25
+}

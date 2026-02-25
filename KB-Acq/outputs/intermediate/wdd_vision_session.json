@@ -1,0 +1,97 @@
+{
+  "run_date": "2026-02-25",
+  "projects_processed": 0,
+  "total_chars": 0,
+  "per_project": {
+    "blumar_el_sokhna": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "blumar_hills": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "breeze": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "clubtown": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "edge": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "floating_islands": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "horizon": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "living_community": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "murano": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "neo": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "neo_gardens": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "neo_lakes": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "neopolis": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "ojo": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "promenade_new_cairo": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "vero": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "vyon": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    },
+    "waterside": {
+      "combined_text_path": null,
+      "pdf_count": 0,
+      "total_chars": 0
+    }
+  }
+}

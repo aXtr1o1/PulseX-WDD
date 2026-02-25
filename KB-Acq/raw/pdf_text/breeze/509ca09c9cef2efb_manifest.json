@@ -1,0 +1,14 @@
+{
+  "project_id": "breeze",
+  "pdf_name": "breeze__phase_brochure__aeaa3281.pdf",
+  "pdf_hash": "509ca09c9cef2efb",
+  "pdf_hash_full": "509ca09c9cef2efbaa1dbfe62baf4b683836a6bd111c19b9106e06126b8ee54b",
+  "source_url": "https://wadidegladevelopments.com/wp-content/uploads/2023/10/CT-Breeze-Brochure.pdf",
+  "page_count": 17,
+  "pages_via_docintel": 15,
+  "pages_via_aoai": 0,
+  "pages_no_text": 2,
+  "total_chars": 4752,
+  "text_file": "/Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/raw/pdf_text/breeze/509ca09c9cef2efb.txt",
+  "extracted_date": "2026-02-25"
+}

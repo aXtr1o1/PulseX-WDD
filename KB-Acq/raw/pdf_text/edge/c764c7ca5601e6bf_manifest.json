@@ -1,0 +1,14 @@
+{
+  "project_id": "edge",
+  "pdf_name": "edge__phase_brochure__f80df447.pdf",
+  "pdf_hash": "c764c7ca5601e6bf",
+  "pdf_hash_full": "c764c7ca5601e6bf98e2897e8d4502ca958d5e711014289142bf833a9e0fbf5d",
+  "source_url": "https://wadidegladevelopments.com/wp-content/uploads/2024/07/Edge-Brochure-2.pdf",
+  "page_count": 21,
+  "pages_via_docintel": 20,
+  "pages_via_aoai": 0,
+  "pages_no_text": 1,
+  "total_chars": 6061,
+  "text_file": "/Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/raw/pdf_text/edge/c764c7ca5601e6bf.txt",
+  "extracted_date": "2026-02-25"
+}
