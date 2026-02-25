@@ -1,0 +1,1 @@
+{"status": "failed", "reason": "PDFs are image-based/design brochures; no text extraction library available (pdftotext/pypdf not installed). Brochure exists but specs not machine-readable."}

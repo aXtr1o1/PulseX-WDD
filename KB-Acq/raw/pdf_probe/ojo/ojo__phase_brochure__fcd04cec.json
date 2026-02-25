@@ -1,0 +1,23 @@
+{
+  "page_count": 3,
+  "pdf_text_extractable": true,
+  "keyword_hits": {
+    "bedrooms": [
+      " br",
+      "1br",
+      "2br",
+      "3br",
+      "4br"
+    ],
+    "sqm_bua": [
+      "sqm",
+      "m2",
+      "m\u00b2"
+    ]
+  },
+  "likely_spec_pages": [],
+  "likely_pricing_pages": [],
+  "likely_payment_plan_pages": [],
+  "probe_status": "completed",
+  "notes": ""
+}

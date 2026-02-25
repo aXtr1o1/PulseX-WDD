@@ -1,0 +1,199 @@
+[2026-02-25T14:41:09Z] ======================================================================
+[2026-02-25T14:41:09Z] PulseX-WDD Brochure Harvest Pipeline — START
+[2026-02-25T14:41:09Z] Date: 2026-02-25
+[2026-02-25T14:41:09Z] Base: /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq
+[2026-02-25T14:41:09Z] ======================================================================
+[2026-02-25T14:41:09Z] Total unique PDF URLs to attempt: 10
+[2026-02-25T14:41:09Z] Entities with candidates: 18
+[2026-02-25T14:41:09Z] Entities with no candidates: 10
+[2026-02-25T14:41:09Z] 
+── Processing: Murano (murano) — 2 candidate(s)
+[2026-02-25T14:41:09Z]   📄 Downloading: Waterside-Brochure.pdf
+[2026-02-25T14:41:09Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/murano/murano__phase_brochure__61f82a41.pdf
+[2026-02-25T14:41:20Z]   ✅ Downloaded: 10042195 bytes, SHA256: 6826d5347e2e...
+[2026-02-25T14:41:20Z]   🔍 Probing PDF...
+[2026-02-25T14:41:20Z]   📄 Downloading: WDD-Magazine-25-Digital.pdf
+[2026-02-25T14:41:20Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/murano/murano__unknown_pdf__c479efe0.pdf
+[2026-02-25T14:41:53Z]   ✅ Downloaded: 28963808 bytes, SHA256: 48944a0807f9...
+[2026-02-25T14:41:53Z]   🔍 Probing PDF...
+[2026-02-25T14:41:53Z] 
+── Processing: ClubTown (clubtown) — 1 candidate(s)
+[2026-02-25T14:41:53Z]   📄 Downloading: WDD-Magazine-25-Digital.pdf
+[2026-02-25T14:41:53Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/clubtown/clubtown__unknown_pdf__c479efe0.pdf
+[2026-02-25T14:42:23Z]   ⚠️  Duplicate SHA256 (same as /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/murano/murano__unknown_pdf__c479efe0.pdf)
+[2026-02-25T14:42:23Z]   ✅ Downloaded: 28963808 bytes, SHA256: 48944a0807f9...
+[2026-02-25T14:42:23Z]   🔍 Probing PDF...
+[2026-02-25T14:42:23Z] 
+── Processing: Neo (neo) — 1 candidate(s)
+[2026-02-25T14:42:23Z]   📄 Downloading: Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf
+[2026-02-25T14:42:23Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/neo/neo__project_brochure__5926f3b9.pdf
+[2026-02-25T14:42:33Z]   ✅ Downloaded: 8307741 bytes, SHA256: 2938e53e7b0f...
+[2026-02-25T14:42:33Z]   🔍 Probing PDF...
+[2026-02-25T14:42:33Z] 
+── Processing: Vero (vero) — 1 candidate(s)
+[2026-02-25T14:42:33Z]   📄 Downloading: WDD-Magazine-25-Digital.pdf
+[2026-02-25T14:42:33Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/vero/vero__unknown_pdf__c479efe0.pdf
+[2026-02-25T14:43:01Z]   ⚠️  Duplicate SHA256 (same as /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/murano/murano__unknown_pdf__c479efe0.pdf)
+[2026-02-25T14:43:01Z]   ✅ Downloaded: 28963808 bytes, SHA256: 48944a0807f9...
+[2026-02-25T14:43:01Z]   🔍 Probing PDF...
+[2026-02-25T14:43:01Z] 
+── Processing: Promenade New Cairo (promenade_new_cairo) — 1 candidate(s)
+[2026-02-25T14:43:01Z]   📄 Downloading: WDD-Magazine-25-Digital.pdf
+[2026-02-25T14:43:01Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/promenade_new_cairo/promenade_new_cairo__unknown_pdf__c479efe0.pdf
+[2026-02-25T14:43:27Z]   ⚠️  Duplicate SHA256 (same as /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/murano/murano__unknown_pdf__c479efe0.pdf)
+[2026-02-25T14:43:27Z]   ✅ Downloaded: 28963808 bytes, SHA256: 48944a0807f9...
+[2026-02-25T14:43:27Z]   🔍 Probing PDF...
+[2026-02-25T14:43:27Z] 
+── Processing: Blumar El Sokhna (blumar_el_sokhna) — 1 candidate(s)
+[2026-02-25T14:43:27Z]   📄 Downloading: WDD-Magazine-25-Digital.pdf
+[2026-02-25T14:43:27Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/blumar_el_sokhna/blumar_el_sokhna__unknown_pdf__c479efe0.pdf
+[2026-02-25T14:44:24Z]   ⚠️  Duplicate SHA256 (same as /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/murano/murano__unknown_pdf__c479efe0.pdf)
+[2026-02-25T14:44:24Z]   ✅ Downloaded: 28963808 bytes, SHA256: 48944a0807f9...
+[2026-02-25T14:44:24Z]   🔍 Probing PDF...
+[2026-02-25T14:44:24Z] 
+── Processing: Blumar Hills (blumar_hills) — 1 candidate(s)
+[2026-02-25T14:44:24Z]   📄 Downloading: WDD-Magazine-25-Digital.pdf
+[2026-02-25T14:44:24Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/blumar_hills/blumar_hills__unknown_pdf__c479efe0.pdf
+[2026-02-25T14:44:50Z]   ⚠️  Duplicate SHA256 (same as /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/murano/murano__unknown_pdf__c479efe0.pdf)
+[2026-02-25T14:44:50Z]   ✅ Downloaded: 28963808 bytes, SHA256: 48944a0807f9...
+[2026-02-25T14:44:50Z]   🔍 Probing PDF...
+[2026-02-25T14:44:50Z] 
+── Processing: Tijan Maadi (tijan_maadi) — 0 candidate(s)
+[2026-02-25T14:44:50Z]   ❌ No brochure URL candidates for tijan_maadi
+[2026-02-25T14:44:50Z] 
+── Processing: Blumar El Dome (blumar_el_dome) — 0 candidate(s)
+[2026-02-25T14:44:50Z]   ❌ No brochure URL candidates for blumar_el_dome
+[2026-02-25T14:44:50Z] 
+── Processing: Pyramids Walk (pyramids_walk) — 0 candidate(s)
+[2026-02-25T14:44:50Z]   ❌ No brochure URL candidates for pyramids_walk
+[2026-02-25T14:44:50Z] 
+── Processing: Blumar Sidi Abd El Rahman (blumar_sidi_abd_el_rahman) — 0 candidate(s)
+[2026-02-25T14:44:50Z]   ❌ No brochure URL candidates for blumar_sidi_abd_el_rahman
+[2026-02-25T14:44:50Z] 
+── Processing: Tijan Zahraa El Maadi (tijan_zahraa_el_maadi) — 0 candidate(s)
+[2026-02-25T14:44:50Z]   ❌ No brochure URL candidates for tijan_zahraa_el_maadi
+[2026-02-25T14:44:50Z] 
+── Processing: Canal Residence (canal_residence) — 0 candidate(s)
+[2026-02-25T14:44:50Z]   ❌ No brochure URL candidates for canal_residence
+[2026-02-25T14:44:50Z] 
+── Processing: River Walk (river_walk) — 0 candidate(s)
+[2026-02-25T14:44:50Z]   ❌ No brochure URL candidates for river_walk
+[2026-02-25T14:44:50Z] 
+── Processing: Marina Wadi Degla (marina_wadi_degla) — 0 candidate(s)
+[2026-02-25T14:44:50Z]   ❌ No brochure URL candidates for marina_wadi_degla
+[2026-02-25T14:44:50Z] 
+── Processing: Living Community (living_community) — 1 candidate(s)
+[2026-02-25T14:44:50Z]   📄 Downloading: Waterside-Brochure.pdf
+[2026-02-25T14:44:50Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/living_community/living_community__phase_brochure__61f82a41.pdf
+[2026-02-25T14:45:02Z]   ⚠️  Duplicate SHA256 (same as /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/murano/murano__phase_brochure__61f82a41.pdf)
+[2026-02-25T14:45:02Z]   ✅ Downloaded: 10042195 bytes, SHA256: 6826d5347e2e...
+[2026-02-25T14:45:02Z]   🔍 Probing PDF...
+[2026-02-25T14:45:02Z] 
+── Processing: Waterside (waterside) — 1 candidate(s)
+[2026-02-25T14:45:02Z]   📄 Downloading: Waterside-Brochure.pdf
+[2026-02-25T14:45:02Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/waterside/waterside__phase_brochure__61f82a41.pdf
+[2026-02-25T14:45:10Z]   ⚠️  Duplicate SHA256 (same as /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/murano/murano__phase_brochure__61f82a41.pdf)
+[2026-02-25T14:45:10Z]   ✅ Downloaded: 10042195 bytes, SHA256: 6826d5347e2e...
+[2026-02-25T14:45:10Z]   🔍 Probing PDF...
+[2026-02-25T14:45:10Z] 
+── Processing: Floating Islands (floating_islands) — 1 candidate(s)
+[2026-02-25T14:45:10Z]   📄 Downloading: Floating-Islands-Brochure.pdf
+[2026-02-25T14:45:10Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/floating_islands/floating_islands__phase_brochure__75d002bc.pdf
+[2026-02-25T14:45:14Z]   ✅ Downloaded: 2669547 bytes, SHA256: a959b47ae185...
+[2026-02-25T14:45:14Z]   🔍 Probing PDF...
+[2026-02-25T14:45:14Z] 
+── Processing: Ojo (ojo) — 1 candidate(s)
+[2026-02-25T14:45:14Z]   📄 Downloading: Ojo-Brochure.pdf
+[2026-02-25T14:45:14Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/ojo/ojo__phase_brochure__fcd04cec.pdf
+[2026-02-25T14:46:20Z]   ✅ Downloaded: 76664753 bytes, SHA256: ec17f40cc57f...
+[2026-02-25T14:46:20Z]   🔍 Probing PDF...
+[2026-02-25T14:46:21Z] 
+── Processing: Neo Lakes (neo_lakes) — 1 candidate(s)
+[2026-02-25T14:46:21Z]   📄 Downloading: Neo-Lakes.pdf
+[2026-02-25T14:46:21Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/neo_lakes/neo_lakes__project_brochure__1bfb1a62.pdf
+[2026-02-25T14:46:24Z]   ✅ Downloaded: 6087793 bytes, SHA256: 3bf893d6c9ee...
+[2026-02-25T14:46:24Z]   🔍 Probing PDF...
+[2026-02-25T14:46:24Z] 
+── Processing: Neo Gardens (neo_gardens) — 1 candidate(s)
+[2026-02-25T14:46:24Z]   📄 Downloading: Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf
+[2026-02-25T14:46:24Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/neo_gardens/neo_gardens__project_brochure__5926f3b9.pdf
+[2026-02-25T14:46:27Z]   ⚠️  Duplicate SHA256 (same as /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/neo/neo__project_brochure__5926f3b9.pdf)
+[2026-02-25T14:46:27Z]   ✅ Downloaded: 8307741 bytes, SHA256: 2938e53e7b0f...
+[2026-02-25T14:46:27Z]   🔍 Probing PDF...
+[2026-02-25T14:46:27Z] 
+── Processing: Breeze (breeze) — 1 candidate(s)
+[2026-02-25T14:46:27Z]   📄 Downloading: CT-Breeze-Brochure.pdf
+[2026-02-25T14:46:27Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/breeze/breeze__phase_brochure__aeaa3281.pdf
+[2026-02-25T14:46:32Z]   ✅ Downloaded: 13361317 bytes, SHA256: 509ca09c9cef...
+[2026-02-25T14:46:32Z]   🔍 Probing PDF...
+[2026-02-25T14:46:32Z] 
+── Processing: Horizon (horizon) — 1 candidate(s)
+[2026-02-25T14:46:32Z]   📄 Downloading: CT-Horizon-Brochure-Wadi-Degla-Developments_.pdf
+[2026-02-25T14:46:32Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/horizon/horizon__phase_brochure__fb03a146.pdf
+[2026-02-25T14:46:37Z]   ✅ Downloaded: 11655369 bytes, SHA256: 38d394706a5f...
+[2026-02-25T14:46:37Z]   🔍 Probing PDF...
+[2026-02-25T14:46:37Z] 
+── Processing: Edge (edge) — 1 candidate(s)
+[2026-02-25T14:46:37Z]   📄 Downloading: Edge-Brochure-2.pdf
+[2026-02-25T14:46:37Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/edge/edge__phase_brochure__f80df447.pdf
+[2026-02-25T14:46:49Z]   ✅ Downloaded: 34821297 bytes, SHA256: c764c7ca5601...
+[2026-02-25T14:46:49Z]   🔍 Probing PDF...
+[2026-02-25T14:46:49Z] 
+── Processing: VYON (vyon) — 1 candidate(s)
+[2026-02-25T14:46:49Z]   📄 Downloading: VYON-Brochure.pdf
+[2026-02-25T14:46:49Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/vyon/vyon__phase_brochure__127bb95e.pdf
+[2026-02-25T14:46:53Z]   ✅ Downloaded: 15167851 bytes, SHA256: 0cdceab5d9ce...
+[2026-02-25T14:46:53Z]   🔍 Probing PDF...
+[2026-02-25T14:46:53Z] 
+── Processing: Neopolis (neopolis) — 1 candidate(s)
+[2026-02-25T14:46:53Z]   📄 Downloading: Wadi-Degla-Development-Neopolis-Neo-Gardens.pdf
+[2026-02-25T14:46:53Z]      → /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/neopolis/neopolis__project_brochure__5926f3b9.pdf
+[2026-02-25T14:46:56Z]   ⚠️  Duplicate SHA256 (same as /Volumes/ReserveDisk/codeBase/PulseX-WDD/KB-Acq/projectBrochures/neo/neo__project_brochure__5926f3b9.pdf)
+[2026-02-25T14:46:56Z]   ✅ Downloaded: 8307741 bytes, SHA256: 2938e53e7b0f...
+[2026-02-25T14:46:56Z]   🔍 Probing PDF...
+[2026-02-25T14:46:56Z] 
+── Processing: Mada (mada) — 0 candidate(s)
+[2026-02-25T14:46:56Z]   ❌ No brochure URL candidates for mada
+[2026-02-25T14:46:56Z] 
+── Processing: CAMUSE (camuse) — 0 candidate(s)
+[2026-02-25T14:46:56Z]   ❌ No brochure URL candidates for camuse
+[2026-02-25T14:46:56Z] 
+✓ wdd_brochures_manifest.csv: 19 rows
+[2026-02-25T14:46:56Z] ✓ wdd_brochure_coverage.csv: 28 rows
+[2026-02-25T14:46:56Z] ✓ wdd_brochure_source_audit.csv: 76 rows
+[2026-02-25T14:46:56Z] ✓ wdd_screens_index.csv: 61 rows
+[2026-02-25T14:46:56Z] ✓ wdd_brochure_missing_report.csv: 10 rows
+[2026-02-25T14:46:56Z] ✓ wdd_pdf_probe_manifest.csv: 19 rows
+[2026-02-25T14:46:56Z] 
+======================================================================
+[2026-02-25T14:46:56Z] VALIDATION
+[2026-02-25T14:46:56Z] ======================================================================
+[2026-02-25T14:46:56Z] ✓ Coverage CSV has exactly 28 rows
+[2026-02-25T14:46:56Z] ✓ 28 unique project_ids in coverage
+[2026-02-25T14:46:56Z] ✓ All 19 downloaded files exist and are valid PDFs
+[2026-02-25T14:46:56Z] ✓ SHA256 present for all downloads
+[2026-02-25T14:46:56Z] ✓ All brochure_found=true entities have manifest rows
+[2026-02-25T14:46:56Z] ✓ All brochure_found=false entities have missing report rows
+[2026-02-25T14:46:56Z] 
+======================================================================
+[2026-02-25T14:46:56Z] HARVEST SUMMARY
+[2026-02-25T14:46:56Z] ======================================================================
+[2026-02-25T14:46:56Z] Total entities processed: 28
+[2026-02-25T14:46:56Z] Entities with project pages: 26
+[2026-02-25T14:46:56Z] Entities with ≥1 brochure/PDF: 18
+[2026-02-25T14:46:56Z] Total PDFs downloaded: 19
+[2026-02-25T14:46:56Z] Unique PDFs by SHA256: 10
+[2026-02-25T14:46:56Z] Entities with NO brochure: 10
+[2026-02-25T14:46:56Z] PDF probes completed: 19
+[2026-02-25T14:46:56Z] 
+Missing brochure entities:
+[2026-02-25T14:46:56Z]   • Tijan Maadi (tijan_maadi): no_pdf_links_visible
+[2026-02-25T14:46:56Z]   • Blumar El Dome (blumar_el_dome): no_pdf_links_visible
+[2026-02-25T14:46:56Z]   • Pyramids Walk (pyramids_walk): no_pdf_links_visible
+[2026-02-25T14:46:56Z]   • Blumar Sidi Abd El Rahman (blumar_sidi_abd_el_rahman): no_pdf_links_visible
+[2026-02-25T14:46:56Z]   • Tijan Zahraa El Maadi (tijan_zahraa_el_maadi): no_pdf_links_visible
+[2026-02-25T14:46:56Z]   • Canal Residence (canal_residence): no_pdf_links_visible
+[2026-02-25T14:46:56Z]   • River Walk (river_walk): no_pdf_links_visible
+[2026-02-25T14:46:56Z]   • Marina Wadi Degla (marina_wadi_degla): no_pdf_links_visible
+[2026-02-25T14:46:56Z]   • Mada (mada): no_project_page
+[2026-02-25T14:46:56Z]   • CAMUSE (camuse): no_project_page
