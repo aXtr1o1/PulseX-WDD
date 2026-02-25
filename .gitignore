@@ -1,0 +1,40 @@
+.env
+env.txt
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node modules (UI)
+ui/node_modules/
+
+# System specific
+.env
+*.env
+# runtime/**
+*.index
+*.jsonl
+#leads*.csv
+*.xlsx
+
+# KB brochure dir
+KB-Acq/projectBrochures/
