@@ -1,0 +1,95 @@
+{
+  "run_date": "2026-02-27",
+  "counts": {
+    "total_rows_in": 28,
+    "kept": 26,
+    "dropped": 2
+  },
+  "dropped_items": [
+    {
+      "project_id": "mada",
+      "project_name": "Mada",
+      "drop_reason": "HTTP 404 on WDD site; not listed on official projects index; no official_project_url; name not attributable to any WDD project or phase; confidence=0.30",
+      "confidence_before": "0.30",
+      "confidence_after": "0.30"
+    },
+    {
+      "project_id": "camuse",
+      "project_name": "CAMUSE",
+      "drop_reason": "HTTP 404 on WDD site; not listed on official projects index; no official_project_url; name not attributable to any WDD project or phase; confidence=0.30",
+      "confidence_before": "0.30",
+      "confidence_after": "0.30"
+    }
+  ],
+  "fixed_links": [
+    {
+      "project_id": "neopolis",
+      "old_url": "https://wadidegladevelopments.com/projects/neo-gardens/",
+      "new_url": "https://wadidegladevelopments.com/projects/neopolis/"
+    }
+  ],
+  "normalized_fields_stats": {
+    "enums_normalized_rows": 16,
+    "placeholders_removed_cells": 52,
+    "unit_type_rows_normalized": 24,
+    "non_unit_items_removed": 4,
+    "city_area_region_cells_normalized": 14,
+    "urls_fixed": 1
+  },
+  "unit_type_normalization_stats": {
+    "removed_non_unit_items": [
+      {
+        "project_id": "vero",
+        "removed": [
+          "Serviced Apartments",
+          "Residential Apartments"
+        ]
+      },
+      {
+        "project_id": "breeze",
+        "removed": [
+          "retail"
+        ]
+      },
+      {
+        "project_id": "horizon",
+        "removed": [
+          "retail"
+        ]
+      }
+    ]
+  },
+  "confidence_groups": {
+    "verified": [
+      "murano",
+      "clubtown",
+      "neo",
+      "vero",
+      "promenade_new_cairo",
+      "blumar_el_sokhna",
+      "blumar_hills",
+      "tijan_maadi",
+      "blumar_el_dome",
+      "pyramids_walk",
+      "blumar_sidi_abd_el_rahman",
+      "tijan_zahraa_el_maadi",
+      "canal_residence",
+      "river_walk",
+      "marina_wadi_degla",
+      "living_community",
+      "waterside",
+      "floating_islands",
+      "ojo",
+      "neo_lakes",
+      "neo_gardens",
+      "breeze",
+      "horizon",
+      "edge",
+      "vyon",
+      "neopolis"
+    ],
+    "needs_verify": [],
+    "weak": []
+  },
+  "verification_method": "HTTP HEAD check on official WDD URLs + WDD projects index scrape (2026-02-27)"
+}
