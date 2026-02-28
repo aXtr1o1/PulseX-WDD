@@ -1,0 +1,1 @@
+timestamp,request_id,session_id,endpoint,intent,kb_version_hash,keyword_hits,vector_hits,blended_hits,top_entities_json,model,tokens_in,tokens_out,latency_ms,status,error_reason,cost_estimate_usd,message_hash
