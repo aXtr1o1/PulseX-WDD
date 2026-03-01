@@ -2,3 +2,15 @@ timestamp,request_id,session_id,endpoint,intent,kb_version_hash,keyword_hits,vec
 2026-03-01T08:07:22.923932+00:00,96b71ed8,sess_mm7go0zgpck8n,/api/chat,unknown,dcb4d66a6b47,0,0,0,[],gpt-4o,0,0,0,ok,,0.0,8f434346648f6b96
 2026-03-01T09:41:55.367287+00:00,5ad5b9a8,sess_mm7k97ruevwo3,/api/chat,unknown,dcb4d66a6b47,0,0,0,[],gpt-4o,0,0,0,ok,,0.0,8f434346648f6b96
 2026-03-01T10:26:15.183324+00:00,2a961c69,sess_mm7luaq11h2ha,/api/chat,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o,0,0,249,ok,,0.0,8f434346648f6b96
+2026-03-01T10:31:06.116855+00:00,ebfae046,test_sess_1,/api/chat,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o,0,0,1031,ok,,0.0,8f434346648f6b96
+2026-03-01T10:31:07.081404+00:00,d2ba2a28,test_sess_2,/api/chat,sales_intent,dcb4d66a6b47,0,0,0,[],gpt-4o,0,0,932,ok,,0.0,5c6c9be6efb01b92
+2026-03-01T10:31:08.162532+00:00,84ce43c9,test_sess_3,/api/chat,property_question,dcb4d66a6b47,0,0,0,[],gpt-4o,0,0,1011,ok,,0.0,fa8276bce993487a
+2026-03-01T10:31:24.660301+00:00,895a96b0,test_sess_1,/api/chat,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o,0,0,1240,ok,,0.0,8f434346648f6b96
+2026-03-01T10:31:26.422331+00:00,9514f64c,test_sess_2,/api/chat,sales_intent,dcb4d66a6b47,0,0,0,[],gpt-4o,0,0,1738,ok,,0.0,5c6c9be6efb01b92
+2026-03-01T10:31:27.409626+00:00,09e595c5,test_sess_3,/api/chat,property_question,dcb4d66a6b47,0,0,0,[],gpt-4o,0,0,939,ok,,0.0,fa8276bce993487a
+2026-03-01T10:32:05.267234+00:00,08e3c9d1,test_sess_1,/api/chat,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o,10,20,1,ok,,0.00035,8f434346648f6b96
+2026-03-01T10:32:05.278853+00:00,0a33465b,test_sess_2,/api/chat,sales_intent,dcb4d66a6b47,0,0,0,[],gpt-4o,10,20,0,ok,,0.00035,5c6c9be6efb01b92
+2026-03-01T10:32:05.383334+00:00,62f9f968,test_sess_3,/api/chat,property_question,dcb4d66a6b47,0,0,0,[],gpt-4o,10,20,1,ok,,0.00035,fa8276bce993487a
+2026-03-01T10:32:25.411939+00:00,bbea0bfa,test_sess_1,/api/chat,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o,10,20,1,ok,,0.00035,8f434346648f6b96
+2026-03-01T10:32:25.424134+00:00,6a9c31e5,test_sess_2,/api/chat,sales_intent,dcb4d66a6b47,0,0,0,[],gpt-4o,10,20,0,ok,,0.00035,5c6c9be6efb01b92
+2026-03-01T10:32:25.462467+00:00,edf181ec,test_sess_3,/api/chat,property_question,dcb4d66a6b47,0,0,0,[],gpt-4o,10,20,1,ok,,0.00035,fa8276bce993487a

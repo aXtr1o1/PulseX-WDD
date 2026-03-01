@@ -9,7 +9,7 @@ PY        := python3
 
 .DEFAULT_GOAL := help
 
-.PHONY: help setup dev api web index seed validate test lint build up down clean
+.PHONY: help setup dev api web index seed validate test smoke lint build up down clean
 
 help:		## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
@@ -52,9 +52,13 @@ validate:	## Validate buyerKB.csv (incl. installment-years false-positive check)
 
 test:		## Run backend tests (pytest) + frontend lint
 	@echo "→ Running pytest..."
-	cd $(REPO_ROOT) && PYTHONPATH=$(API_DIR) pytest tests/ -v
+	cd $(REPO_ROOT) && PYTHONPATH=$(API_DIR) $(PY) -m pytest tests/ -q
 	@echo "→ Running Next.js lint..."
 	cd $(WEB_DIR) && npm run lint
+
+smoke:		## Run minimal E2E sanity tests
+	@echo "→ Running smoke tests..."
+	cd $(REPO_ROOT) && bash scripts/smoke_e2e.sh
 
 lint:		## Lint backend Python files
 	cd $(REPO_ROOT) && python -m flake8 apps/api/ scripts/ --max-line-length=110 --ignore=E501 || true

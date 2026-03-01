@@ -134,7 +134,7 @@ def create_app() -> FastAPI:
     async def health():
         return {
             "status": "ok",
-            "index_ready": True, # Hardcoded to true for now since lifespan handles blocking startup
+            "index_ready": getattr(app.state, "retriever", None) is not None and get_settings().keyword_index_path.exists(),
             "kb_entities": len(app.state.kb_entities) if hasattr(app.state, "kb_entities") else 0,
             "kb_hash": getattr(app.state, "kb_version_hash", ""),
         }
