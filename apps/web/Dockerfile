@@ -10,6 +10,7 @@ COPY apps/web/ .
 COPY apps/web/.env.local* ./
 ARG NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
 ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
+ENV NODE_ENV=production
 RUN npm run build
 
 FROM node:20-alpine AS runner

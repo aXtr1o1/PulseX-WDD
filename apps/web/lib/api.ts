@@ -3,7 +3,10 @@
  * All requests go through Next.js rewrite proxy -> FastAPI backend.
  */
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL ?? '';
+const isServer = typeof window === 'undefined';
+const API_BASE = isServer
+    ? (process.env.INTERNAL_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL || '')
+    : (process.env.NEXT_PUBLIC_API_BASE_URL || '');
 
 // ── Types mirroring backend schemas ─────────────────────────────────────────
 
