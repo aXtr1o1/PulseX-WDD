@@ -33,27 +33,28 @@ router = APIRouter(prefix="/api/admin", tags=["admin"])
 # Auth
 # ──────────────────────────────────────────────────────────────────────────────
 
-@router.post("/login", response_model=AdminLoginResponse)
-async def admin_login(body: AdminLoginRequest, response: Response) -> AdminLoginResponse:
-    settings = get_settings()
-    if body.password != settings.admin_password:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid password.")
-    token = create_admin_token()
-    response.set_cookie(
-        key="pulsex_admin",
-        value=token,
-        httponly=True,
-        max_age=settings.admin_session_ttl,
-        samesite="lax",
-        secure=(settings.app_env == "prod"),
-    )
-    return AdminLoginResponse(success=True, message="Authenticated.")
+if get_settings().admin_auth_mode == "cookie":
+    @router.post("/login", response_model=AdminLoginResponse)
+    async def admin_login(body: AdminLoginRequest, response: Response) -> AdminLoginResponse:
+        settings = get_settings()
+        if body.password != settings.admin_password:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid password.")
+        token = create_admin_token()
+        response.set_cookie(
+            key="pulsex_admin",
+            value=token,
+            httponly=True,
+            max_age=settings.admin_session_ttl,
+            samesite="lax",
+            secure=(settings.app_env == "prod"),
+        )
+        return AdminLoginResponse(success=True, message="Authenticated.")
 
 
-@router.post("/logout")
-async def admin_logout(response: Response):
-    response.delete_cookie("pulsex_admin")
-    return {"success": True}
+    @router.post("/logout")
+    async def admin_logout(response: Response):
+        response.delete_cookie("pulsex_admin")
+        return {"success": True}
 
 
 # ──────────────────────────────────────────────────────────────────────────────

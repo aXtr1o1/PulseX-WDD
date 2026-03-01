@@ -20,12 +20,17 @@ RENTALS              = "rentals_ever_stay"
 REFERRAL             = "referral_grow_the_family"
 UNKNOWN              = "unknown"
 
+GREETING             = "greeting"
+
 # ── Keyword patterns per intent (order matters – checked top-down) ──────────
 PATTERNS: List[Tuple[str, List[str]]] = [
+    (GREETING, [
+        r"\b(hi|hello|hey|good morning|good afternoon|good evening|مرحبا|اهلا|صباح الخير|مساء الخير)\b",
+    ]),
     (SALES_INTENT, [
-        r"\b(buy|book|purchase|reserve|invest|interested in|interested to|callback|call back|"
+        r"\b(buy|book|purchase|reserve|invest|interested in|interested to|callback|call me|call back|"
         r"contact sale|speak to|talk to sales|visit|schedule|arrange|set up.*(meeting|call|visit)|"
-        r"أريد.*(شراء|حجز|استثمار|زيارة)|اتصل|أتصل)\b",
+        r"payment plan|send brochure|brochure|أريد.*(شراء|حجز|استثمار|زيارة)|اتصل|أتصل|كتيب|تفاصيل الدفع)\b",
     ]),
     (COMPLAINT, [
         r"\b(complain|problem|issue|broken|maintenance|repair|damage|شكوى|مشكلة|عطل)\b",

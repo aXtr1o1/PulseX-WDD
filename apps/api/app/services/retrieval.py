@@ -218,10 +218,9 @@ class HybridRetriever:
                 continue
             gated.append((eid, score))
 
-        # If gating returned nothing, fall back to unfiltered (warn + note)
+        # If gating returned nothing under a strict filter, DO NOT fall back.
         if not gated and (project_filter or region_filter):
-            logger.info("Gating returned 0; falling back to un-gated for query: %s", query)
-            gated = [(eid, score) for eid, score in blended.items() if eid in self.entities]
+            logger.info("Gating returned 0; maintaining strict zero-results for query: %s", query)
 
         # ── Sort + dedupe + pick top-k
         gated.sort(key=lambda x: x[1], reverse=True)

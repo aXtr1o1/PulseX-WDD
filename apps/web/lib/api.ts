@@ -93,7 +93,6 @@ export interface AdminDashboard {
 async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
     const url = `${API_BASE}${path}`;
     const res = await fetch(url, {
-        credentials: 'include',
         headers: { 'Content-Type': 'application/json', ...(init?.headers ?? {}) },
         ...init,
     });
@@ -131,7 +130,6 @@ export function streamChat(
 
     fetch(url, {
         method: 'POST',
-        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ session_id: sessionId, lang, message, page_context: pageContext }),
         signal: ctrl.signal,

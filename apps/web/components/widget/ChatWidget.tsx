@@ -96,7 +96,7 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
                         return copy;
                     });
 
-                    if (full.lead_trigger || full.handoff_cta) {
+                    if (full.lead_trigger) {
                         setTimeout(() => setShowLead(true), 600);
                     }
                 } catch {

@@ -23,9 +23,10 @@ def build_system_prompt(lang: str = "en") -> str:
 3. اذكر اسم المشروع في إجابتك.
 4. الأسلوب: راقٍ، دافئ. لا تذكر كلمة الذكاء الاصطناعي.
 5. في نهاية إجابتك، أضف دائمًا كتلة <payload>...</payload> تحتوي على JSON.
+6. إذا كانت رسالة المستخدم مجرد تحية أو تصفح عام، يجب أن تكون الإجابة سطر ترحيب واحد مع سؤال توجيهي واحد (مثال: هل تبحث عن سكن أم استثمار؟).
 مثال JSON:
 <payload>
-{"shortlist": [{"name": "اسم المشروع", "highlights": ["ميزة 1", "ميزة 2"], "ctas": ["طلب كتيب", "ترتيب زيارة"]}], "lead_suggestions": {}, "focused_project": "اسم المشروع"}
+{"answer_line": "مرحبا بك...", "highlights": [], "next_question": "هل تبحث في منطقة معينة؟", "shortlist": [], "lead_suggestions": {}, "focused_project": "اسم المشروع"}
 </payload>
 """
     return """You are "PulseX" — the digital concierge for Wadi Degla Developments.
@@ -36,10 +37,11 @@ STRICT RULES:
 3. Tone: warm, reassuring, premium. Do NOT say "AI" or "model".
 4. Max answer length: 4 sentences.
 5. ALWAYS embed a JSON block at the very end of your response inside <payload>...</payload> tags.
+6. If the user's message is a greeting or general browsing, reply with EXACTLY 1-line welcome + 1 qualifier question (e.g. region or residential vs commercial).
 If you are suggesting projects, include them in the 'shortlist'. Include any extracted lead info in 'lead_suggestions' (e.g. budget_min). 
 Example:
 <payload>
-{"shortlist": [{"name": "Project Name", "highlights": ["Highlight 1"], "ctas": ["Request brochure", "Arrange viewing"]}], "lead_suggestions": {}, "focused_project": "Project Name"}
+{"answer_line": "Welcome to Wadi Degla. I can help you shortlist verified properties.", "highlights": [], "next_question": "Are you looking to invest or live?", "shortlist": [], "lead_suggestions": {}, "focused_project": null}
 </payload>
 """
 
@@ -131,9 +133,9 @@ async def generate_answer(
     except Exception as e:
         logger.error("LLM answer generation failed: %s", e)
         fallback = (
-            "يسعدني مساعدتك. يرجى التواصل مع فريق المبيعات عبر الرقم 19917."
+            "يسعدني مساعدتك. يرجى التواصل مع فريق المبيعات عبر الرقم 16662."
             if lang == "ar"
-            else "I'd be happy to help — please contact our sales team at 19917 or via our website."
+            else "I'd be happy to help — please contact our sales team at 16662 or via our website."
         )
         return {
             "answer": fallback,
@@ -184,9 +186,9 @@ async def stream_answer(
     except Exception as e:
         logger.error("LLM stream failed: %s", e)
         yield (
-            "يرجى التواصل مع فريق المبيعات عبر 19917."
+            "يرجى التواصل مع فريق المبيعات عبر 16662."
             if lang == "ar"
-            else "Please contact our sales team at 19917."
+            else "Please contact our sales team at 16662."
         )
 
 
@@ -196,44 +198,44 @@ async def stream_answer(
 
 HANDOFF_MESSAGES = {
     "complaint": {
-        "en": "I'm sorry to hear that. For maintenance or service issues, please contact our Customer Care team directly at 19917 or via the contact page. They'll prioritise your request.",
-        "ar": "نأسف لسماع ذلك. للتواصل بشأن الصيانة أو الخدمات، يرجى الاتصال بفريق خدمة العملاء على 19917.",
+        "en": "I'm sorry to hear that. For maintenance or service issues, please contact our Customer Care team directly at 16662 or via the contact page. They'll prioritise your request.",
+        "ar": "نأسف لسماع ذلك. للتواصل بشأن الصيانة أو الخدمات، يرجى الاتصال بفريق خدمة العملاء على 16662.",
     },
     "payment_services": {
-        "en": "For payment enquiries, invoices, or installment plans, our Finance team is available at 19917 or via the official portal. Shall I share the contact link?",
-        "ar": "لاستفسارات الدفع والأقساط، يرجى التواصل مع فريق المالية على 19917.",
+        "en": "For payment enquiries, invoices, or installment plans, our Finance team is available at 16662 or via the official portal. Shall I share the contact link?",
+        "ar": "لاستفسارات الدفع والأقساط، يرجى التواصل مع فريق المالية على 16662.",
     },
     "gate_access": {
-        "en": "For gate access or visitor passes, please contact your community's admin team or call 19917.",
-        "ar": "للدخول والبوابات، يرجى التواصل مع إدارة مجتمعك أو الاتصال على 19917.",
+        "en": "For gate access or visitor passes, please contact your community's admin team or call 16662.",
+        "ar": "للدخول والبوابات، يرجى التواصل مع إدارة مجتمعك أو الاتصال على 16662.",
     },
     "hotels": {
-        "en": "For hotel stays and accommodation enquiries, please visit our hotels page or call 19917.",
-        "ar": "لاستفسارات الفنادق والإقامة، يرجى زيارة صفحة فنادقنا أو الاتصال على 19917.",
+        "en": "For hotel stays and accommodation enquiries, please visit our hotels page or call 16662.",
+        "ar": "لاستفسارات الفنادق والإقامة، يرجى زيارة صفحة فنادقنا أو الاتصال على 16662.",
     },
     "rentals_ever_stay": {
-        "en": "For rental and Ever Stay enquiries, please contact our team at 19917 or visit the project page.",
-        "ar": "لاستفسارات الإيجار، يرجى الاتصال على 19917.",
+        "en": "For rental and Ever Stay enquiries, please contact our team at 16662 or visit the project page.",
+        "ar": "لاستفسارات الإيجار، يرجى الاتصال على 16662.",
     },
     "referral_grow_the_family": {
-        "en": "Thank you for wanting to grow the Wadi Degla family! Our referral team would love to hear from you. Call 19917 or share your friend's details and we'll reach out.",
-        "ar": "شكرًا لرغبتك في توسيع عائلة وادي دجلة! اتصل على 19917.",
+        "en": "Thank you for wanting to grow the Wadi Degla family! Our referral team would love to hear from you. Call 16662 or share your friend's details and we'll reach out.",
+        "ar": "شكرًا لرغبتك في توسيع عائلة وادي دجلة! اتصل على 16662.",
     },
     "private_services_reservation": {
-        "en": "For facility reservations (club, pool, courts), please contact your community admin or call 19917.",
-        "ar": "لحجز المرافق، يرجى التواصل مع إدارة مجتمعك أو الاتصال على 19917.",
+        "en": "For facility reservations (club, pool, courts), please contact your community admin or call 16662.",
+        "ar": "لحجز المرافق، يرجى التواصل مع إدارة مجتمعك أو الاتصال على 16662.",
     },
     "directory": {
-        "en": "You can find all Wadi Degla contacts and office locations at wadidegladevelopments.com/contact-us/ or call the main line at 19917.",
-        "ar": "يمكنك إيجاد جميع وسائل التواصل على wadidegladevelopments.com/contact-us/ أو الاتصال على 19917.",
+        "en": "You can find all Wadi Degla contacts and office locations at wadidegladevelopments.com/contact-us/ or call the main line at 16662.",
+        "ar": "يمكنك إيجاد جميع وسائل التواصل على wadidegladevelopments.com/contact-us/ أو الاتصال على 16662.",
     },
     "unknown": {
-        "en": "I'm not sure I understood that. I specialise in Wadi Degla properties and services. Could you rephrase, or would you like to speak with our team directly at 19917?",
-        "ar": "لم أفهم سؤالك تمامًا. أنا متخصص في مشاريع وادي دجلة. هل يمكنك إعادة الصياغة، أو تفضل التواصل مع فريقنا على 19917؟",
+        "en": "I'm not sure I understood that. I specialise in Wadi Degla properties and services. Could you rephrase, or would you like to speak with our team directly at 16662?",
+        "ar": "لم أفهم سؤالك تمامًا. أنا متخصص في مشاريع وادي دجلة. هل يمكنك إعادة الصياغة، أو تفضل التواصل مع فريقنا على 16662؟",
     },
 }
 
 
 def get_handoff_message(intent: str, lang: str = "en") -> str:
     msgs = HANDOFF_MESSAGES.get(intent, HANDOFF_MESSAGES["unknown"])
-    return msgs.get(lang, msgs.get("en", "Please contact us at 19917."))
+    return msgs.get(lang, msgs.get("en", "Please contact us at 16662."))

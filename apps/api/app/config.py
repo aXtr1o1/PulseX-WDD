@@ -58,6 +58,7 @@ class Settings(BaseSettings):
 
     # ── Admin ────────────────────────────────────────────────────────────────
     admin_password: str = Field("changeme", alias="ADMIN_PASSWORD")
+    admin_auth_mode: str = Field("off", alias="ADMIN_AUTH_MODE")
     admin_session_ttl: int = 3600  # seconds
 
     # ── App ─────────────────────────────────────────────────────────────────

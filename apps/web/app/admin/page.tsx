@@ -87,8 +87,8 @@ export default function AdminPage() {
                                     key={tf.id}
                                     onClick={() => setTimeFilter(tf.id)}
                                     className={`px-3 py-1 text-[11px] font-semibold rounded-full transition-colors ${timeFilter === tf.id
-                                            ? 'bg-white text-[var(--wdd-black)] shadow-sm'
-                                            : 'text-[var(--wdd-muted)] hover:text-[var(--wdd-black)]'
+                                        ? 'bg-white text-[var(--wdd-black)] shadow-sm'
+                                        : 'text-[var(--wdd-muted)] hover:text-[var(--wdd-black)]'
                                         }`}
                                 >
                                     {tf.label}
