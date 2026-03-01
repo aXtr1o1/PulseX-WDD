@@ -27,6 +27,10 @@ export interface ChatResponse {
     intent: string;
     answer: string;
     evidence: EvidenceSnippet[];
+    shortlist?: Record<string, any>[];
+    lead_suggestions?: Record<string, any>;
+    focused_project?: string;
+    intent_lane?: string;
     lead_trigger: boolean;
     handoff_cta: boolean;
     lang: string;

@@ -1,96 +1,92 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import ChatWidget from '@/components/widget/ChatWidget';
+import InitScreen from '@/components/InitScreen';
+import OverlayMenu from '@/components/OverlayMenu';
+import { gtm } from '@/lib/gtm';
 
-export default function HomePage() {
+export default function ConciergePage() {
+    const [ready, setReady] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [lang, setLang] = useState<'en' | 'ar'>('en');
+
+    // WDD Hotlines
+    const hotline = "16662"; // Placeholder or can be env-based
+
     return (
-        <main className="min-h-screen bg-white">
-            {/* Navbar */}
+        <main className="min-h-screen bg-[var(--wdd-surface)] flex flex-col font-isidora relative" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+
+            {/* 1. Initialization Ritual */}
+            {!ready && <InitScreen onReady={() => setReady(true)} />}
+
+            {/* 2. Global Overlay Menu */}
+            <OverlayMenu open={menuOpen} onClose={() => setMenuOpen(false)} lang={lang} />
+
+            {/* 3. Official WDD-like Navbar */}
             <header className="sticky top-0 z-30 bg-white border-b border-[var(--wdd-border)] shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
-                <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-                    <Image src="/brand/WDD_fullLogo.png" width={180} height={48} alt="Wadi Degla Developments" className="object-contain h-9 w-auto" />
-                    <nav className="flex items-center gap-6">
-                        <Link href="/widget" className="text-sm text-[var(--wdd-muted)] hover:text-[var(--wdd-red)] transition-colors">
-                            Widget Demo
-                        </Link>
-                        <Link
-                            href="/admin"
-                            className="text-sm font-medium text-[var(--wdd-red)] border border-[var(--wdd-red)] px-4 py-1.5 rounded-full hover:bg-[var(--wdd-red)] hover:text-white transition-all"
+                <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+
+                    {/* Left: Branding */}
+                    <div className="flex items-center gap-4">
+                        <Image src="/brand/WDD_fullLogo.png" width={160} height={42} alt="Wadi Degla Developments" className="object-contain h-8 w-auto" />
+                        <div className="hidden md:flex items-center gap-2 border-l border-[var(--wdd-border)] pl-4 ml-2">
+                            <span className="text-xs font-semibold text-[var(--wdd-black)] tracking-wider">PULSEX AI</span>
+                        </div>
+                    </div>
+
+                    {/* Right: Actions */}
+                    <nav className="flex items-center gap-5 md:gap-8">
+                        {/* Language Toggle */}
+                        <button
+                            onClick={() => setLang(l => l === 'en' ? 'ar' : 'en')}
+                            className="text-xs font-medium text-[var(--wdd-text)] hover:text-[var(--wdd-red)] transition-colors hidden md:block"
                         >
-                            Admin →
-                        </Link>
+                            {lang === 'en' ? '🇦🇪 العربية' : '🇬🇧 English'}
+                        </button>
+
+                        {/* Hotline Call */}
+                        <a
+                            href={`tel:${hotline}`}
+                            onClick={() => gtm.customEvent('click_hotline')}
+                            className="text-sm font-semibold text-[var(--wdd-black)] hover:text-[var(--wdd-red)] transition-colors hidden sm:flex items-center gap-2"
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                            {hotline}
+                        </a>
+
+                        <button
+                            onClick={() => { gtm.customEvent('click_request_call'); setMenuOpen(true); }} // Placeholder for triggering lead form directly
+                            className="text-xs tracking-wide font-medium bg-[var(--wdd-red)] text-white px-4 py-2 rounded-full hover:bg-[#b01c28] transition-all shadow-sm hidden md:block"
+                        >
+                            {lang === 'ar' ? 'طلب مكالمة مبيعات' : 'REQUEST A SALES CALL'}
+                        </button>
+
+                        {/* Hamburger */}
+                        <button
+                            onClick={() => setMenuOpen(true)}
+                            className="w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-full hover:bg-[var(--wdd-surface)] transition-colors"
+                            aria-label="Menu"
+                        >
+                            <span className="w-5 h-[2px] bg-[var(--wdd-black)] rounded-full"></span>
+                            <span className="w-5 h-[2px] bg-[var(--wdd-black)] rounded-full"></span>
+                            <span className="w-5 h-[2px] bg-[var(--wdd-black)] rounded-full"></span>
+                        </button>
                     </nav>
                 </div>
             </header>
 
-            {/* Hero */}
-            <section className="max-w-6xl mx-auto px-6 py-20">
-                <div className="max-w-2xl">
-                    <p className="text-xs font-semibold tracking-widest text-[var(--wdd-red)] uppercase mb-4">
-                        PulseX · Wadi Degla Developments
-                    </p>
-                    <h1 className="text-4xl md:text-5xl font-bold text-[var(--wdd-black)] leading-tight mb-6">
-                        Your Property<br />Concierge, Reimagined.
-                    </h1>
-                    <p className="text-lg text-[var(--wdd-muted)] leading-relaxed mb-8 max-w-xl">
-                        PulseX brings WDD&apos;s entire portfolio and knowledge base into a single conversational interface — grounded in verified data, available 24/7.
-                    </p>
-                    <div className="flex flex-wrap gap-4">
-                        <Link
-                            href="/widget"
-                            className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--wdd-red)] text-white rounded-full font-medium text-sm hover:bg-[#b01c28] transition-colors"
-                        >
-                            Try the Widget
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </Link>
-                        <Link
-                            href="/admin"
-                            className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--wdd-border)] text-[var(--wdd-text)] rounded-full font-medium text-sm hover:border-[var(--wdd-red)] hover:text-[var(--wdd-red)] transition-all"
-                        >
-                            Admin Dashboard
-                        </Link>
-                    </div>
+            {/* 4. Hero Content / Whitespace Body */}
+            <section className="flex-1 flex flex-col max-w-5xl mx-auto w-full px-4 md:px-8 py-8 md:py-12 animate-fade-in">
+
+                {/* Embedded Concierge Core */}
+                <div className="flex-1 w-full bg-white rounded-[24px] shadow-[0_8px_40px_rgba(0,0,0,0.06)] border border-[#f0f0f0] overflow-hidden flex flex-col">
+                    <ChatWidget embedded={true} headerLangToggle={true} />
                 </div>
-            </section>
 
-            {/* Feature grid */}
-            <section className="border-t border-[var(--wdd-border)] bg-[var(--wdd-surface)]">
-                <div className="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-8">
-                    {[
-                        { icon: '🧠', title: 'Hybrid RAG', desc: 'BM25 keyword + vector search with hard project/region gating — no hallucinated inventory.' },
-                        { icon: '💬', title: 'Concierge Widget', desc: 'Embeddable chat widget with streaming responses, intent routing, and progressive lead profiling.' },
-                        { icon: '📊', title: 'Lead Intelligence', desc: 'Auto-capture, validate, and score leads. Full admin dashboard with CSV/XLSX export.' },
-                    ].map((f) => (
-                        <div key={f.title} className="p-6 bg-white rounded-[var(--wdd-radius-lg)] border border-[var(--wdd-border)]">
-                            <div className="text-3xl mb-4">{f.icon}</div>
-                            <h3 className="font-semibold text-[var(--wdd-black)] mb-2">{f.title}</h3>
-                            <p className="text-sm text-[var(--wdd-muted)] leading-relaxed">{f.desc}</p>
-                        </div>
-                    ))}
-                </div>
             </section>
-
-            {/* Embed snippet */}
-            <section className="max-w-6xl mx-auto px-6 py-16">
-                <h2 className="text-2xl font-bold text-[var(--wdd-black)] mb-4">Embed on your website</h2>
-                <p className="text-sm text-[var(--wdd-muted)] mb-6">
-                    Add one script tag to your existing website to dock the PulseX widget.
-                </p>
-                <pre className="bg-[#191919] text-[#E5E5E5] text-xs rounded-xl p-5 overflow-x-auto font-mono leading-relaxed">
-                    {`<script
-  src="${process.env.NEXT_PUBLIC_WIDGET_BASE_URL ?? 'https://your-pulsex-domain.com'}/widget.js"
-  data-project="murano"
-  data-lang="en"
-  defer
-></script>`}
-                </pre>
-            </section>
-
-            {/* Floating chat widget on this page */}
-            <ChatWidget />
         </main>
     );
 }

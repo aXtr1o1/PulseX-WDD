@@ -34,4 +34,7 @@ export const gtm = {
 
     consentOptIn: (sessionId: string, types: string[]) =>
         push('pulseX_consent_opt_in', { session_id: sessionId, consent_types: types }),
+
+    customEvent: (eventName: string, params?: Record<string, unknown>) =>
+        push(eventName, params),
 };

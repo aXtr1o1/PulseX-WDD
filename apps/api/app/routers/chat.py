@@ -116,12 +116,18 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
         for e in top_entities[:4]
     ]
 
+    payload = result.get("payload") or {}
+
     return ChatResponse(
         session_id=request.session_id,
         request_id=request_id,
         intent=intent,
         answer=result["answer"],
         evidence=evidence,
+        shortlist=payload.get("shortlist"),
+        lead_suggestions=payload.get("lead_suggestions"),
+        focused_project=payload.get("focused_project"),
+        intent_lane=intent,
         lead_trigger=(intent == SALES_INTENT),
         lang=request.lang,
         latency_ms=latency_ms,

@@ -1,26 +1,31 @@
-import type { Metadata } from 'next';
+'use client';
+import React, { useEffect, useState } from 'react';
 import ChatWidget from '@/components/widget/ChatWidget';
+import InitScreen from '@/components/InitScreen';
 
-export const metadata: Metadata = {
-    title: 'PulseX Widget — Wadi Degla Developments',
-    description: 'Embeddable property concierge widget for WDD.',
-};
+export default function WidgetPage() {
+    const [ready, setReady] = useState(false);
+    const [project, setProject] = useState<string>();
+    const [region, setRegion] = useState<string>();
 
-interface PageProps {
-    searchParams: { project?: string; region?: string; lang?: string };
-}
-
-export default function WidgetPage({ searchParams }: PageProps) {
-    const project = searchParams.project;
-    const region = searchParams.region;
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        setProject(params.get('project') || undefined);
+        setRegion(params.get('region') || undefined);
+    }, []);
 
     return (
-        <div className="w-full h-screen flex flex-col bg-white">
-            <ChatWidget
-                initialProject={project}
-                initialRegion={region}
-                embedded
-            />
-        </div>
+        <main className="w-screen h-screen bg-transparent overflow-hidden font-isidora bg-white">
+            {!ready ? (
+                <InitScreen onReady={() => setReady(true)} />
+            ) : (
+                <ChatWidget
+                    embedded={true}
+                    initialProject={project}
+                    initialRegion={region}
+                    headerLangToggle={false}
+                />
+            )}
+        </main>
     );
 }

@@ -11,20 +11,18 @@ import { LeadsTimeChart, TopProjectsChart, TopRegionsChart } from '@/components/
 import LeadTable from '@/components/admin/LeadTable';
 import LeadDrawer from '@/components/admin/LeadDrawer';
 import DataViewer from '@/components/admin/DataViewer';
-import Button from '@/components/ui/Button';
 import Spinner from '@/components/ui/Spinner';
 
-type Tab = 'dashboard' | 'leads' | 'data';
-
 export default function AdminPage() {
-    const [tab, setTab] = useState<Tab>('dashboard');
     const [stats, setStats] = useState<AdminDashboard | null>(null);
     const [statsLoading, setStatsLoading] = useState(false);
 
     const [leads, setLeads] = useState<Record<string, string>[]>([]);
     const [leadsTotal, setLeadsTotal] = useState(0);
     const [leadsLoading, setLeadsLoading] = useState(false);
-    const [filters, setFilters] = useState<LeadFilter>({ time_filter: 'all' });
+
+    const [timeFilter, setTimeFilter] = useState<'all' | '24h' | '7d' | '30d'>('all');
+    const [sheetView, setSheetView] = useState<'dashboard' | 'leads' | 'audit' | 'sessions'>('dashboard');
 
     const [selectedLead, setSelectedLead] = useState<Record<string, string> | null>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -38,147 +36,179 @@ export default function AdminPage() {
     const loadLeads = useCallback(async () => {
         setLeadsLoading(true);
         try {
-            const res = await fetchLeads(filters);
+            const res = await fetchLeads({ time_filter: timeFilter });
             setLeads(res.leads);
             setLeadsTotal(res.total);
         } catch { /* noop */ }
         finally { setLeadsLoading(false); }
-    }, [filters]);
+    }, [timeFilter]);
 
     useEffect(() => { loadStats(); }, [loadStats]);
-    useEffect(() => { if (tab === 'leads') { loadLeads(); } }, [tab, loadLeads]);
+    useEffect(() => { loadLeads(); }, [loadLeads]);
+
+    if (!stats && statsLoading) {
+        return (
+            <div className="min-h-screen bg-[var(--wdd-bg)] flex flex-col items-center justify-center animate-pulse-soft">
+                <Image src="/brand/WDD_blockLogo.png" width={72} height={72} alt="Loading..." className="object-contain mb-6" priority />
+                <p className="text-sm font-medium text-[var(--wdd-muted)] tracking-wider uppercase">Loading Intelligence...</p>
+            </div>
+        );
+    }
 
     return (
-        <div className="min-h-screen bg-[var(--wdd-surface)]">
-            {/* Sticky header */}
-            <header className="sticky top-0 z-30 bg-white border-b border-[var(--wdd-border)] shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
-                <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <Image src="/brand/WDD_fullLogo.png" width={140} height={36} alt="WDD" className="h-7 w-auto object-contain" />
-                        <span className="text-xs text-[var(--wdd-muted)] border-l border-[var(--wdd-border)] pl-3">PulseX Admin</span>
+        <div className="min-h-screen bg-[var(--wdd-surface)] font-isidora">
+
+            {/* Header / Command Bar */}
+            <header className="sticky top-0 z-30 bg-white border-b border-[var(--wdd-border)]">
+                <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+
+                    {/* Left: Branding */}
+                    <div className="flex items-center gap-4">
+                        <Link href="/">
+                            <Image src="/brand/WDD_fullLogo.png" width={140} height={36} alt="WDD" className="h-7 w-auto object-contain hover:opacity-80 transition-opacity" />
+                        </Link>
+                        <div className="flex items-center gap-2 border-l border-[var(--wdd-border)] pl-4">
+                            <span className="text-xs font-semibold text-[var(--wdd-black)] tracking-wider">LEAD INTELLIGENCE</span>
+                        </div>
                     </div>
-                    <Link href="/" className="text-xs text-[var(--wdd-muted)] hover:text-[var(--wdd-red)]">← Back to site</Link>
+
+                    {/* Right: Controls & Filters */}
+                    <div className="flex items-center gap-4">
+
+                        {/* Time Filter */}
+                        <div className="flex bg-[var(--wdd-surface)] border border-[var(--wdd-border)] rounded-full p-1">
+                            {([
+                                { id: 'all', label: 'All' },
+                                { id: '24h', label: '24h' },
+                                { id: '7d', label: '7d' },
+                                { id: '30d', label: '30d' }
+                            ] as const).map(tf => (
+                                <button
+                                    key={tf.id}
+                                    onClick={() => setTimeFilter(tf.id)}
+                                    className={`px-3 py-1 text-[11px] font-semibold rounded-full transition-colors ${timeFilter === tf.id
+                                            ? 'bg-white text-[var(--wdd-black)] shadow-sm'
+                                            : 'text-[var(--wdd-muted)] hover:text-[var(--wdd-black)]'
+                                        }`}
+                                >
+                                    {tf.label}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* View/Sheet Selector */}
+                        <select
+                            value={sheetView}
+                            onChange={(e) => setSheetView(e.target.value as any)}
+                            className="bg-white border border-[var(--wdd-border)] text-xs font-medium text-[var(--wdd-black)] rounded-full px-4 py-1.5 focus:outline-none focus:ring-1 focus:ring-[var(--wdd-red)]"
+                        >
+                            <option value="dashboard">Executive Dashboard</option>
+                            <option value="leads">leads.csv</option>
+                            <option value="audit">audit.csv</option>
+                            <option value="sessions">sessions.csv</option>
+                        </select>
+
+                        {/* Refresh */}
+                        <button
+                            onClick={() => { loadStats(); loadLeads(); }}
+                            className="text-xs font-semibold text-[var(--wdd-muted)] hover:text-[var(--wdd-black)] transition-colors flex items-center gap-1.5"
+                        >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.92-10.26l5.08 5.08" /></svg>
+                            Refresh
+                        </button>
+                    </div>
                 </div>
             </header>
 
-            {/* Tab bar */}
-            <div className="bg-white border-b border-[var(--wdd-border)]">
-                <div className="max-w-7xl mx-auto px-6 flex items-center gap-1">
-                    {([
-                        { id: 'dashboard' as Tab, label: '📊 Dashboard' },
-                        { id: 'leads' as Tab, label: '👤 Leads' },
-                        { id: 'data' as Tab, label: '🗂 Data Viewer' },
-                    ] as const).map((t) => (
-                        <button
-                            key={t.id}
-                            onClick={() => setTab(t.id)}
-                            className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${tab === t.id
-                                    ? 'border-[var(--wdd-red)] text-[var(--wdd-red)]'
-                                    : 'border-transparent text-[var(--wdd-muted)] hover:text-[var(--wdd-text)]'
-                                }`}
-                        >
-                            {t.label}
-                        </button>
-                    ))}
-                </div>
-            </div>
+            <main className="max-w-[1400px] mx-auto px-6 py-8 animate-fade-in">
 
-            <main className="max-w-7xl mx-auto px-6 py-8">
-
-                {/* ── DASHBOARD TAB ── */}
-                {tab === 'dashboard' && (
-                    <div className="space-y-8 animate-fade-in">
-                        <div className="flex items-center justify-between">
-                            <h2 className="text-xl font-bold text-[var(--wdd-black)]">Overview</h2>
-                            <Button variant="ghost" size="sm" onClick={loadStats} disabled={statsLoading}>
-                                {statsLoading ? <Spinner size="sm" /> : '↻ Refresh'}
-                            </Button>
+                {/* ── Dashboard Segment ── */}
+                {sheetView === 'dashboard' && stats && (
+                    <div className="space-y-8">
+                        {/* KPI Strip */}
+                        <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
+                            <KPITile label="Total Active Leads" value={stats.kpi.total_leads} accent icon="" />
+                            <KPITile label="Intake (Last 24h)" value={stats.kpi.last_24h} icon="" />
+                            <KPITile label="Unique Contacts" value={stats.kpi.unique_contacts} icon="" />
+                            <KPITile label="Top Project Demand" value={stats.kpi.top_project ?? '—'} icon="" />
+                            <KPITile label="Top District Demanded" value={stats.kpi.top_region ?? '—'} icon="" />
+                            <KPITile
+                                label="Median Target Budget"
+                                value={stats.kpi.median_budget_min != null ? `${(stats.kpi.median_budget_min / 1e6).toFixed(1)}–${((stats.kpi.median_budget_max ?? stats.kpi.median_budget_min) / 1e6).toFixed(1)}M` : '—'}
+                                icon=""
+                            />
                         </div>
 
-                        {stats ? (
-                            <>
-                                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                                    <KPITile label="Total Leads" value={stats.kpi.total_leads} icon="📋" accent />
-                                    <KPITile label="Last 24 Hours" value={stats.kpi.last_24h} icon="⏱" />
-                                    <KPITile label="Unique Contacts" value={stats.kpi.unique_contacts} icon="👤" />
-                                    <KPITile label="Top Project" value={stats.kpi.top_project ?? '—'} icon="🏡" />
-                                    <KPITile label="Top Region" value={stats.kpi.top_region ?? '—'} icon="📍" />
-                                    <KPITile
-                                        label="Median Budget"
-                                        value={stats.kpi.median_budget_min != null
-                                            ? `${(stats.kpi.median_budget_min / 1e6).toFixed(1)}–${((stats.kpi.median_budget_max ?? stats.kpi.median_budget_min) / 1e6).toFixed(1)}M`
-                                            : '—'}
-                                        icon="💰"
-                                    />
-                                </div>
-                                <div className="grid md:grid-cols-1 gap-6">
-                                    <LeadsTimeChart data={stats.daily_leads} />
-                                </div>
-                                <div className="grid md:grid-cols-2 gap-6">
+                        {/* Charts Strip */}
+                        <div className="grid lg:grid-cols-3 gap-6">
+                            <div className="lg:col-span-2 bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
+                                <h3 className="text-sm font-semibold text-[var(--wdd-black)] mb-6">Lead Acquisition Velocity</h3>
+                                <LeadsTimeChart data={stats.daily_leads} />
+                            </div>
+                            <div className="space-y-6 flex flex-col">
+                                <div className="flex-1 bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
+                                    <h3 className="text-sm font-semibold text-[var(--wdd-black)] mb-6">Volume by Project</h3>
                                     <TopProjectsChart data={stats.top_projects} />
-                                    <TopRegionsChart data={stats.top_regions} />
                                 </div>
-                            </>
-                        ) : (
-                            <div className="py-16 flex justify-center"><Spinner size="lg" /></div>
-                        )}
+                            </div>
+                        </div>
+
+                        {/* Recent Leads Preview */}
+                        <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
+                            <div className="flex items-center justify-between mb-6">
+                                <h3 className="text-sm font-semibold text-[var(--wdd-black)]">Recent Qualified Leads</h3>
+                                <button
+                                    onClick={() => setSheetView('leads')}
+                                    className="text-xs font-semibold text-[var(--wdd-red)] hover:underline"
+                                >
+                                    View all {leadsTotal} leads →
+                                </button>
+                            </div>
+                            <LeadTable
+                                leads={leads.slice(0, 5)}
+                                onSelect={(lead) => { setSelectedLead(lead); setDrawerOpen(true); }}
+                                loading={leadsLoading}
+                            />
+                        </div>
                     </div>
                 )}
 
-                {/* ── LEADS TAB ── */}
-                {tab === 'leads' && (
-                    <div className="space-y-5 animate-fade-in">
+                {/* ── Raw Sheets Segments ── */}
+                {sheetView === 'leads' && (
+                    <div className="space-y-6">
                         <div className="flex items-center justify-between">
                             <h2 className="text-xl font-bold text-[var(--wdd-black)]">
-                                Leads <span className="text-sm font-normal text-[var(--wdd-muted)]">({leadsTotal})</span>
+                                Qualified Leads Rollup <span className="text-sm font-normal text-[var(--wdd-muted)]">({leadsTotal})</span>
                             </h2>
-                            <Button variant="ghost" size="sm" onClick={loadLeads} disabled={leadsLoading}>
-                                {leadsLoading ? <Spinner size="sm" /> : '↻ Refresh'}
-                            </Button>
                         </div>
-
-                        <div className="flex flex-wrap items-center gap-3 bg-white border border-[var(--wdd-border)] rounded-[var(--wdd-radius-lg)] px-4 py-3">
-                            {(['all', '24h', '7d', '30d'] as const).map((tf) => (
-                                <button
-                                    key={tf}
-                                    onClick={() => setFilters((f) => ({ ...f, time_filter: tf }))}
-                                    className={`px-3 py-1 rounded-full text-xs font-medium border transition-all ${filters.time_filter === tf
-                                            ? 'bg-[var(--wdd-red)] text-white border-[var(--wdd-red)]'
-                                            : 'bg-white text-[var(--wdd-text)] border-[var(--wdd-border)] hover:border-[var(--wdd-red)]'
-                                        }`}
-                                >
-                                    {tf === 'all' ? 'All time' : tf === '24h' ? 'Last 24h' : tf === '7d' ? 'Last 7d' : 'Last 30d'}
-                                </button>
-                            ))}
-                            <select
-                                value={filters.purpose ?? ''}
-                                onChange={(e) => setFilters((f) => ({ ...f, purpose: e.target.value || undefined }))}
-                                className="ml-auto px-3 py-1.5 text-xs border border-[var(--wdd-border)] rounded-lg bg-white text-[var(--wdd-text)] focus:outline-none focus:ring-1 focus:ring-[var(--wdd-red)]"
-                            >
-                                <option value="">All purposes</option>
-                                <option value="buy">Buy</option>
-                                <option value="rent">Rent</option>
-                                <option value="invest">Invest</option>
-                            </select>
+                        <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-2 shadow-sm">
+                            <LeadTable
+                                leads={leads}
+                                onSelect={(lead) => { setSelectedLead(lead); setDrawerOpen(true); }}
+                                loading={leadsLoading}
+                            />
                         </div>
-
-                        <LeadTable
-                            leads={leads}
-                            onSelect={(lead) => { setSelectedLead(lead); setDrawerOpen(true); }}
-                            loading={leadsLoading}
-                        />
-                        <LeadDrawer lead={selectedLead} open={drawerOpen} onClose={() => setDrawerOpen(false)} />
                     </div>
                 )}
 
-                {/* ── DATA VIEWER TAB ── */}
-                {tab === 'data' && (
-                    <div className="space-y-5 animate-fade-in">
-                        <h2 className="text-xl font-bold text-[var(--wdd-black)]">Runtime Data Viewer</h2>
-                        <DataViewer />
+                {sheetView === 'audit' && (
+                    <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
+                        <h2 className="text-xl font-bold text-[var(--wdd-black)] mb-6">Platform Audit Logs (audit.csv)</h2>
+                        <DataViewer forceSheet="audit" />
                     </div>
                 )}
+
+                {sheetView === 'sessions' && (
+                    <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
+                        <h2 className="text-xl font-bold text-[var(--wdd-black)] mb-6">Session Telemetry (sessions.csv)</h2>
+                        <DataViewer forceSheet="sessions" />
+                    </div>
+                )}
+
             </main>
+
+            {/* Global Lead Drawer */}
+            <LeadDrawer lead={selectedLead} open={drawerOpen} onClose={() => setDrawerOpen(false)} />
         </div>
     );
 }

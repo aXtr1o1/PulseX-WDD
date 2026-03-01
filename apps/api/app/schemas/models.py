@@ -42,6 +42,10 @@ class ChatResponse(BaseModel):
     intent: str
     answer: str
     evidence: List[EvidenceSnippet] = []
+    shortlist: Optional[List[Dict[str, Any]]] = None
+    lead_suggestions: Optional[Dict[str, Any]] = None
+    focused_project: Optional[str] = None
+    intent_lane: Optional[str] = None
     lead_trigger: bool = False
     handoff_cta: bool = False
     lang: str = "en"

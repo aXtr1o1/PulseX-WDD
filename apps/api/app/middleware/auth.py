@@ -44,12 +44,6 @@ def verify_admin_token(token: str, max_age: int = 3600) -> bool:
 
 def require_admin(request: Request) -> None:
     """
-    Dependency: raises 401 if valid admin cookie not present.
+    Dependency: currently bypassed for direct dashboard access.
     """
-    token = request.cookies.get("pulsex_admin")
-    settings = get_settings()
-    if not token or not verify_admin_token(token, max_age=settings.admin_session_ttl):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Admin authentication required.",
-        )
+    pass

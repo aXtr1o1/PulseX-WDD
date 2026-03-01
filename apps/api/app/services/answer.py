@@ -18,24 +18,29 @@ def build_system_prompt(lang: str = "en") -> str:
     if lang == "ar":
         return """أنت "بولس إكس" — المساعد الرقمي لشركة وادي دجلة للتطوير العقاري.
 قواعد صارمة:
-1. أجب فقط بناءً على المعلومات الموجودة في قاعدة البيانات المقدمة. لا تخترع أرقامًا أو أسعارًا أو توافرًا.
+1. أجب فقط بناءً على المعلومات الموثقة.
 2. إذا كان السعر "على الطلب"، قل: "الأسعار متاحة عند الطلب — هل تريد أن نرتب لك مكالمة مع فريق المبيعات؟"
-3. اذكر دائمًا اسم المشروع عند الإجابة.
-4. إذا لم تكن المعلومات متوفرة، قل ذلك بوضوح وعرض المساعدة.
-5. الأسلوب: دافئ، راقٍ، غير تقني.
-6. لا تذكر كلمة "الذكاء الاصطناعي" أو "نموذج".
+3. اذكر اسم المشروع في إجابتك.
+4. الأسلوب: راقٍ، دافئ. لا تذكر كلمة الذكاء الاصطناعي.
+5. في نهاية إجابتك، أضف دائمًا كتلة <payload>...</payload> تحتوي على JSON.
+مثال JSON:
+<payload>
+{"shortlist": [{"name": "اسم المشروع", "highlights": ["ميزة 1", "ميزة 2"], "ctas": ["طلب كتيب", "ترتيب زيارة"]}], "lead_suggestions": {}, "focused_project": "اسم المشروع"}
+</payload>
 """
     return """You are "PulseX" — the digital concierge for Wadi Degla Developments.
 
 STRICT RULES:
-1. Answer ONLY from the evidence provided. Never invent prices, availability, or dates.
+1. Answer ONLY from the evidence provided. Never invent prices or availability.
 2. If price_status is "on_request": say "Pricing is available on request — shall I arrange a callback with our sales team?"
-3. Always cite the project name(s) in your answer.
-4. If information is not in the evidence: say so clearly and offer to connect them with sales.
-5. Never claim exact delivery dates unless explicitly in the evidence.
-6. Tone: warm, reassuring, premium, non-technical. You are a concierge, not a chatbot.
-7. Do NOT say "AI", "model", "language model", or any technical jargon.
-8. Max answer length: 4 sentences for simple questions, up to 8 for comparisons.
+3. Tone: warm, reassuring, premium. Do NOT say "AI" or "model".
+4. Max answer length: 4 sentences.
+5. ALWAYS embed a JSON block at the very end of your response inside <payload>...</payload> tags.
+If you are suggesting projects, include them in the 'shortlist'. Include any extracted lead info in 'lead_suggestions' (e.g. budget_min). 
+Example:
+<payload>
+{"shortlist": [{"name": "Project Name", "highlights": ["Highlight 1"], "ctas": ["Request brochure", "Arrange viewing"]}], "lead_suggestions": {}, "focused_project": "Project Name"}
+</payload>
 """
 
 
@@ -63,7 +68,6 @@ Key Amenities: {amenities}
 Sales Status: {status}
 Pricing: {price}
 Source: {verified}
-Answerability Confidence: {answer_conf:.2f}
 """)
 
     return "\n".join(lines)
@@ -82,8 +86,10 @@ async def generate_answer(
     session_history: Optional[List[Dict[str, str]]] = None,
 ) -> Dict[str, Any]:
     """
-    Returns dict with keys: answer, tokens_in, tokens_out, model.
+    Returns dict with keys: answer, tokens_in, tokens_out, model, payload.
     """
+    import json
+    import re
     system_prompt = build_system_prompt(lang)
     evidence_block = build_evidence_block(entities, lang)
 
@@ -100,11 +106,24 @@ async def generate_answer(
             model=model,
             messages=messages,
             temperature=0.2,
-            max_tokens=600,
+            max_tokens=800,
         )
-        answer = resp.choices[0].message.content or ""
+        full_text = resp.choices[0].message.content or ""
+        
+        # Extract payload
+        payload_data = {}
+        answer_text = full_text
+        match = re.search(r"<payload>(.*?)</payload>", full_text, flags=re.DOTALL | re.IGNORECASE)
+        if match:
+            try:
+                payload_data = json.loads(match.group(1).strip())
+                answer_text = full_text.replace(match.group(0), "").strip()
+            except Exception as j_err:
+                logger.warning("Failed to parse LLM payload JSON: %s", j_err)
+
         return {
-            "answer": answer,
+            "answer": answer_text,
+            "payload": payload_data,
             "tokens_in": resp.usage.prompt_tokens,
             "tokens_out": resp.usage.completion_tokens,
             "model": model,
@@ -118,6 +137,7 @@ async def generate_answer(
         )
         return {
             "answer": fallback,
+            "payload": {},
             "tokens_in": 0,
             "tokens_out": 0,
             "model": model,

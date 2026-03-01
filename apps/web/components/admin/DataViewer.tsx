@@ -6,6 +6,10 @@ import { fetchSheetRows, downloadSheetUrl } from '@/lib/api';
 
 type Sheet = 'leads' | 'audit' | 'leads_seed' | 'sessions';
 
+interface DataViewerProps {
+    forceSheet?: Sheet;
+}
+
 const SHEETS: { id: Sheet; label: string }[] = [
     { id: 'leads', label: 'leads.csv' },
     { id: 'audit', label: 'audit.csv' },
@@ -13,8 +17,8 @@ const SHEETS: { id: Sheet; label: string }[] = [
     { id: 'sessions', label: 'sessions.csv' },
 ];
 
-export default function DataViewer() {
-    const [activeSheet, setActiveSheet] = useState<Sheet>('leads');
+export default function DataViewer({ forceSheet }: DataViewerProps) {
+    const [activeSheet, setActiveSheet] = useState<Sheet>(forceSheet || 'leads');
     const [rows, setRows] = useState<Record<string, string>[]>([]);
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(false);
@@ -41,22 +45,35 @@ export default function DataViewer() {
 
     return (
         <div className="space-y-4">
-            {/* Sheet selector */}
-            <div className="flex items-center gap-2 flex-wrap">
-                {SHEETS.map((s) => (
-                    <button
-                        key={s.id}
-                        onClick={() => setActiveSheet(s.id)}
-                        className={`px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all ${activeSheet === s.id
-                                ? 'bg-[var(--wdd-red)] text-white border-[var(--wdd-red)]'
-                                : 'bg-white text-[var(--wdd-text)] border-[var(--wdd-border)] hover:border-[var(--wdd-red)]'
-                            }`}
-                    >
-                        {s.label}
-                    </button>
-                ))}
+            {/* Action Bar */}
+            <div className="flex items-center justify-between flex-wrap gap-4 border-b border-[var(--wdd-border)] pb-4">
+                {/* Sheet selector (only if not forced) */}
+                <div className="flex items-center gap-2 flex-wrap">
+                    {!forceSheet ? SHEETS.map((s) => (
+                        <button
+                            key={s.id}
+                            onClick={() => setActiveSheet(s.id)}
+                            className={`px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all ${activeSheet === s.id
+                                    ? 'bg-[var(--wdd-black)] text-white border-[var(--wdd-black)]'
+                                    : 'bg-white text-[var(--wdd-muted)] border-[var(--wdd-border)] hover:border-[var(--wdd-black)]'
+                                }`}
+                        >
+                            {s.label}
+                        </button>
+                    )) : (
+                        <div className="flex items-center gap-2">
+                            <span className="text-xs font-semibold text-[var(--wdd-black)] bg-[var(--wdd-surface)] px-3 py-1.5 rounded-full border border-[var(--wdd-border)] shadow-sm">
+                                {activeSheet}.csv
+                            </span>
+                            <span className="text-xs text-[var(--wdd-muted)]">
+                                {total} total rows · showing {rows.length}
+                            </span>
+                        </div>
+                    )}
+                </div>
 
-                <div className="ml-auto flex items-center gap-2">
+                {/* Controls */}
+                <div className="flex items-center gap-2">
                     <Button variant="ghost" size="sm" onClick={() => load(activeSheet)} disabled={loading}>
                         ↻ Refresh
                     </Button>
@@ -69,35 +86,37 @@ export default function DataViewer() {
                 </div>
             </div>
 
-            {/* Meta */}
-            <p className="text-xs text-[var(--wdd-muted)]">
-                {total} total rows · showing {rows.length}
-            </p>
+            {/* Meta (if not forced) */}
+            {!forceSheet && (
+                <p className="text-xs text-[var(--wdd-muted)]">
+                    {total} total rows · showing {rows.length}
+                </p>
+            )}
 
             {/* Table */}
             {loading ? (
-                <div className="py-10 flex justify-center"><Spinner /></div>
+                <div className="py-12 flex justify-center"><Spinner /></div>
             ) : error ? (
-                <div className="py-8 text-center text-sm text-[var(--wdd-red)]">{error}</div>
+                <div className="py-8 text-center text-sm text-[var(--wdd-red)] bg-red-50 rounded-xl">{error}</div>
             ) : !rows.length ? (
-                <div className="py-8 text-center text-sm text-[var(--wdd-muted)]">No rows in this sheet.</div>
+                <div className="py-12 text-center text-sm text-[var(--wdd-muted)] border border-dashed border-[var(--wdd-border)] rounded-xl">No rows found in this sheet.</div>
             ) : (
-                <div className="overflow-x-auto rounded-[var(--wdd-radius-lg)] border border-[var(--wdd-border)]">
+                <div className="overflow-x-auto rounded-xl border border-[var(--wdd-border)] shadow-sm">
                     <table className="w-full text-xs border-collapse min-w-max">
                         <thead>
                             <tr className="bg-[var(--wdd-surface)] border-b border-[var(--wdd-border)]">
                                 {cols.map((c) => (
-                                    <th key={c} className="px-3 py-2.5 text-left font-semibold text-[var(--wdd-muted)] uppercase tracking-wider whitespace-nowrap">
-                                        {c}
+                                    <th key={c} className="px-4 py-3 text-left font-semibold text-[var(--wdd-black)] uppercase tracking-wider whitespace-nowrap">
+                                        {c.replace(/_/g, ' ')}
                                     </th>
                                 ))}
                             </tr>
                         </thead>
                         <tbody>
                             {rows.map((row, i) => (
-                                <tr key={i} className={`border-b border-[var(--wdd-border)] ${i % 2 === 0 ? 'bg-white' : 'bg-[var(--wdd-surface)]'}`}>
+                                <tr key={i} className={`border-b border-[var(--wdd-border)] hover:bg-gray-50/50 transition-colors ${i % 2 === 0 ? 'bg-white' : 'bg-transparent'}`}>
                                     {cols.map((c) => (
-                                        <td key={c} className="px-3 py-2 text-[var(--wdd-text)] whitespace-nowrap max-w-[200px] truncate" title={row[c]}>
+                                        <td key={c} className="px-4 py-2.5 text-[var(--wdd-text)] whitespace-nowrap max-w-[250px] truncate" title={row[c]}>
                                             {row[c] ?? '—'}
                                         </td>
                                     ))}

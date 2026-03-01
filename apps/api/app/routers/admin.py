@@ -276,3 +276,93 @@ async def list_leads(
         filtered.append(r)
 
     return {"total": len(filtered), "leads": filtered}
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Trust Layer: Sources & Quality
+# ──────────────────────────────────────────────────────────────────────────────
+
+@router.get("/sources")
+async def get_sources(request: Request, _: None = Depends(require_admin)):
+    import json
+    state = request.app.state
+    settings = get_settings()
+    
+    entities = getattr(state, "kb_entities", [])
+    regions_map: Dict[str, set] = {}
+    
+    for e in entities:
+        reg = e.get("region") or "Unspecified"
+        proj = e.get("parent_project") or e.get("display_name")
+        if reg not in regions_map:
+            regions_map[reg] = set()
+        if proj:
+            regions_map[reg].add(proj)
+            
+    regions = [
+        {"region": r, "projects": sorted(list(p))} 
+        for r, p in regions_map.items()
+    ]
+    regions.sort(key=lambda x: x["region"])
+    
+    kb_health = {
+        "filename": settings.kb_csv_path.name,
+        "kb_hash": getattr(state, "kb_version_hash", "unknown"),
+        "last_indexed_at": getattr(state, "kb_timestamp", datetime.now(timezone.utc).isoformat()),
+        "schema_strict": True,
+        "total_entities": len(entities)
+    }
+    
+    return {"kb_health": kb_health, "regions": regions}
+
+
+@router.get("/quality")
+async def get_quality(request: Request, _: None = Depends(require_admin)):
+    import json
+    settings = get_settings()
+    rows = read_csv_rows(settings.audit_csv_path)
+    
+    total = len(rows)
+    if total == 0:
+        return {
+            "total_queries": 0, "empty_retrieval_pct": 0,
+            "top_retrieved_entities": [], "intent_distribution": [], "content_gaps": []
+        }
+    
+    empty_hits = 0
+    intents: Dict[str, int] = {}
+    entities_count: Dict[str, int] = {}
+    content_gaps = []
+    
+    for row in rows:
+        intent = row.get("intent", "unknown")
+        intents[intent] = intents.get(intent, 0) + 1
+        
+        try:
+            blended = int(row.get("blended_hits", 0))
+            if blended == 0 and intent in {"property_question", "sales_intent"}:
+                empty_hits += 1
+                msg_hash = row.get("message_hash", "unknown_query")
+                content_gaps.append({"query": f"Query Hash {msg_hash[:8]}", "reason": "Zero Hits"})
+        except Exception:
+            pass
+            
+        try:
+            ents = json.loads(row.get("top_entities_json", "[]"))
+            for e in ents:
+                entities_count[e] = entities_count.get(e, 0) + 1
+        except Exception:
+            pass
+            
+    empty_pct = (empty_hits / total) * 100 if total > 0 else 0
+    
+    top_ents = [{"name": k, "count": v} for k, v in sorted(entities_count.items(), key=lambda x: x[1], reverse=True)[:10]]
+    intent_dist = [{"intent": k, "count": v} for k, v in sorted(intents.items(), key=lambda x: x[1], reverse=True)]
+    
+    return {
+        "total_queries": total,
+        "empty_retrieval_pct": empty_pct,
+        "top_retrieved_entities": top_ents,
+        "intent_distribution": intent_dist,
+        "content_gaps": content_gaps[:10]
+    }
