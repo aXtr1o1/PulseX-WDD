@@ -24,14 +24,15 @@ from app.services.funnel import (
     STAGE_6_SAVE_AND_CLOSE
 )
 
-def build_system_prompt(state: SessionState, lang: str = "en", intent: str = "info_query") -> str:
+def build_system_prompt(state: SessionState, lang: str = "en", intent: str = "info_query", next_question_text: str = "") -> str:
     if lang == "ar":
         return f"""أنت "بولس إكس" (PulseX) — المساعد الرقمي فائق الذكاء لـ "وادي دجلة للتطوير العقاري".
 
 مهمتك (Concierge Brain - 4 Threads):
 1. **Thread 1 (النية الحالية المكتشفة):** {intent}
 2. **Thread 2 (القيود والمعلومات - Verified Answer Policy):** أجب فقط من <EVIDENCE>. يمنع تخمين الأسعار أو المساحات أو تواريخ التسليم إن لم تُذكر نصاً.
-3. **Thread 3 (تسلسل الأسئلة - Next-Best-Question):** اسأل سؤالاً واحداً فقط في النهاية بالترتيب التالي للمعلومات الناقصة: الغرض (سكن/استثمار) ← المنطقة ← الميزانية ← موعد الاستلام ← نوع الوحدة.
+3. **Thread 3 (تسلسل الأسئلة - STRICT GOVERNOR):** اسأل EXACTLY السؤال التالي حرفياً في النهاية، ولا تضف أي سؤال آخر:
+   "{next_question_text}"
 4. **Thread 4 (استخلاص البيانات والتقييم):** استخرج البيانات بدقة لملء هيكل JSON في النهاية وتقييم العميل (Hot/Warm/Cold).
 
 القيود:
@@ -76,17 +77,10 @@ def build_system_prompt(state: SessionState, lang: str = "en", intent: str = "in
 CORE MISSION (Concierge Brain - 4 Simultaneous Threads):
 1. **Thread 1 (Current Intent):** {intent}
 2. **Thread 2 (Verified Answer Policy & Luxury Consultative Persona):** You are not a basic QA bot. You are a high-end Real Estate Advisor. Use the <EVIDENCE> to answer, but frame it with "prestige," "exclusivity," and "smart investment." NEVER sound computational, robotic, or apologetic. Frame unknowns as "exclusive details held directly by the Sales Directors."
-3. **Thread 3 (Consultative Next-Step Progressive Profiling):** Check the Current Stage Rules below. Always end your response with exactly ONE conversational question based strictly on the current stage logic.
+3. **Thread 3 (STRICT Question Governor):** You MUST end your response by asking EXACTLY this text, word-for-word, and absolutely nothing else:
+   "{next_question_text}"
+   Do not ask any other questions.
 4. **Thread 4 (Data Extraction & Lead Scoring):** Extract constraints to build a comprehensive JSON lead packet behind the scenes, assessing their qualification (Hot, Warm, Cold).
-
-CURRENT FUNNEL STAGE: {getattr(state, 'stage', 0)}
-RULES FOR THE NEXT QUESTION BASED ON STAGE:
-- STAGE 0 or 1: Ask exactly ONE missing property constraint. Priority: Purpose (Live/Invest) → Area/Region → Unit Type.
-- STAGE 2: Ask exactly ONE feasibility constraint. Priority: Budget Band (e.g. "Do you have a comfortable range like 5M-10M or higher?") → Timeline ("Immediate or 3-6 months?").
-- STAGE 3 (Shortlist Ready): Offer them a callback or WhatsApp contact to share availability, brochures, or exact figures. (e.g. "Shall I have our advisor send you the brochures on WhatsApp?")
-- STAGE 4 (Capture Contact): Ask ONLY for their WhatsApp or Phone number to proceed. No other questions.
-- STAGE 5 (Mandatory Lead Confirmation Recap): You MUST output a structured recap of their constraints (Project, Location, Budget, Contact) and ask explicitly for confirmation AND contact consent in one question. Example: "Quick recap before I share this: Interest in Murano, 5M-10M, Contact ending in 1234. Is this correct, and do you consent to a callback?"
-- STAGE 6 (Close): Thank them warmly and end the conversation. Say NO questions.
 
 STRICT GUARDRAILS:
 - Unknown Information: Do NOT say "I don't know." Instead, say: "Certain specific details regarding [topic] are currently kept exclusively by our Sales Directors. I can easily arrange a priority callback to confirm that."
@@ -170,13 +164,14 @@ async def generate_answer(
     lang: str = "en",
     session_history: Optional[List[Dict[str, str]]] = None,
     intent: str = "info_query",
+    next_question_text: str = "",
 ) -> Dict[str, Any]:
     """
     Returns dict with keys: answer, tokens_in, tokens_out, model, payload.
     """
     import json
     import re
-    system_prompt = build_system_prompt(state, lang, intent)
+    system_prompt = build_system_prompt(state, lang, intent, next_question_text)
     evidence_block = build_evidence_block(entities, lang)
 
     messages = [{"role": "system", "content": system_prompt}]
@@ -246,9 +241,10 @@ async def stream_answer(
     lang: str = "en",
     session_history: Optional[List[Dict[str, str]]] = None,
     intent: str = "info_query",
+    next_question_text: str = "",
 ) -> AsyncGenerator[str, None]:
     """Yields token strings for SSE streaming."""
-    system_prompt = build_system_prompt(state, lang, intent)
+    system_prompt = build_system_prompt(state, lang, intent, next_question_text)
     evidence_block = build_evidence_block(entities, lang)
 
     messages = [{"role": "system", "content": system_prompt}]

@@ -114,6 +114,7 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
                                 evidence: streamMetadata?.evidence,
                                 lead_suggestions: payloadData?.lead_suggestions,
                                 focused_project: payloadData?.focused_project,
+                                lead_trigger: streamMetadata?.lead_trigger,
                                 streaming: false,
                             };
                         }

@@ -18,6 +18,7 @@ interface Msg {
     focused_project?: string;
     shortlist?: ProjectCardData[];
     lead_suggestions?: any;
+    lead_trigger?: boolean;
 }
 
 interface MessageBubbleProps {
@@ -89,19 +90,19 @@ export default function MessageBubble({ message, lang, onConfirm }: MessageBubbl
                 </div>
             )}
 
-            {/* Shortlist Chips */}
-            {!isUser && message.lead_suggestions?.project_interest && message.lead_suggestions.project_interest.length > 0 && typeof message.lead_suggestions.project_interest[0] === 'string' && (
+            {/* Verified Shortlist Chips (Strictly from Retrieval Evidence) */}
+            {!isUser && message.evidence && message.evidence.length > 0 && typeof message.evidence[0] === 'object' && (
                 <div className="flex flex-wrap gap-2 mt-2 max-w-[85%]">
-                    {message.lead_suggestions.project_interest.map((proj: string, idx: number) => (
+                    {message.evidence.map((ev, idx: number) => (
                         <span key={idx} className="px-3 py-1.5 bg-[var(--wdd-surface)] border border-[var(--wdd-border)] text-xs font-medium text-[var(--wdd-black)] rounded-none">
-                            {proj.replace(/-/g, ' ').toUpperCase()}
+                            {ev.display_name.toUpperCase()}
                         </span>
                     ))}
                 </div>
             )}
 
             {/* Stage 5 Confirmation Block */}
-            {!isUser && !message.streaming && message.lead_suggestions?.phone && !message.lead_suggestions?.confirmed_by_user && (
+            {!isUser && !message.streaming && message.lead_trigger && !message.lead_suggestions?.confirmed_by_user && (
                 <div className="mt-2 w-[85%] md:w-[75%] p-4 bg-[#f9f9f9] border border-[var(--wdd-border)] rounded-none">
                     <p className="text-xs font-semibold text-[var(--wdd-black)] uppercase tracking-wider mb-3">
                         {lang === 'ar' ? 'تأكيد البيانات' : 'Confirm Your Details'}

@@ -35,6 +35,11 @@ from app.services.router import (
 )
 from app.utils.csv_io import hash_message
 
+from app.services.lead_pipeline import save_lead_if_confirmed, save_anonymous_intent
+from app.services.llm_router import router_completion
+from app.services.slot_extractor import extract_slots
+from app.services.funnel_policy import get_next_question
+
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api", tags=["chat"])
 
@@ -105,6 +110,13 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
     # Output strictly Top-4 UI evidence cards based on Reranker
     evidence_entities = top_entities[:4]
 
+    # Extract strict slots deterministically First
+    new_slots = extract_slots(request.message, entity_names)
+    session_state.collected_fields.update(new_slots)
+    
+    # Run the strict funnel governor
+    slot_key, prompt_string, options = get_next_question(session_state, intent, new_slots)
+
     # Answer generation with 4-Thread Concierge Brain
     result = await generate_answer(
         client=state.llm_client,
@@ -114,6 +126,7 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
         state=session_state,
         lang=request.lang,
         intent=intent,
+        next_question_text=prompt_string,
     )
 
     latency_ms = int((time.monotonic() - t0) * 1000)
@@ -144,13 +157,11 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
     save_session(session_state)
     
     from pathlib import Path
-    from app.services.lead import save_lead_if_confirmed, save_anonymous_intent
-    from app.services.funnel import STAGE_6_SAVE_AND_CLOSE
     
-    if session_state.stage >= STAGE_6_SAVE_AND_CLOSE:
-        save_lead_if_confirmed(session_state, Path("runtime/leads.csv"))
+    if session_state.stage >= 6:
+        save_lead_if_confirmed(session_state, payload, Path("runtime/leads.csv"))
     else:
-        save_anonymous_intent(session_state, Path("runtime/intent.csv"))
+        save_anonymous_intent(session_state, payload, Path("runtime/intent.csv"))
     
     # Lead trigger check from dynamic payload
     is_trigger = (intent == LEAD_CAPTURE) or payload.get("ready_for_handoff", False)
@@ -161,7 +172,6 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
         intent=intent,
         answer=result["answer"],
         evidence=evidence,
-        shortlist=payload.get("project_interest"),
         lead_suggestions=payload,
         focused_project=project_filter,
         intent_lane=intent,
@@ -235,11 +245,18 @@ async def chat_stream(request: ChatRequest, req: Request) -> StreamingResponse:
         for e in evidence_entities
     ]
 
+    # Extract strict slots deterministically First
+    new_slots = extract_slots(request.message, entity_names)
+    session_state.collected_fields.update(new_slots)
+    
+    # Run the strict funnel governor
+    slot_key, prompt_string, options = get_next_question(session_state, intent, new_slots)
+
     async def gen() -> AsyncGenerator[str, None]:
         meta = {
             "intent": intent,
             "handoff_cta": False,
-            "lead_trigger": (intent == LEAD_CAPTURE),
+            "lead_trigger": (intent == LEAD_CAPTURE) or (slot_key in ["phone", "confirm_recap", "consent", "done"]),
             "evidence": evidence
         }
         yield f"data: [METADATA] {json.dumps(meta)}\n\n"
@@ -253,6 +270,7 @@ async def chat_stream(request: ChatRequest, req: Request) -> StreamingResponse:
             state=session_state,
             lang=request.lang,
             intent=intent,
+            next_question_text=prompt_string,
         ):
             full_text += token
             # Stream as json object to safely handle newlines natively
@@ -280,13 +298,11 @@ async def chat_stream(request: ChatRequest, req: Request) -> StreamingResponse:
         save_session(session_state)
         
         from pathlib import Path
-        from app.services.lead import save_lead_if_confirmed, save_anonymous_intent
-        from app.services.funnel import STAGE_6_SAVE_AND_CLOSE
         
-        if session_state.stage >= STAGE_6_SAVE_AND_CLOSE:
-            save_lead_if_confirmed(session_state, Path("runtime/leads.csv"))
+        if session_state.stage >= 6:
+            save_lead_if_confirmed(session_state, payload_data, Path("runtime/leads.csv"))
         else:
-            save_anonymous_intent(session_state, Path("runtime/intent.csv"))
+            save_anonymous_intent(session_state, payload_data, Path("runtime/intent.csv"))
         
         yield "data: [DONE]\n\n"
 

@@ -23,3 +23,4 @@ pytest-asyncio==0.24.0
 # Serverless SSE Pub/Sub
 redis[hiredis]>=5.0.0
 upstash-redis>=1.1.0
+rapidfuzz==3.6.1

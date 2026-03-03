@@ -15,7 +15,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from .config import get_settings
-from .routers import admin, chat, lead
+from .routers import admin, chat, lead, debug
 from .services.retrieval import HybridRetriever
 from .utils.csv_io import ensure_csv, LEADS_HEADERS, AUDIT_HEADERS, SESSIONS_HEADERS
 from .utils.kb_loader import kb_file_hash, load_kb
@@ -133,6 +133,7 @@ def create_app() -> FastAPI:
     app.include_router(chat.router)
     app.include_router(lead.router)
     app.include_router(admin.router)
+    app.include_router(debug.router)
 
     @app.get("/api/health")
     async def health():

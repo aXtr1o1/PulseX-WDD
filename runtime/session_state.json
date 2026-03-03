@@ -30,5 +30,32 @@
     },
     "language": "en",
     "last_updated": 1772539589.214822
+  },
+  "mysession": {
+    "session_id": "mysession",
+    "stage": 4,
+    "collected_fields": {
+      "purpose": "invest",
+      "region": "east cairo",
+      "unit_type": "villa",
+      "project_interest": [
+        "project_id_1",
+        "project_id_2"
+      ],
+      "budget_min": "10 million"
+    },
+    "language": "en",
+    "last_updated": 1772545483.491668
+  },
+  "sess_mmanzdl7v1zw5": {
+    "session_id": "sess_mmanzdl7v1zw5",
+    "stage": 1,
+    "collected_fields": {
+      "project_interest": [
+        "project_id_1"
+      ]
+    },
+    "language": "en",
+    "last_updated": 1772546035.896496
   }
 }

@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
+from rapidfuzz import process, fuzz
 
 logger = logging.getLogger(__name__)
 
@@ -231,6 +232,22 @@ class HybridRetriever:
         # If gating returned nothing under a strict filter, DO NOT fall back.
         if not gated and (project_filter or region_filter):
             logger.info("Gating returned 0; maintaining strict zero-results for query: %s", query)
+
+        # ── RapidFuzz Entity Matching on retrieved results ──
+        # If user explicitly provided a project filter, promote those entities
+        if project_filter:
+            for i in range(len(gated)):
+                eid, score = gated[i]
+                entity = self.entities[eid]
+                # Look at both entity ID and display name
+                names_to_check = [entity.get("display_name", ""), entity.get("entity_id", ""), entity.get("parent_project", "")]
+                names_to_check = [str(n) for n in names_to_check if n]
+                
+                # If rapidfuzz matches well, give it a massive promotion boost
+                if names_to_check:
+                    res = process.extractOne(project_filter, names_to_check, scorer=fuzz.partial_ratio)
+                    if res and res[1] > 80:
+                         gated[i] = (eid, score + 5.0)  # Pinned projects jump to the top
 
         # ── Metadata Constraint Reranking
         for i in range(len(gated)):

@@ -1,0 +1,63 @@
+# PulseX-WDD: System Context & Architecture Transfer
+
+**Copy and paste Ready - entire document into your new AI chat to instantly provide it with the full architectural context, strict rules, and nuances of the current PulseX-WDD codebase.**
+
+---
+
+## 1. Core Identity & Objective
+**System Name:** PulseX-WDD (Wadi Degla Developments)
+**Architecture:** A transplant of the "PalmX Intelligent Engine" wrapped in the WDD "Brutalist Monochrome + Red Accent" visual identity.
+**Goal:** A stateful, highly-converting Real Estate Concierge that uses Hybrid RAG (Vector + Keyword) to answer buyer questions factually, progressively score them (Hot/Warm/Cold), and strictly capture their phone number before saving them as a Lead.
+
+## 2. Tech Stack & Directory Structure
+- **Frontend (`apps/web`):** Next.js 14, TailwindCSS, TypeScript. 
+- **Backend (`apps/api`):** FastAPI, Python 3.11+, Pydantic v2.
+- **Vector/DB (`runtime/`, `indices/`):** FAISS for semantic search, SQLite FTS5 for keyword search.
+- **Streaming:** Server-Sent Events (SSE) with optional Redis Pub/Sub (Upstash) for scale.
+- **Run Orchestration:** Docker Compose (`docker-compose.yml`) + `start.sh`
+
+### Key Directories:
+- `apps/api/app/services/`: Core brain (`answer.py`, `router.py`, `retrieval.py`, `funnel.py`, `lead.py`, `session.py`).
+- `apps/api/app/routers/`: API endpoints (`chat.py`, `lead.py`, `admin.py`).
+- `apps/web/components/widget/`: Chat UI components (`ChatWidget.tsx`, `LeadForm.tsx`, `ConsentBlock.tsx`).
+- `apps/web/app/admin/`: Admin UI to view converted leads and drop-off analytics.
+- `scripts/`: Initialization scripts (`build_index.py`, `seed_leads.py`, `validate_kb.py`).
+- `runtime/`: Live persistent data (`leads.csv`, `intent.csv`, `sessions.csv`, `audit.csv`, `session_state.json`).
+
+## 3. The Concierge Brain (Backend Intelligence)
+The intelligence layer uses a multi-threaded approach executed sequentially per request:
+
+1. **Intent Router (`router.py`):** Uses strict Regex/Keywords to classify the user's intent into: `info_query`, `shortlist`, `pricing`, `handoff`, `lead_capture`, or `greeting`.
+2. **Dynamic Hybrid RAG (`retrieval.py`):** 
+   - Uses FAISS + SQLite FTS5.
+   - Applies **Hard Metadata Gating**: If the user asks about "Murano", the retriever strictly filters out all other projects. If no results match, it returns `empty_retrieval=True` rather than relaxing the filter (to prevent hallucinating wrong project data).
+   - Dynamically adjusts `Top-K` based on constraint strictness (vague queries get `k=16`, exact ones get `k=6`).
+3. **LLM Generator (`answer.py`):**
+   - The LLM acts purely as a "Verbalizer". It is forbidden from hallucinating prices or dates.
+   - If a price is `on_request` or missing, it must create "urgency/scarcity" (e.g., "Prices fluctuate, let's get you on a priority call with Sales...").
+   - Outputs a dual-layer response: Conversational text, AND a hidden `<payload>{...}</payload>` JSON block containing 12 deterministic slots (budget, timeline, purpose, extracted tags, qualification score).
+
+## 4. The Funnel State Machine (`funnel.py`)
+PulseX is **Stateful**. It maintains the conversation state in `runtime/sessions.csv` (or JSON), tracking exactly what the user has provided. The LLM is strictly instructed to ask **only ONE missing question per turn** based on the current stage:
+
+- **Stage 0 (Greeting):** Extract generic intent.
+- **Stage 1 (Match Building):** Obtain Property Purpose (Live/Invest) + Region/Unit Type.
+- **Stage 2 (Feasibility):** Obtain Budget Band or Timeline.
+- **Stage 3 (Shortlist):** Provide property recommendations (UI renders Shortlist Chips).
+- **Stage 4 (Capture):** Explicitly transition to lead capture. The LLM must stop answering property questions and demand a phone number.
+- **Stage 5 (Confirmation - CRITICAL):** The UI presents a `ConsentBlock.tsx` recapping the captured details (Project, Budget, Phone). The user MUST manually confirm and consent.
+- **Stage 6 (Save):** Only upon Stage 5 completion does `lead.py` write the data to `runtime/leads.csv`. Unconfirmed data stays in `runtime/intent.csv`.
+
+## 5. UI/UX & Brand Nuances (WDD "Brutalist")
+- **Colors:** Monochrome backgrounds (`#FFFFFF`, `#FAFAFA`, `#000000`) with strict WDD Red accents (`#CB2030`).
+- **Typography:** `Isidora Sans` (English) / `Noto Sans Arabic` (Arabic).
+- **Bold Tag Interception:** The LLM is instructed to enclose Project Names, Areas, and Amenities in `**bold**`. The Next.js frontend intercepts `<strong>` tags and renders them in WDD Red.
+- **Handoffs:** Non-sales intents (complaints, payment services, HR) are instantly intercepted by `router.py` and deflected to the canonical hotline: **16662**. The LLM is not invoked for these.
+
+## 6. Strict Rules & Guardrails for Future Edits
+- **NEVER** break the `12-field Payload Schema` in `answer.py`. The frontend relies on parsing `<payload>` to trigger transitions.
+- **NEVER** bypass the `save_lead_if_confirmed` logic. Leads must have `consent_contact=True`.
+- **NEVER** change the layout of the `runtime/*.csv` files without updating `csv_io.py`. They are concurrency-safe appended exactly as defined.
+- **NO PLACEHOLDERS:** The system handles real data. Verified chips must map to real `display_name` and `verified_url` from the RAG metadata.
+- **DO NOT** add multiple questions to a single LLM response. The Progressive Profiling rule is **1 question per turn**. 
+- **NO CHATTY AI:** The LLM must sound like a prestigious real estate consultant, never apologizing or saying "As an AI...". Use words like "Exclusive details", "Sales Directors", "Priority Callback".
