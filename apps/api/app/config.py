@@ -45,6 +45,10 @@ class Settings(BaseSettings):
         "text-embedding-ada-002", alias="OPENAI_EMBEDDING_MODEL"
     )
 
+    # ── Upstash Redis (Serverless SSE) ─────────────────────────────────────────────
+    upstash_redis_rest_url: str = Field("", alias="UPSTASH_REDIS_REST_URL")
+    upstash_redis_rest_token: str = Field("", alias="UPSTASH_REDIS_REST_TOKEN")
+
     # ── KB / RAG ────────────────────────────────────────────────────────────
     kb_base_path: str = Field("engine-KB", alias="KB_BASE_PATH")
     kb_top_k: int = Field(5, alias="KB_TOP_K")

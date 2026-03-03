@@ -8,7 +8,7 @@ import logging
 import time
 from typing import AsyncGenerator
 
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, BackgroundTasks
 from fastapi.responses import JSONResponse, StreamingResponse
 
 from ..config import get_settings
@@ -159,6 +159,8 @@ async def chat_stream(request: ChatRequest, req: Request) -> StreamingResponse:
     """Streaming SSE chat endpoint."""
     import json
     import time
+    from ..services.pubsub import publish_to_redis, stream_redis_sse
+
     settings = get_settings()
     t0 = time.monotonic()
     request_id = new_request_id()
@@ -233,7 +235,7 @@ async def chat_stream(request: ChatRequest, req: Request) -> StreamingResponse:
             intent=intent,
         ):
             full_text += token
-            # stream as json object to safely handle newlines natively
+            # Stream as json object to safely handle newlines natively
             yield f"data: {json.dumps({'t': token})}\n\n"
             
         latency_ms = int((time.monotonic() - t0) * 1000)
@@ -243,9 +245,36 @@ async def chat_stream(request: ChatRequest, req: Request) -> StreamingResponse:
             settings.azure_openai_chat_deployment,
             0, 0, latency_ms, request.message,
         )
-
         yield "data: [DONE]\n\n"
 
+    # ──────────────────────────────────────────────────────────────────
+    # [PHASE 13] - Serverless Redis Pub/Sub Streaming
+    # ──────────────────────────────────────────────────────────────────
+    
+    # If Upstash is configured, offload the Heavy LLM generator to the background 
+    # and return the fast Redis stream to the client. Otherwise fallback to local.
+    channel_id = f"chat_sse_{request.session_id}_{request_id}"
+    
+    if settings.upstash_redis_rest_url:
+        import asyncio
+        asyncio.create_task(
+            publish_to_redis(
+                settings.upstash_redis_rest_url,
+                settings.upstash_redis_rest_token,
+                channel_id,
+                gen()
+            )
+        )
+        return StreamingResponse(
+            stream_redis_sse(
+                settings.upstash_redis_rest_url, 
+                settings.upstash_redis_rest_token, 
+                channel_id
+            ), 
+            media_type="text/event-stream"
+        )
+        
+    # Local memory fallback (FastAPI standard)
     return StreamingResponse(gen(), media_type="text/event-stream")
 
 

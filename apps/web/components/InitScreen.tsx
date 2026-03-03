@@ -40,7 +40,10 @@ export default function InitScreen({ onReady }: InitScreenProps) {
 
                 const data: HealthResponse = await res.json();
                 if (data.index_ready && mounted) {
-                    onReady();
+                    // Enforce a 2.5 second minimum display time so the brand initialization animation is visible
+                    setTimeout(() => {
+                        if (mounted) onReady();
+                    }, 2500);
                 } else {
                     if (mounted) setTimeout(pollHealth, 2000);
                 }

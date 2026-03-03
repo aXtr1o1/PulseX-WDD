@@ -42,7 +42,7 @@ export default function MessageBubble({ message, lang }: MessageBubbleProps) {
                 className={clsx(
                     'max-w-[85%] md:max-w-[75%] px-5 py-3.5 text-[14px] leading-[1.6]',
                     isUser
-                        ? 'bg-[var(--wdd-black)] text-white rounded-2xl rounded-tr-sm'
+                        ? 'bg-[var(--wdd-red)] text-white rounded-2xl rounded-tr-sm'
                         : 'bg-white text-[var(--wdd-text)] shadow-sm border border-[var(--wdd-border)] rounded-2xl rounded-tl-sm',
                     rtl && isUser && 'rounded-tl-sm rounded-tr-2xl',
                     rtl && !isUser && 'rounded-tr-sm rounded-tl-2xl'
@@ -52,8 +52,8 @@ export default function MessageBubble({ message, lang }: MessageBubbleProps) {
                     className="whitespace-pre-wrap"
                     dangerouslySetInnerHTML={{
                         __html: message.content
-                            // basic markdown bold parsing
-                            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                            // basic markdown bold parsing with static inline Brand Red highlight to bypass Tailwind purging
+                            .replace(/\*\*(.*?)\*\*/g, '<strong style="color: var(--wdd-red); font-weight: 600;">$1</strong>')
                             // newlines
                             .replace(/\ng/, '<br/>')
                     }}

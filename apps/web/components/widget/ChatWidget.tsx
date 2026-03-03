@@ -5,7 +5,6 @@ import { sendChat, streamChat } from '@/lib/api';
 import { gtm } from '@/lib/gtm';
 import type { Lang } from '@/lib/i18n';
 import MessageBubble, { type Msg } from './MessageBubble';
-import LeadForm from './LeadForm';
 import Spinner from '@/components/ui/Spinner';
 
 function genSessionId() {
@@ -25,25 +24,18 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
     const [messages, setMessages] = useState<Msg[]>([]);
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
-    const [leadId, setLeadId] = useState('');
-    const [showLead, setShowLead] = useState(false);
 
     const bottomRef = useRef<HTMLDivElement>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLTextAreaElement>(null);
     const rtl = lang === 'ar';
 
     const scroll = () => bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-    useEffect(scroll, [messages, showLead]);
+    useEffect(scroll, [messages]);
 
     // Initialize conversation grammar (PalmX style)
     useEffect(() => {
         if (messages.length === 0) {
-            setMessages([{
-                role: 'assistant',
-                content: lang === 'ar'
-                    ? 'أهلاً بك في دجلة للتطوير العقاري. ما هي المنطقة أو المشروع الذي تهتم به؟'
-                    : 'Welcome to Wadi Degla Developments. What region or project are you interested in today?',
-            }]);
+            // User requested to remove initial conversational triggers so the chat natively starts on the first user message
             gtm.sessionStart(session, lang);
         }
     }, [lang, session, messages.length]);
@@ -52,6 +44,7 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
         const msg = (text ?? input).trim();
         if (!msg || loading) return;
         setInput('');
+        if (inputRef.current) inputRef.current.style.height = 'auto';
         setLoading(true);
 
         const userMsg: Msg = { role: 'user', content: msg };
@@ -126,11 +119,6 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
                         }
                         return copy;
                     });
-
-                    // Trigger lead if intent matches SALES or handoff matches
-                    if (streamMetadata?.lead_trigger || payloadData?.lead_suggestions?.ready_for_handoff) {
-                        setTimeout(() => setShowLead(true), 600);
-                    }
                 } catch {
                     setMessages((prev) => {
                         const copy = [...prev];
@@ -146,19 +134,8 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
         );
     }, [input, loading, session, lang, initialProject, embedded]);
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
-    };
-
-    const handleLeadSuccess = (id: string) => {
-        setLeadId(id);
-        setShowLead(false);
-        setMessages((prev) => [...prev, {
-            role: 'assistant',
-            content: lang === 'ar'
-                ? `شكراً لك. تم تسجيل طلبك (${id}). سيتواصل فريقنا معك قريباً. هل هناك أي معلومات أخرى تبحث عنها؟`
-                : `Thank you. Your request (${id}) has been recorded. Our team will be in touch soon. Is there any other information you're looking for?`
-        }]);
     };
 
     const containerClass = embedded
@@ -193,59 +170,44 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
                 </div>
             )}
 
-            {/* Chat Body */}
-            <div className={`flex-1 overflow-y-auto px-4 md:px-8 py-8 space-y-8 ${!embedded ? 'scroll-smooth' : ''} ${embedded ? 'max-w-4xl mx-auto w-full' : ''}`}>
-                {messages.map((msg, i) => (
-                    <MessageBubble key={i} message={msg} lang={lang} />
-                ))}
-
-                {/* Progressive Lead Form Injection */}
-                {showLead && (
-                    <div className="border border-[var(--wdd-border)] rounded-2xl p-5 md:p-6 bg-[var(--wdd-surface)] animate-slide-up shadow-sm mb-4">
-                        <div className="mb-4">
-                            <h4 className="text-[var(--wdd-black)] font-medium text-sm">
-                                {lang === 'ar' ? 'تأكيد طلبك' : 'Confirm your request'}
-                            </h4>
-                            <p className="text-[var(--wdd-muted)] text-xs mt-1">
-                                {lang === 'ar' ? 'نحتاج لبعض التفاصيل الإضافية لمساعدتك بشكل أفضل.' : 'We just need a few details to assist you better.'}
-                            </p>
-                        </div>
-                        <LeadForm
-                            lang={lang}
-                            sessionId={session}
-                            initialProjects={initialProject ? [initialProject] : []}
-                            onSuccess={handleLeadSuccess}
-                            onCancel={() => setShowLead(false)}
-                        />
-                    </div>
-                )}
-
-                <div ref={bottomRef} className="h-4" />
+            {/* Chat Body - Scrollbar flush by moving padding inward */}
+            <div className={`flex-1 overflow-y-auto ${!embedded ? 'scroll-smooth' : ''} ${embedded ? 'w-full' : ''}`}>
+                <div className="px-4 md:px-8 py-8 space-y-8 max-w-4xl mx-auto w-full">
+                    {messages.map((msg, i) => (
+                        <MessageBubble key={i} message={msg} lang={lang} />
+                    ))}
+                    <div ref={bottomRef} className="h-4" />
+                </div>
             </div>
 
-            {/* Input Dock */}
-            <div className={`w-full bg-gradient-to-t from-white via-white to-transparent pt-6 pb-8 md:pb-12 ${embedded ? 'px-4' : 'px-4 md:px-8 pb-6 pt-4'}`}>
+            {/* Input Dock - Minimalist Floating Pill */}
+            <div className={`w-full bg-white pt-2 pb-6 md:pb-10 ${embedded ? 'px-4' : 'px-4 md:px-8'}`}>
                 <div className={`w-full relative ${embedded ? 'max-w-4xl mx-auto' : ''}`}>
-                    <div className="flex items-center bg-white border border-[var(--wdd-border)] rounded-full px-5 py-3.5 shadow-[0_2px_16px_rgba(0,0,0,0.03)] focus-within:border-[var(--wdd-red)] focus-within:shadow-[0_4px_24px_rgba(203,32,48,0.06)] transition-all duration-300">
-                        <input
+                    <div className="flex items-end bg-[#f9f9f9] rounded-[24px] px-5 py-3 transition-all duration-300 group focus-within:bg-[var(--wdd-surface)] focus-within:shadow-sm">
+                        <textarea
                             ref={inputRef}
                             value={input}
-                            onChange={(e) => setInput(e.target.value)}
+                            onChange={(e) => {
+                                setInput(e.target.value);
+                                e.target.style.height = 'auto';
+                                e.target.style.height = Math.min(e.target.scrollHeight, 150) + 'px';
+                            }}
                             onKeyDown={handleKeyDown}
                             placeholder={lang === 'ar' ? 'رحلتك إلى منزل أحلامك تبدأ من هنا...' : 'The journey to your dream starts here...'}
-                            className="flex-1 bg-transparent text-[15px] font-medium text-[var(--wdd-black)] placeholder:text-[var(--wdd-muted)] placeholder:font-normal outline-none"
+                            className="flex-1 bg-transparent text-[15px] font-medium text-[#1a1a1a] placeholder:text-gray-400 outline-none resize-none min-h-[24px] max-h-[150px] py-1 hide-scrollbar"
+                            rows={1}
                             dir={rtl ? 'rtl' : 'ltr'}
                             disabled={loading}
                         />
                         {loading ? (
-                            <div className="pl-3 animate-fade-in flex items-center justify-center">
+                            <div className="pl-3 pb-0.5 animate-fade-in flex items-center justify-center">
                                 <Spinner size="sm" />
                             </div>
                         ) : (
                             <button
                                 onClick={() => handleSend()}
                                 disabled={!input.trim()}
-                                className="ml-3 w-9 h-9 flex items-center justify-center rounded-full bg-[var(--wdd-black)] text-white hover:bg-[var(--wdd-red)] disabled:opacity-50 disabled:hover:bg-[var(--wdd-black)] transition-all duration-300 active:scale-95"
+                                className="ml-3 mb-0.5 w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-full bg-[#E5E5E5] text-[#1a1a1a] hover:bg-[#d4d4d4] disabled:opacity-50 transition-colors"
                                 aria-label="Send message"
                             >
                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
@@ -255,21 +217,6 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
                         )}
                     </div>
                 </div>
-                {!embedded && (
-                    <div className="flex justify-between items-center mt-4 px-3 max-w-4xl mx-auto">
-                        <p className="text-[11px] text-[var(--wdd-muted)] flex items-center gap-2">
-                            <span>{lang === 'ar' ? 'الردود مبنية على معلومات موثقة' : 'Responses grounded in verified information'}</span>
-                            <span className="w-1 h-1 rounded-full bg-[var(--wdd-border)]"></span>
-                            <a href="tel:16662" className="hover:text-[var(--wdd-red)] transition-colors inline-flex items-center gap-1 font-medium"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" /></svg> 16662</a>
-                        </p>
-                        <button
-                            onClick={() => { setShowLead(true); gtm.callbackRequested(session); }}
-                            className="text-[11px] font-medium text-[var(--wdd-red)] hover:underline"
-                        >
-                            {lang === 'ar' ? 'طلب مكالمة مبيعات' : 'Request Sales Call'}
-                        </button>
-                    </div>
-                )}
             </div>
         </div>
     );
