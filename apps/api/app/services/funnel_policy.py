@@ -6,12 +6,13 @@ from typing import Dict, Any, Tuple
 from app.schemas.models import SessionState
 
 # Ordered fields for progressive profiling
+# Returning: (slot_key, llm_instruction_concept, [options])
 FUNNEL_ORDER = [
-    ("purpose", "Are you looking to live or invest?", ["Live", "Invest"]),
-    ("region", "Which region are you interested in? (e.g. New Cairo, North Coast, Sokhna)", ["East Cairo", "North Coast", "Ain Sokhna"]),
-    ("unit_type", "What type of unit do you prefer? (Villa, Apartment, Chalet)", ["Villa", "Apartment", "Chalet"]),
-    ("budget_min", "What is your approximate budget range?", []),
-    ("timeline", "When are you looking to move in or invest?", ["Immediate", "Within 1 year", "Exploring"]),
+    ("purpose", "Ask if they are looking to buy for living or for investment.", ["Live", "Invest"]),
+    ("region", "Ask which region or specific area they are focused on (e.g. New Cairo, North Coast).", ["East Cairo", "North Coast", "Ain Sokhna"]),
+    ("unit_type", "Ask what property type they prefer (e.g. Villa, Chalet, Apartment).", ["Villa", "Apartment", "Chalet"]),
+    ("budget_min", "Gently ask for their approximate budget range or price expectation.", []),
+    ("timeline", "Ask when they are looking to take delivery or move in.", ["Immediate", "Within 1 year", "Exploring"]),
 ]
 
 def get_next_question(state: SessionState, router_intent: str, extracted_slots: Dict[str, Any]) -> Tuple[str, str, list]:
@@ -28,15 +29,15 @@ def get_next_question(state: SessionState, router_intent: str, extracted_slots: 
     
     if is_capture_intent or ready_for_handoff or fields.get("lead_capture_trigger") or fields.get("salvage_trigger"):
         if not fields.get("phone"):
-            return "phone", "I can share the brochure and confirm availability on WhatsApp. What WhatsApp number should I use?", []
+            return "phone", "Offer to share the official brochure and exact availability on WhatsApp, and ask what WhatsApp number you should use.", []
             
         if not fields.get("confirmed_by_user"):
-            return "confirm_recap", "Great. Please confirm the details in the recap card below to proceed.", []
+            return "confirm_recap", "Ask the user to confirm if the details in the summary are correct.", []
             
         if not fields.get("consent_contact"):
-            return "consent", "Do we have your consent to contact you?", ["Yes", "No"]
+            return "consent", "Politely ask for their consent to be contacted by a Senior Consultant.", ["Yes", "No"]
             
-        return "done", "Thank you, a Senior Consultant will be in touch shortly.", []
+        return "done", "Thank the user and notify them that a Senior Consultant will be in touch shortly.", []
 
     # 2. If we have project_interest pinned, we skip some vague questions (region, etc.) 
     # and go straight to budget/timeline if missing.
@@ -44,40 +45,38 @@ def get_next_question(state: SessionState, router_intent: str, extracted_slots: 
     
     if has_pinned_project:
         if not fields.get("budget_min"):
-             return "budget_min", f"You have great taste considering {', '.join(fields['project_interest'])}. What is your approximate budget range?", []
+             return "budget_min", f"Praise their interest in {', '.join(fields['project_interest'])} and ask for their approximate budget range.", []
         if not fields.get("timeline"):
-             return "timeline", "When were you looking to take delivery or move in?", ["Immediate", "Exploring"]
+             return "timeline", "Ask when they were hoping to take delivery or move in.", ["Immediate", "Exploring"]
              
         # If we have basic project info + budget, transition to capture
         if not fields.get("phone"):
-            return "phone", "To provide the exact availability for that project, what's your WhatsApp number?", []
+            return "phone", "Offer to confirm the exact availability and pricing for their selected project on WhatsApp, and ask for their number.", []
 
     # 2.5 International / New to Egypt Flow (P4)
     is_intl = state.is_international or fields.get("is_international")
     if is_intl:
         if not fields.get("region"):
-            return "region", "Since you're joining us from abroad, we can arrange a virtual walkthrough. Which region in Egypt are you focused on?", ["East Cairo", "North Coast"]
+            return "region", "Note that since they are abroad, we can arrange a virtual walkthrough. Ask which region in Egypt they are focused on.", ["East Cairo", "North Coast"]
         if not fields.get("budget_min"):
-            return "budget_min", "To find the perfect match for your virtual tour, what is your approximate budget range?", []
+            return "budget_min", "Ask what their budget range is to find the perfect match for a virtual tour.", []
         if not fields.get("timeline"):
-            return "timeline", "When are you looking to invest or move?", ["Immediate", "Exploring"]
+            return "timeline", "Ask when they are looking to invest or move.", ["Immediate", "Exploring"]
         if not fields.get("phone"):
-            return "phone", "To send you the virtual walkthrough links and keep you updated, what is your WhatsApp number?", []
+            return "phone", "Offer to send them the virtual walkthrough links on WhatsApp and ask for their number.", []
 
     # 3. Standard Progressive Profiling (Order of Operations)
-    # We walk down the FUNNEL_ORDER. The first one missing in `fields` is what we ask.
     for slot_key, prompt_text, options in FUNNEL_ORDER:
         if not fields.get(slot_key):
-            # E.g. If we haven't asked purpose, ask it.
             return slot_key, prompt_text, options
 
     # 4. Reached end of standard slots without triggering capture?
     # Default to capture if we have enough info.
     if not fields.get("phone"):
-        return "phone", "We've found excellent matches. To share the brochures, what's your phone number?", []
+        return "phone", "Mention we process excellent matches. Offer to share brochures and ask for their WhatsApp number.", []
         
     if not fields.get("confirmed_by_user"):
-        return "confirm_recap", "Please confirm the details below.", []
+        return "confirm_recap", "Ask the user to confirm the details below.", []
 
     return "consent", "Do we have your consent to contact you?", ["Yes"]
 
