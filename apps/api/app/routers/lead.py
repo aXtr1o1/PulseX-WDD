@@ -10,7 +10,8 @@ from fastapi import APIRouter, HTTPException, Request, status
 
 from ..config import get_settings
 from ..schemas.models import LeadRequest, LeadResponse
-from ..services.lead import save_lead, get_next_lead_prompt
+from ..services.lead import save_lead_if_confirmed, get_next_lead_prompt
+from ..services.session import get_session
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api", tags=["lead"])
@@ -19,18 +20,28 @@ router = APIRouter(prefix="/api", tags=["lead"])
 @router.post("/lead", response_model=LeadResponse)
 async def submit_lead(lead: LeadRequest, req: Request) -> LeadResponse:
     """
-    Accept a fully or partially populated lead.
-    Saves to leads.csv and returns reference ID.
+    Accept a manually submitted form lead (fallback).
+    Maps into SessionState and saves to leads.csv.
     """
     settings = get_settings()
-    # Require at least phone OR email
     if not lead.phone and not lead.email:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail="At least one of phone or email is required.",
         )
 
-    lead_id = save_lead(lead, settings.leads_csv_path)
+    state = get_session(lead.session_id)
+    fields = lead.model_dump(exclude={"session_id", "lang"})
+    state.collected_fields.update(fields)
+    state.collected_fields["confirmed_by_user"] = True
+    state.collected_fields["consent_contact"] = lead.consent_callback or lead.consent_marketing
+    
+    lead_id = save_lead_if_confirmed(state, settings.leads_csv_path)
+    if not lead_id:
+        raise HTTPException(
+            status_code=400,
+            detail="Lead rejected by Funnel constraint verification.",
+        )
     msg_en = f"Thank you! We've recorded your request (Ref: {lead_id}). Our team will be in touch shortly."
     msg_ar = f"شكرًا! تم تسجيل طلبك (رقم المرجع: {lead_id}). سيتواصل معك فريقنا قريبًا."
     message = msg_ar if lead.lang == "ar" else msg_en

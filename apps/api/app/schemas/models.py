@@ -76,8 +76,74 @@ class LeadSuggestions(BaseModel):
     summary: Optional[str] = None
     ready_for_handoff: bool = False
     
+    # Concierge Intelligence Validation
+    consent_contact: bool = False
+    confirmed_by_user: bool = False
+    
     class Config:
         extra = "allow"
+
+
+class SessionState(BaseModel):
+    """6-Stage Funnel State Machine in-memory/csv structure"""
+    session_id: str
+    stage: int = 0
+    collected_fields: Dict[str, Any] = Field(default_factory=dict)
+    language: str = "en"
+    last_updated: float
+
+
+class AnonymousIntent(BaseModel):
+    """Unconverted sessions capturing partial intent without PII"""
+    session_id: str
+    language: str = "en"
+    stage_reached: int
+    purpose: Optional[str] = None
+    unit_type: Optional[str] = None
+    location_preference: Optional[str] = None
+    budget_band: Optional[str] = None
+    timeline: Optional[str] = None
+    created_at: float
+
+
+class LeadPacket(BaseModel):
+    """Fully confirmed lead ready for CRM/Admin consumption"""
+    lead_id: str
+    name: Optional[str] = None
+    phone: str
+    contact_channel: Optional[str] = None
+    preferred_callback_time: Optional[str] = None
+    language: str = "en"
+    source_page: Optional[str] = None
+    project_interest: List[str] = Field(default_factory=list)
+    purpose: Optional[str] = None
+    unit_type: Optional[str] = None
+    location_preference: Optional[str] = None
+    budget_band: Optional[str] = None
+    timeline: Optional[str] = None
+    must_haves: List[str] = Field(default_factory=list)
+    key_driver: Optional[str] = None
+    lead_temperature: str = "Cold" # Hot/Warm/Cold
+    reason_codes: List[str] = Field(default_factory=list)
+    consent_contact: bool = False
+    confirmed_by_user: bool = False
+    confirmed_at: float
+    created_at: float
+    session_id: str
+
+    @field_validator("phone")
+    @classmethod
+    def validate_phone(cls, v: str) -> str:
+        v = v.strip()
+        if not PHONE_PATTERN.match(v):
+            raise ValueError(f"Invalid phone number: {v}")
+        return v
+
+
+class LeadResponse(BaseModel):
+    success: bool
+    lead_id: str
+    message: str
 
 
 class LeadRequest(BaseModel):
@@ -91,7 +157,7 @@ class LeadRequest(BaseModel):
     unit_type: Optional[str] = None
     budget_min: Optional[float] = None
     budget_max: Optional[float] = None
-    purpose: Optional[str] = None  # buy / rent / invest
+    purpose: Optional[str] = None
     timeline: Optional[str] = None
     consent_callback: bool = False
     consent_marketing: bool = False
@@ -99,68 +165,6 @@ class LeadRequest(BaseModel):
     page_title: Optional[str] = None
     tags: List[str] = []
     summary: Optional[str] = None
-
-    @field_validator("phone")
-    @classmethod
-    def validate_phone(cls, v: Optional[str]) -> Optional[str]:
-        if v is None:
-            return v
-        v = v.strip()
-        if not PHONE_PATTERN.match(v):
-            raise ValueError(f"Invalid phone number: {v}")
-        return v
-
-    @field_validator("email")
-    @classmethod
-    def validate_email(cls, v: Optional[str]) -> Optional[str]:
-        if v is None:
-            return v
-        v = v.strip().lower()
-        if not EMAIL_PATTERN.match(v):
-            raise ValueError(f"Invalid email: {v}")
-        return v
-
-    @field_validator("purpose")
-    @classmethod
-    def validate_purpose(cls, v: Optional[str]) -> Optional[str]:
-        if v is None:
-            return v
-        allowed = {"buy", "rent", "invest"}
-        if v.lower() not in allowed:
-            raise ValueError(f"purpose must be one of {allowed}")
-        return v.lower()
-
-
-class LeadRow(BaseModel):
-    """Internal row model for leads.csv"""
-    timestamp: str
-    session_id: str
-    lang: str
-    name: Optional[str]
-    phone: Optional[str]
-    email: Optional[str]
-    interest_projects: str  # JSON
-    preferred_region: Optional[str]
-    unit_type: Optional[str]
-    budget_min: Optional[float]
-    budget_max: Optional[float]
-    budget_band: str
-    purpose: Optional[str]
-    timeline: Optional[str]
-    tags: str  # JSON
-    consent_callback: bool
-    consent_marketing: bool
-    consent_timestamp: Optional[str]
-    source_url: Optional[str]
-    page_title: Optional[str]
-    summary: Optional[str]
-    raw_json: str
-
-
-class LeadResponse(BaseModel):
-    success: bool
-    lead_id: str
-    message: str
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -199,6 +203,16 @@ class ProjectCount(BaseModel):
 class RegionCount(BaseModel):
     region: str
     count: int
+
+
+class FunnelMetrics(BaseModel):
+    stage_0: int
+    stage_1: int
+    stage_2: int
+    stage_3: int
+    stage_4: int
+    stage_5: int
+    stage_6: int
 
 
 class AdminDashboardResponse(BaseModel):

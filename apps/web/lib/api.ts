@@ -81,11 +81,22 @@ export interface DailyCount { date: string; count: number; }
 export interface ProjectCount { project: string; count: number; }
 export interface RegionCount { region: string; count: number; }
 
+export interface FunnelMetrics {
+    stage_0: number;
+    stage_1: number;
+    stage_2: number;
+    stage_3: number;
+    stage_4: number;
+    stage_5: number;
+    stage_6: number;
+}
+
 export interface AdminDashboard {
     kpi: KPISummary;
     daily_leads: DailyCount[];
     top_projects: ProjectCount[];
     top_regions: RegionCount[];
+    funnel?: FunnelMetrics;
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────────────

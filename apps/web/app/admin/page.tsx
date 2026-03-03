@@ -139,6 +139,31 @@ export default function AdminPage() {
                             />
                         </div>
 
+                        {/* Funnel Drop-off Strip */}
+                        {stats.funnel && (
+                            <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
+                                <h3 className="text-sm font-semibold text-[var(--wdd-black)] mb-6">Concierge Funnel Conversion</h3>
+                                <div className="flex w-full h-16 rounded-md overflow-hidden bg-[var(--wdd-surface)] text-[10px] font-bold text-white tracking-widest leading-tight">
+                                    {Object.entries(stats.funnel)
+                                        .filter(([k]) => k.startsWith('stage_'))
+                                        .sort((a, b) => a[0].localeCompare(b[0]))
+                                        .map(([stage, count], i) => {
+                                            const total = Math.max(1, stats.funnel!.stage_0 || 1);
+                                            const w = Math.max(8, (Number(count) / total) * 100);
+                                            const labels = [
+                                                "0: Greeting", "1: Match", "2: Feasibility", "3: Shortlist", "4: Capture", "5: Confirm", "6: Save"
+                                            ];
+                                            return (
+                                                <div key={stage} className="h-full flex flex-col justify-center items-center border-r border-white/20 transition-all hover:brightness-110" style={{ width: `${w}%`, backgroundColor: `rgba(211, 47, 47, ${1 - i * 0.12})` }} title={`${labels[i]}: ${count}`}>
+                                                    {w > 12 && <span>{labels[i].split(':')[1].trim().toUpperCase()}</span>}
+                                                    {w > 12 && <span className="text-xs opacity-90">{count as number}</span>}
+                                                </div>
+                                            );
+                                        })}
+                                </div>
+                            </div>
+                        )}
+
                         {/* Charts Strip */}
                         <div className="grid lg:grid-cols-3 gap-6">
                             <div className="lg:col-span-2 bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">

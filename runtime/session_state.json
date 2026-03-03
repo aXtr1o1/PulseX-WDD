@@ -1,0 +1,34 @@
+{
+  "sess_mmaikuu4if6mp": {
+    "session_id": "sess_mmaikuu4if6mp",
+    "stage": 1,
+    "collected_fields": {
+      "project_interest": [
+        "project_id_1",
+        "project_id_2",
+        "project_id_3",
+        "project_id_4"
+      ]
+    },
+    "language": "en",
+    "last_updated": 1772537084.901383
+  },
+  "sess_mmaizx0l11er7": {
+    "session_id": "sess_mmaizx0l11er7",
+    "stage": 0,
+    "collected_fields": {},
+    "language": "en",
+    "last_updated": 1772537902.473141
+  },
+  "sess_mmak2dok0z33z": {
+    "session_id": "sess_mmak2dok0z33z",
+    "stage": 1,
+    "collected_fields": {
+      "project_interest": [
+        "neo_lakes"
+      ]
+    },
+    "language": "en",
+    "last_updated": 1772539589.214822
+  }
+}

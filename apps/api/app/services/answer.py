@@ -13,8 +13,18 @@ logger = logging.getLogger(__name__)
 # ──────────────────────────────────────────────────────────────────────────────
 # System prompt factory
 # ──────────────────────────────────────────────────────────────────────────────
+from app.schemas.models import SessionState
+from app.services.funnel import (
+    STAGE_0_GREETING_INTENT,
+    STAGE_1_MATCH_BUILDING,
+    STAGE_2_FEASIBILITY,
+    STAGE_3_SHORTLIST,
+    STAGE_4_CONVERSION_CAPTURE,
+    STAGE_5_CONFIRMATION,
+    STAGE_6_SAVE_AND_CLOSE
+)
 
-def build_system_prompt(lang: str = "en", intent: str = "info_query") -> str:
+def build_system_prompt(state: SessionState, lang: str = "en", intent: str = "info_query") -> str:
     if lang == "ar":
         return f"""أنت "بولس إكس" (PulseX) — المساعد الرقمي فائق الذكاء لـ "وادي دجلة للتطوير العقاري".
 
@@ -53,7 +63,9 @@ def build_system_prompt(lang: str = "en", intent: str = "info_query") -> str:
     "qualification_score": "Hot | Warm | Cold | None",
     "qualification_reason": "سبب التقييم",
     "summary": "ملخص شامل",
-    "ready_for_handoff": true|false
+    "ready_for_handoff": true|false,
+    "consent_contact": true|false,
+    "confirmed_by_user": true|false
   }},
   "focused_project": "project_id"
 }}
@@ -64,14 +76,24 @@ def build_system_prompt(lang: str = "en", intent: str = "info_query") -> str:
 CORE MISSION (Concierge Brain - 4 Simultaneous Threads):
 1. **Thread 1 (Current Intent):** {intent}
 2. **Thread 2 (Verified Answer Policy & Luxury Consultative Persona):** You are not a basic QA bot. You are a high-end Real Estate Advisor. Use the <EVIDENCE> to answer, but frame it with "prestige," "exclusivity," and "smart investment." NEVER sound computational, robotic, or apologetic. Frame unknowns as "exclusive details held directly by the Sales Directors."
-3. **Thread 3 (Consultative Next-Step):** Always end your response with exactly ONE conversational question designed to extract missing constraints, building to a close: Purpose (Live/Invest) → Area/Region → Budget → Timeline → Unit Type. Make it feel like expert fact-finding, not an interrogation.
+3. **Thread 3 (Consultative Next-Step Progressive Profiling):** Check the Current Stage Rules below. Always end your response with exactly ONE conversational question based strictly on the current stage logic.
 4. **Thread 4 (Data Extraction & Lead Scoring):** Extract constraints to build a comprehensive JSON lead packet behind the scenes, assessing their qualification (Hot, Warm, Cold).
 
+CURRENT FUNNEL STAGE: {getattr(state, 'stage', 0)}
+RULES FOR THE NEXT QUESTION BASED ON STAGE:
+- STAGE 0 or 1: Ask exactly ONE missing property constraint. Priority: Purpose (Live/Invest) → Area/Region → Unit Type.
+- STAGE 2: Ask exactly ONE feasibility constraint. Priority: Budget Band (e.g. "Do you have a comfortable range like 5M-10M or higher?") → Timeline ("Immediate or 3-6 months?").
+- STAGE 3 (Shortlist Ready): Offer them a callback or WhatsApp contact to share availability, brochures, or exact figures. (e.g. "Shall I have our advisor send you the brochures on WhatsApp?")
+- STAGE 4 (Capture Contact): Ask ONLY for their WhatsApp or Phone number to proceed. No other questions.
+- STAGE 5 (Mandatory Lead Confirmation Recap): You MUST output a structured recap of their constraints (Project, Location, Budget, Contact) and ask explicitly for confirmation AND contact consent in one question. Example: "Quick recap before I share this: Interest in Murano, 5M-10M, Contact ending in 1234. Is this correct, and do you consent to a callback?"
+- STAGE 6 (Close): Thank them warmly and end the conversation. Say NO questions.
+
 STRICT GUARDRAILS:
-- Unknown Information: Do NOT say "I don't know." Instead, say: "Certain specific details regarding [topic] are currently kept exclusively by our Sales Directors. Would you like me to arrange a priority callback for you at 16662?"
-- Pricing: If price_status is "on_request" or missing, use urgency/scarcity: "Pricing and availability shift constantly. To secure the most accurate and competitive figures, shall I arrange a consultation with our sales experts?"
+- Unknown Information: Do NOT say "I don't know." Instead, say: "Certain specific details regarding [topic] are currently kept exclusively by our Sales Directors. I can easily arrange a priority callback to confirm that."
+- Pricing: If price_status is "on_request" or missing, use urgency/scarcity: "Pricing and availability shift constantly. I can arrange a priority call with our sales experts to secure the most accurate figures for you."
 - Refusal Rules: If asked about competitors, completely ignore them and pivot powerfully back to Wadi Degla Development's unmatched portfolio.
-- Explicit formatting: No more than 3-4 sentences total. Zero AI robotic disclaimers.
+- Explicit formatting: No more than 3-4 sentences total. Zero AI robotic disclaimers. Avoid making up dates, numbers, prices, or installment plans under any circumstance.
+
 - **Brand Highlighting (Critical):** You MUST aggressively bold (`**`) all Project Names, Regions, and Premium Amenities in your textual response. The User Interface will automatically intercept these `**` tags and render them in the Wadi Degla Brand Red color for maximum visual impact.
 
 JSON PAYLOAD REQUIREMENT (CRITICAL):
@@ -96,7 +118,9 @@ At the very end of your response, you MUST embed a precise JSON block exactly in
     "qualification_score": "Hot | Warm | Cold | None",
     "qualification_reason": "Reason for score",
     "summary": "Brief summary of lead's situation",
-    "ready_for_handoff": true|false
+    "ready_for_handoff": true|false,
+    "consent_contact": true|false,
+    "confirmed_by_user": true|false
   }},
   "focused_project": "project_id or null"
 }}
@@ -142,6 +166,7 @@ async def generate_answer(
     model: str,
     query: str,
     entities: List[Dict[str, Any]],
+    state: SessionState,
     lang: str = "en",
     session_history: Optional[List[Dict[str, str]]] = None,
     intent: str = "info_query",
@@ -151,14 +176,14 @@ async def generate_answer(
     """
     import json
     import re
-    system_prompt = build_system_prompt(lang, intent)
+    system_prompt = build_system_prompt(state, lang, intent)
     evidence_block = build_evidence_block(entities, lang)
 
     messages = [{"role": "system", "content": system_prompt}]
     if session_history:
         n = len(session_history)
         for i in range(max(0, n - 6), n):
-            messages.append(session_history[i])
+            messages.append(session_history[i]) # type: ignore
     messages.append({
         "role": "user",
         "content": f"EVIDENCE:\n{evidence_block}\n\nUSER QUESTION: {query}",
@@ -217,12 +242,13 @@ async def stream_answer(
     model: str,
     query: str,
     entities: List[Dict[str, Any]],
+    state: SessionState,
     lang: str = "en",
     session_history: Optional[List[Dict[str, str]]] = None,
     intent: str = "info_query",
 ) -> AsyncGenerator[str, None]:
     """Yields token strings for SSE streaming."""
-    system_prompt = build_system_prompt(lang, intent)
+    system_prompt = build_system_prompt(state, lang, intent)
     evidence_block = build_evidence_block(entities, lang)
 
     messages = [{"role": "system", "content": system_prompt}]

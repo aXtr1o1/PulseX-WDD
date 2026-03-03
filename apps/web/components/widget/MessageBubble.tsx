@@ -23,9 +23,10 @@ interface Msg {
 interface MessageBubbleProps {
     message: Msg;
     lang: 'en' | 'ar';
+    onConfirm?: () => void;
 }
 
-export default function MessageBubble({ message, lang }: MessageBubbleProps) {
+export default function MessageBubble({ message, lang, onConfirm }: MessageBubbleProps) {
     const isUser = message.role === 'user';
     const rtl = lang === 'ar';
 
@@ -62,8 +63,8 @@ export default function MessageBubble({ message, lang }: MessageBubbleProps) {
                 )}
             </div>
 
-            {/* Shortlist Cards */}
-            {!isUser && message.shortlist && message.shortlist.length > 0 && (
+            {/* Shortlist Cards (legacy) */}
+            {!isUser && message.shortlist && message.shortlist.length > 0 && typeof message.shortlist[0] === 'object' && (
                 <div className="flex flex-col gap-3 mt-1 w-[85%] md:w-[75%]">
                     {message.shortlist.map((proj, idx) => (
                         <div key={idx} className="bg-white border border-[var(--wdd-border)] rounded-xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
@@ -85,6 +86,44 @@ export default function MessageBubble({ message, lang }: MessageBubbleProps) {
                             </div>
                         </div>
                     ))}
+                </div>
+            )}
+
+            {/* Shortlist Chips */}
+            {!isUser && message.lead_suggestions?.project_interest && message.lead_suggestions.project_interest.length > 0 && typeof message.lead_suggestions.project_interest[0] === 'string' && (
+                <div className="flex flex-wrap gap-2 mt-2 max-w-[85%]">
+                    {message.lead_suggestions.project_interest.map((proj: string, idx: number) => (
+                        <span key={idx} className="px-3 py-1.5 bg-[var(--wdd-surface)] border border-[var(--wdd-border)] text-xs font-medium text-[var(--wdd-black)] rounded-none">
+                            {proj.replace(/-/g, ' ').toUpperCase()}
+                        </span>
+                    ))}
+                </div>
+            )}
+
+            {/* Stage 5 Confirmation Block */}
+            {!isUser && !message.streaming && message.lead_suggestions?.phone && !message.lead_suggestions?.confirmed_by_user && (
+                <div className="mt-2 w-[85%] md:w-[75%] p-4 bg-[#f9f9f9] border border-[var(--wdd-border)] rounded-none">
+                    <p className="text-xs font-semibold text-[var(--wdd-black)] uppercase tracking-wider mb-3">
+                        {lang === 'ar' ? 'تأكيد البيانات' : 'Confirm Your Details'}
+                    </p>
+                    <div className="grid grid-cols-2 gap-3 mb-4 text-xs xl:text-sm text-[var(--wdd-text)]">
+                        {message.lead_suggestions.phone && <div><span className="text-[var(--wdd-muted)]">Phone:</span> {message.lead_suggestions.phone}</div>}
+                        {message.lead_suggestions.budget_min && <div><span className="text-[var(--wdd-muted)]">Budget:</span> ~{message.lead_suggestions.budget_min.toLocaleString()}</div>}
+                        {message.lead_suggestions.region && <div><span className="text-[var(--wdd-muted)]">Region:</span> {message.lead_suggestions.region}</div>}
+                        {message.lead_suggestions.purpose && <div><span className="text-[var(--wdd-muted)]">Purpose:</span> {message.lead_suggestions.purpose}</div>}
+                        {message.lead_suggestions.unit_type && <div><span className="text-[var(--wdd-muted)]">Unit:</span> {message.lead_suggestions.unit_type}</div>}
+                    </div>
+                    {onConfirm && (
+                        <button
+                            onClick={onConfirm}
+                            className="w-full py-2.5 bg-[var(--wdd-black)] text-white text-sm font-semibold hover:bg-[var(--wdd-red)] transition-colors rounded-none"
+                        >
+                            {lang === 'ar' ? 'تأكيد والموافقة على التواصل' : 'Confirm & Consent to Callback'}
+                        </button>
+                    )}
+                    <p className="text-[10px] text-[var(--wdd-muted)] mt-3 text-center leading-relaxed">
+                        {lang === 'ar' ? 'بضغطك على تأكيد، أنت توافق على الشروط والأحكام الخاصة بنا ومشاركة هذه البيانات مع فريق المبيعات.' : 'By confirming, you consent to our terms and allow our sales team to contact you.'}
+                    </p>
                 </div>
             )}
 

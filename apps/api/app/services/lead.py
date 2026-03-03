@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from ..schemas.models import LeadRequest
+from ..schemas.models import SessionState
 from ..utils.csv_io import append_csv_row, now_iso, json_dumps, LEADS_HEADERS
 
 logger = logging.getLogger(__name__)
@@ -77,46 +77,100 @@ def generate_lead_id() -> str:
 # Save lead
 # ──────────────────────────────────────────────────────────────────────────────
 
-def save_lead(lead: LeadRequest, leads_path: Path) -> str:
+def save_lead_if_confirmed(state: SessionState, leads_path: Path) -> Optional[str]:
     """
-    Persist a validated lead to leads.csv.
-    Returns the lead reference ID.
+    Persist a fully validated funnel session to leads.csv ONLY IF confirmed and consented.
+    Returns the lead reference ID if saved.
     """
+    fields = state.collected_fields
+    
+    if not fields.get("phone"):
+        return None
+    if not fields.get("confirmed_by_user"):
+        return None
+    if not fields.get("consent_contact"):
+        return None
+
     lead_id = generate_lead_id()
     ts = now_iso()
-    consent_ts = ts if (lead.consent_callback or lead.consent_marketing) else None
 
-    phone_norm = normalise_phone(lead.phone)
-    budget_band = compute_budget_band(lead.budget_min, lead.budget_max)
+    phone_norm = normalise_phone(fields.get("phone"))
+    budget_min = fields.get("budget_min")
+    budget_max = fields.get("budget_max")
+    
+    if isinstance(budget_min, str):
+        try: budget_min = float(budget_min)
+        except: budget_min = None
+    if isinstance(budget_max, str):
+        try: budget_max = float(budget_max)
+        except: budget_max = None
+        
+    budget_band = compute_budget_band(budget_min, budget_max)
 
     row: Dict[str, Any] = {
         "timestamp": ts,
-        "session_id": lead.session_id,
-        "lang": lead.lang,
-        "name": lead.name or "",
+        "session_id": state.session_id,
+        "lang": state.language,
+        "name": fields.get("name") or "",
         "phone": phone_norm or "",
-        "email": lead.email or "",
-        "interest_projects": json_dumps(lead.interest_projects),
-        "preferred_region": lead.preferred_region or "",
-        "unit_type": lead.unit_type or "",
-        "budget_min": lead.budget_min if lead.budget_min is not None else "",
-        "budget_max": lead.budget_max if lead.budget_max is not None else "",
+        "email": fields.get("email") or "",
+        "interest_projects": json_dumps(fields.get("project_interest", [])),
+        "preferred_region": fields.get("region") or "",
+        "unit_type": fields.get("unit_type") or "",
+        "budget_min": budget_min if budget_min is not None else "",
+        "budget_max": budget_max if budget_max is not None else "",
         "budget_band": budget_band,
-        "purpose": lead.purpose or "",
-        "timeline": lead.timeline or "",
-        "tags": json_dumps(lead.tags),
-        "consent_callback": lead.consent_callback,
-        "consent_marketing": lead.consent_marketing,
-        "consent_timestamp": consent_ts or "",
-        "source_url": lead.source_url or "",
-        "page_title": lead.page_title or "",
-        "summary": lead.summary or "",
-        "raw_json": json_dumps(lead.model_dump()),
+        "purpose": fields.get("purpose") or "",
+        "timeline": fields.get("timeline") or "",
+        "tags": json_dumps(fields.get("tags", [])),
+        "consent_callback": True,
+        "consent_marketing": True,
+        "consent_timestamp": ts,
+        "source_url": fields.get("source_url") or "",
+        "page_title": fields.get("page_title") or "",
+        "summary": fields.get("summary") or "",
+        "raw_json": json_dumps(state.model_dump()),
     }
 
     append_csv_row(leads_path, row, LEADS_HEADERS)
-    logger.info("Lead saved: %s (session=%s)", lead_id, lead.session_id)
+    logger.info("Confirmed Lead saved: %s (session=%s)", lead_id, state.session_id)
     return lead_id
+
+INTENT_HEADERS = [
+    "timestamp", "session_id", "stage_reached", "language",
+    "purpose", "unit_type", "region", "budget_band", "timeline"
+]
+
+def save_anonymous_intent(state: SessionState, intent_path: Path) -> None:
+    """
+    Log an unconverted session state to trace Funnel drop-offs.
+    """
+    fields = state.collected_fields
+    
+    budget_min = fields.get("budget_min")
+    budget_max = fields.get("budget_max")
+    if isinstance(budget_min, str):
+        try: budget_min = float(budget_min)
+        except: budget_min = None
+    if isinstance(budget_max, str):
+        try: budget_max = float(budget_max)
+        except: budget_max = None
+        
+    budget_band = compute_budget_band(budget_min, budget_max)
+    
+    row: Dict[str, Any] = {
+        "timestamp": now_iso(),
+        "session_id": state.session_id,
+        "stage_reached": state.stage,
+        "language": state.language,
+        "purpose": fields.get("purpose") or "",
+        "unit_type": fields.get("unit_type") or "",
+        "region": fields.get("region") or "",
+        "budget_band": budget_band,
+        "timeline": fields.get("timeline") or ""
+    }
+    
+    append_csv_row(intent_path, row, INTENT_HEADERS)
 
 
 # ──────────────────────────────────────────────────────────────────────────────

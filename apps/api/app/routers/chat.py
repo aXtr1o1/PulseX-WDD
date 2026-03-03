@@ -12,11 +12,13 @@ from fastapi import APIRouter, Depends, HTTPException, Request, BackgroundTasks
 from fastapi.responses import JSONResponse, StreamingResponse
 
 from ..config import get_settings
-from ..schemas.models import ChatRequest, ChatResponse, EvidenceSnippet
-from ..services.answer import generate_answer, stream_answer, get_handoff_message
-from ..services.audit import write_audit, new_request_id
-from ..services.lead import get_next_lead_prompt
-from ..services.router import (
+from app.schemas.models import ChatRequest, ChatResponse, EvidenceSnippet
+from app.services.answer import generate_answer, stream_answer, get_handoff_message
+from app.services.audit import write_audit, new_request_id
+from app.services.lead import get_next_lead_prompt
+from app.services.session import get_session, save_session
+from app.services.funnel import advance_funnel_stage
+from app.services.router import (
     detect_intent,
     extract_project_hint,
     extract_region_hint,
@@ -31,7 +33,7 @@ from ..services.router import (
     LEAD_CAPTURE,
     GREETING,
 )
-from ..utils.csv_io import hash_message
+from app.utils.csv_io import hash_message
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api", tags=["chat"])
@@ -48,6 +50,8 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
     t0 = time.monotonic()
     request_id = new_request_id()
     state = req.app.state
+    
+    session_state = get_session(request.session_id)
 
     intent = detect_intent(request.message, request.lang)
 
@@ -107,6 +111,7 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
         model=settings.azure_openai_chat_deployment,
         query=request.message,
         entities=evidence_entities,
+        state=session_state,
         lang=request.lang,
         intent=intent,
     )
@@ -135,6 +140,18 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
 
     payload = result.get("payload") or {}
     
+    advance_funnel_stage(session_state, payload, request.message)
+    save_session(session_state)
+    
+    from pathlib import Path
+    from app.services.lead import save_lead_if_confirmed, save_anonymous_intent
+    from app.services.funnel import STAGE_6_SAVE_AND_CLOSE
+    
+    if session_state.stage >= STAGE_6_SAVE_AND_CLOSE:
+        save_lead_if_confirmed(session_state, Path("runtime/leads.csv"))
+    else:
+        save_anonymous_intent(session_state, Path("runtime/intent.csv"))
+    
     # Lead trigger check from dynamic payload
     is_trigger = (intent == LEAD_CAPTURE) or payload.get("ready_for_handoff", False)
 
@@ -159,12 +176,14 @@ async def chat_stream(request: ChatRequest, req: Request) -> StreamingResponse:
     """Streaming SSE chat endpoint."""
     import json
     import time
-    from ..services.pubsub import publish_to_redis, stream_redis_sse
+    from app.services.pubsub import publish_to_redis, stream_redis_sse
 
     settings = get_settings()
     t0 = time.monotonic()
     request_id = new_request_id()
     state = req.app.state
+    
+    session_state = get_session(request.session_id)
     intent = detect_intent(request.message, request.lang)
 
     if intent in HANDOFF_INTENTS:
@@ -231,6 +250,7 @@ async def chat_stream(request: ChatRequest, req: Request) -> StreamingResponse:
             model=settings.azure_openai_chat_deployment,
             query=request.message,
             entities=evidence_entities,
+            state=session_state,
             lang=request.lang,
             intent=intent,
         ):
@@ -245,6 +265,29 @@ async def chat_stream(request: ChatRequest, req: Request) -> StreamingResponse:
             settings.azure_openai_chat_deployment,
             0, 0, latency_ms, request.message,
         )
+        
+        # Extract payload and advance Funnel State Post-Stream
+        import re
+        payload_data = {}
+        match = re.search(r"<payload>(.*?)</payload>", full_text, flags=re.DOTALL | re.IGNORECASE)
+        if match:
+            try:
+                payload_data = json.loads(match.group(1).strip())
+            except Exception:
+                pass
+                
+        advance_funnel_stage(session_state, payload_data, request.message)
+        save_session(session_state)
+        
+        from pathlib import Path
+        from app.services.lead import save_lead_if_confirmed, save_anonymous_intent
+        from app.services.funnel import STAGE_6_SAVE_AND_CLOSE
+        
+        if session_state.stage >= STAGE_6_SAVE_AND_CLOSE:
+            save_lead_if_confirmed(session_state, Path("runtime/leads.csv"))
+        else:
+            save_anonymous_intent(session_state, Path("runtime/intent.csv"))
+        
         yield "data: [DONE]\n\n"
 
     # ──────────────────────────────────────────────────────────────────

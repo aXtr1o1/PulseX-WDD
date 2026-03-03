@@ -19,6 +19,7 @@ from ..schemas.models import (
     AdminLoginRequest,
     AdminLoginResponse,
     DailyCount,
+    FunnelMetrics,
     KPISummary,
     ProjectCount,
     RegionCount,
@@ -143,6 +144,32 @@ async def dashboard(request: Request, _: None = Depends(require_admin)) -> Admin
     top_projects_list = sorted(project_counts.items(), key=lambda x: x[1], reverse=True)[:5]
     top_regions_list  = sorted(region_counts.items(), key=lambda x: x[1], reverse=True)[:5]
 
+    try:
+        intent_rows = read_csv_rows(Path("runtime/intent.csv"))
+    except Exception:
+        intent_rows = []
+
+    funnel_counts = {str(i): 0 for i in range(7)}
+    for row in intent_rows:
+        try:
+            st = str(row.get("stage_reached", "0")).split("_")[0]
+            funnel_counts[st] = funnel_counts.get(st, 0) + 1
+        except Exception:
+            pass
+            
+    # For stage 6, we count total actual leads
+    funnel_counts["6"] = total
+
+    funnel_metrics = FunnelMetrics(
+        stage_0=funnel_counts.get("0", 0),
+        stage_1=funnel_counts.get("1", 0),
+        stage_2=funnel_counts.get("2", 0),
+        stage_3=funnel_counts.get("3", 0),
+        stage_4=funnel_counts.get("4", 0),
+        stage_5=funnel_counts.get("5", 0),
+        stage_6=funnel_counts.get("6", 0),
+    )
+
     return AdminDashboardResponse(
         kpi=KPISummary(
             total_leads=total,
@@ -156,6 +183,7 @@ async def dashboard(request: Request, _: None = Depends(require_admin)) -> Admin
         daily_leads=daily_series,
         top_projects=[ProjectCount(project=p, count=c) for p, c in top_projects_list],
         top_regions=[RegionCount(region=r, count=c) for r, c in top_regions_list],
+        funnel=funnel_metrics,
     )
 
 

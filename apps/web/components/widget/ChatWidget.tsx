@@ -174,7 +174,12 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
             <div className={`flex-1 overflow-y-auto ${!embedded ? 'scroll-smooth' : ''} ${embedded ? 'w-full' : ''}`}>
                 <div className="px-4 md:px-8 py-8 space-y-8 max-w-4xl mx-auto w-full">
                     {messages.map((msg, i) => (
-                        <MessageBubble key={i} message={msg} lang={lang} />
+                        <MessageBubble
+                            key={i}
+                            message={msg}
+                            lang={lang}
+                            onConfirm={() => handleSend(lang === 'ar' ? 'نعم، أؤكد بياناتي وأوافق على التواصل.' : 'Yes, I confirm my details and consent to a callback.')}
+                        />
                     ))}
                     <div ref={bottomRef} className="h-4" />
                 </div>
