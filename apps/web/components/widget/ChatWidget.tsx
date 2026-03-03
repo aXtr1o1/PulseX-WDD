@@ -19,7 +19,7 @@ interface ChatWidgetProps {
 }
 
 export default function ChatWidget({ initialProject, initialRegion, embedded = false, headerLangToggle = false }: ChatWidgetProps) {
-    const [lang, setLang] = useState<Lang>('en');
+    const [lang] = useState<Lang>('en'); // Forced English
     const [session] = useState(genSessionId);
     const [messages, setMessages] = useState<Msg[]>([]);
     const [input, setInput] = useState('');
@@ -27,7 +27,6 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
 
     const bottomRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
-    const rtl = lang === 'ar';
 
     const scroll = () => bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     useEffect(scroll, [messages]);
@@ -150,7 +149,7 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
         : "w-full max-w-4xl mx-auto h-[70vh] min-h-[500px] flex flex-col bg-white rounded-2xl shadow-[var(--wdd-shadow-lg)] border border-[var(--wdd-border)]";
 
     return (
-        <div className={containerClass} dir={rtl ? 'rtl' : 'ltr'}>
+        <div className={containerClass} dir="ltr">
 
             {/* Header (optional based on embedding, but always premium) */}
             {!embedded && (
@@ -162,18 +161,10 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
                         <div>
                             <p className="text-sm font-semibold text-[var(--wdd-black)] leading-tight">WDD Concierge</p>
                             <p className="text-[11px] text-[var(--wdd-muted)] tracking-wide">
-                                {lang === 'ar' ? 'معلومات موثقة فقط' : 'Verified Information Only'}
+                                Verified Information Only
                             </p>
                         </div>
                     </div>
-                    {headerLangToggle && (
-                        <button
-                            onClick={() => setLang(l => l === 'en' ? 'ar' : 'en')}
-                            className="text-xs font-medium text-[var(--wdd-text)] hover:text-[var(--wdd-red)] transition-colors"
-                        >
-                            {lang === 'en' ? '🇦🇪 العربية' : '🇬🇧 English'}
-                        </button>
-                    )}
                 </div>
             )}
 
@@ -185,8 +176,8 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
                             key={i}
                             message={msg}
                             lang={lang}
-                            onConfirm={() => handleSend(lang === 'ar' ? 'نعم، أؤكد بياناتي وأوافق على التواصل.' : 'Yes, I confirm my details and consent to a callback.')}
-                            onChipClick={(name) => handleSend(lang === 'ar' ? `أنا مهتم بـ ${name}` : `I'm interested in ${name}`)}
+                            onConfirm={() => handleSend('Yes, I confirm my details and consent to a callback.')}
+                            onChipClick={(name) => handleSend(`I'm interested in ${name}`)}
                         />
                     ))}
                     <div ref={bottomRef} className="h-4" />
@@ -206,10 +197,10 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
                                 e.target.style.height = Math.min(e.target.scrollHeight, 150) + 'px';
                             }}
                             onKeyDown={handleKeyDown}
-                            placeholder={lang === 'ar' ? 'رحلتك إلى منزل أحلامك تبدأ من هنا...' : 'The journey to your dream starts here...'}
+                            placeholder="The journey to your dream starts here..."
                             className="flex-1 bg-transparent text-[15px] font-medium text-[#1a1a1a] placeholder:text-gray-400 outline-none resize-none min-h-[24px] max-h-[150px] py-1 hide-scrollbar"
                             rows={1}
-                            dir={rtl ? 'rtl' : 'ltr'}
+                            dir="ltr"
                             disabled={loading}
                         />
                         {loading ? (

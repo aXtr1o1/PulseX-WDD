@@ -30,7 +30,6 @@ interface MessageBubbleProps {
 
 export default function MessageBubble({ message, lang, onConfirm, onChipClick }: MessageBubbleProps) {
     const isUser = message.role === 'user';
-    const rtl = lang === 'ar';
 
     return (
         <div
@@ -38,7 +37,7 @@ export default function MessageBubble({ message, lang, onConfirm, onChipClick }:
                 'flex flex-col gap-2 animate-fade-in w-full',
                 isUser ? 'items-end' : 'items-start',
             )}
-            dir={rtl ? 'rtl' : 'ltr'}
+            dir="ltr"
         >
             {/* Main Bubble */}
             <div
@@ -110,7 +109,7 @@ export default function MessageBubble({ message, lang, onConfirm, onChipClick }:
             {!isUser && !message.streaming && message.lead_trigger && !message.lead_suggestions?.confirmed_by_user && (
                 <div className="mt-2 w-[85%] md:w-[75%] p-4 bg-[#f9f9f9] border border-[var(--wdd-border)] rounded-none">
                     <p className="text-xs font-semibold text-[var(--wdd-black)] uppercase tracking-wider mb-3">
-                        {lang === 'ar' ? 'تأكيد البيانات' : 'Confirm Your Details'}
+                        Confirm Your Details
                     </p>
                     <div className="grid grid-cols-2 gap-3 mb-4 text-xs xl:text-sm text-[var(--wdd-text)]">
                         {message.lead_suggestions.phone && <div><span className="text-[var(--wdd-muted)]">Phone:</span> {message.lead_suggestions.phone}</div>}
@@ -124,23 +123,23 @@ export default function MessageBubble({ message, lang, onConfirm, onChipClick }:
                             onClick={onConfirm}
                             className="w-full py-2.5 bg-[var(--wdd-black)] text-white text-sm font-semibold hover:bg-[var(--wdd-red)] transition-colors rounded-none"
                         >
-                            {lang === 'ar' ? 'تأكيد والموافقة على التواصل' : 'Confirm & Consent to Callback'}
+                            Confirm & Consent to Callback
                         </button>
                     )}
                     <p className="text-[10px] text-[var(--wdd-muted)] mt-3 text-center leading-relaxed">
-                        {lang === 'ar' ? 'بضغطك على تأكيد، أنت توافق على الشروط والأحكام الخاصة بنا ومشاركة هذه البيانات مع فريق المبيعات.' : 'By confirming, you consent to our terms and allow our sales team to contact you.'}
+                        By confirming, you consent to our terms and allow our sales team to contact you.
                     </p>
                 </div>
             )}
 
             {/* Evidence Micro-Band */}
             {!isUser && message.evidence && message.evidence.length > 0 && (
-                <div className="flex flex-wrap items-center gap-2 mt-0.5 ml-2 rtl:mr-2 rtl:ml-0 max-w-[90%]">
+                <div className="flex flex-wrap items-center gap-2 mt-0.5 ml-2 max-w-[90%]">
                     <span className="text-[10px] uppercase tracking-wider font-semibold text-[var(--wdd-red)] flex items-center gap-1 opacity-80">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                         </svg>
-                        {lang === 'ar' ? 'تم التحقق' : 'Verified'}
+                        Verified
                     </span>
 
                     {message.evidence.slice(0, 4).map((ev, i) => (

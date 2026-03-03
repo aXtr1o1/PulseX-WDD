@@ -50,6 +50,14 @@ class ChatResponse(BaseModel):
     handoff_cta: bool = False
     lang: str = "en"
     latency_ms: Optional[int] = None
+    
+    # E8: Debug Metadata
+    stage: Optional[int] = None
+    slots_summary: Optional[Dict[str, Any]] = None
+    next_question_key: Optional[str] = None
+    lead_capture_trigger: Optional[bool] = None
+    lead_temperature: Optional[str] = None
+    reason_codes: Optional[List[str]] = None
 
 
 # ──────────────────────────────────────────────────────────────────────────────

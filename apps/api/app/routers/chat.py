@@ -51,6 +51,7 @@ HANDOFF_INTENTS = {HANDOFF}
 @router.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest, req: Request) -> ChatResponse:
     """Non-streaming chat endpoint."""
+    request.lang = 'en' # P4: English-Only
     settings = get_settings()
     t0 = time.monotonic()
     request_id = new_request_id()
@@ -191,6 +192,14 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
         lead_trigger=is_trigger,
         lang=request.lang,
         latency_ms=latency_ms,
+        
+        # E8 Debug Metadata
+        stage=session_state.stage,
+        slots_summary=session_state.collected_fields,
+        next_question_key=slot_key,
+        lead_capture_trigger=is_trigger,
+        lead_temperature=payload.get("qualification_score"),
+        reason_codes=[payload.get("qualification_reason")] if payload.get("qualification_reason") else []
     )
 
 
@@ -201,6 +210,7 @@ async def chat_stream(request: ChatRequest, req: Request) -> StreamingResponse:
     import time
     from app.services.pubsub import publish_to_redis, stream_redis_sse
 
+    request.lang = 'en' # P4: English-Only
     settings = get_settings()
     t0 = time.monotonic()
     request_id = new_request_id()
@@ -271,7 +281,13 @@ async def chat_stream(request: ChatRequest, req: Request) -> StreamingResponse:
             "handoff_cta": False,
             "lead_trigger": (intent == LEAD_CAPTURE) or (slot_key in ["phone", "confirm_recap", "consent", "done"]),
             "evidence": evidence,
-            "shortlist": [e["display_name"] for e in evidence_entities]
+            "shortlist": [e["display_name"] for e in evidence_entities],
+            
+            # E8 Debug Metadata
+            "stage": session_state.stage,
+            "slots_summary": session_state.collected_fields,
+            "next_question_key": slot_key,
+            "lead_capture_trigger": (intent == LEAD_CAPTURE) or (slot_key in ["phone", "confirm_recap", "consent", "done"]),
         }
         
         # P2: Portfolio Hook

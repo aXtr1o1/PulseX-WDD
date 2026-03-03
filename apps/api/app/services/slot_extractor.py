@@ -98,4 +98,12 @@ def extract_slots(message: str, kb_project_names: List[str]) -> Dict[str, Any]:
         updates["is_international"] = True
         updates["contact_channel"] = "whatsapp"
 
+    # 9. High-Intent Capture Trigger (E4)
+    if re.search(r"\b(price|pricing|installment|payment plan|availability|brochure|pdf|book|visit|viewing|tour|call me|whatsapp|contact)\b", text):
+        updates["lead_capture_trigger"] = True
+
+    # 10. Salvage Trigger (Confusion)
+    if re.search(r"\b(i told you already|new to egypt|i have no idea|am new|don't know|not sure)\b", text):
+        updates["salvage_trigger"] = True
+
     return updates

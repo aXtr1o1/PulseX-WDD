@@ -26,9 +26,9 @@ def get_next_question(state: SessionState, router_intent: str, extracted_slots: 
     is_capture_intent = router_intent in ["lead_capture", "pricing", "handoff", "availability", "brochure", "visit_request", "request_sales_call"]
     ready_for_handoff = fields.get("ready_for_handoff", False)
     
-    if is_capture_intent or ready_for_handoff:
+    if is_capture_intent or ready_for_handoff or fields.get("lead_capture_trigger") or fields.get("salvage_trigger"):
         if not fields.get("phone"):
-            return "phone", "To provide you with priority access and exact details, what is the best phone number (or WhatsApp) to reach you on?", []
+            return "phone", "I can share the brochure and confirm availability on WhatsApp. What WhatsApp number should I use?", []
             
         if not fields.get("confirmed_by_user"):
             return "confirm_recap", "Great. Please confirm the details in the recap card below to proceed.", []

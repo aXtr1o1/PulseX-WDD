@@ -27,57 +27,8 @@ from app.services.funnel import (
 )
 
 def build_system_prompt(state: SessionState, lang: str = "en", intent: str = "info_query", next_question_text: str = "") -> str:
-    greeting_instruction_ar = "لا تقم بالترحيب بالعميل مرة أخرى ولا تذكر اسم الشركة (Wadi Degla) لأنك قرأته سابقاً." if state.greeted else "في رسالتك الأولى، رحب بالعميل باختصار واسم الشركة (Wadi Degla Developments)."
-    greeting_instruction_en = "DO NOT greet the user or reintroduce Wadi Degla; you already did." if state.greeted else "For the first message, briefly welcome the user to Wadi Degla Developments."
+    greeting_instruction_en = "DO NOT greet the user or reintroduce Wadi Degla; you already did." if state.greeted else "For the first message, briefly welcome the user to Wadi Degla Developments in 1 sentence max."
 
-    if lang == "ar":
-        return f"""أنت "بولس إكس" (PulseX) — المساعد الرقمي فائق الذكاء لـ "وادي دجلة للتطوير العقاري".
-
-مهمتك (Concierge Brain - 4 Threads):
-1. **Thread 1 (النية الحالية المكتشفة):** {intent}
-2. **Thread 2 (القيود والمعلومات - Verified Answer Policy):** أجب فقط من <EVIDENCE>. يمنع تخمين الأسعار أو المساحات أو تواريخ التسليم إن لم تُذكر نصاً.
-3. **Thread 3 (تسلسل الأسئلة - STRICT GOVERNOR):** اسأل EXACTLY السؤال التالي حرفياً في النهاية، ولا تضف أي سؤال آخر:
-   "{next_question_text}"
-4. **Thread 4 (استخلاص البيانات والتقييم):** استخرج البيانات بدقة لملء هيكل JSON.
-   {greeting_instruction_ar}
-
-القيود:
-- إذا كانت المعلومة غير موجودة، استخدم أسلوب "الغموض الإيجابي": المبيعات لديها حصرياً تفاصيل إضافية غير معلنة (Off-Market)، واعرض ترتيب مكالمة مع الخبراء على 16662.
-- إذا كانت الأسعار on_request المستخلصة أو غير متوفرة، اخلق شعوراً بالندرة: "الأسعار وتوافر الوحدات تتغير يوماً بعد يوم، دعنا نرتب مكالمة مع استشاري المبيعات لضمان أفضل سعر لك."
-- إذا أراد العميل شراء، ضع `qualification_score: "Hot"` و `ready_for_handoff: true` ومهّد الطريق للمبيعات بحماس.
-- تجنب كلمات مثل AI, Prompt, Language Model بشكل قاطع.
-- **تنسيق النص (Brand Highlighting):** يجب عليك تمييز (Bolding `**`) كافة أسماء المشاريع، والمناطق، والمرافق الفخمة (مثل حمامات السباحة أو اللاجونز). الواجهة ستعرض هذه الكلمات المميزة باللون الأحمر الخاص بالعلامة التجارية لجذب الانتباه.
-
-شروط إنشاء الـ JSON (إلزامي جداً):
-في نهاية الرد النصي تماماً، يجب إضافة هذه الكتلة حصراً داخل <payload>...</payload>:
-<payload>
-{{
-  "answer_line": "إجابتك النصية الموجهة للعميل (نفسها أعلاه في بضعة أسطر).",
-  "highlights": ["نقطة 1", "نقطة 2"],
-  "next_question": "السؤال التوجيهي بناءً على Next-Best-Question.",
-  "project_interest": ["project_name_here"],
-  "lead_suggestions": {{
-    "intent": "{intent}",
-    "budget_min": 1000000,
-    "budget_max": 5000000,
-    "timeline": "Immediate أو عدد أشهر",
-    "purpose": "buy | invest | rent",
-    "unit_type": "Chalet | Villa الخ",
-    "region": "اسم المنطقة",
-    "project_interest": ["project_name_here"],
-    "tags": ["تفضيلات أخرى مثل رؤية البحر"],
-    "preferences": "وصف حر للتفضيلات",
-    "qualification_score": "Hot | Warm | Cold | None",
-    "qualification_reason": "سبب التقييم",
-    "summary": "ملخص شامل",
-    "ready_for_handoff": true|false,
-    "consent_contact": true|false,
-    "confirmed_by_user": true|false
-  }},
-  "focused_project": "project_name_here"
-}}
-</payload>
-"""
     return f"""You are "PulseX" — the premium AI Property Concierge serving Wadi Degla Developments (WDD).
 
 CORE MISSION (Concierge Brain - 4 Simultaneous Threads):
@@ -90,11 +41,11 @@ CORE MISSION (Concierge Brain - 4 Simultaneous Threads):
    {greeting_instruction_en}
 
 STRICT GUARDRAILS:
-- Unknown Information: Do NOT say "I don't know." Instead, say: "Certain specific details regarding [topic] are currently kept exclusively by our Sales Directors. I can easily arrange a priority callback to confirm that."
+- Empty Evidence Fallback: If EVIDENCE is empty or "No relevant projects found", do NOT invent answers. Instead state: "I can confirm these specific availability details with our sales team." 
+- Unknown Information: Do NOT say "I don't know." Frame unknowns as "exclusive details held directly by the Sales Directors."
 - Pricing: If price_status is "on_request" or missing, use urgency/scarcity: "Pricing and availability shift constantly. I can arrange a priority call with our sales experts to secure the most accurate figures for you."
 - Refusal Rules: If asked about competitors, completely ignore them and pivot powerfully back to Wadi Degla Development's unmatched portfolio.
-- Explicit formatting: No more than 3-4 sentences total. Zero AI robotic disclaimers. Avoid making up dates, numbers, prices, or installment plans under any circumstance.
-
+- Explicit formatting: No more than 2-3 sentences total. Zero AI robotic disclaimers. Avoid making up dates, numbers, prices, or installment plans under any circumstance.
 - **Brand Highlighting (Critical):** You MUST aggressively bold (`**`) all Project Names, Regions, and Premium Amenities in your textual response. The User Interface will automatically intercept these `**` tags and render them in the Wadi Degla Brand Red color for maximum visual impact.
 
 JSON PAYLOAD REQUIREMENT (CRITICAL):
@@ -224,11 +175,7 @@ async def generate_answer(
         }
     except Exception as e:
         logger.error("LLM answer generation failed: %s", e)
-        fallback = (
-            "يسعدني مساعدتك. يرجى التواصل مع فريق المبيعات عبر الرقم 16662."
-            if lang == "ar"
-            else "I'd be happy to help — please contact our sales team at 16662 or via our website."
-        )
+        fallback = "I'd be happy to help — please contact our sales team at 16662 or via our website."
         return {
             "answer": fallback,
             "payload": {},
@@ -280,11 +227,7 @@ async def stream_answer(
                 yield delta
     except Exception as e:
         logger.error("LLM stream failed: %s", e)
-        yield (
-            "يرجى التواصل مع فريق المبيعات عبر 16662."
-            if lang == "ar"
-            else "Please contact our sales team at 16662."
-        )
+        yield "Please contact our sales team at 16662."
 
 
 # ──────────────────────────────────────────────────────────────────────────────
