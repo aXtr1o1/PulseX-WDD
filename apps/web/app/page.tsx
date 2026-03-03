@@ -72,7 +72,7 @@ export default function ConciergePage() {
                         {/* Black Action Button */}
                         <button
                             onClick={() => { gtm.customEvent('click_request_call'); setMenuOpen(true); }}
-                            className="text-[10px] tracking-[0.15em] font-bold bg-[#1a1a1a] text-white px-6 py-3 rounded-full hover:bg-black transition-all hidden md:block"
+                            className="text-[10px] tracking-[0.15em] font-bold bg-[#1a1a1a] text-white px-6 py-3 rounded-none hover:bg-black transition-all hidden md:block"
                         >
                             {lang === 'ar' ? 'طلب مكالمة مبيعات' : 'REQUEST A SALES CALL'}
                         </button>

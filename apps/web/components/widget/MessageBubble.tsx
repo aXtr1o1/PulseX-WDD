@@ -40,12 +40,10 @@ export default function MessageBubble({ message, lang }: MessageBubbleProps) {
             {/* Main Bubble */}
             <div
                 className={clsx(
-                    'max-w-[85%] md:max-w-[75%] px-5 py-3.5 text-[14px] leading-[1.6]',
+                    'max-w-[85%] md:max-w-[75%] px-5 py-3.5 text-[14px] leading-[1.6] rounded-none',
                     isUser
-                        ? 'bg-[var(--wdd-red)] text-white rounded-2xl rounded-tr-sm'
-                        : 'bg-white text-[var(--wdd-text)] shadow-sm border border-[var(--wdd-border)] rounded-2xl rounded-tl-sm',
-                    rtl && isUser && 'rounded-tl-sm rounded-tr-2xl',
-                    rtl && !isUser && 'rounded-tr-sm rounded-tl-2xl'
+                        ? 'bg-[var(--wdd-red)] text-white'
+                        : 'bg-white text-[var(--wdd-text)] shadow-sm border border-[var(--wdd-border)]'
                 )}
             >
                 <div

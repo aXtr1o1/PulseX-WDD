@@ -183,7 +183,7 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
             {/* Input Dock - Minimalist Floating Pill */}
             <div className={`w-full bg-white pt-2 pb-6 md:pb-10 ${embedded ? 'px-4' : 'px-4 md:px-8'}`}>
                 <div className={`w-full relative ${embedded ? 'max-w-4xl mx-auto' : ''}`}>
-                    <div className="flex items-end bg-[#f9f9f9] rounded-[24px] px-5 py-3 transition-all duration-300 group focus-within:bg-[var(--wdd-surface)] focus-within:shadow-sm">
+                    <div className="flex items-end bg-[#f9f9f9] rounded-none px-5 py-3 transition-all duration-300 group focus-within:bg-[var(--wdd-surface)] focus-within:shadow-sm">
                         <textarea
                             ref={inputRef}
                             value={input}
@@ -207,7 +207,7 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
                             <button
                                 onClick={() => handleSend()}
                                 disabled={!input.trim()}
-                                className="ml-3 mb-0.5 w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-full bg-[#E5E5E5] text-[#1a1a1a] hover:bg-[#d4d4d4] disabled:opacity-50 transition-colors"
+                                className="ml-3 mb-0.5 w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-none bg-[#E5E5E5] text-[#1a1a1a] hover:bg-[#d4d4d4] disabled:opacity-50 transition-colors cursor-pointer"
                                 aria-label="Send message"
                             >
                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none">

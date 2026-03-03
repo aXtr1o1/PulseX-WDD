@@ -76,3 +76,4 @@ timestamp,request_id,session_id,endpoint,intent,kb_version_hash,keyword_hits,vec
 2026-03-03T08:24:58.623374+00:00,2b334de3,sess_mmacdwmp2x18f,/api/chat/stream,greeting,dcb4d66a6b47,0,26,26,"[""blumar_hills"", ""clubtown"", ""horizon"", ""murano""]",gpt-4o-mini,0,0,5090,ok,,0.0,8f434346648f6b96
 2026-03-03T08:25:15.045102+00:00,4ea2304b,sess_mmacdwmp2x18f,/api/chat/stream,info_query,dcb4d66a6b47,0,26,26,"[""blumar_hills"", ""clubtown"", ""waterside"", ""ojo""]",gpt-4o-mini,0,0,7677,ok,,0.0,ffeb393396999321
 2026-03-03T08:27:07.926898+00:00,c4913cc6,sess_mmacdwmp2x18f,/api/chat/stream,info_query,dcb4d66a6b47,0,26,26,"[""blumar_hills"", ""clubtown"", ""murano"", ""floating_islands""]",gpt-4o-mini,0,0,9484,ok,,0.0,bb4522bcf20e9ecd
+2026-03-03T09:27:56.427774+00:00,4872df10,sess_mmaemq8gwu2kc,/api/chat/stream,greeting,dcb4d66a6b47,0,26,26,"[""blumar_hills"", ""clubtown"", ""murano"", ""waterside""]",gpt-4o-mini,0,0,3570,ok,,0.0,3639efcd08abb273
