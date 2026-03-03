@@ -166,12 +166,25 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
     # Lead trigger check from dynamic payload
     is_trigger = (intent == LEAD_CAPTURE) or payload.get("ready_for_handoff", False)
 
+    # P2: Portfolio Hook
+    is_list = intent == "list_projects" or ("list" in request.message.lower() and "project" in request.message.lower())
+    if is_list:
+        from app.services.portfolio import list_projects
+        p_res = list_projects(state.kb_entities, include_not_selling=False, region=region_filter)
+        return ChatResponse(
+            session_id=request.session_id, request_id=request_id, intent="list_projects",
+            answer=p_res["answer"], evidence=p_res["evidence"], shortlist=p_res["shortlist"],
+            lead_suggestions=payload, focused_project=project_filter, intent_lane=intent,
+            lead_trigger=False, lang=request.lang, latency_ms=latency_ms
+        )
+
     return ChatResponse(
         session_id=request.session_id,
         request_id=request_id,
         intent=intent,
         answer=result["answer"],
         evidence=evidence,
+        shortlist=[e["display_name"] for e in evidence_entities],
         lead_suggestions=payload,
         focused_project=project_filter,
         intent_lane=intent,
@@ -257,8 +270,27 @@ async def chat_stream(request: ChatRequest, req: Request) -> StreamingResponse:
             "intent": intent,
             "handoff_cta": False,
             "lead_trigger": (intent == LEAD_CAPTURE) or (slot_key in ["phone", "confirm_recap", "consent", "done"]),
-            "evidence": evidence
+            "evidence": evidence,
+            "shortlist": [e["display_name"] for e in evidence_entities]
         }
+        
+        # P2: Portfolio Hook
+        is_list = intent == "list_projects" or ("list" in request.message.lower() and "project" in request.message.lower())
+        if is_list:
+            from app.services.portfolio import list_projects
+            p_res = list_projects(state.kb_entities, include_not_selling=False, region=region_filter)
+            meta["evidence"] = [e.model_dump() for e in p_res["evidence"]]
+            meta["shortlist"] = p_res["shortlist"]
+            yield f"data: [METADATA] {json.dumps(meta)}\n\n"
+            
+            chunk_size = 5
+            ans = p_res["answer"]
+            for i in range(0, len(ans), chunk_size):
+                yield f"data: {json.dumps({'t': ans[i:i+chunk_size]})}\n\n"
+                
+            yield "data: [DONE]\n\n"
+            return
+            
         yield f"data: [METADATA] {json.dumps(meta)}\n\n"
         
         full_text = ""

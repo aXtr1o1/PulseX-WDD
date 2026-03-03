@@ -85,12 +85,17 @@ def extract_slots(message: str, kb_project_names: List[str]) -> Dict[str, Any]:
         
         extracted_projects = []
         # RapidFuzz extract against the original message to preserve casing just in case (though we lowercased our text)
-        res = process.extract(text, kb_project_names, scorer=fuzz.partial_ratio, limit=3)
+        res = process.extract(text, kb_project_names, scorer=fuzz.WRatio, limit=3)
         for name, score, _ in res:
-            if score >= 85: # Threshold for partial match
+            if score >= 60: # Threshold for WRatio fuzzy match
                 extracted_projects.append(name)
                 
         if extracted_projects:
             updates["project_interest"] = list(set(extracted_projects))
+
+    # 8. International / Relocating Flow
+    if re.search(r"\b(from \w+|new to egypt|moving to egypt|outside egypt|international)\b", text):
+        updates["is_international"] = True
+        updates["contact_channel"] = "whatsapp"
 
     return updates

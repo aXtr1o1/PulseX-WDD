@@ -23,7 +23,7 @@ def get_next_question(state: SessionState, router_intent: str, extracted_slots: 
     
     # 1. Lead Capture Triggers (Overrides normal flow)
     # If the user asked for pricing/avail/handoff or explicitly wants a call
-    is_capture_intent = router_intent in ["lead_capture", "pricing", "handoff"]
+    is_capture_intent = router_intent in ["lead_capture", "pricing", "handoff", "availability", "brochure", "visit_request", "request_sales_call"]
     ready_for_handoff = fields.get("ready_for_handoff", False)
     
     if is_capture_intent or ready_for_handoff:
@@ -51,6 +51,18 @@ def get_next_question(state: SessionState, router_intent: str, extracted_slots: 
         # If we have basic project info + budget, transition to capture
         if not fields.get("phone"):
             return "phone", "To provide the exact availability for that project, what's your WhatsApp number?", []
+
+    # 2.5 International / New to Egypt Flow (P4)
+    is_intl = state.is_international or fields.get("is_international")
+    if is_intl:
+        if not fields.get("region"):
+            return "region", "Since you're joining us from abroad, we can arrange a virtual walkthrough. Which region in Egypt are you focused on?", ["East Cairo", "North Coast"]
+        if not fields.get("budget_min"):
+            return "budget_min", "To find the perfect match for your virtual tour, what is your approximate budget range?", []
+        if not fields.get("timeline"):
+            return "timeline", "When are you looking to invest or move?", ["Immediate", "Exploring"]
+        if not fields.get("phone"):
+            return "phone", "To send you the virtual walkthrough links and keep you updated, what is your WhatsApp number?", []
 
     # 3. Standard Progressive Profiling (Order of Operations)
     # We walk down the FUNNEL_ORDER. The first one missing in `fields` is what we ask.

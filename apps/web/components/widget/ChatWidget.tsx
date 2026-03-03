@@ -79,7 +79,13 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
                     setMessages((prev) => {
                         const copy = [...prev];
                         const last = copy[copy.length - 1];
-                        if (last?.streaming) copy[copy.length - 1] = { ...last, evidence: meta.evidence };
+                        if (last?.streaming) {
+                            copy[copy.length - 1] = {
+                                ...last,
+                                evidence: meta.evidence,
+                                shortlist: meta.shortlist
+                            };
+                        }
                         return copy;
                     });
                 }
@@ -180,6 +186,7 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
                             message={msg}
                             lang={lang}
                             onConfirm={() => handleSend(lang === 'ar' ? 'نعم، أؤكد بياناتي وأوافق على التواصل.' : 'Yes, I confirm my details and consent to a callback.')}
+                            onChipClick={(name) => handleSend(lang === 'ar' ? `أنا مهتم بـ ${name}` : `I'm interested in ${name}`)}
                         />
                     ))}
                     <div ref={bottomRef} className="h-4" />

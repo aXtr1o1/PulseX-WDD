@@ -90,6 +90,8 @@ class SessionState(BaseModel):
     stage: int = 0
     collected_fields: Dict[str, Any] = Field(default_factory=dict)
     language: str = "en"
+    greeted: bool = False
+    is_international: bool = False
     last_updated: float
 
 

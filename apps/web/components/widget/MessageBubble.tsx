@@ -16,7 +16,7 @@ interface Msg {
     evidence?: EvidenceSnippet[];
     streaming?: boolean;
     focused_project?: string;
-    shortlist?: ProjectCardData[];
+    shortlist?: any[];
     lead_suggestions?: any;
     lead_trigger?: boolean;
 }
@@ -25,9 +25,10 @@ interface MessageBubbleProps {
     message: Msg;
     lang: 'en' | 'ar';
     onConfirm?: () => void;
+    onChipClick?: (name: string) => void;
 }
 
-export default function MessageBubble({ message, lang, onConfirm }: MessageBubbleProps) {
+export default function MessageBubble({ message, lang, onConfirm, onChipClick }: MessageBubbleProps) {
     const isUser = message.role === 'user';
     const rtl = lang === 'ar';
 
@@ -90,13 +91,17 @@ export default function MessageBubble({ message, lang, onConfirm }: MessageBubbl
                 </div>
             )}
 
-            {/* Verified Shortlist Chips (Strictly from Retrieval Evidence) */}
-            {!isUser && message.evidence && message.evidence.length > 0 && typeof message.evidence[0] === 'object' && (
+            {/* Verified Shortlist Chips (Strictly from Backend Metadata Shortlist) */}
+            {!isUser && message.shortlist && message.shortlist.length > 0 && typeof message.shortlist[0] === 'string' && (
                 <div className="flex flex-wrap gap-2 mt-2 max-w-[85%]">
-                    {message.evidence.map((ev, idx: number) => (
-                        <span key={idx} className="px-3 py-1.5 bg-[var(--wdd-surface)] border border-[var(--wdd-border)] text-xs font-medium text-[var(--wdd-black)] rounded-none">
-                            {ev.display_name.toUpperCase()}
-                        </span>
+                    {message.shortlist.map((name: string, idx: number) => (
+                        <button
+                            key={idx}
+                            onClick={() => onChipClick?.(name)}
+                            className="px-3 py-1.5 bg-[var(--wdd-surface)] border border-[var(--wdd-border)] text-xs font-medium text-[var(--wdd-black)] shadow-sm hover:shadow hover:bg-gray-50 transition-all rounded-none cursor-pointer"
+                        >
+                            {name.toUpperCase()}
+                        </button>
                     ))}
                 </div>
             )}
