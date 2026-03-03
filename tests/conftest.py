@@ -33,7 +33,7 @@ def set_admin_bypass():
 def mock_openai(monkeypatch):
     """Mock LLM calls to make tests fast, deterministic and offline-capable without 404s."""
     
-    async def mock_generate_answer(client, model, query, entities, lang):
+    async def mock_generate_answer(client, model, query, entities, lang="en", session_history=None, intent="info_query"):
         ans = "I'd be happy to help. What specific region are you looking for?"
         intent_lane = "unknown"
         

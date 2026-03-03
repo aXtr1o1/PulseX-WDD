@@ -71,7 +71,11 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
     )
 
     # Build index if requested or missing
-    if settings.index_rebuild_on_start or not settings.keyword_index_path.exists():
+    if (
+        settings.index_rebuild_on_start
+        or not settings.keyword_index_path.exists()
+        or not settings.vector_index_path.exists()
+    ):
         logger.info("Building retrieval indices...")
         try:
             from scripts.build_index import build_all  # type: ignore

@@ -14,3 +14,50 @@ timestamp,request_id,session_id,endpoint,intent,kb_version_hash,keyword_hits,vec
 2026-03-01T10:32:25.411939+00:00,bbea0bfa,test_sess_1,/api/chat,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o,10,20,1,ok,,0.00035,8f434346648f6b96
 2026-03-01T10:32:25.424134+00:00,6a9c31e5,test_sess_2,/api/chat,sales_intent,dcb4d66a6b47,0,0,0,[],gpt-4o,10,20,0,ok,,0.00035,5c6c9be6efb01b92
 2026-03-01T10:32:25.462467+00:00,edf181ec,test_sess_3,/api/chat,property_question,dcb4d66a6b47,0,0,0,[],gpt-4o,10,20,1,ok,,0.00035,fa8276bce993487a
+2026-03-01T11:08:44.185438+00:00,e2a264cb,sess_mm7ncw2tu1vh5,/api/chat,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o,0,0,282,ok,,0.0,8f434346648f6b96
+2026-03-01T11:09:32.262100+00:00,ba1eae55,sess_mm7ndxdixjqoh,/api/chat,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o,0,0,247,ok,,0.0,8f434346648f6b96
+2026-03-01T11:13:30.845526+00:00,4eb2a900,sess_mm7nixwyhd9a5,/api/chat,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o,0,0,1059,ok,,0.0,8f434346648f6b96
+2026-03-01T11:41:44.469791+00:00,f47dd65c,test_sess_1,/api/chat,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o,10,20,3,ok,,0.00035,8f434346648f6b96
+2026-03-01T11:41:44.480448+00:00,3428d234,test_sess_2,/api/chat,sales_intent,dcb4d66a6b47,0,0,0,[],gpt-4o,10,20,0,ok,,0.00035,5c6c9be6efb01b92
+2026-03-01T11:41:44.515033+00:00,883dbdc6,test_sess_3,/api/chat,property_question,dcb4d66a6b47,0,0,0,[],gpt-4o,10,20,0,ok,,0.00035,fa8276bce993487a
+2026-03-01T11:43:10.272402+00:00,11a75640,sess_mm7okyb0x0xio,/api/chat/stream,sales_intent,dcb4d66a6b47,0,0,0,[],gpt-4o,0,0,1085,ok,,0.0,5d0200f71173c403
+2026-03-01T11:44:04.760346+00:00,7aff7770,sess_mm7omc3rppbid,/api/chat/stream,sales_intent,dcb4d66a6b47,0,0,0,[],gpt-4o,0,0,1011,ok,,0.0,5d0200f71173c403
+2026-03-01T11:48:06.041931+00:00,cb1772b8,sess_mm7or54b8yj6c,/api/chat/stream,property_question,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,0,0,3806,ok,,0.0,1c6357b57be8fa95
+2026-03-01T11:49:49.280459+00:00,517575e7,sess_mm7ota5q1nhqo,/api/chat/stream,property_question,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,0,0,3858,ok,,0.0,1c6357b57be8fa95
+2026-03-02T14:04:04.100259+00:00,49442061,sess_mm98w178k6cgm,/api/chat/stream,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,0,0,2196,ok,,0.0,3639efcd08abb273
+2026-03-02T17:23:49.582359+00:00,2da07c9c,test_sess_1,/api/chat,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,10,20,1,ok,,0.00035,8f434346648f6b96
+2026-03-02T17:23:51.157203+00:00,a277a4f7,test_sess_2,/api/chat,info_query,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,10,20,3,ok,,0.00035,5c6c9be6efb01b92
+2026-03-02T17:23:55.222260+00:00,dfc47075,test_sess_3,/api/chat,info_query,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,10,20,2,ok,,0.00035,fa8276bce993487a
+2026-03-02T17:25:08.881483+00:00,bbb5e1aa,test_sess_1,/api/chat,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,10,20,2,ok,,0.00035,8f434346648f6b96
+2026-03-02T17:25:10.276948+00:00,0f2fc64c,test_sess_2,/api/chat,info_query,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,10,20,6,ok,,0.00035,5c6c9be6efb01b92
+2026-03-02T17:25:14.489137+00:00,ba6a3b16,test_sess_3,/api/chat,info_query,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,10,20,2,ok,,0.00035,fa8276bce993487a
+2026-03-02T17:50:34.561813+00:00,c2d49a23,sess_mm9h53yrykadk,/api/chat/stream,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,0,0,4101,ok,,0.0,f2bf742ecf61b8e7
+2026-03-02T17:50:58.883148+00:00,cc222891,sess_mm9h53yrykadk,/api/chat/stream,sales_intent,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,0,0,4497,ok,,0.0,3b04d7e3cbabc762
+2026-03-02T17:51:58.571454+00:00,37a291bb,sess_mm9h77ulk7lfq,/api/chat/stream,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,0,0,3708,ok,,0.0,f2bf742ecf61b8e7
+2026-03-02T17:52:19.160130+00:00,fb39e8e0,sess_mm9h77ulk7lfq,/api/chat/stream,sales_intent,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,0,0,4043,ok,,0.0,3b04d7e3cbabc762
+2026-03-02T17:53:14.468994+00:00,5f20de11,sess_mm9h8iup5i10j,/api/chat/stream,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,0,0,5397,ok,,0.0,f2bf742ecf61b8e7
+2026-03-02T17:53:21.043789+00:00,95fabe64,sess_mm9h8iup5i10j,/api/chat/stream,sales_intent,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,0,0,2828,ok,,0.0,3b04d7e3cbabc762
+2026-03-02T17:55:44.967741+00:00,6debb4ac,sess_mm9h8iup5i10j,/api/chat/stream,greeting,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,0,0,3615,ok,,0.0,3639efcd08abb273
+2026-03-02T18:05:33.548817+00:00,ff057331,test_session_123,/api/chat/stream,shortlist,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,0,0,5883,ok,,0.0,6a2e4cbe813bb2f9
+2026-03-02T18:08:47.624774+00:00,05b85a10,test_session_124,/api/chat/stream,shortlist,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,0,0,5324,ok,,0.0,6a2e4cbe813bb2f9
+2026-03-03T05:09:56.036173+00:00,0f478908,test_session_125,/api/chat/stream,shortlist,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,0,0,3438,ok,,0.0,6a2e4cbe813bb2f9
+2026-03-03T05:12:05.194351+00:00,60f51d08,test_session_126,/api/chat/stream,shortlist,dcb4d66a6b47,0,0,0,[],gpt-4o-mini,0,0,4214,ok,,0.0,6a2e4cbe813bb2f9
+2026-03-03T05:13:30.132977+00:00,2f888b09,test_session_127,/api/chat/stream,shortlist,dcb4d66a6b47,0,26,26,"[""clubtown"", ""blumar_hills"", ""ojo"", ""waterside""]",gpt-4o-mini,0,0,5814,ok,,0.0,6a2e4cbe813bb2f9
+2026-03-03T05:33:42.310912+00:00,158b7ec8,test_rag_1,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""blumar_hills"", ""waterside"", ""living_community"", ""murano""]",gpt-4o-mini,0,0,5070,ok,,0.0,0701585bcb004b8a
+2026-03-03T05:33:46.875000+00:00,52024127,test_rag_2,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""waterside""]",gpt-4o-mini,0,0,4553,ok,,0.0,f931fd40db3d4c0c
+2026-03-03T05:33:50.049734+00:00,78deb863,test_rag_3,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""clubtown"", ""horizon"", ""breeze"", ""edge""]",gpt-4o-mini,0,0,3161,ok,,0.0,5693cae679f67f98
+2026-03-03T05:33:53.759839+00:00,543de820,test_rag_1,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""blumar_hills"", ""waterside"", ""living_community"", ""murano""]",gpt-4o-mini,0,0,3250,ok,,0.0,0701585bcb004b8a
+2026-03-03T05:33:57.678817+00:00,a8b58435,test_rag_2,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""waterside""]",gpt-4o-mini,0,0,3913,ok,,0.0,f931fd40db3d4c0c
+2026-03-03T05:34:01.070744+00:00,24c2e58d,test_rag_3,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""clubtown"", ""horizon"", ""breeze"", ""edge""]",gpt-4o-mini,0,0,3383,ok,,0.0,5693cae679f67f98
+2026-03-03T05:34:04.960999+00:00,1c6a872a,test_rag_4,/api/chat/stream,shortlist,dcb4d66a6b47,0,18,18,"[""river_walk""]",gpt-4o-mini,0,0,3879,ok,,0.0,cbcb99a5ff085bc3
+2026-03-03T05:34:08.295322+00:00,907145d2,test_rag_5,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""clubtown"", ""horizon"", ""breeze"", ""edge""]",gpt-4o-mini,0,0,3321,ok,,0.0,e3b345c91ca7e6b6
+2026-03-03T05:34:46.095153+00:00,7ba81014,test_rag_1,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""blumar_hills"", ""waterside"", ""living_community"", ""murano""]",gpt-4o-mini,0,0,4741,ok,,0.0,0701585bcb004b8a
+2026-03-03T05:34:50.329986+00:00,7a9d63ca,test_rag_2,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""waterside""]",gpt-4o-mini,0,0,4221,ok,,0.0,f931fd40db3d4c0c
+2026-03-03T05:34:54.246518+00:00,c338764f,test_rag_3,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""clubtown"", ""horizon"", ""breeze"", ""edge""]",gpt-4o-mini,0,0,3886,ok,,0.0,5693cae679f67f98
+2026-03-03T05:34:58.307837+00:00,90e5ec43,test_rag_4,/api/chat/stream,shortlist,dcb4d66a6b47,0,18,18,"[""river_walk""]",gpt-4o-mini,0,0,4039,ok,,0.0,cbcb99a5ff085bc3
+2026-03-03T05:35:02.010458+00:00,c7de5278,test_rag_5,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""clubtown"", ""horizon"", ""breeze"", ""edge""]",gpt-4o-mini,0,0,3692,ok,,0.0,e3b345c91ca7e6b6
+2026-03-03T05:35:16.475624+00:00,d9273233,test_rag_1,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""blumar_hills"", ""waterside"", ""living_community"", ""murano""]",gpt-4o-mini,0,0,5227,ok,,0.0,0701585bcb004b8a
+2026-03-03T05:35:19.837731+00:00,a8d232ef,test_rag_2,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""waterside""]",gpt-4o-mini,0,0,3350,ok,,0.0,f931fd40db3d4c0c
+2026-03-03T05:35:23.117143+00:00,638a18d7,test_rag_3,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""clubtown"", ""horizon"", ""breeze"", ""edge""]",gpt-4o-mini,0,0,3272,ok,,0.0,5693cae679f67f98
+2026-03-03T05:35:26.879422+00:00,aee1d5f3,test_rag_4,/api/chat/stream,shortlist,dcb4d66a6b47,0,18,18,"[""river_walk""]",gpt-4o-mini,0,0,3750,ok,,0.0,cbcb99a5ff085bc3
+2026-03-03T05:35:29.633414+00:00,367f41ab,test_rag_5,/api/chat/stream,info_query,dcb4d66a6b47,0,18,18,"[""clubtown"", ""horizon"", ""breeze"", ""edge""]",gpt-4o-mini,0,0,2746,ok,,0.0,e3b345c91ca7e6b6

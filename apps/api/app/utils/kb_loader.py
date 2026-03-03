@@ -117,6 +117,11 @@ def load_kb(csv_path: Path) -> List[Dict[str, Any]]:
             c["parent_project"]   = _pick(raw, "parent_project")
             c["is_alias_of"]      = _pick(raw, "is_alias_of")
             c["region"]           = _pick(raw, "region")
+            
+            if not c["region"]:
+                logger.warning("Skipping project row %s due to missing region metadata.", c["entity_id"])
+                continue
+
             c["city_area"]        = _pick(raw, "city_area")
             c["location_text"]    = _pick(raw, "micro_location")
             c["brand_family"]     = _pick(raw, "brand_family")

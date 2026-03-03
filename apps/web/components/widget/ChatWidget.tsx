@@ -61,6 +61,7 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
         setMessages((prev) => [...prev, placeholder]);
 
         let finalContent = '';
+        let streamMetadata: any = null;
 
         streamChat(
             msg, session, lang,
@@ -70,33 +71,64 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
                 setMessages((prev) => {
                     const copy = [...prev];
                     const last = copy[copy.length - 1];
-                    if (last?.streaming) copy[copy.length - 1] = { ...last, content: finalContent };
+                    if (last?.streaming) {
+                        let display = finalContent;
+                        const pIdx = display.indexOf('<payload>');
+                        if (pIdx !== -1) display = display.substring(0, pIdx);
+                        copy[copy.length - 1] = { ...last, content: display };
+                    }
                     return copy;
                 });
             },
+            (meta) => {
+                streamMetadata = meta;
+                if (meta?.evidence && meta.evidence.length > 0) {
+                    setMessages((prev) => {
+                        const copy = [...prev];
+                        const last = copy[copy.length - 1];
+                        if (last?.streaming) copy[copy.length - 1] = { ...last, evidence: meta.evidence };
+                        return copy;
+                    });
+                }
+            },
             async () => {
                 try {
-                    const full = await sendChat(msg, session, lang, {
-                        url: typeof window !== 'undefined' ? window.location.href : undefined,
-                        project_slug: initialProject,
-                    });
+                    let answerText = finalContent;
+                    let payloadData: any = {};
+
+                    const pIdx = finalContent.indexOf('<payload>');
+                    if (pIdx !== -1) {
+                        const endIdx = finalContent.indexOf('</payload>', pIdx);
+                        if (endIdx !== -1) {
+                            const jsonStr = finalContent.substring(pIdx + 9, endIdx).trim();
+                            try {
+                                payloadData = JSON.parse(jsonStr);
+                            } catch (e) { console.error("Failed to parse LLM JSON payload", e); }
+                            answerText = finalContent.substring(0, pIdx).trim();
+                        } else {
+                            // Unclosed tag
+                            answerText = finalContent.substring(0, pIdx).trim();
+                        }
+                    }
+
                     setMessages((prev) => {
                         const copy = [...prev];
                         const last = copy[copy.length - 1];
                         if (last?.streaming) {
                             copy[copy.length - 1] = {
                                 role: 'assistant',
-                                content: full.answer,
-                                evidence: full.evidence,
-                                lead_suggestions: full.lead_suggestions,
-                                focused_project: full.focused_project,
+                                content: answerText,
+                                evidence: streamMetadata?.evidence,
+                                lead_suggestions: payloadData?.lead_suggestions,
+                                focused_project: payloadData?.focused_project,
                                 streaming: false,
                             };
                         }
                         return copy;
                     });
 
-                    if (full.lead_trigger) {
+                    // Trigger lead if intent matches SALES or handoff matches
+                    if (streamMetadata?.lead_trigger || payloadData?.lead_suggestions?.ready_for_handoff) {
                         setTimeout(() => setShowLead(true), 600);
                     }
                 } catch {
@@ -137,7 +169,7 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
         <div className={containerClass} dir={rtl ? 'rtl' : 'ltr'}>
 
             {/* Header (optional based on embedding, but always premium) */}
-            {embedded && (
+            {!embedded && (
                 <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--wdd-border)] bg-gray-50/50">
                     <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden border border-[var(--wdd-border)] shadow-sm">
@@ -162,7 +194,7 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
             )}
 
             {/* Chat Body */}
-            <div className={`flex-1 overflow-y-auto px-4 md:px-8 py-6 space-y-6 ${!embedded ? 'scroll-smooth' : ''}`}>
+            <div className={`flex-1 overflow-y-auto px-4 md:px-8 py-8 space-y-8 ${!embedded ? 'scroll-smooth' : ''} ${embedded ? 'max-w-4xl mx-auto w-full' : ''}`}>
                 {messages.map((msg, i) => (
                     <MessageBubble key={i} message={msg} lang={lang} />
                 ))}
@@ -192,16 +224,16 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
             </div>
 
             {/* Input Dock */}
-            <div className="px-4 md:px-8 pb-6 pt-4 bg-gradient-to-t from-white via-white to-transparent">
-                <div className="relative">
-                    <div className="flex items-center bg-white border border-[var(--wdd-border)] rounded-full px-5 py-3.5 shadow-[0_2px_12px_rgba(0,0,0,0.04)] focus-within:border-[var(--wdd-red)] focus-within:shadow-[0_4px_20px_rgba(203,32,48,0.08)] transition-all duration-300">
+            <div className={`w-full bg-gradient-to-t from-white via-white to-transparent pt-6 pb-8 md:pb-12 ${embedded ? 'px-4' : 'px-4 md:px-8 pb-6 pt-4'}`}>
+                <div className={`w-full relative ${embedded ? 'max-w-4xl mx-auto' : ''}`}>
+                    <div className="flex items-center bg-white border border-[var(--wdd-border)] rounded-full px-5 py-3.5 shadow-[0_2px_16px_rgba(0,0,0,0.03)] focus-within:border-[var(--wdd-red)] focus-within:shadow-[0_4px_24px_rgba(203,32,48,0.06)] transition-all duration-300">
                         <input
                             ref={inputRef}
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={handleKeyDown}
-                            placeholder={lang === 'ar' ? 'اكتشف مشاريعنا...' : 'The journey to your dream starts here...'}
-                            className="flex-1 bg-transparent text-base text-[var(--wdd-text)] placeholder:text-[var(--wdd-muted)] outline-none"
+                            placeholder={lang === 'ar' ? 'رحلتك إلى منزل أحلامك تبدأ من هنا...' : 'The journey to your dream starts here...'}
+                            className="flex-1 bg-transparent text-[15px] font-medium text-[var(--wdd-black)] placeholder:text-[var(--wdd-muted)] placeholder:font-normal outline-none"
                             dir={rtl ? 'rtl' : 'ltr'}
                             disabled={loading}
                         />
@@ -213,7 +245,7 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
                             <button
                                 onClick={() => handleSend()}
                                 disabled={!input.trim()}
-                                className="ml-3 w-9 h-9 flex items-center justify-center rounded-full bg-[var(--wdd-black)] hover:bg-[var(--wdd-red)] text-white disabled:opacity-30 disabled:hover:bg-[var(--wdd-black)] transition-colors duration-300 active:scale-95"
+                                className="ml-3 w-9 h-9 flex items-center justify-center rounded-full bg-[var(--wdd-black)] text-white hover:bg-[var(--wdd-red)] disabled:opacity-50 disabled:hover:bg-[var(--wdd-black)] transition-all duration-300 active:scale-95"
                                 aria-label="Send message"
                             >
                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
@@ -224,9 +256,11 @@ export default function ChatWidget({ initialProject, initialRegion, embedded = f
                     </div>
                 </div>
                 {!embedded && (
-                    <div className="flex justify-between items-center mt-3 px-2">
-                        <p className="text-[11px] text-[var(--wdd-muted)]">
-                            {lang === 'ar' ? 'الردود مبنية على معلومات موثقة' : 'Responses grounded in verified information'}
+                    <div className="flex justify-between items-center mt-4 px-3 max-w-4xl mx-auto">
+                        <p className="text-[11px] text-[var(--wdd-muted)] flex items-center gap-2">
+                            <span>{lang === 'ar' ? 'الردود مبنية على معلومات موثقة' : 'Responses grounded in verified information'}</span>
+                            <span className="w-1 h-1 rounded-full bg-[var(--wdd-border)]"></span>
+                            <a href="tel:16662" className="hover:text-[var(--wdd-red)] transition-colors inline-flex items-center gap-1 font-medium"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" /></svg> 16662</a>
                         </p>
                         <button
                             onClick={() => { setShowLead(true); gtm.callbackRequested(session); }}

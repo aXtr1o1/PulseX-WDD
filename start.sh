@@ -69,7 +69,7 @@ free_port() {
   fi
 }
 
-free_port 8080
+free_port 8081
 free_port 3001
 
 # ── 4. .env check ────────────────────────────────────────────
@@ -122,9 +122,7 @@ success "Images built"
 
 # ── 7. Start services ─────────────────────────────────────────
 info "Starting containers..."
-# Remove ALL stopped/dead containers to clear any ghost state Docker is holding
-docker container prune -f >/dev/null 2>&1 || true
-docker network prune -f   >/dev/null 2>&1 || true
+$COMPOSE down --remove-orphans 2>/dev/null || true
 $COMPOSE up -d --force-recreate
 success "Containers started"
 
@@ -132,7 +130,7 @@ success "Containers started"
 info "Waiting for API to become healthy..."
 MAX=40
 COUNT=0
-until curl -sf http://localhost:8080/api/health >/dev/null 2>&1; do
+until curl -sf http://localhost:8081/api/health >/dev/null 2>&1; do
   COUNT=$((COUNT + 1))
   [ "$COUNT" -ge "$MAX" ] && { echo ""; warn "API health timeout. Check logs: $COMPOSE logs api"; break; }
   printf "."
@@ -150,8 +148,8 @@ echo ""
 echo -e "  🌐  Landing + Widget:    ${CYAN}http://localhost:3001${RESET}"
 echo -e "  🔑  Admin dashboard:     ${CYAN}http://localhost:3001/admin${RESET}"
 echo -e "  🔌  Widget iframe:       ${CYAN}http://localhost:3001/widget${RESET}"
-echo -e "  📡  API (health check):  ${CYAN}http://localhost:8080/api/health${RESET}"
-echo -e "  📖  API docs (dev):      ${CYAN}http://localhost:8080/api/docs${RESET}"
+echo -e "  📡  API (health check):  ${CYAN}http://localhost:8081/api/health${RESET}"
+echo -e "  📖  API docs (dev):      ${CYAN}http://localhost:8081/api/docs${RESET}"
 echo ""
 [ -n "$ADMIN_PASS" ] && echo -e "  Admin password: ${YELLOW}${ADMIN_PASS}${RESET}"
 echo ""

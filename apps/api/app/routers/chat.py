@@ -21,22 +21,24 @@ from ..services.router import (
     extract_project_hint,
     extract_region_hint,
     extract_unit_type_hint,
-    PROPERTY_QUESTION,
-    SALES_INTENT,
+    extract_budget_hint,
+    extract_timeline_hint,
+    extract_purpose_hint,
+    INFO_QUERY,
+    SHORTLIST,
+    PRICING,
+    HANDOFF,
+    LEAD_CAPTURE,
+    GREETING,
 )
 from ..utils.csv_io import hash_message
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api", tags=["chat"])
 
-# Intents that require full RAG
-RAG_INTENTS = {PROPERTY_QUESTION, SALES_INTENT}
-# Intents that route to handoff
-HANDOFF_INTENTS = {
-    "complaint", "payment_services", "gate_access", "hotels",
-    "rentals_ever_stay", "referral_grow_the_family",
-    "private_services_reservation", "directory", "unknown",
-}
+# Intents that require full RAG via the Concierge Brain
+RAG_INTENTS = {INFO_QUERY, SHORTLIST, PRICING, LEAD_CAPTURE, GREETING}
+HANDOFF_INTENTS = {HANDOFF}
 
 
 @router.post("/chat", response_model=ChatResponse)
@@ -66,32 +68,47 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
             lang=request.lang,
         )
 
-    # Extract filters
+    # Extract dynamic constraint filters
     entity_names = [e["display_name"] for e in state.kb_entities]
     project_filter = (
         request.page_context.project_slug if request.page_context and request.page_context.project_slug
         else extract_project_hint(request.message, entity_names)
     )
-    region_filter   = extract_region_hint(request.message)
+    region_filter    = extract_region_hint(request.message)
     unit_type_filter = extract_unit_type_hint(request.message)
+    budget_filter    = extract_budget_hint(request.message)
+    timeline_filter  = extract_timeline_hint(request.message)
+    purpose_filter   = extract_purpose_hint(request.message)
 
-    # Hybrid retrieval
-    top_entities, stats = state.retriever.retrieve(
+    # Determine dynamic Top-K based on constraint exactness
+    is_vague = not any([project_filter, region_filter, unit_type_filter, budget_filter])
+    top_k = 16 if is_vague else 6
+
+    # Hybrid retrieval with metadata reranking parameters
+    top_entities, stats = await state.retriever.retrieve(
         query=request.message,
         client=state.llm_client,
         embed_model=settings.azure_openai_embed_deployment,
         project_filter=project_filter,
         region_filter=region_filter,
         unit_type_filter=unit_type_filter,
+        budget_filter=budget_filter,
+        timeline_filter=timeline_filter,
+        purpose_filter=purpose_filter,
+        top_k=top_k,
     )
 
-    # Answer generation
+    # Output strictly Top-4 UI evidence cards based on Reranker
+    evidence_entities = top_entities[:4]
+
+    # Answer generation with 4-Thread Concierge Brain
     result = await generate_answer(
         client=state.llm_client,
         model=settings.azure_openai_chat_deployment,
         query=request.message,
-        entities=top_entities,
+        entities=evidence_entities,
         lang=request.lang,
+        intent=intent,
     )
 
     latency_ms = int((time.monotonic() - t0) * 1000)
@@ -99,7 +116,7 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
     _write_audit_safe(
         state, request_id, request.session_id, "/api/chat",
         intent, stats,
-        [e["entity_id"] for e in top_entities],
+        [e["entity_id"] for e in evidence_entities],
         result.get("model", settings.azure_openai_chat_deployment),
         result.get("tokens_in", 0), result.get("tokens_out", 0),
         latency_ms, request.message,
@@ -113,10 +130,13 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
             snippet=e.get("index_text", "")[:200],
             confidence=e.get("confidence", 0.7),
         )
-        for e in top_entities[:4]
+        for e in evidence_entities
     ]
 
     payload = result.get("payload") or {}
+    
+    # Lead trigger check from dynamic payload
+    is_trigger = (intent == LEAD_CAPTURE) or payload.get("ready_for_handoff", False)
 
     return ChatResponse(
         session_id=request.session_id,
@@ -124,11 +144,11 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
         intent=intent,
         answer=result["answer"],
         evidence=evidence,
-        shortlist=payload.get("shortlist"),
-        lead_suggestions=payload.get("lead_suggestions"),
-        focused_project=payload.get("focused_project"),
+        shortlist=payload.get("project_interest"),
+        lead_suggestions=payload,
+        focused_project=project_filter,
         intent_lane=intent,
-        lead_trigger=(intent == SALES_INTENT),
+        lead_trigger=is_trigger,
         lang=request.lang,
         latency_ms=latency_ms,
     )
@@ -137,14 +157,20 @@ async def chat(request: ChatRequest, req: Request) -> ChatResponse:
 @router.post("/chat/stream")
 async def chat_stream(request: ChatRequest, req: Request) -> StreamingResponse:
     """Streaming SSE chat endpoint."""
+    import json
+    import time
     settings = get_settings()
+    t0 = time.monotonic()
+    request_id = new_request_id()
     state = req.app.state
     intent = detect_intent(request.message, request.lang)
 
     if intent in HANDOFF_INTENTS:
         msg = get_handoff_message(intent, request.lang)
         async def _simple():
-            yield f"data: {msg}\n\n"
+            meta = {"intent": intent, "handoff_cta": True, "lead_trigger": False, "evidence": []}
+            yield f"data: [METADATA] {json.dumps(meta)}\n\n"
+            yield f"data: {json.dumps({'t': msg})}\n\n"
             yield "data: [DONE]\n\n"
         return StreamingResponse(_simple(), media_type="text/event-stream")
 
@@ -155,25 +181,69 @@ async def chat_stream(request: ChatRequest, req: Request) -> StreamingResponse:
     )
     region_filter    = extract_region_hint(request.message)
     unit_type_filter = extract_unit_type_hint(request.message)
+    budget_filter    = extract_budget_hint(request.message)
+    timeline_filter  = extract_timeline_hint(request.message)
+    purpose_filter   = extract_purpose_hint(request.message)
 
-    top_entities, _ = state.retriever.retrieve(
+    is_vague = not any([project_filter, region_filter, unit_type_filter, budget_filter])
+    top_k = 16 if is_vague else 6
+
+    top_entities, stats = await state.retriever.retrieve(
         query=request.message,
         client=state.llm_client,
         embed_model=settings.azure_openai_embed_deployment,
         project_filter=project_filter,
         region_filter=region_filter,
         unit_type_filter=unit_type_filter,
+        budget_filter=budget_filter,
+        timeline_filter=timeline_filter,
+        purpose_filter=purpose_filter,
+        top_k=top_k,
     )
+    
+    evidence_entities = top_entities[:4]
+
+    evidence = [
+        EvidenceSnippet(
+            entity_id=e["entity_id"],
+            display_name=e["display_name"],
+            source_url=e.get("verified_url") or (e.get("sources") or [None])[0],
+            snippet=e.get("index_text", "")[:200],
+            confidence=e.get("confidence", 0.7),
+        ).model_dump()
+        for e in evidence_entities
+    ]
 
     async def gen() -> AsyncGenerator[str, None]:
+        meta = {
+            "intent": intent,
+            "handoff_cta": False,
+            "lead_trigger": (intent == LEAD_CAPTURE),
+            "evidence": evidence
+        }
+        yield f"data: [METADATA] {json.dumps(meta)}\n\n"
+        
+        full_text = ""
         async for token in stream_answer(
             client=state.llm_client,
             model=settings.azure_openai_chat_deployment,
             query=request.message,
-            entities=top_entities,
+            entities=evidence_entities,
             lang=request.lang,
+            intent=intent,
         ):
-            yield f"data: {token}\n\n"
+            full_text += token
+            # stream as json object to safely handle newlines natively
+            yield f"data: {json.dumps({'t': token})}\n\n"
+            
+        latency_ms = int((time.monotonic() - t0) * 1000)
+        _write_audit_safe(
+            state, request_id, request.session_id, "/api/chat/stream",
+            intent, stats, [e["entity_id"] for e in evidence_entities],
+            settings.azure_openai_chat_deployment,
+            0, 0, latency_ms, request.message,
+        )
+
         yield "data: [DONE]\n\n"
 
     return StreamingResponse(gen(), media_type="text/event-stream")

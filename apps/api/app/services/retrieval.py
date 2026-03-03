@@ -21,10 +21,10 @@ logger = logging.getLogger(__name__)
 # ──────────────────────────────────────────────────────────────────────────────
 
 def _region_matches(entity_region: Optional[str], user_region: Optional[str]) -> bool:
-    if not user_region or not entity_region:
+    if user_region is None or entity_region is None:
         return True  # no filter requested
-    ur = user_region.lower()
-    er = entity_region.lower()
+    ur = str(user_region).lower()
+    er = str(entity_region).lower()
     return ur in er or er in ur
 
 
@@ -66,6 +66,12 @@ class KeywordIndex:
         """Returns list of (entity_id, normalized_bm25_score)."""
         if not self.db_path.exists():
             return []
+            
+        import re
+        clean_query = re.sub(r'[^\w\s]', ' ', query).strip()
+        if not clean_query:
+            return []
+            
         with self._conn() as conn:
             try:
                 rows = conn.execute(
@@ -76,7 +82,7 @@ class KeywordIndex:
                     ORDER BY score
                     LIMIT ?
                     """,
-                    (query, top_k),
+                    (clean_query, top_k),
                 ).fetchall()
                 if not rows:
                     return []
@@ -156,16 +162,16 @@ class HybridRetriever:
         self.top_k = top_k
         self._vector_ready = self.vector.load()
 
-    def _embed_query(self, query: str, client: Any, model: str) -> Optional[np.ndarray]:
+    async def _embed_query(self, query: str, client: Any, model: str) -> Optional[np.ndarray]:
         try:
-            resp = client.embeddings.create(input=[query], model=model)
+            resp = await client.embeddings.create(input=[query], model=model)
             vec = np.array(resp.data[0].embedding, dtype="float32")
             return vec
         except Exception as e:
             logger.warning("Embedding failed: %s", e)
             return None
 
-    def retrieve(
+    async def retrieve(
         self,
         query: str,
         client: Any,
@@ -173,11 +179,15 @@ class HybridRetriever:
         project_filter: Optional[str] = None,
         region_filter: Optional[str] = None,
         unit_type_filter: Optional[str] = None,
+        budget_filter: Optional[str] = None,
+        timeline_filter: Optional[str] = None,
+        purpose_filter: Optional[str] = None,
         top_k: Optional[int] = None,
     ) -> Tuple[List[Dict[str, Any]], Dict[str, int]]:
         """
         Returns (ranked_entities, stats_dict).
-        Applies hard gating: project_filter > region_filter > unit_type_filter.
+        Applies hard gating: project_filter > region_filter.
+        Applies soft constraints reranking: budget, timeline, unit_type, answerability.
         """
         k = top_k or self.top_k
 
@@ -188,7 +198,7 @@ class HybridRetriever:
         # ── Vector retrieval
         vec_map: Dict[str, float] = {}
         if self._vector_ready:
-            query_vec = self._embed_query(query, client, embed_model)
+            query_vec = await self._embed_query(query, client, embed_model)
             if query_vec is not None:
                 vec_results = self.vector.search(query_vec, top_k=k * 3)
                 vec_map = dict(vec_results)
@@ -221,6 +231,32 @@ class HybridRetriever:
         # If gating returned nothing under a strict filter, DO NOT fall back.
         if not gated and (project_filter or region_filter):
             logger.info("Gating returned 0; maintaining strict zero-results for query: %s", query)
+
+        # ── Metadata Constraint Reranking
+        for i in range(len(gated)):
+            eid, score = gated[i]
+            entity = self.entities[eid]
+            
+            # Factual density base from ingestion
+            ans = float(entity.get("answerability", 0.5))
+            bonus = ans * 0.2  # Up to 20% bonus for highly answerable docs
+            
+            # Soft constraints correlation
+            if budget_filter is not None:
+                bf = str(budget_filter)
+                if (bf in str(entity.get("downpayment_min", "")) or 
+                    bf in str(entity.get("downpayment_max", "")) or
+                    bf in str(entity.get("payment_plan", ""))):
+                    bonus += 0.15
+                
+            if timeline_filter is not None:
+                tf = str(timeline_filter)
+                if (tf in str(entity.get("delivery_year_min", "")) or
+                    tf in str(entity.get("delivery_year_max", "")) or
+                    tf in str(entity.get("project_status", ""))):
+                    bonus += 0.15
+                
+            gated[i] = (eid, score + bonus)
 
         # ── Sort + dedupe + pick top-k
         gated.sort(key=lambda x: x[1], reverse=True)

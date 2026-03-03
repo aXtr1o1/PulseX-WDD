@@ -123,6 +123,7 @@ export function streamChat(
     lang: string,
     pageContext?: PageContext,
     onToken?: (token: string) => void,
+    onMetadata?: (meta: any) => void,
     onDone?: () => void,
 ): AbortController {
     const ctrl = new AbortController();
@@ -146,7 +147,18 @@ export function streamChat(
                     if (line.startsWith('data: ')) {
                         const tok = line.slice(6);
                         if (tok === '[DONE]') { onDone?.(); return; }
-                        onToken?.(tok);
+                        if (tok.startsWith('[METADATA] ')) {
+                            try { onMetadata?.(JSON.parse(tok.slice(11))); } catch (e) { }
+                            continue;
+                        }
+                        try {
+                            const parsed = JSON.parse(tok);
+                            if (parsed && typeof parsed.t === 'string') {
+                                onToken?.(parsed.t);
+                            }
+                        } catch (e) {
+                            // strictly ignore invalid chunks to avoid UI breaking
+                        }
                     }
                 }
             }

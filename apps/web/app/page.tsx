@@ -15,7 +15,7 @@ export default function ConciergePage() {
     const hotline = "16662"; // Placeholder or can be env-based
 
     return (
-        <main className="min-h-screen bg-[var(--wdd-surface)] flex flex-col font-isidora relative" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+        <main className="min-h-screen bg-white flex flex-col font-isidora relative" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
 
             {/* 1. Initialization Ritual */}
             {!ready && <InitScreen onReady={() => setReady(true)} />}
@@ -78,14 +78,9 @@ export default function ConciergePage() {
                 </div>
             </header>
 
-            {/* 4. Hero Content / Whitespace Body */}
-            <section className="flex-1 flex flex-col max-w-5xl mx-auto w-full px-4 md:px-8 py-8 md:py-12 animate-fade-in">
-
-                {/* Embedded Concierge Core */}
-                <div className="flex-1 w-full bg-white rounded-[24px] shadow-[0_8px_40px_rgba(0,0,0,0.06)] border border-[#f0f0f0] overflow-hidden flex flex-col">
-                    <ChatWidget embedded={true} headerLangToggle={true} />
-                </div>
-
+            {/* 4. Full Page Chat Area */}
+            <section className="flex-1 flex flex-col w-full h-[calc(100vh-64px)] overflow-hidden relative">
+                <ChatWidget embedded={true} headerLangToggle={false} />
             </section>
         </main>
     );

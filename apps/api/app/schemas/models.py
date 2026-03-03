@@ -60,6 +60,26 @@ PHONE_PATTERN = re.compile(r"^\+?[0-9\s\-().]{7,20}$")
 EMAIL_PATTERN = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 
+class LeadSuggestions(BaseModel):
+    intent: Optional[str] = None
+    budget_min: Optional[int] = None
+    budget_max: Optional[int] = None
+    timeline: Optional[str] = None
+    purpose: Optional[str] = None
+    unit_type: Optional[str] = None
+    region: Optional[str] = None
+    project_interest: Optional[List[str]] = Field(default_factory=list)
+    tags: Optional[List[str]] = Field(default_factory=list)
+    preferences: Optional[str] = None
+    qualification_score: Optional[str] = None
+    qualification_reason: Optional[str] = None
+    summary: Optional[str] = None
+    ready_for_handoff: bool = False
+    
+    class Config:
+        extra = "allow"
+
+
 class LeadRequest(BaseModel):
     session_id: str
     lang: str = "en"
