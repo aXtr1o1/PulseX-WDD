@@ -1,6 +1,6 @@
 services:
   # ── Backend (FastAPI + RAG) ──────────────────────────────────
-  api:
+  pulsex_api:
     build:
       context: .
       dockerfile: app/backend/Dockerfile
@@ -9,7 +9,7 @@ services:
       - PYTHONPATH=/code
       - PALMX_RUNTIME_DIR=/code/runtime
     volumes:
-      - pulsex-wdd-v3-runtime-v1:/code/runtime
+      - ./runtime:/code/runtime
       - ./engine-KB:/code/engine-KB:ro
     ports:
       - "8081:8000"
@@ -22,7 +22,7 @@ services:
       start_period: 30s
 
   # ── Frontend (Next.js) ──────────────────────────────────────
-  web:
+  pulsex_web:
     build:
       context: .
       dockerfile: app/frontend/Dockerfile
@@ -31,9 +31,6 @@ services:
     ports:
       - "3001:3000"
     depends_on:
-      api:
+      pulsex_api:
         condition: service_healthy
     restart: unless-stopped
-
-volumes:
-  pulsex-wdd-v3-runtime-v1:

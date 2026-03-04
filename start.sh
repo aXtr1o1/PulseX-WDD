@@ -38,16 +38,19 @@ fi
 success "Docker OK"
 
 # ── 2. Stop any existing PulseX containers ────────────────────
-info "Stopping any existing PulseX containers..."
-# Clean up the specific ghost ID that corrupts the daemon metadata
+info "Hard-resetting Docker project state (Project: PulseX-WDD)..."
+# Defensive ghost-kill for the specific ID corrupting the daemon metadata
 docker rm -f 1ed41d6a385b991b71662b5f0584aadcc89bb9b3dd91bbf5cabd5aad3b396573 2>/dev/null || true
-$COMPOSE down -v --remove-orphans 2>/dev/null || true
+# Deep scrub of standard service names to flush daemon mappings
+docker stop pulsex_api pulsex_web api web 2>/dev/null || true
+docker rm -f pulsex_api pulsex_web api web 2>/dev/null || true
+$COMPOSE down -v --remove-orphans --timeout 0 2>/dev/null || true
 
 # ── 3. Free ports 8081 and 3001 if occupied ───────────────────
 free_port() {
   local PORT=$1
   
-  # A) Check for ALL Docker containers (including exited/zombie ones)
+  # A) Check for ALL Docker containers holding the port
   local CIDS
   CIDS=$(docker ps -a --filter "publish=$PORT" --format "{{.ID}}" 2>/dev/null || true)
   if [ -n "$CIDS" ]; then
@@ -142,7 +145,7 @@ MAX=40
 COUNT=0
 until curl -sf http://localhost:8081/api/health >/dev/null 2>&1; do
   COUNT=$((COUNT + 1))
-  [ "$COUNT" -ge "$MAX" ] && { echo ""; warn "API health timeout. Check logs: $COMPOSE logs api"; break; }
+  [ "$COUNT" -ge "$MAX" ] && { echo ""; warn "API health timeout. Check logs: $COMPOSE logs pulsex_api"; break; }
   printf "."
   sleep 2
 done
@@ -163,6 +166,6 @@ echo -e "  📖  API docs (Swagger):  ${CYAN}http://localhost:8081/docs${RESET}"
 echo ""
 [ -n "$ADMIN_PASS" ] && echo -e "  Admin password: ${YELLOW}${ADMIN_PASS}${RESET}"
 echo ""
-echo -e "  View logs:  ${BOLD}docker compose logs -f${RESET}"
-echo -e "  Stop:       ${BOLD}docker compose down${RESET}"
+  echo -e "  View logs:  ${BOLD}docker compose logs -f${RESET}"
+  echo -e "  Stop:       ${BOLD}docker compose down${RESET}"
 echo ""
