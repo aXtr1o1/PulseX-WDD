@@ -30,10 +30,10 @@ coverage.xml
 
 # ── Node / Next.js ───────────────────────────────────────────
 node_modules/
-apps/web/.next/
-apps/web/out/
-apps/web/.cache/
-apps/web/build/
+app/frontend/.next/
+app/frontend/out/
+app/frontend/.cache/
+app/frontend/build/
 *.tsbuildinfo
 .npm/
 .eslintcache
