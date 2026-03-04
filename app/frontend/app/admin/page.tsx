@@ -220,7 +220,10 @@ export default function AdminPage() {
                     <div className="grid lg:grid-cols-3 gap-6 mt-6">
                         <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
                             <h3 className="text-sm font-semibold mb-4">Temperature</h3>
-                            <DistributionDonut data={activeMetrics?.distributions.temperatures || []} />
+                            <DistributionDonut
+                                data={activeMetrics?.distributions.temperatures || []}
+                                colors={['#CB2030', '#191919', '#55575A', '#9D1523', '#3A3A3A']}
+                            />
                         </div>
                         <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
                             <h3 className="text-sm font-semibold mb-4">Budget Bands</h3>

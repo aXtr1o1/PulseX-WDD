@@ -74,7 +74,7 @@ export function DistributionBar({ data, layout = 'horizontal', color = ACCENT }:
     );
 }
 
-export function DistributionDonut({ data }: { data: PiePoint[] }) {
+export function DistributionDonut({ data, colors = CHART_ACCENT }: { data: PiePoint[], colors?: string[] }) {
     if (!data.length) return <EmptyChart label="No data" />;
     return (
         <ResponsiveContainer width="100%" height={260}>
@@ -95,14 +95,14 @@ export function DistributionDonut({ data }: { data: PiePoint[] }) {
                         const y = cy + radius * Math.sin(-midAngle * RADIAN);
                         const textAnchor = x > cx ? 'start' : 'end';
                         return (
-                            <text x={x} y={y} fill={CHART_ACCENT[index % CHART_ACCENT.length]} textAnchor={textAnchor} dominantBaseline="central" fontSize={11} fontWeight={600}>
+                            <text x={x} y={y} fill={colors[index % colors.length]} textAnchor={textAnchor} dominantBaseline="central" fontSize={11} fontWeight={600}>
                                 {name} ({value})
                             </text>
                         );
                     }}
                 >
                     {data.map((_, index) => (
-                        <Cell key={`cell-${index}`} fill={CHART_ACCENT[index % CHART_ACCENT.length]} />
+                        <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
                     ))}
                 </Pie>
                 <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12, border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
