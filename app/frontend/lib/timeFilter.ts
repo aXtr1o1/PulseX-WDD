@@ -55,6 +55,8 @@ export function computeLeadAnalytics(leads: any[]) {
         purposes: {} as Record<string, number>,
         timelines: {} as Record<string, number>,
         tags: {} as Record<string, number>,
+        temperatures: {} as Record<string, number>,
+        budgetBands: {} as Record<string, number>,
     };
 
     const budgets: number[] = [];
@@ -77,6 +79,8 @@ export function computeLeadAnalytics(leads: any[]) {
         if (l.unit_type) distributions.unitTypes[l.unit_type] = (distributions.unitTypes[l.unit_type] || 0) + 1;
         if (l.purpose) distributions.purposes[l.purpose] = (distributions.purposes[l.purpose] || 0) + 1;
         if (l.timeline) distributions.timelines[l.timeline] = (distributions.timelines[l.timeline] || 0) + 1;
+        if (l.lead_temperature) distributions.temperatures[l.lead_temperature] = (distributions.temperatures[l.lead_temperature] || 0) + 1;
+        if (l.budget_band) distributions.budgetBands[l.budget_band] = (distributions.budgetBands[l.budget_band] || 0) + 1;
 
         // Tags
         (l.tags || []).forEach((t: string) => distributions.tags[t] = (distributions.tags[t] || 0) + 1);
@@ -115,6 +119,8 @@ export function computeLeadAnalytics(leads: any[]) {
             purposes: Object.entries(distributions.purposes).map(([label, count]) => ({ label, count })),
             timelines: Object.entries(distributions.timelines).map(([label, count]) => ({ label, count })),
             tags: Object.entries(distributions.tags).map(([label, count]) => ({ label, count })),
+            temperatures: Object.entries(distributions.temperatures).map(([name, value]) => ({ name, value })),
+            budgetBands: Object.entries(distributions.budgetBands).map(([label, count]) => ({ label, count })),
         }
     };
 }

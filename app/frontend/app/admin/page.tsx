@@ -205,7 +205,7 @@ export default function AdminPage() {
 
                         <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
                             <h3 className="text-sm font-semibold mb-6">Top Project Demand</h3>
-                            <DistributionBar data={activeMetrics?.distributions.projects.slice(0, 5) || []} layout="vertical" />
+                            <DistributionBar data={activeMetrics?.distributions.projects.slice(0, 5) || []} layout="vertical" color="mixed" />
                         </div>
                         <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
                             <h3 className="text-sm font-semibold mb-6">Volume by District</h3>
@@ -214,6 +214,21 @@ export default function AdminPage() {
                         <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
                             <h3 className="text-sm font-semibold mb-4">Lead Purpose</h3>
                             <DistributionBar data={activeMetrics?.distributions.purposes || []} />
+                        </div>
+                    </div>
+
+                    <div className="grid lg:grid-cols-3 gap-6 mt-6">
+                        <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
+                            <h3 className="text-sm font-semibold mb-4">Temperature</h3>
+                            <DistributionDonut data={activeMetrics?.distributions.temperatures || []} />
+                        </div>
+                        <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
+                            <h3 className="text-sm font-semibold mb-4">Budget Bands</h3>
+                            <DistributionBar data={activeMetrics?.distributions.budgetBands || []} color="#55575A" />
+                        </div>
+                        <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
+                            <h3 className="text-sm font-semibold mb-4">Timeline</h3>
+                            <DistributionBar data={activeMetrics?.distributions.timelines || []} color="mixed" />
                         </div>
                     </div>
                 </section>

@@ -11,6 +11,10 @@ const SECONDARY = '#55575A';
 const MUTED = '#9A9A9A';
 const CHART_ACCENT = ['#CB2030', '#D32F2F', '#E53935', '#55575A', '#191919', '#E6E6E6'];
 
+// Color palettes for varied shade bars
+const WDD_REDS = ['#9D1523', '#B71C1C', '#CB2030', '#D32F2F', '#E53935', '#EF5350', '#E57373'];
+const WDD_GREYS = ['#191919', '#3A3A3A', '#55575A', '#74777B', '#9A9A9A', '#BABABA', '#D5D5D5'];
+
 // --- Components ---
 
 
@@ -41,7 +45,7 @@ export function LeadsTimeChart({ data }: { data: any[] }) {
     );
 }
 
-export function DistributionBar({ data, layout = 'horizontal', color = ACCENT }: { data: DataPoint[], layout?: 'horizontal' | 'vertical', color?: string }) {
+export function DistributionBar({ data, layout = 'horizontal', color = ACCENT }: { data: DataPoint[], layout?: 'horizontal' | 'vertical', color?: string | 'mixed' }) {
     if (!data.length) return <EmptyChart label="No data" />;
     return (
         <ResponsiveContainer width="100%" height={220}>
@@ -59,7 +63,12 @@ export function DistributionBar({ data, layout = 'horizontal', color = ACCENT }:
                     </>
                 )}
                 <Tooltip contentStyle={{ border: '1px solid #E6E6E6', borderRadius: 8, fontSize: 12 }} />
-                <Bar dataKey="count" fill={color} radius={layout === 'vertical' ? [0, 4, 4, 0] : [4, 4, 0, 0]} name="Leads" />
+                <Bar dataKey="count" radius={layout === 'vertical' ? [0, 4, 4, 0] : [4, 4, 0, 0]} name="Leads">
+                    {data.map((entry, index) => {
+                        const palette = color === 'mixed' ? CHART_ACCENT : (color === ACCENT ? WDD_REDS : WDD_GREYS);
+                        return <Cell key={`cell-${index}`} fill={palette[index % palette.length]} />;
+                    })}
+                </Bar>
             </BarChart>
         </ResponsiveContainer>
     );
