@@ -39,35 +39,45 @@ success "Docker OK"
 
 # ── 2. Stop any existing PulseX containers ────────────────────
 info "Stopping any existing PulseX containers..."
-$COMPOSE down --remove-orphans 2>/dev/null || true
+# Clean up the specific ghost ID that corrupts the daemon metadata
+docker rm -f 1ed41d6a385b991b71662b5f0584aadcc89bb9b3dd91bbf5cabd5aad3b396573 2>/dev/null || true
+$COMPOSE down -v --remove-orphans 2>/dev/null || true
 
-# ── 3. Free ports 8000 and 3000 if occupied ───────────────────
+# ── 3. Free ports 8081 and 3001 if occupied ───────────────────
 free_port() {
   local PORT=$1
-  # Get all PIDs on this port
+  
+  # A) Check for ALL Docker containers (including exited/zombie ones)
+  local CIDS
+  CIDS=$(docker ps -a --filter "publish=$PORT" --format "{{.ID}}" 2>/dev/null || true)
+  if [ -n "$CIDS" ]; then
+    for CID in $CIDS; do
+      local CNAME
+      CNAME=$(docker inspect --format '{{.Name}}' "$CID" 2>/dev/null | sed 's/^\///')
+      warn "Port $PORT is held by Docker container '$CNAME' ($CID) — forcing removal..."
+      docker stop "$CID" 2>/dev/null || true
+      docker rm -f "$CID" 2>/dev/null || true
+    done
+  fi
+
+  # B) Check for local processes (dev servers, etc.)
   local PIDS
   PIDS=$(lsof -ti tcp:"$PORT" 2>/dev/null || true)
   if [ -z "$PIDS" ]; then return; fi
 
-  # Only kill known safe dev-server processes; never kill Docker internals
-  local SAFE_NAMES="uvicorn|node|python|python3|next"
-  local KILLED=0
+  warn "Port $PORT is occupied. Cleaning up..."
   for PID in $PIDS; do
     local PNAME
     PNAME=$(ps -p "$PID" -o comm= 2>/dev/null || true)
-    if echo "$PNAME" | grep -qiE "$SAFE_NAMES"; then
-      warn "Port $PORT in use by '$PNAME' (PID $PID) — stopping it..."
-      kill -9 "$PID" 2>/dev/null || true
-      KILLED=1
-    else
-      warn "Port $PORT in use by '$PNAME' (PID $PID) — skipping (not a dev server)"
-    fi
+    warn "Killing '$PNAME' (PID $PID)..."
+    kill -9 "$PID" 2>/dev/null || true
   done
-  if [ "$KILLED" -eq 1 ]; then
-    sleep 1
-    success "Port $PORT freed"
-  fi
+  sleep 1
+  success "Port $PORT freed"
 }
+
+info "Thermal Cleanup: Clearing stale network metadata..."
+docker network prune -f 2>/dev/null || true
 
 free_port 8081
 free_port 3001
@@ -102,28 +112,28 @@ fi
 success ".env OK"
 
 # ── 5. Ensure runtime dirs + CSV headers ─────────────────────
-info "Ensuring runtime directories and CSV headers..."
-mkdir -p "$REPO/runtime" "$REPO/indices"
+info "Ensuring runtime directories..."
+mkdir -p "$REPO/runtime/index" "$REPO/runtime/leads" "$REPO/runtime/exports"
 
-LEADS_HDR="timestamp,session_id,lang,name,phone,email,interest_projects,preferred_region,unit_type,budget_min,budget_max,budget_band,purpose,timeline,tags,consent_callback,consent_marketing,consent_timestamp,source_url,page_title,summary,raw_json"
-AUDIT_HDR="timestamp,request_id,session_id,endpoint,intent,kb_version_hash,keyword_hits,vector_hits,blended_hits,top_entities_json,model,tokens_in,tokens_out,latency_ms,status,error_reason,cost_estimate_usd,message_hash"
-SESS_HDR="session_id,created_at,last_seen,turn_count,lang,last_intent,page_url,ip_hash,user_agent"
+LEADS_CSV="$REPO/runtime/leads/leads.csv"
+AUDIT_CSV="$REPO/runtime/leads/audit.csv"
 
-[ ! -f "$REPO/runtime/leads.csv" ]    && echo "$LEADS_HDR"  > "$REPO/runtime/leads.csv"
-[ ! -f "$REPO/runtime/audit.csv" ]    && echo "$AUDIT_HDR"  > "$REPO/runtime/audit.csv"
-[ ! -f "$REPO/runtime/sessions.csv" ] && echo "$SESS_HDR"   > "$REPO/runtime/sessions.csv"
+LEADS_HDR="timestamp,session_id,name,phone,interest_projects,preferred_region,unit_type,budget_min,budget_max,purpose,timeline,next_step,lead_summary,tags,kb_version_hash"
+AUDIT_HDR="timestamp,session_id,user_message,router_intent,retrieved_projects,similarity_scores,kb_version,fields_used"
+
+[ ! -f "$LEADS_CSV" ] && echo "$LEADS_HDR" > "$LEADS_CSV"
+[ ! -f "$AUDIT_CSV" ] && echo "$AUDIT_HDR" > "$AUDIT_CSV"
 
 success "Runtime ready"
 
 # ── 6. Build images ───────────────────────────────────────────
-info "Building Docker images (parallel, may take ~2 min on first run)..."
-$COMPOSE build --parallel
+info "Building Docker images (may take ~2 min on first run)..."
+$COMPOSE build
 success "Images built"
 
 # ── 7. Start services ─────────────────────────────────────────
 info "Starting containers..."
-$COMPOSE down --remove-orphans 2>/dev/null || true
-$COMPOSE up -d --force-recreate
+$COMPOSE up -d
 success "Containers started"
 
 # ── 8. Wait for API health ────────────────────────────────────
@@ -145,11 +155,11 @@ echo -e "${BOLD}═════════════════════�
 echo -e "${GREEN}  PulseX-WDD is running! 🚀${RESET}"
 echo -e "${BOLD}════════════════════════════════════════════════${RESET}"
 echo ""
-echo -e "  🌐  Landing + Widget:    ${CYAN}http://localhost:3001${RESET}"
+echo -e "  🌐  Concierge:           ${CYAN}http://localhost:3001${RESET}"
 echo -e "  🔑  Admin dashboard:     ${CYAN}http://localhost:3001/admin${RESET}"
 echo -e "  🔌  Widget iframe:       ${CYAN}http://localhost:3001/widget${RESET}"
 echo -e "  📡  API (health check):  ${CYAN}http://localhost:8081/api/health${RESET}"
-echo -e "  📖  API docs (dev):      ${CYAN}http://localhost:8081/api/docs${RESET}"
+echo -e "  📖  API docs (Swagger):  ${CYAN}http://localhost:8081/docs${RESET}"
 echo ""
 [ -n "$ADMIN_PASS" ] && echo -e "  Admin password: ${YELLOW}${ADMIN_PASS}${RESET}"
 echo ""

@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600&display=swap');
+
+/* ── WDD Design Tokens ─────────────────────────────────────────────────────── */
+:root {
+    --wdd-red: #CB2030;
+    --wdd-bg: #FFFFFF;
+    --wdd-text: #191919;
+    --wdd-black: #000000;
+    --wdd-icon-grey: #55575A;
+    --wdd-selection-bg: #CB2030;
+    --wdd-selection-text: #FFFFFF;
+    --wdd-surface: #FAFAFA;
+    --wdd-border: #E6E6E6;
+    --wdd-muted: #6B6B6B;
+    --wdd-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --wdd-shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.15);
+    --wdd-radius: 0px;
+    --wdd-radius-lg: 0px;
+    --font-primary: "Isidora Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-arabic: "Isidora Sans", "Noto Sans Arabic", system-ui, sans-serif;
+}
+
+/* ── Selection Color ─────────────────────────────────────────────────────── */
+::selection {
+    background: var(--wdd-selection-bg);
+    color: var(--wdd-selection-text);
+}
+
+::-moz-selection {
+    background: var(--wdd-selection-bg);
+    color: var(--wdd-selection-text);
+}
+
+/* ── Base ────────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    background: var(--wdd-bg);
+    color: var(--wdd-text);
+    line-height: 1.5;
+    min-height: 100dvh;
+}
+
+/* Arabic RTL */
+[dir="rtl"] {
+    font-family: var(--font-arabic);
+}
+
+/* ── Typography ──────────────────────────────────────────────────────────── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--wdd-black);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+}
+
+p {
+    line-height: 1.65;
+}
+
+a {
+    color: var(--wdd-red);
+    text-decoration: none;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--wdd-border);
+    border-radius: 99px;
+}
+
+/* ── Animations ──────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse-soft {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.45;
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out both;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.35s ease-out both;
+}
+
+.animate-slide-right {
+    animation: slideInRight 0.3s ease-out both;
+}
+
+.animate-pulse-soft {
+    animation: pulse-soft 1.4s ease-in-out infinite;
+}
+
+.animate-blink {
+    animation: blink 1s step-end infinite;
+}
+
+/* ── Widget layer ────────────────────────────────────────────────────────── */
+.wdd-widget-root {
+    font-family: var(--font-primary);
+    font-size: 15px;
+    color: var(--wdd-text);
+}
+
+/* ── Prose in chat bubbles ───────────────────────────────────────────────── */
+.prose-sm {
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.prose-sm p+p {
+    margin-top: 0.6em;
+}
+
+/* ── Tailwind base layer override ────────────────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

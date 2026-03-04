@@ -1,40 +1,39 @@
-name: pulsex-v3
-
 services:
+  # ── Backend (FastAPI + RAG) ──────────────────────────────────
   api:
     build:
       context: .
-      dockerfile: apps/api/Dockerfile
-    ports:
-      - "8081:8000"
-    volumes:
-      - ./runtime:/app/runtime
-      - ./indices:/app/indices
+      dockerfile: app/backend/Dockerfile
     env_file: .env
     environment:
-      - PYTHONPATH=/app/apps/api
-      - APP_ENV=prod
-      - INDEX_REBUILD_ON_START=false
+      - PYTHONPATH=/code
+      - PALMX_RUNTIME_DIR=/code/runtime
+    volumes:
+      - pulsex-wdd-v3-runtime-v1:/code/runtime
+      - ./engine-KB:/code/engine-KB:ro
+    ports:
+      - "8081:8000"
     restart: unless-stopped
     healthcheck:
       test: [ "CMD", "curl", "-sf", "http://localhost:8000/api/health" ]
-      interval: 15s
+      interval: 10s
       timeout: 5s
-      retries: 5
-      start_period: 60s
+      retries: 12
+      start_period: 30s
 
+  # ── Frontend (Next.js) ──────────────────────────────────────
   web:
     build:
       context: .
-      dockerfile: apps/web/Dockerfile
-      args:
-        NEXT_PUBLIC_API_BASE_URL: http://localhost:8081
-    ports:
-      - "3001:3000"
+      dockerfile: app/frontend/Dockerfile
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_BASE_URL=http://localhost:8081
-      - INTERNAL_API_URL=http://api:8000
+    ports:
+      - "3001:3000"
     depends_on:
-      - api
+      api:
+        condition: service_healthy
     restart: unless-stopped
+
+volumes:
+  pulsex-wdd-v3-runtime-v1:
