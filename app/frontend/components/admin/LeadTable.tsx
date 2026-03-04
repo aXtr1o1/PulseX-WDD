@@ -16,7 +16,7 @@ export default function LeadTable({ leads, onSelect, loading }: LeadTableProps) 
     if (!leads.length) return <div className="py-20 text-center text-xs text-[var(--wdd-muted)] italic">No leads match the active filters.</div>;
 
     return (
-        <div className="overflow-x-auto no-scrollbar">
+        <div className="overflow-x-auto no-scrollbar pb-4">
             <table className="w-full text-left border-separate border-spacing-0">
                 <thead>
                     <tr className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-[0.15em]">
@@ -30,7 +30,7 @@ export default function LeadTable({ leads, onSelect, loading }: LeadTableProps) 
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-[var(--wdd-border)]">
-                    {leads.map((l, i) => {
+                    {leads.slice(0, 100).map((l, i) => {
                         const projects = l.projects || [];
                         const displayProject = projects[0] || '—';
                         const extraProjects = projects.length > 1 ? `(+${projects.length - 1})` : '';
@@ -75,7 +75,7 @@ export default function LeadTable({ leads, onSelect, loading }: LeadTableProps) 
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 text-right">
-                                    <div className="text-xs font-bold text-[var(--wdd-black)]">{date ? date.toLocaleDateString([], { month: 'short', day: 'numeric' }) : '—'}</div>
+                                    <div className="text-xs font-bold text-[var(--wdd-black)]">{date ? date.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) : '—'}</div>
                                     <div className="text-[10px] text-[var(--wdd-muted)]">{date ? date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '—'}</div>
                                 </td>
                             </tr>
@@ -83,6 +83,11 @@ export default function LeadTable({ leads, onSelect, loading }: LeadTableProps) 
                     })}
                 </tbody>
             </table>
+
+            <div className="py-6 border-t border-[var(--wdd-border)] text-center bg-[var(--wdd-surface)] 
+                            text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-widest mt-2 rounded-b-2xl">
+                SHOWING {Math.min(100, leads.length)} OF {leads.length} LEADS
+            </div>
         </div>
     );
 }

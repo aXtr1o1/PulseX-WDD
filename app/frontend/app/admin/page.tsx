@@ -14,6 +14,8 @@ import KPITile from '@/components/admin/KPITile';
 import { LeadsTimeChart, DistributionBar, DistributionDonut, FunnelStrip } from '@/components/admin/Charts';
 import LeadTable from '@/components/admin/LeadTable';
 import LeadDrawer from '@/components/admin/LeadDrawer';
+import DataViewer from '@/components/admin/DataViewer';
+import Drawer from '@/components/ui/Drawer';
 
 export default function AdminPage() {
     const [leads, setLeads] = useState<LeadRecord[]>([]);
@@ -28,6 +30,8 @@ export default function AdminPage() {
 
     const [selectedLead, setSelectedLead] = useState<LeadRecord | null>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [sortOrder, setSortOrder] = useState<'desc' | 'asc'>('desc');
+    const [previewSheet, setPreviewSheet] = useState<string | null>(null);
 
     const loadAll = useCallback(async () => {
         setLoading(true);
@@ -66,8 +70,15 @@ export default function AdminPage() {
         if (regionFilter !== 'ALL') {
             result = result.filter(l => (l.region || l.preferred_region) === regionFilter);
         }
+
+        result = result.sort((a, b) => {
+            const timeA = parseTimestamp(a.timestamp);
+            const timeB = parseTimestamp(b.timestamp);
+            return sortOrder === 'desc' ? timeB - timeA : timeA - timeB;
+        });
+
         return result;
-    }, [leads, timeRange, searchQuery, regionFilter, now]);
+    }, [leads, timeRange, searchQuery, regionFilter, now, sortOrder]);
 
     const activeMetrics = useMemo(() => computeLeadAnalytics(filteredLeads), [filteredLeads]);
     const qualityMetrics = useMemo(() => {
@@ -253,15 +264,25 @@ export default function AdminPage() {
                                 ))}
                             </div>
                         </div>
-                        <div className="relative flex-1 max-w-sm">
-                            <input
-                                type="text"
-                                placeholder="Search leads by name, phone, or project..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full bg-[var(--wdd-surface)] border border-[var(--wdd-border)] rounded-full px-10 py-2.5 text-xs focus:ring-1 focus:ring-[var(--wdd-red)] outline-none"
-                            />
-                            <svg className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--wdd-muted)]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+                        <div className="flex items-center gap-4 flex-1 justify-end">
+                            <button
+                                onClick={() => setSortOrder(prev => prev === 'desc' ? 'asc' : 'desc')}
+                                className="flex items-center gap-2 px-4 py-2 bg-[var(--wdd-surface)] border border-[var(--wdd-border)] rounded-full text-xs font-bold hover:border-[var(--wdd-black)] transition-colors whitespace-nowrap"
+                            >
+                                <span className="text-[var(--wdd-muted)]">DATE:</span>
+                                <span>{sortOrder === 'desc' ? 'NEWEST FIRST' : 'OLDEST FIRST'}</span>
+                                <svg className={`w-3 h-3 transition-transform ${sortOrder === 'asc' ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m6 9 6 6 6-6" /></svg>
+                            </button>
+                            <div className="relative max-w-sm w-full md:w-64">
+                                <input
+                                    type="text"
+                                    placeholder="Search leads by name, phone, or project..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="w-full bg-[var(--wdd-surface)] border border-[var(--wdd-border)] rounded-full px-10 py-2.5 text-xs focus:ring-1 focus:ring-[var(--wdd-red)] outline-none"
+                                />
+                                <svg className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--wdd-muted)]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+                            </div>
                         </div>
                     </div>
                     <div className="p-2">
@@ -291,7 +312,7 @@ export default function AdminPage() {
                                 <div className="flex gap-2">
                                     <button
                                         className="flex-1 bg-[var(--wdd-surface)] text-[var(--wdd-black)] text-[10px] font-bold py-2 rounded-lg hover:bg-[var(--wdd-border)] transition-colors"
-                                        onClick={() => { setActiveSheet(s.name); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                                        onClick={() => setPreviewSheet(s.name.replace(/\.[^/.]+$/, ''))}
                                     >
                                         PREVIEW
                                     </button>
@@ -335,23 +356,34 @@ export default function AdminPage() {
 
                 {/* Segment G: Executive Summary */}
                 <section className="bg-[var(--wdd-red)] text-white rounded-[24px] p-8 lg:p-12 shadow-xl">
-                    <div className="max-w-3xl">
+                    <div className="w-full">
                         <h2 className="text-2xl font-bold mb-8">Executive Intelligence Summary</h2>
-                        <div className="grid md:grid-cols-2 gap-8">
+                        <div className="grid lg:grid-cols-2 gap-12">
                             <div>
                                 <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase mb-4 opacity-70">What This Proves</h4>
                                 <ul className="space-y-4 text-sm font-light">
                                     <li className="flex gap-3"><span className="text-[#FFD700]">✔</span> System handle {activeMetrics?.uniqueContacts} validated lead sessions.</li>
                                     <li className="flex gap-3"><span className="text-[#FFD700]">✔</span> Primary intent focused on {activeMetrics?.topProj}.</li>
                                     <li className="flex gap-3"><span className="text-[#FFD700]">✔</span> Demand concentration highest in {activeMetrics?.topReg}.</li>
+                                    <li className="flex gap-3"><span className="text-[#FFD700]">✔</span> AI concierge captures qualified leads through natural conversation, not forms — improving conversion quality.</li>
+                                    <li className="flex gap-3"><span className="text-[#FFD700]">✔</span> Every interaction is enriched with project interest, budget signals, timeline, and purchase intent.</li>
+                                    <li className="flex gap-3"><span className="text-[#FFD700]">✔</span> Lead data is structured and export-ready for CRM, call center, or executive reporting workflows.</li>
+                                    <li className="flex gap-3"><span className="text-[#FFD700]">✔</span> The system serves verified information only, eliminating misinformation risk from sales teams.</li>
+                                    <li className="flex gap-3"><span className="text-[#FFD700]">✔</span> Real-time dashboard provides instant visibility into demand patterns across the entire portfolio.</li>
+                                    <li className="flex gap-3"><span className="text-[#FFD700]">✔</span> Retrieval quality tracking ensures the AI&apos;s accuracy is measurable and improvable.</li>
+                                    <li className="flex gap-3"><span className="text-[#FFD700]">✔</span> 24/7 availability captures leads outside business hours — a segment typically lost.</li>
                                 </ul>
                             </div>
                             <div>
-                                <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase mb-4 opacity-70">Expansion Scope</h4>
+                                <h4 className="text-[10px] font-bold tracking-[0.2em] uppercase mb-4 opacity-70">Next Expansion Scope</h4>
                                 <ul className="space-y-4 text-sm font-light">
-                                    <li className="flex gap-3"><span className="opacity-50">○</span> Increase retrieval density for secondary projects.</li>
-                                    <li className="flex gap-3"><span className="opacity-50">○</span> Deploy automated callback scheduling.</li>
-                                    <li className="flex gap-3"><span className="opacity-50">○</span> Deepen integration with inventory API.</li>
+                                    <li className="flex gap-3"><span className="opacity-50">○</span> Phase 1: CRM integration (Salesforce/HubSpot) for real-time lead push and lifecycle tracking.</li>
+                                    <li className="flex gap-3"><span className="opacity-50">○</span> Phase 2: Call center workflow — warm transfer with pre-qualified lead context to sales consultants.</li>
+                                    <li className="flex gap-3"><span className="opacity-50">○</span> Phase 3: Multilingual support (Arabic, French) with culturally-adapted conversation flows.</li>
+                                    <li className="flex gap-3"><span className="opacity-50">○</span> Phase 4: Live pricing and availability sync from internal inventory systems.</li>
+                                    <li className="flex gap-3"><span className="opacity-50">○</span> Phase 5: Role-based admin access (RBAC) with team-level analytics and audit trails.</li>
+                                    <li className="flex gap-3"><span className="opacity-50">○</span> Phase 6: Voice assistant integration for phone-based and in-app concierge experiences.</li>
+                                    <li className="flex gap-3"><span className="opacity-50">○</span> Phase 7: Predictive analytics — demand forecasting, price sensitivity modeling, and buyer scoring.</li>
                                 </ul>
                             </div>
                         </div>
@@ -361,6 +393,15 @@ export default function AdminPage() {
             </main>
 
             <LeadDrawer lead={selectedLead} open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+
+            <Drawer
+                open={!!previewSheet}
+                onClose={() => setPreviewSheet(null)}
+                title={`Preview: ${previewSheet}.csv`}
+                width="w-full md:w-3/4 lg:w-2/3"
+            >
+                {previewSheet && <DataViewer forceSheet={previewSheet as any} />}
+            </Drawer>
         </div>
     );
 }
