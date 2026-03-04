@@ -1,0 +1,83 @@
+{
+  "Murano": {
+    "region": "Ain El Sokhna",
+    "type": "resort",
+    "unit_types": [
+      "villa",
+      "chalet",
+      "duplex",
+      "loft",
+      "penthouse"
+    ],
+    "status": "selling",
+    "highlights": [
+      "Located in 750 meters of beach, 50 minutes from Cairo",
+      "Direct beach access",
+      "Multiple swimming pools",
+      "Phases: Living Community, Waterside, Floating Islands"
+    ],
+    "price_status": "on_request"
+  },
+  "ClubTown": {
+    "region": "Cairo",
+    "type": "residential",
+    "unit_types": [
+      "apartment",
+      "duplex"
+    ],
+    "status": "selling",
+    "highlights": [
+      "Located in New Degla",
+      "Multiple swimming pools",
+      "Phases: Breeze, Horizon, Edge",
+      "Key amenities: Retail, Admin, Sports Courts"
+    ],
+    "price_status": "on_request"
+  },
+  "Neo": {
+    "region": "East Cairo",
+    "type": "residential",
+    "unit_types": [
+      "apartment",
+      "duplex"
+    ],
+    "status": "selling",
+    "highlights": [
+      "Located in Heart of Mostakbal City",
+      "Phases: Neo Lakes, Neo Gardens",
+      "Key amenities: Green Areas, Parking, International School"
+    ],
+    "price_status": "on_request"
+  },
+  "Vero": {
+    "region": "North Coast",
+    "type": "resort",
+    "unit_types": [
+      "apartment",
+      "chalet"
+    ],
+    "status": "selling",
+    "highlights": [
+      "Located in Sidi Abd El Rahman, elevated coastal retreat",
+      "Direct beach access",
+      "Multiple swimming pools",
+      "Key amenities: Horizon Pool, 24/7 Lounge Reception & Concierge, Housekeeping"
+    ],
+    "price_status": "on_request"
+  },
+  "Promenade New Cairo": {
+    "region": "East Cairo",
+    "type": "residential",
+    "unit_types": [
+      "apartment",
+      "penthouse"
+    ],
+    "status": "selling",
+    "highlights": [
+      "Located in 5 minutes from AUC and Road 90",
+      "Multiple swimming pools",
+      "Key amenities: Walking Track, Gym, Swimming Pools"
+    ],
+    "price_status": "on_request"
+  }
+}

@@ -244,6 +244,13 @@ _COL_MAP = {
     "lead_temperature": ["lead_temperature", "temperature", "temp", "score", "hot_warm_cold"],
     "consent_contact": ["consent_contact", "consent", "consented", "callback_allowed", "consent_callback"],
     "confirmed_by_user": ["confirmed_by_user", "confirmed", "verified"],
+    "email": ["email", "e-mail", "mail", "email_address"],
+    "session_id": ["session_id", "session", "user_session", "client_id"],
+    "lead_id": ["lead_id", "id", "lead_number"],
+    "contact_channel": ["contact_channel", "channel", "source_channel"],
+    "customer_summary": ["customer_summary", "customer_brief"],
+    "executive_summary": ["executive_summary", "exec_summary", "exec_brief"],
+    "next_action": ["next_action", "recommended_action", "follow_up"],
 }
 
 
@@ -337,6 +344,13 @@ async def get_leads(
         col_consent = _find_col(cols, _COL_MAP["consent_contact"])
         col_confirmed = _find_col(cols, _COL_MAP["confirmed_by_user"])
         col_reason_display = _find_col(cols, ["reason_codes_display", "reason_codes"])
+        col_email = _find_col(cols, _COL_MAP["email"])
+        col_session = _find_col(cols, _COL_MAP["session_id"])
+        col_lead_id = _find_col(cols, _COL_MAP["lead_id"])
+        col_channel = _find_col(cols, _COL_MAP["contact_channel"])
+        col_customer_summary = _find_col(cols, _COL_MAP["customer_summary"])
+        col_exec_summary = _find_col(cols, _COL_MAP["executive_summary"])
+        col_next_action = _find_col(cols, _COL_MAP["next_action"])
 
         results = []
         for _, row in df.iterrows():
@@ -352,6 +366,8 @@ async def get_leads(
                 "name": raw.get(col_name, "") if col_name else "",
                 "phone": raw.get(col_contact, "") if col_contact else "",
                 "contact": raw.get(col_contact, "") if col_contact else "",
+                "email": raw.get(col_email, "") if col_email else "",
+                "session_id": raw.get(col_session, "") if col_session else "",
                 "summary": raw.get(col_summary, "") if col_summary else "",
                 "projects": projects,
                 "interest_projects": interest_display, # Return pretty string by default
@@ -370,6 +386,11 @@ async def get_leads(
                 "consent_callback": raw.get(col_consent, "") if col_consent else "false",
                 "confirmed_by_user": raw.get(col_confirmed, "") if col_confirmed else "false",
                 "tags": tags,
+                "lead_id": raw.get(col_lead_id, "") if col_lead_id else "",
+                "contact_channel": raw.get(col_channel, "") if col_channel else "",
+                "customer_summary": raw.get(col_customer_summary, "") if col_customer_summary else "",
+                "executive_summary": raw.get(col_exec_summary, "") if col_exec_summary else "",
+                "next_action": raw.get(col_next_action, "") if col_next_action else "",
                 "raw": raw,
             })
         return {"total": len(results), "leads": results}
