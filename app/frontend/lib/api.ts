@@ -47,8 +47,8 @@ export interface KPISummary {
 }
 
 export interface DailyCount { date: string; count: number; }
-export interface ProjectCount { project: string; count: number; }
-export interface RegionCount { region: string; count: number; }
+export interface ProjectCount { label: string; count: number; }
+export interface RegionCount { label: string; count: number; }
 
 export interface FunnelMetrics {
     stage_0: number;
@@ -62,9 +62,15 @@ export interface FunnelMetrics {
 
 export interface AdminDashboard {
     kpi: KPISummary;
-    daily_leads: DailyCount[];
-    top_projects: ProjectCount[];
-    top_regions: RegionCount[];
+    timeseries: DailyCount[];
+    breakdowns: {
+        by_project: ProjectCount[];
+        by_region: RegionCount[];
+        by_unit_type: { label: string; count: number }[];
+        by_purpose: { label: string; count: number }[];
+        by_timeline: { label: string; count: number }[];
+        by_tag: { label: string; count: number }[];
+    };
     funnel?: FunnelMetrics;
 }
 
@@ -204,7 +210,29 @@ export interface LeadFilter {
     purpose?: string;
 }
 
-export async function fetchLeads(params?: LeadFilter): Promise<{ total: number; leads: Record<string, string>[] }> {
+export interface LeadRecord extends Record<string, any> {
+    timestamp: string;
+    name: string;
+    phone: string;
+    contact: string;
+    summary: string;
+    projects: string[];
+    interest_projects: string;
+    project_primary?: string;
+    region?: string;
+    preferred_region?: string;
+    unit_type?: string;
+    purpose?: string;
+    budget_min?: number;
+    budget_max?: number;
+    budget_band?: string;
+    lead_temperature?: 'Hot' | 'Warm' | 'Cold';
+    lead_temperature_variant?: string;
+    tags: string[];
+    reason_codes?: string;
+}
+
+export async function fetchLeads(params?: LeadFilter): Promise<{ total: number; leads: LeadRecord[] }> {
     const q = new URLSearchParams(
         Object.entries(params ?? {}).filter(([, v]) => v != null) as [string, string][]
     ).toString();

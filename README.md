@@ -103,7 +103,7 @@ PulseX-WDD/
 ├── scripts/
 │   ├── build_index.py        Build SQLite FTS5 + FAISS indices
 │   ├── validate_kb.py        Validate buyerKB.csv
-│   └── seed_leads.py         Seed demo leads
+│   └── seed_leads.py         PalmX-grade Lead & Telemetry Generator (Deterministic)
 ├── engine-KB/                PulseX-WDD_buyerKB.csv
 ├── runtime/                  leads.csv, audit.csv, sessions.csv, leads_seed.csv
 ├── indices/                  keyword_index.db, vectors.faiss, metadata.json (generated)

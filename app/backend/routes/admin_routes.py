@@ -199,6 +199,10 @@ _COL_MAP = {
     "budget_max": ["budget_max", "max_budget", "budget_to", "price_max"],
     "timeline": ["timeline", "purchase_timeline", "delivery_timeline", "timeframe", "expected_delivery"],
     "tags": ["tags", "labels", "keywords", "flags"],
+    "budget_band": ["budget_band", "band", "price_band", "segment"],
+    "lead_temperature": ["lead_temperature", "temperature", "temp", "score", "hot_warm_cold"],
+    "consent_contact": ["consent_contact", "consent", "consented", "callback_allowed", "consent_callback"],
+    "confirmed_by_user": ["confirmed_by_user", "confirmed", "verified"],
 }
 
 
@@ -272,6 +276,10 @@ async def get_leads(response: Response, sheet: str = Query("leads.csv")):
         col_bmax = _find_col(cols, _COL_MAP["budget_max"])
         col_timeline = _find_col(cols, _COL_MAP["timeline"])
         col_tags = _find_col(cols, _COL_MAP["tags"])
+        col_band = _find_col(cols, _COL_MAP["budget_band"])
+        col_temp = _find_col(cols, _COL_MAP["lead_temperature"])
+        col_consent = _find_col(cols, _COL_MAP["consent_contact"])
+        col_confirmed = _find_col(cols, _COL_MAP["confirmed_by_user"])
 
         logger.info(f"Mapping results for {sheet}: Contact='{col_contact}', Projects='{col_projects}', Summary='{col_summary}'")
 
@@ -284,30 +292,38 @@ async def get_leads(response: Response, sheet: str = Query("leads.csv")):
             results.append({
                 "timestamp": raw.get(col_ts, "") if col_ts else "",
                 "name": raw.get(col_name, "") if col_name else "",
+                "phone": raw.get(col_contact, "") if col_contact else "",
                 "contact": raw.get(col_contact, "") if col_contact else "",
                 "summary": raw.get(col_summary, "") if col_summary else "",
                 "projects": projects,
+                "interest_projects": raw.get(col_projects, ""),
                 "project_primary": raw.get(col_primary, "") if col_primary else (projects[0] if projects else None),
                 "region": raw.get(col_region, "") if col_region else None,
+                "preferred_region": raw.get(col_region, "") if col_region else None,
                 "unit_type": raw.get(col_unit, "") if col_unit else None,
                 "purpose": raw.get(col_purpose, "") if col_purpose else None,
                 "budget_min": _parse_num(raw.get(col_bmin, "")) if col_bmin else None,
                 "budget_max": _parse_num(raw.get(col_bmax, "")) if col_bmax else None,
                 "timeline": raw.get(col_timeline, "") if col_timeline else None,
+                "budget_band": raw.get(col_band, "") if col_band else None,
+                "lead_temperature": raw.get(col_temp, "") if col_temp else None,
+                "lead_temperature_variant": raw.get(col_temp, "").lower() if col_temp else "cold",
+                "consent_callback": raw.get(col_consent, "") if col_consent else "false",
+                "confirmed_by_user": raw.get(col_confirmed, "") if col_confirmed else "false",
                 "tags": tags,
                 "raw": raw,
             })
-        return results
+        return {"total": len(results), "leads": results}
     except Exception as e:
         logger.error(f"Error serving leads from {sheet}: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Failed to process leads: {e}")
 
 
 # ---------------------------------------------------------------------------
-# 5) GET /admin/analytics — aggregated metrics
+# 5) GET /admin/dashboard — aggregated metrics
 # ---------------------------------------------------------------------------
-@router.get("/analytics")
-async def get_analytics(
+@router.get("/dashboard")
+async def get_dashboard(
     sheet: str = Query("leads.csv"),
     range: str = Query("all", alias="range"),
 ):
@@ -425,13 +441,14 @@ async def get_analytics(
         return [{"label": k, "count": v} for k, v in counter.most_common(max_items)]
 
     return {
-        "kpis": {
-            "total": total,
+        "kpi": {
+            "total_leads": total,
             "last_24h": last_24h,
             "unique_contacts": unique_contacts,
             "top_project": top_project,
             "top_region": top_region,
-            "budget_median": budget_median,
+            "median_budget_min": budget_median * 0.8 if budget_median else None,
+            "median_budget_max": budget_median * 1.2 if budget_median else None,
         },
         "timeseries": timeseries,
         "breakdowns": {

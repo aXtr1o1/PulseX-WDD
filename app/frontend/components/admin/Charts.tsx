@@ -43,7 +43,7 @@ export function TopProjectsChart({ data }: TopProjectsChartProps) {
                 <BarChart data={data} layout="vertical" margin={{ top: 0, right: 12, left: 0, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#E6E6E6" horizontal={false} />
                     <XAxis type="number" tick={{ fontSize: 11, fill: '#6B6B6B' }} tickLine={false} />
-                    <YAxis type="category" dataKey="project" width={120} tick={{ fontSize: 11, fill: '#191919' }} tickLine={false} axisLine={false} />
+                    <YAxis type="category" dataKey="label" width={120} tick={{ fontSize: 11, fill: '#191919' }} tickLine={false} axisLine={false} />
                     <Tooltip contentStyle={{ border: '1px solid #E6E6E6', borderRadius: 8, fontSize: 12 }} />
                     <Bar dataKey="count" fill="#CB2030" radius={[0, 4, 4, 0]} name="Leads" />
                 </BarChart>
@@ -61,7 +61,7 @@ export function TopRegionsChart({ data }: TopRegionsChartProps) {
                 <BarChart data={data} layout="vertical" margin={{ top: 0, right: 12, left: 0, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#E6E6E6" horizontal={false} />
                     <XAxis type="number" tick={{ fontSize: 11, fill: '#6B6B6B' }} tickLine={false} />
-                    <YAxis type="category" dataKey="region" width={110} tick={{ fontSize: 11, fill: '#191919' }} tickLine={false} axisLine={false} />
+                    <YAxis type="category" dataKey="label" width={110} tick={{ fontSize: 11, fill: '#191919' }} tickLine={false} axisLine={false} />
                     <Tooltip contentStyle={{ border: '1px solid #E6E6E6', borderRadius: 8, fontSize: 12 }} />
                     <Bar dataKey="count" fill="#55575A" radius={[0, 4, 4, 0]} name="Leads" />
                 </BarChart>

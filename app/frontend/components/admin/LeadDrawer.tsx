@@ -2,11 +2,10 @@
 import React, { useState } from 'react';
 import Drawer from '@/components/ui/Drawer';
 import Badge from '@/components/ui/Badge';
-
-type LeadRow = Record<string, string>;
+import { type LeadRecord } from '@/lib/api';
 
 interface LeadDrawerProps {
-    lead: LeadRow | null;
+    lead: LeadRecord | null;
     open: boolean;
     onClose: () => void;
 }
@@ -22,18 +21,17 @@ export default function LeadDrawer({ lead, open, onClose }: LeadDrawerProps) {
         setTimeout(() => setCopied(false), 2000);
     }
 
-    function bandVariant(band: string): 'hot' | 'warm' | 'cold' | 'muted' {
-        if (band === 'high' || band === 'ultra_high') return 'hot';
-        if (band === 'mid') return 'warm';
-        if (band === 'low') return 'cold';
+    function tempVariant(temp?: string): 'hot' | 'warm' | 'cold' | 'muted' {
+        const t = (temp || '').toLowerCase();
+        if (t === 'hot') return 'hot';
+        if (t === 'warm') return 'warm';
+        if (t === 'cold') return 'cold';
         return 'muted';
     }
 
     const fields = [
         { label: 'Session ID', key: 'session_id', mono: true },
-        { label: 'Language', key: 'lang' },
-        { label: 'Name', key: 'name' },
-        { label: 'Phone', key: 'phone', mono: true },
+        { label: 'Contact', key: 'phone', mono: true },
         { label: 'Email', key: 'email', mono: true },
         { label: 'Project(s)', key: 'interest_projects' },
         { label: 'Region', key: 'preferred_region' },
@@ -42,12 +40,7 @@ export default function LeadDrawer({ lead, open, onClose }: LeadDrawerProps) {
         { label: 'Budget Max', key: 'budget_max' },
         { label: 'Purpose', key: 'purpose' },
         { label: 'Timeline', key: 'timeline' },
-        { label: 'Callback Consent', key: 'consent_callback' },
-        { label: 'Marketing Consent', key: 'consent_marketing' },
-        { label: 'Consent Timestamp', key: 'consent_timestamp', mono: true },
-        { label: 'Source URL', key: 'source_url' },
-        { label: 'Summary', key: 'summary' },
-        { label: 'Tags', key: 'tags' },
+        { label: 'Lead Record Status', key: 'confirmed_by_user' },
     ];
 
     return (
@@ -55,48 +48,85 @@ export default function LeadDrawer({ lead, open, onClose }: LeadDrawerProps) {
             open={open}
             onClose={onClose}
             title={`Lead — ${lead.name || 'Unknown'}`}
-            width="w-full md:w-[520px]"
+            width="w-full md:w-[600px]"
         >
-            {/* Time + budget */}
-            <div className="flex items-center gap-2 mb-5">
-                <span className="text-xs text-[var(--wdd-muted)]">
-                    {lead.timestamp ? new Date(lead.timestamp).toLocaleString() : '—'}
-                </span>
-                {lead.budget_band && (
-                    <Badge variant={bandVariant(lead.budget_band)}>{lead.budget_band}</Badge>
+            {/* Header / Temperature + Tags */}
+            <div className="space-y-4 mb-6">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                        {lead.lead_temperature && (
+                            <Badge variant={tempVariant(lead.lead_temperature)}>{lead.lead_temperature} LEAD</Badge>
+                        )}
+                        <span className="text-[11px] font-semibold text-[var(--wdd-muted)] tracking-wider">
+                            {lead.timestamp ? new Date(lead.timestamp).toLocaleString() : '—'}
+                        </span>
+                    </div>
+                    {lead.budget_band && (
+                        <span className="text-xs font-bold text-[var(--wdd-red)] uppercase tracking-tighter">Budget: {lead.budget_band}</span>
+                    )}
+                </div>
+
+                {/* Tags Strip */}
+                {lead.tags && (
+                    <div className="flex flex-wrap gap-1.5">
+                        {lead.tags.map((t: string) => (
+                            <span key={t} className="px-2 py-0.5 bg-[var(--wdd-surface)] border border-[var(--wdd-border)] rounded-md text-[10px] font-bold text-[var(--wdd-muted)] uppercase">
+                                #{t}
+                            </span>
+                        ))}
+                    </div>
                 )}
             </div>
 
+            {/* AI Insights Segment */}
+            {lead.reason_codes && (
+                <div className="mb-8 p-4 bg-[#F9FAFB] border border-[var(--wdd-border)] rounded-xl">
+                    <h4 className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-widest mb-2">Concierge Intelligence (Reason Codes)</h4>
+                    <p className="text-sm text-[var(--wdd-black)] leading-relaxed italic">“{lead.reason_codes}”</p>
+                </div>
+            )}
+
+            {/* Conversation Summary */}
+            {lead.summary && (
+                <div className="mb-8">
+                    <h4 className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-widest mb-2">Executive Summary</h4>
+                    <p className="text-sm text-[var(--wdd-black)] leading-relaxed">{lead.summary}</p>
+                </div>
+            )}
+
             {/* Field list */}
-            <div className="space-y-3">
+            <div className="space-y-3.5 border-t border-[var(--wdd-border)] pt-6">
+                <h4 className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-widest mb-4">Lead Profile Details</h4>
                 {fields.map(({ label, key, mono }) => {
                     let val = lead[key];
-                    if (!val || val === 'None') return null;
-                    // Parse JSON arrays
-                    if (val.startsWith('[') || val.startsWith('{')) {
-                        try { val = JSON.parse(val); if (Array.isArray(val)) val = val.join(', '); } catch { /* noop */ }
-                    }
+                    if (val === undefined || val === null || val === 'None' || val === '') return null;
+
+                    // Format lists
+                    if (Array.isArray(val)) val = val.join(', ');
+
                     return (
-                        <div key={key} className="grid grid-cols-[130px_1fr] gap-2">
-                            <span className="text-xs font-medium text-[var(--wdd-muted)] pt-0.5">{label}</span>
-                            <span className={`text-sm text-[var(--wdd-text)] break-words ${mono ? 'font-mono text-xs' : ''}`}>{String(val)}</span>
+                        <div key={key} className="grid grid-cols-[140px_1fr] gap-2 items-start">
+                            <span className="text-[11px] font-semibold text-[var(--wdd-muted)] uppercase tracking-tight">{label}</span>
+                            <span className={`text-sm text-[var(--wdd-black)] break-words ${mono ? 'font-mono text-[11px] opacity-70' : ''}`}>
+                                {String(val)}
+                            </span>
                         </div>
                     );
                 })}
             </div>
 
             {/* Raw JSON */}
-            <div className="mt-6 pt-4 border-t border-[var(--wdd-border)]">
+            <div className="mt-12 pt-4 border-t border-[var(--wdd-border)]">
                 <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-medium text-[var(--wdd-muted)]">Raw JSON</span>
+                    <span className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-widest">Metadata</span>
                     <button
                         onClick={copyRaw}
                         className="text-xs text-[var(--wdd-red)] hover:underline"
                     >
-                        {copied ? '✓ Copied!' : 'Copy'}
+                        {copied ? '✓ Copied!' : 'Copy JSON'}
                     </button>
                 </div>
-                <pre className="bg-[var(--wdd-surface)] border border-[var(--wdd-border)] rounded-lg p-3 text-[10px] text-[var(--wdd-text)] overflow-x-auto whitespace-pre-wrap break-all font-mono max-h-[200px] overflow-y-auto">
+                <pre className="bg-[var(--wdd-surface)] border border-[var(--wdd-border)] rounded-lg p-3 text-[10px] text-[var(--wdd-muted)] overflow-x-auto whitespace-pre-wrap break-all font-mono max-h-[150px] overflow-y-auto">
                     {JSON.stringify(lead, null, 2)}
                 </pre>
             </div>

@@ -2,12 +2,11 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import Badge from '@/components/ui/Badge';
-
-type LeadRow = Record<string, string>;
+import { type LeadRecord } from '@/lib/api';
 
 interface LeadTableProps {
-    leads: LeadRow[];
-    onSelect: (lead: LeadRow) => void;
+    leads: LeadRecord[];
+    onSelect: (lead: LeadRecord) => void;
     loading?: boolean;
 }
 
@@ -15,8 +14,8 @@ export default function LeadTable({ leads, onSelect, loading }: LeadTableProps) 
     const [sort, setSort] = useState<{ col: string; dir: 'asc' | 'desc' }>({ col: 'timestamp', dir: 'desc' });
 
     const sorted = [...leads].sort((a, b) => {
-        const va = a[sort.col] ?? '';
-        const vb = b[sort.col] ?? '';
+        const va = (a[sort.col] ?? '').toString();
+        const vb = (b[sort.col] ?? '').toString();
         return sort.dir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
     });
 
@@ -26,11 +25,11 @@ export default function LeadTable({ leads, onSelect, loading }: LeadTableProps) 
 
     const cols = [
         { key: 'timestamp', label: 'Time' },
+        { key: 'lead_temperature', label: 'Temp' },
         { key: 'name', label: 'Name' },
         { key: 'phone', label: 'Phone' },
         { key: 'interest_projects', label: 'Project(s)' },
-        { key: 'preferred_region', label: 'Region' },
-        { key: 'budget_band', label: 'Budget Band' },
+        { key: 'budget_band', label: 'Budget' },
         { key: 'purpose', label: 'Purpose' },
         { key: 'consent_callback', label: 'Callback' },
     ];
@@ -38,7 +37,7 @@ export default function LeadTable({ leads, onSelect, loading }: LeadTableProps) 
     if (loading) {
         return (
             <div className="py-12 text-center text-sm text-[var(--wdd-muted)]">
-                Loading leads…
+                Loading leads...
             </div>
         );
     }
@@ -51,10 +50,11 @@ export default function LeadTable({ leads, onSelect, loading }: LeadTableProps) 
         );
     }
 
-    function bandVariant(band: string): 'hot' | 'warm' | 'cold' | 'muted' {
-        if (band === 'high' || band === 'ultra_high') return 'hot';
-        if (band === 'mid') return 'warm';
-        if (band === 'low') return 'cold';
+    function tempVariant(temp?: string): 'hot' | 'warm' | 'cold' | 'muted' {
+        const t = (temp || '').toLowerCase();
+        if (t === 'hot') return 'hot';
+        if (t === 'warm') return 'warm';
+        if (t === 'cold') return 'cold';
         return 'muted';
     }
 
@@ -88,31 +88,33 @@ export default function LeadTable({ leads, onSelect, loading }: LeadTableProps) 
                                 i % 2 === 0 ? 'bg-white' : 'bg-[var(--wdd-surface)]',
                             )}
                         >
-                            <td className="px-4 py-3 text-xs text-[var(--wdd-muted)] whitespace-nowrap">
-                                {lead.timestamp ? new Date(lead.timestamp).toLocaleString() : '—'}
-                            </td>
-                            <td className="px-4 py-3 font-medium text-[var(--wdd-text)] whitespace-nowrap">
-                                {lead.name || <span className="text-[var(--wdd-muted)]">—</span>}
-                            </td>
-                            <td className="px-4 py-3 text-[var(--wdd-text)] font-mono text-xs whitespace-nowrap">
-                                {lead.phone || '—'}
-                            </td>
-                            <td className="px-4 py-3 text-xs max-w-[160px] truncate text-[var(--wdd-text)]">
-                                {tryParseJson(lead.interest_projects) || '—'}
-                            </td>
-                            <td className="px-4 py-3 text-xs whitespace-nowrap text-[var(--wdd-text)]">
-                                {lead.preferred_region || '—'}
+                            <td className="px-4 py-3 text-[11px] text-[var(--wdd-muted)] whitespace-nowrap">
+                                {lead.timestamp ? new Date(lead.timestamp).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }) : '—'}
                             </td>
                             <td className="px-4 py-3">
-                                {lead.budget_band ? (
-                                    <Badge variant={bandVariant(lead.budget_band)}>{lead.budget_band}</Badge>
+                                {lead.lead_temperature ? (
+                                    <Badge variant={tempVariant(lead.lead_temperature)}>{lead.lead_temperature}</Badge>
                                 ) : <span className="text-[var(--wdd-muted)]">—</span>}
                             </td>
-                            <td className="px-4 py-3 text-xs text-[var(--wdd-text)] capitalize">
+                            <td className="px-4 py-3 font-semibold text-[var(--wdd-black)] whitespace-nowrap">
+                                {lead.name || <span className="text-[var(--wdd-muted)]">—</span>}
+                            </td>
+                            <td className="px-4 py-3 text-[var(--wdd-muted)] font-mono text-xs whitespace-nowrap">
+                                {lead.phone || '—'}
+                            </td>
+                            <td className="px-4 py-3 text-xs max-w-[160px] truncate text-[var(--wdd-black)]">
+                                {formatProjects(lead.projects || lead.interest_projects)}
+                            </td>
+                            <td className="px-4 py-3 whitespace-nowrap">
+                                {lead.budget_band ? (
+                                    <span className="text-[11px] font-bold text-[var(--wdd-muted)] uppercase">{lead.budget_band}</span>
+                                ) : <span className="text-[var(--wdd-muted)]">—</span>}
+                            </td>
+                            <td className="px-4 py-3 text-[11px] text-[var(--wdd-black)] capitalize">
                                 {lead.purpose || '—'}
                             </td>
                             <td className="px-4 py-3 text-center">
-                                {lead.consent_callback === 'True' || lead.consent_callback === 'true'
+                                {lead.consent_callback === 'True' || lead.consent_callback === 'true' || lead.consent_contact === 'True' || lead.consent_contact === 'true'
                                     ? <span className="text-emerald-600 font-bold text-xs">✓</span>
                                     : <span className="text-[var(--wdd-muted)]">—</span>}
                             </td>
@@ -124,13 +126,12 @@ export default function LeadTable({ leads, onSelect, loading }: LeadTableProps) 
     );
 }
 
-function tryParseJson(raw: string): string {
-    if (!raw) return '';
+function formatProjects(val: any): string {
+    if (!val) return '—';
+    if (Array.isArray(val)) return val.join(', ');
     try {
-        const parsed = JSON.parse(raw);
+        const parsed = JSON.parse(val);
         if (Array.isArray(parsed)) return parsed.join(', ');
-        return String(parsed);
-    } catch {
-        return raw;
-    }
+    } catch { /* noop */ }
+    return String(val);
 }

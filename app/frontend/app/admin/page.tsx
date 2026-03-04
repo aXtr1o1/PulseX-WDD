@@ -4,27 +4,26 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {
     fetchAdminStats, fetchLeads,
-    type AdminDashboard, type LeadFilter,
+    type AdminDashboard, type LeadRecord,
 } from '@/lib/api';
 import KPITile from '@/components/admin/KPITile';
 import { LeadsTimeChart, TopProjectsChart, TopRegionsChart } from '@/components/admin/Charts';
 import LeadTable from '@/components/admin/LeadTable';
 import LeadDrawer from '@/components/admin/LeadDrawer';
 import DataViewer from '@/components/admin/DataViewer';
-import Spinner from '@/components/ui/Spinner';
 
 export default function AdminPage() {
     const [stats, setStats] = useState<AdminDashboard | null>(null);
     const [statsLoading, setStatsLoading] = useState(false);
 
-    const [leads, setLeads] = useState<Record<string, string>[]>([]);
+    const [leads, setLeads] = useState<LeadRecord[]>([]);
     const [leadsTotal, setLeadsTotal] = useState(0);
     const [leadsLoading, setLeadsLoading] = useState(false);
 
     const [timeFilter, setTimeFilter] = useState<'all' | '24h' | '7d' | '30d'>('all');
     const [sheetView, setSheetView] = useState<'dashboard' | 'leads' | 'audit' | 'sessions'>('dashboard');
 
-    const [selectedLead, setSelectedLead] = useState<Record<string, string> | null>(null);
+    const [selectedLead, setSelectedLead] = useState<LeadRecord | null>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     const loadStats = useCallback(async () => {
@@ -51,6 +50,25 @@ export default function AdminPage() {
             <div className="min-h-screen bg-[var(--wdd-bg)] flex flex-col items-center justify-center animate-pulse-soft">
                 <Image src="/brand/WDD_blockLogo.png" width={72} height={72} alt="Loading..." className="object-contain mb-6" priority />
                 <p className="text-sm font-medium text-[var(--wdd-muted)] tracking-wider uppercase">Loading Intelligence...</p>
+            </div>
+        );
+    }
+    if (!stats && !statsLoading) {
+        return (
+            <div className="min-h-screen bg-[var(--wdd-surface)] flex flex-col items-center justify-center p-6 text-center">
+                <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-10 shadow-sm max-w-md">
+                    <div className="w-16 h-16 bg-[var(--wdd-surface)] rounded-full flex items-center justify-center mx-auto mb-6 text-[var(--wdd-red)]">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
+                    </div>
+                    <h2 className="text-xl font-bold text-[var(--wdd-black)] mb-2">No Intelligence Data</h2>
+                    <p className="text-sm text-[var(--wdd-muted)] mb-8">We couldn&apos;t reach the PulseX core or no leads have been processed yet.</p>
+                    <button
+                        onClick={() => { loadStats(); loadLeads(); }}
+                        className="bg-[var(--wdd-red)] text-white text-sm font-bold px-8 py-3 rounded-full hover:brightness-110 transition-all shadow-md active:scale-95"
+                    >
+                        RETRY CONNECTION
+                    </button>
+                </div>
             </div>
         );
     }
@@ -168,12 +186,16 @@ export default function AdminPage() {
                         <div className="grid lg:grid-cols-3 gap-6">
                             <div className="lg:col-span-2 bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
                                 <h3 className="text-sm font-semibold text-[var(--wdd-black)] mb-6">Lead Acquisition Velocity</h3>
-                                <LeadsTimeChart data={stats.daily_leads} />
+                                <LeadsTimeChart data={stats.timeseries || []} />
                             </div>
                             <div className="space-y-6 flex flex-col">
                                 <div className="flex-1 bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
                                     <h3 className="text-sm font-semibold text-[var(--wdd-black)] mb-6">Volume by Project</h3>
-                                    <TopProjectsChart data={stats.top_projects} />
+                                    <TopProjectsChart data={stats.breakdowns?.by_project || []} />
+                                </div>
+                                <div className="flex-1 bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
+                                    <h3 className="text-sm font-semibold text-[var(--wdd-black)] mb-6">Volume by District</h3>
+                                    <TopRegionsChart data={stats.breakdowns?.by_region || []} />
                                 </div>
                             </div>
                         </div>

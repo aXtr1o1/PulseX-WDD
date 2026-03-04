@@ -23,7 +23,7 @@ logger = logging.getLogger("PulseX-WDD-API")
 app = FastAPI(title="PulseX-WDD API", version="1.0.0")
 
 # Mount admin routes
-app.include_router(admin_router)
+app.include_router(admin_router, prefix="/api")
 
 # CORS
 app.add_middleware(
@@ -342,26 +342,6 @@ async def create_lead(lead: Lead):
         raise HTTPException(status_code=500, detail="Failed to save lead")
     return {"status": "success", "message": "Lead captured"}
 
-@app.get("/admin/leads")
-async def get_leads(password: str = Header(None)):
-    if password != Config.ADMIN_PASSWORD:
-        raise HTTPException(status_code=401, detail="Unauthorized")
-    return leads_service.get_leads()
-
-@app.get("/admin/leads/export.xlsx")
-async def export_leads(password: str = Header(None, alias="x-admin-password")):
-    if password != Config.ADMIN_PASSWORD:
-        raise HTTPException(status_code=401, detail="Unauthorized")
-        
-    path = leads_service.export_excel()
-    if not path:
-        raise HTTPException(status_code=404, detail="No leads to export")
-        
-    return FileResponse(
-        path, 
-        filename=os.path.basename(path), 
-        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    )
 
 @app.get("/health")
 async def health():

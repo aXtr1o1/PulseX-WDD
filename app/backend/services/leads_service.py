@@ -16,10 +16,12 @@ class LeadsService:
     def _init_files(self):
         # Leads CSV
         expected_headers = [
-            "timestamp", "session_id", "name", "phone", 
+            "timestamp", "lead_id", "session_id", "name", "phone", "email",
             "interest_projects", "preferred_region", "unit_type", 
-            "budget_min", "budget_max", "purpose", "timeline", 
-            "next_step", "lead_summary", "tags", "kb_version_hash"
+            "budget_min", "budget_max", "budget_band", "purpose", "timeline", 
+            "contact_channel", "consent_contact", "confirmed_by_user",
+            "lead_temperature", "reason_codes", "tags", "lead_summary", 
+            "raw_json", "kb_version_hash"
         ]
         
         if not os.path.exists(Config.LEADS_PATH):
