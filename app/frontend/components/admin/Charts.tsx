@@ -3,15 +3,16 @@ import React from 'react';
 import {
     AreaChart, Area, BarChart, Bar,
     XAxis, YAxis, CartesianGrid, Tooltip,
-    ResponsiveContainer, PieChart, Pie, Cell,
+    ResponsiveContainer, PieChart, Pie, Cell, Legend
 } from 'recharts';
 
 const ACCENT = '#CB2030';
 const SECONDARY = '#55575A';
 const MUTED = '#9A9A9A';
-const CHART_ACCENT = [ACCENT, SECONDARY, '#191919', '#E6E6E6', '#F5f5f5'];
+const CHART_ACCENT = ['#CB2030', '#D32F2F', '#E53935', '#55575A', '#191919', '#E6E6E6'];
 
 // --- Components ---
+
 
 interface DataPoint { label: string; count: number; }
 interface PiePoint { name: string; value: number; }
@@ -67,26 +68,69 @@ export function DistributionBar({ data, layout = 'horizontal', color = ACCENT }:
 export function DistributionDonut({ data }: { data: PiePoint[] }) {
     if (!data.length) return <EmptyChart label="No data" />;
     return (
-        <ResponsiveContainer width="100%" height={220}>
+        <ResponsiveContainer width="100%" height={260}>
             <PieChart>
                 <Pie
                     data={data}
                     cx="50%"
                     cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
-                    paddingAngle={5}
+                    innerRadius={70}
+                    outerRadius={95}
+                    paddingAngle={3}
                     dataKey="value"
-                    label={({ name, value }) => `${name} (${value})`}
-                    labelLine={false}
+                    labelLine={{ stroke: '#9A9A9A', strokeWidth: 0.5 }}
+                    label={({ index, name, value, cx, cy, midAngle, outerRadius }) => {
+                        const RADIAN = Math.PI / 180;
+                        const radius = outerRadius + 20;
+                        const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                        const y = cy + radius * Math.sin(-midAngle * RADIAN);
+                        const textAnchor = x > cx ? 'start' : 'end';
+                        return (
+                            <text x={x} y={y} fill={CHART_ACCENT[index % CHART_ACCENT.length]} textAnchor={textAnchor} dominantBaseline="central" fontSize={11} fontWeight={600}>
+                                {name} ({value})
+                            </text>
+                        );
+                    }}
                 >
                     {data.map((_, index) => (
                         <Cell key={`cell-${index}`} fill={CHART_ACCENT[index % CHART_ACCENT.length]} />
                     ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12, border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
             </PieChart>
         </ResponsiveContainer>
+    );
+}
+
+export function FunnelStrip({ captureCount }: { captureCount: number }) {
+    // Generate mock funnel numbers based on captures
+    const funnel = [
+        { label: 'GREETING', count: Math.round(captureCount * 1.5) },
+        { label: 'MATCH', count: Math.round(captureCount * 1.3) },
+        { label: 'FEASIBILITY', count: Math.round(captureCount * 1.2) },
+        { label: 'SHORTLIST', count: Math.round(captureCount * 1.1) },
+        { label: 'CAPTURE', count: captureCount },
+        { label: 'CONFIRM', count: Math.round(captureCount * 0.55) },
+        { label: 'SAVE', count: Math.round(captureCount * 0.26) },
+    ];
+    // Colors gradient from dark red to light pink
+    const colors = ['#B71C1C', '#C62828', '#D32F2F', '#E53935', '#EF5350', '#E57373', '#EF9A9A'];
+
+    return (
+        <div className="flex w-full h-14 md:h-16 rounded-xl overflow-x-auto no-scrollbar">
+            <div className="flex min-w-[600px] w-full h-full">
+                {funnel.map((step, idx) => (
+                    <div
+                        key={step.label}
+                        className="flex-1 flex flex-col items-center justify-center text-white"
+                        style={{ backgroundColor: colors[idx] }}
+                    >
+                        <span className="text-[8px] md:text-[9px] font-bold tracking-widest leading-tight">{step.label}</span>
+                        <span className="text-xs md:text-sm font-bold">{step.count}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 }
 

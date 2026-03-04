@@ -11,7 +11,7 @@ import {
     computeLeadAnalytics, computeAuditAnalytics
 } from '@/lib/timeFilter';
 import KPITile from '@/components/admin/KPITile';
-import { LeadsTimeChart, DistributionBar, DistributionDonut } from '@/components/admin/Charts';
+import { LeadsTimeChart, DistributionBar, DistributionDonut, FunnelStrip } from '@/components/admin/Charts';
 import LeadTable from '@/components/admin/LeadTable';
 import LeadDrawer from '@/components/admin/LeadDrawer';
 
@@ -166,17 +166,24 @@ export default function AdminPage() {
 
                 {/* Segment B: KPI Strip */}
                 <section>
-                    <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
-                        <KPITile label="Total leads" value={activeMetrics?.totalLeads} accent icon="📊" />
-                        <KPITile label="Last 24h" value={activeMetrics ? (activeMetrics as any).intake24 : 0} icon="⚡" />
-                        <KPITile label="Unique contacts" value={activeMetrics?.uniqueContacts} icon="👤" />
-                        <KPITile label="Top project" value={activeMetrics?.topProj} icon="🏙️" />
-                        <KPITile label="Top region" value={activeMetrics?.topReg} icon="📍" />
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                        <KPITile label="Total leads" value={activeMetrics?.totalLeads} accent />
+                        <KPITile label="Last 24h" value={activeMetrics ? (activeMetrics as any).intake24 : 0} />
+                        <KPITile label="Unique contacts" value={activeMetrics?.uniqueContacts} />
+                        <KPITile label="Top project" value={activeMetrics?.topProj} />
+                        <KPITile label="Top region" value={activeMetrics?.topReg} />
                         <KPITile
                             label="Budget Median"
                             value={activeMetrics?.medianBudget ? `${(activeMetrics.medianBudget / 1e6).toFixed(1)}M` : '—'}
-                            icon="💰"
                         />
+                    </div>
+                </section>
+
+                {/* Segment B.2: Funnel Strip */}
+                <section>
+                    <div className="bg-white border border-[var(--wdd-border)] rounded-[20px] p-6 shadow-sm">
+                        <h3 className="text-sm font-semibold mb-6">Concierge Funnel Conversion</h3>
+                        <FunnelStrip captureCount={activeMetrics?.totalLeads || 0} />
                     </div>
                 </section>
 

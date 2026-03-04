@@ -35,7 +35,10 @@ export default function LeadDrawer({ lead, open, onClose }: LeadDrawerProps) {
                 { label: 'Projects', value: (lead.projects || []).join(', ') || '—' },
                 { label: 'Region', value: lead.region || lead.preferred_region || '—' },
                 { label: 'Unit Type', value: lead.unit_type || '—' },
-                { label: 'Budget', value: lead.budget_band || '—' },
+                {
+                    label: 'Budget',
+                    value: `${lead.budget_band || '—'} ${(lead as any).budget_min && (lead as any).budget_max ? `(${(Number((lead as any).budget_min) / 1e6).toFixed(1)}M - ${(Number((lead as any).budget_max) / 1e6).toFixed(1)}M)` : ''}`
+                },
                 { label: 'Purpose', value: lead.purpose || '—' },
                 { label: 'Timeline', value: lead.timeline || '—' },
             ]
