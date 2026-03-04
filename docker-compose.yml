@@ -1,3 +1,4 @@
+name: pulsex_master
 services:
   # ── Backend (FastAPI + RAG) ──────────────────────────────────
   pulsex_api:

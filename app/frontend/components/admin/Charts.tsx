@@ -3,86 +3,97 @@ import React from 'react';
 import {
     AreaChart, Area, BarChart, Bar,
     XAxis, YAxis, CartesianGrid, Tooltip,
-    ResponsiveContainer, Legend,
+    ResponsiveContainer, PieChart, Pie, Cell,
 } from 'recharts';
-import type { DailyCount, ProjectCount, RegionCount } from '@/lib/api';
 
-interface LeadsTimeChartProps { data: DailyCount[]; }
-export function LeadsTimeChart({ data }: LeadsTimeChartProps) {
-    if (!data.length) return <EmptyChart label="No lead data yet" />;
+const ACCENT = '#CB2030';
+const SECONDARY = '#55575A';
+const MUTED = '#9A9A9A';
+const CHART_ACCENT = [ACCENT, SECONDARY, '#191919', '#E6E6E6', '#F5f5f5'];
+
+// --- Components ---
+
+interface DataPoint { label: string; count: number; }
+interface PiePoint { name: string; value: number; }
+
+export function LeadsTimeChart({ data }: { data: any[] }) {
+    if (!data.length) return <EmptyChart label="No trend data" />;
     return (
-        <ChartCard title="Leads Over Time">
-            <ResponsiveContainer width="100%" height={220}>
-                <AreaChart data={data} margin={{ top: 8, right: 8, left: -20, bottom: 0 }}>
-                    <defs>
-                        <linearGradient id="wddGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#CB2030" stopOpacity={0.15} />
-                            <stop offset="95%" stopColor="#CB2030" stopOpacity={0} />
-                        </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E6E6E6" />
-                    <XAxis dataKey="date" tick={{ fontSize: 11, fill: '#6B6B6B' }} tickLine={false} />
-                    <YAxis tick={{ fontSize: 11, fill: '#6B6B6B' }} tickLine={false} axisLine={false} />
-                    <Tooltip
-                        contentStyle={{ border: '1px solid #E6E6E6', borderRadius: 8, fontSize: 12 }}
-                        labelStyle={{ fontWeight: 600 }}
-                    />
-                    <Area type="monotone" dataKey="count" stroke="#CB2030" strokeWidth={2} fill="url(#wddGrad)" dot={false} activeDot={{ r: 4, fill: '#CB2030' }} name="Leads" />
-                </AreaChart>
-            </ResponsiveContainer>
-        </ChartCard>
+        <ResponsiveContainer width="100%" height={260}>
+            <AreaChart data={data} margin={{ top: 8, right: 8, left: -20, bottom: 0 }}>
+                <defs>
+                    <linearGradient id="wddGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor={ACCENT} stopOpacity={0.15} />
+                        <stop offset="95%" stopColor={ACCENT} stopOpacity={0} />
+                    </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E6E6E6" />
+                <XAxis dataKey="date" tick={{ fontSize: 10, fill: '#6B6B6B' }} tickLine={false} />
+                <YAxis tick={{ fontSize: 10, fill: '#6B6B6B' }} tickLine={false} axisLine={false} />
+                <Tooltip
+                    contentStyle={{ border: '1px solid #E6E6E6', borderRadius: 8, fontSize: 12 }}
+                    labelStyle={{ fontWeight: 600 }}
+                />
+                <Area type="monotone" dataKey="count" stroke={ACCENT} strokeWidth={2} fill="url(#wddGrad)" dot={false} activeDot={{ r: 4, fill: ACCENT }} name="Leads" />
+            </AreaChart>
+        </ResponsiveContainer>
     );
 }
 
-interface TopProjectsChartProps { data: ProjectCount[]; }
-export function TopProjectsChart({ data }: TopProjectsChartProps) {
-    if (!data.length) return <EmptyChart label="No project data" />;
+export function DistributionBar({ data, layout = 'horizontal', color = ACCENT }: { data: DataPoint[], layout?: 'horizontal' | 'vertical', color?: string }) {
+    if (!data.length) return <EmptyChart label="No data" />;
     return (
-        <ChartCard title="Top Projects">
-            <ResponsiveContainer width="100%" height={220}>
-                <BarChart data={data} layout="vertical" margin={{ top: 0, right: 12, left: 0, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E6E6E6" horizontal={false} />
-                    <XAxis type="number" tick={{ fontSize: 11, fill: '#6B6B6B' }} tickLine={false} />
-                    <YAxis type="category" dataKey="label" width={120} tick={{ fontSize: 11, fill: '#191919' }} tickLine={false} axisLine={false} />
-                    <Tooltip contentStyle={{ border: '1px solid #E6E6E6', borderRadius: 8, fontSize: 12 }} />
-                    <Bar dataKey="count" fill="#CB2030" radius={[0, 4, 4, 0]} name="Leads" />
-                </BarChart>
-            </ResponsiveContainer>
-        </ChartCard>
+        <ResponsiveContainer width="100%" height={220}>
+            <BarChart data={data} layout={layout} margin={{ top: 0, right: 12, left: layout === 'vertical' ? 0 : -20, bottom: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E6E6E6" horizontal={layout === 'horizontal'} vertical={layout === 'vertical'} />
+                {layout === 'horizontal' ? (
+                    <>
+                        <XAxis dataKey="label" tick={{ fontSize: 10, fill: '#6B6B6B' }} tickLine={false} />
+                        <YAxis tick={{ fontSize: 10, fill: '#6B6B6B' }} tickLine={false} axisLine={false} />
+                    </>
+                ) : (
+                    <>
+                        <XAxis type="number" tick={{ fontSize: 10, fill: '#6B6B6B' }} tickLine={false} />
+                        <YAxis type="category" dataKey="label" width={100} tick={{ fontSize: 10, fill: '#191919' }} tickLine={false} axisLine={false} />
+                    </>
+                )}
+                <Tooltip contentStyle={{ border: '1px solid #E6E6E6', borderRadius: 8, fontSize: 12 }} />
+                <Bar dataKey="count" fill={color} radius={layout === 'vertical' ? [0, 4, 4, 0] : [4, 4, 0, 0]} name="Leads" />
+            </BarChart>
+        </ResponsiveContainer>
     );
 }
 
-interface TopRegionsChartProps { data: RegionCount[]; }
-export function TopRegionsChart({ data }: TopRegionsChartProps) {
-    if (!data.length) return <EmptyChart label="No region data" />;
+export function DistributionDonut({ data }: { data: PiePoint[] }) {
+    if (!data.length) return <EmptyChart label="No data" />;
     return (
-        <ChartCard title="Top Regions">
-            <ResponsiveContainer width="100%" height={220}>
-                <BarChart data={data} layout="vertical" margin={{ top: 0, right: 12, left: 0, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E6E6E6" horizontal={false} />
-                    <XAxis type="number" tick={{ fontSize: 11, fill: '#6B6B6B' }} tickLine={false} />
-                    <YAxis type="category" dataKey="label" width={110} tick={{ fontSize: 11, fill: '#191919' }} tickLine={false} axisLine={false} />
-                    <Tooltip contentStyle={{ border: '1px solid #E6E6E6', borderRadius: 8, fontSize: 12 }} />
-                    <Bar dataKey="count" fill="#55575A" radius={[0, 4, 4, 0]} name="Leads" />
-                </BarChart>
-            </ResponsiveContainer>
-        </ChartCard>
+        <ResponsiveContainer width="100%" height={220}>
+            <PieChart>
+                <Pie
+                    data={data}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={60}
+                    outerRadius={80}
+                    paddingAngle={5}
+                    dataKey="value"
+                    label={({ name, value }) => `${name} (${value})`}
+                    labelLine={false}
+                >
+                    {data.map((_, index) => (
+                        <Cell key={`cell-${index}`} fill={CHART_ACCENT[index % CHART_ACCENT.length]} />
+                    ))}
+                </Pie>
+                <Tooltip />
+            </PieChart>
+        </ResponsiveContainer>
     );
 }
 
-function ChartCard({ title, children }: { title: string; children: React.ReactNode }) {
+export function EmptyChart({ label }: { label: string }) {
     return (
-        <div className="bg-white border border-[var(--wdd-border)] rounded-[var(--wdd-radius-lg)] p-5">
-            <h3 className="text-sm font-semibold text-[var(--wdd-black)] mb-4">{title}</h3>
-            {children}
+        <div className="h-[220px] flex items-center justify-center text-sm text-[var(--wdd-muted)] italic font-light">
+            {label}
         </div>
-    );
-}
-
-function EmptyChart({ label }: { label: string }) {
-    return (
-        <ChartCard title="">
-            <div className="h-[220px] flex items-center justify-center text-sm text-[var(--wdd-muted)]">{label}</div>
-        </ChartCard>
     );
 }

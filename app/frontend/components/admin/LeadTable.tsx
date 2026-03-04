@@ -1,7 +1,6 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import clsx from 'clsx';
-import Badge from '@/components/ui/Badge';
 import { type LeadRecord } from '@/lib/api';
 
 interface LeadTableProps {
@@ -10,128 +9,80 @@ interface LeadTableProps {
     loading?: boolean;
 }
 
+const ACCENT = '#CB2030';
+
 export default function LeadTable({ leads, onSelect, loading }: LeadTableProps) {
-    const [sort, setSort] = useState<{ col: string; dir: 'asc' | 'desc' }>({ col: 'timestamp', dir: 'desc' });
-
-    const sorted = [...leads].sort((a, b) => {
-        const va = (a[sort.col] ?? '').toString();
-        const vb = (b[sort.col] ?? '').toString();
-        return sort.dir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
-    });
-
-    function toggleSort(col: string) {
-        setSort((prev) => ({ col, dir: prev.col === col && prev.dir === 'asc' ? 'desc' : 'asc' }));
-    }
-
-    const cols = [
-        { key: 'timestamp', label: 'Time' },
-        { key: 'lead_temperature', label: 'Temp' },
-        { key: 'name', label: 'Name' },
-        { key: 'phone', label: 'Phone' },
-        { key: 'interest_projects', label: 'Project(s)' },
-        { key: 'budget_band', label: 'Budget' },
-        { key: 'purpose', label: 'Purpose' },
-        { key: 'consent_callback', label: 'Callback' },
-    ];
-
-    if (loading) {
-        return (
-            <div className="py-12 text-center text-sm text-[var(--wdd-muted)]">
-                Loading leads...
-            </div>
-        );
-    }
-
-    if (!leads.length) {
-        return (
-            <div className="py-12 text-center text-sm text-[var(--wdd-muted)]">
-                No leads found for the selected filters.
-            </div>
-        );
-    }
-
-    function tempVariant(temp?: string): 'hot' | 'warm' | 'cold' | 'muted' {
-        const t = (temp || '').toLowerCase();
-        if (t === 'hot') return 'hot';
-        if (t === 'warm') return 'warm';
-        if (t === 'cold') return 'cold';
-        return 'muted';
-    }
+    if (loading) return <div className="py-20 text-center animate-pulse text-xs font-bold uppercase tracking-widest text-[var(--wdd-muted)]">Syncing Leads...</div>;
+    if (!leads.length) return <div className="py-20 text-center text-xs text-[var(--wdd-muted)] italic">No leads match the active filters.</div>;
 
     return (
-        <div className="overflow-x-auto rounded-[var(--wdd-radius-lg)] border border-[var(--wdd-border)]">
-            <table className="w-full text-sm border-collapse">
+        <div className="overflow-x-auto no-scrollbar">
+            <table className="w-full text-left border-separate border-spacing-0">
                 <thead>
-                    <tr className="bg-[var(--wdd-surface)] border-b border-[var(--wdd-border)]">
-                        {cols.map((c) => (
-                            <th
-                                key={c.key}
-                                onClick={() => toggleSort(c.key)}
-                                className="px-4 py-3 text-left text-xs font-semibold text-[var(--wdd-muted)] uppercase tracking-wider cursor-pointer select-none hover:text-[var(--wdd-black)] whitespace-nowrap"
-                            >
-                                {c.label}
-                                {sort.col === c.key && (
-                                    <span className="ml-1">{sort.dir === 'asc' ? '↑' : '↓'}</span>
-                                )}
-                            </th>
-                        ))}
+                    <tr className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-[0.15em]">
+                        <th className="px-6 py-4 border-b border-[var(--wdd-border)]">Name</th>
+                        <th className="px-6 py-4 border-b border-[var(--wdd-border)]">Contact</th>
+                        <th className="px-6 py-4 border-b border-[var(--wdd-border)]">Interest</th>
+                        <th className="px-6 py-4 border-b border-[var(--wdd-border)]">Budget</th>
+                        <th className="px-6 py-4 border-b border-[var(--wdd-border)]">Region</th>
+                        <th className="px-6 py-4 border-b border-[var(--wdd-border)] whitespace-nowrap">Tags / Codes</th>
+                        <th className="px-6 py-4 border-b border-[var(--wdd-border)] text-right">Date</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {sorted.map((lead, i) => (
-                        <tr
-                            key={i}
-                            onClick={() => onSelect(lead)}
-                            className={clsx(
-                                'cursor-pointer border-b border-[var(--wdd-border)] transition-colors',
-                                'hover:bg-[#FFF8F8] hover:border-[var(--wdd-red)]',
-                                i % 2 === 0 ? 'bg-white' : 'bg-[var(--wdd-surface)]',
-                            )}
-                        >
-                            <td className="px-4 py-3 text-[11px] text-[var(--wdd-muted)] whitespace-nowrap">
-                                {lead.timestamp ? new Date(lead.timestamp).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }) : '—'}
-                            </td>
-                            <td className="px-4 py-3">
-                                {lead.lead_temperature ? (
-                                    <Badge variant={tempVariant(lead.lead_temperature)}>{lead.lead_temperature}</Badge>
-                                ) : <span className="text-[var(--wdd-muted)]">—</span>}
-                            </td>
-                            <td className="px-4 py-3 font-semibold text-[var(--wdd-black)] whitespace-nowrap">
-                                {lead.name || <span className="text-[var(--wdd-muted)]">—</span>}
-                            </td>
-                            <td className="px-4 py-3 text-[var(--wdd-muted)] font-mono text-xs whitespace-nowrap">
-                                {lead.phone || '—'}
-                            </td>
-                            <td className="px-4 py-3 text-xs max-w-[160px] truncate text-[var(--wdd-black)]">
-                                {formatProjects(lead.projects || lead.interest_projects)}
-                            </td>
-                            <td className="px-4 py-3 whitespace-nowrap">
-                                {lead.budget_band ? (
-                                    <span className="text-[11px] font-bold text-[var(--wdd-muted)] uppercase">{lead.budget_band}</span>
-                                ) : <span className="text-[var(--wdd-muted)]">—</span>}
-                            </td>
-                            <td className="px-4 py-3 text-[11px] text-[var(--wdd-black)] capitalize">
-                                {lead.purpose || '—'}
-                            </td>
-                            <td className="px-4 py-3 text-center">
-                                {lead.consent_callback === 'True' || lead.consent_callback === 'true' || lead.consent_contact === 'True' || lead.consent_contact === 'true'
-                                    ? <span className="text-emerald-600 font-bold text-xs">✓</span>
-                                    : <span className="text-[var(--wdd-muted)]">—</span>}
-                            </td>
-                        </tr>
-                    ))}
+                <tbody className="divide-y divide-[var(--wdd-border)]">
+                    {leads.map((l, i) => {
+                        const projects = l.projects || [];
+                        const displayProject = projects[0] || '—';
+                        const extraProjects = projects.length > 1 ? `(+${projects.length - 1})` : '';
+                        const date = l.timestamp ? new Date(l.timestamp) : null;
+
+                        return (
+                            <tr
+                                key={i}
+                                onClick={() => onSelect(l)}
+                                className="group cursor-pointer hover:bg-[var(--wdd-surface)] transition-all"
+                            >
+                                <td className="px-6 py-4">
+                                    <div className="font-bold text-sm text-[var(--wdd-black)] group-hover:text-[var(--wdd-red)] transition-colors">{l.name || 'Anonymous'}</div>
+                                    <div className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-tighter">
+                                        {l.lead_temperature || 'WARM'}
+                                    </div>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <div className="text-xs font-medium text-[var(--wdd-black)]">{l.phone || l.contact || '—'}</div>
+                                    <div className="text-[10px] text-[var(--wdd-muted)] truncate max-w-[120px]">{l.email || 'No Email'}</div>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <div className="flex items-center gap-1.5">
+                                        <span className="text-xs font-bold text-[var(--wdd-black)]">{displayProject}</span>
+                                        {extraProjects && <span className="text-[10px] font-bold text-[var(--wdd-red)] bg-[#FFF0F1] px-1.5 py-0.5 rounded">{extraProjects}</span>}
+                                    </div>
+                                    <div className="text-[10px] text-[var(--wdd-muted)] capitalize">{l.unit_type || 'Residential'}</div>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <div className="text-xs font-bold text-[var(--wdd-black)]">{l.budget_band || '—'}</div>
+                                    <div className="text-[10px] text-[var(--wdd-muted)] uppercase">{l.purpose || 'INVEST'}</div>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <div className="text-xs font-medium">{l.region || l.preferred_region || '—'}</div>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <div className="flex gap-1 flex-wrap max-w-[150px]">
+                                        {(l.tags || []).slice(0, 2).map((t, idx) => (
+                                            <span key={idx} className="text-[9px] font-bold border border-[var(--wdd-border)] px-1.5 py-0.5 rounded text-[var(--wdd-muted)] uppercase">{t}</span>
+                                        ))}
+                                        {l.reason_codes && <span className="text-[9px] font-bold text-[var(--wdd-red)] uppercase">{l.reason_codes}</span>}
+                                    </div>
+                                </td>
+                                <td className="px-6 py-4 text-right">
+                                    <div className="text-xs font-bold text-[var(--wdd-black)]">{date ? date.toLocaleDateString([], { month: 'short', day: 'numeric' }) : '—'}</div>
+                                    <div className="text-[10px] text-[var(--wdd-muted)]">{date ? date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '—'}</div>
+                                </td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
         </div>
     );
-}
-
-function formatProjects(val: any): string {
-    if (!val) return '—';
-    if (Array.isArray(val)) return val.join(', ');
-    try {
-        const parsed = JSON.parse(val);
-        if (Array.isArray(parsed)) return parsed.join(', ');
-    } catch { /* noop */ }
-    return String(val);
 }

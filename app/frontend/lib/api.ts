@@ -211,26 +211,31 @@ export interface LeadFilter {
     purpose?: string;
 }
 
-export interface LeadRecord extends Record<string, any> {
+export interface LeadRecord {
     timestamp: string;
-    name: string;
-    phone: string;
-    contact: string;
-    summary: string;
-    projects: string[];
-    interest_projects: string;
-    project_primary?: string;
+    session_id?: string;
+    name?: string;
+    phone?: string;
+    contact?: string;
+    email?: string;
+    projects?: string[];
+    interest_projects?: string;
     region?: string;
     preferred_region?: string;
     unit_type?: string;
     purpose?: string;
+    budget_band?: string;
     budget_min?: number;
     budget_max?: number;
-    budget_band?: string;
-    lead_temperature?: 'Hot' | 'Warm' | 'Cold';
-    lead_temperature_variant?: string;
-    tags: string[];
+    timeline?: string;
+    tags?: string[];
+    summary?: string;
     reason_codes?: string;
+    lead_temperature?: string;
+    confirmed_by_user?: string;
+    consent_callback?: string;
+    consent_contact?: string;
+    [key: string]: any;
 }
 
 export async function fetchLeads(params?: LeadFilter): Promise<{ total: number; leads: LeadRecord[] }> {
@@ -240,11 +245,26 @@ export async function fetchLeads(params?: LeadFilter): Promise<{ total: number; 
     return apiFetch(`/api/admin/leads${q ? `?${q}` : ''}`);
 }
 
+// ── Sheet Management ──────────────────────────────────────────────────────────
+
+export interface SheetMetadata {
+    name: string;
+    rows: number;
+    cols: number;
+    size_bytes: number;
+    modified_at: string;
+    type: 'csv' | 'xlsx';
+}
+
+export async function fetchSheets(): Promise<SheetMetadata[]> {
+    return apiFetch<SheetMetadata[]>('/api/admin/sheets');
+}
+
 export async function fetchSheetRows(
-    sheet: 'leads' | 'audit' | 'leads_seed' | 'sessions',
+    sheet: 'leads' | 'audit' | 'leads_seed' | 'sessions' | string,
     limit = 200,
     offset = 0,
-): Promise<{ total: number; rows: Record<string, string>[]; offset: number; limit: number }> {
+): Promise<{ total: number; rows: Record<string, any>[]; offset: number; limit: number; columns: string[] }> {
     return apiFetch(`/api/admin/sheets/${sheet}/rows?limit=${limit}&offset=${offset}`);
 }
 

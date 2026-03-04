@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import Drawer from '@/components/ui/Drawer';
-import Badge from '@/components/ui/Badge';
 import { type LeadRecord } from '@/lib/api';
 
 interface LeadDrawerProps {
@@ -12,7 +11,6 @@ interface LeadDrawerProps {
 
 export default function LeadDrawer({ lead, open, onClose }: LeadDrawerProps) {
     const [copied, setCopied] = useState(false);
-
     if (!lead) return null;
 
     async function copyRaw() {
@@ -21,114 +19,103 @@ export default function LeadDrawer({ lead, open, onClose }: LeadDrawerProps) {
         setTimeout(() => setCopied(false), 2000);
     }
 
-    function tempVariant(temp?: string): 'hot' | 'warm' | 'cold' | 'muted' {
-        const t = (temp || '').toLowerCase();
-        if (t === 'hot') return 'hot';
-        if (t === 'warm') return 'warm';
-        if (t === 'cold') return 'cold';
-        return 'muted';
-    }
-
-    const fields = [
-        { label: 'Session ID', key: 'session_id', mono: true },
-        { label: 'Contact', key: 'phone', mono: true },
-        { label: 'Email', key: 'email', mono: true },
-        { label: 'Project(s)', key: 'interest_projects' },
-        { label: 'Region', key: 'preferred_region' },
-        { label: 'Unit Type', key: 'unit_type' },
-        { label: 'Budget Min', key: 'budget_min' },
-        { label: 'Budget Max', key: 'budget_max' },
-        { label: 'Purpose', key: 'purpose' },
-        { label: 'Timeline', key: 'timeline' },
-        { label: 'Lead Record Status', key: 'confirmed_by_user' },
+    const groups = [
+        {
+            title: 'Lead Profile',
+            fields: [
+                { label: 'Full Name', value: lead.name || 'Anonymous' },
+                { label: 'Phone', value: lead.phone || lead.contact || '—', mono: true },
+                { label: 'Email', value: lead.email || '—', mono: true },
+                { label: 'Session ID', value: lead.session_id || '—', mono: true },
+            ]
+        },
+        {
+            title: 'Acquisition Intent',
+            fields: [
+                { label: 'Projects', value: (lead.projects || []).join(', ') || '—' },
+                { label: 'Region', value: lead.region || lead.preferred_region || '—' },
+                { label: 'Unit Type', value: lead.unit_type || '—' },
+                { label: 'Budget', value: lead.budget_band || '—' },
+                { label: 'Purpose', value: lead.purpose || '—' },
+                { label: 'Timeline', value: lead.timeline || '—' },
+            ]
+        }
     ];
 
     return (
         <Drawer
             open={open}
             onClose={onClose}
-            title={`Lead — ${lead.name || 'Unknown'}`}
-            width="w-full md:w-[600px]"
+            title={`Lead Detail: ${lead.name || 'Anonymous'}`}
+            width="w-full md:w-[650px]"
         >
-            {/* Header / Temperature + Tags */}
-            <div className="space-y-4 mb-6">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        {lead.lead_temperature && (
-                            <Badge variant={tempVariant(lead.lead_temperature)}>{lead.lead_temperature} LEAD</Badge>
-                        )}
-                        <span className="text-[11px] font-semibold text-[var(--wdd-muted)] tracking-wider">
-                            {lead.timestamp ? new Date(lead.timestamp).toLocaleString() : '—'}
-                        </span>
-                    </div>
-                    {lead.budget_band && (
-                        <span className="text-xs font-bold text-[var(--wdd-red)] uppercase tracking-tighter">Budget: {lead.budget_band}</span>
-                    )}
+            <div className="space-y-10 pb-20">
+                {/* Status Indicator */}
+                <div className="flex items-center gap-2 mb-4">
+                    <span className="bg-[var(--wdd-red)] text-white text-[9px] font-bold px-2 py-0.5 rounded tracking-widest uppercase">QUALIFIED</span>
+                    <span className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-tighter">Verified Lead</span>
                 </div>
 
-                {/* Tags Strip */}
-                {lead.tags && (
-                    <div className="flex flex-wrap gap-1.5">
-                        {lead.tags.map((t: string) => (
-                            <span key={t} className="px-2 py-0.5 bg-[var(--wdd-surface)] border border-[var(--wdd-border)] rounded-md text-[10px] font-bold text-[var(--wdd-muted)] uppercase">
-                                #{t}
-                            </span>
-                        ))}
+                {/* RAG Strategy Highlight */}
+                {lead.reason_codes && (
+                    <div className="bg-[var(--wdd-black)] text-white p-6 rounded-2xl relative overflow-hidden shadow-xl">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 blur-2xl rounded-full -mr-16 -mt-16" />
+                        <h4 className="text-[9px] font-bold tracking-[0.2em] uppercase mb-3 text-gray-400">RAG Intelligence Insight</h4>
+                        <p className="text-sm font-light leading-relaxed italic opacity-95">“{lead.reason_codes}”</p>
                     </div>
                 )}
-            </div>
 
-            {/* AI Insights Segment */}
-            {lead.reason_codes && (
-                <div className="mb-8 p-4 bg-[#F9FAFB] border border-[var(--wdd-border)] rounded-xl">
-                    <h4 className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-widest mb-2">Concierge Intelligence (Reason Codes)</h4>
-                    <p className="text-sm text-[var(--wdd-black)] leading-relaxed italic">“{lead.reason_codes}”</p>
-                </div>
-            )}
+                {/* Conversation Summary */}
+                {lead.summary && (
+                    <div className="space-y-3">
+                        <h4 className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-widest">Executive Summary</h4>
+                        <p className="text-sm leading-relaxed font-medium text-[var(--wdd-black)] bg-[var(--wdd-surface)] p-4 rounded-xl border border-[var(--wdd-border)]">
+                            {lead.summary}
+                        </p>
+                    </div>
+                )}
 
-            {/* Conversation Summary */}
-            {lead.summary && (
-                <div className="mb-8">
-                    <h4 className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-widest mb-2">Executive Summary</h4>
-                    <p className="text-sm text-[var(--wdd-black)] leading-relaxed">{lead.summary}</p>
-                </div>
-            )}
-
-            {/* Field list */}
-            <div className="space-y-3.5 border-t border-[var(--wdd-border)] pt-6">
-                <h4 className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-widest mb-4">Lead Profile Details</h4>
-                {fields.map(({ label, key, mono }) => {
-                    let val = lead[key];
-                    if (val === undefined || val === null || val === 'None' || val === '') return null;
-
-                    // Format lists
-                    if (Array.isArray(val)) val = val.join(', ');
-
-                    return (
-                        <div key={key} className="grid grid-cols-[140px_1fr] gap-2 items-start">
-                            <span className="text-[11px] font-semibold text-[var(--wdd-muted)] uppercase tracking-tight">{label}</span>
-                            <span className={`text-sm text-[var(--wdd-black)] break-words ${mono ? 'font-mono text-[11px] opacity-70' : ''}`}>
-                                {String(val)}
-                            </span>
+                {/* Field Groups Grid */}
+                {groups.map((group, idx) => (
+                    <div key={idx} className="space-y-4">
+                        <h4 className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-[0.2em] border-b border-[var(--wdd-border)] pb-2">{group.title}</h4>
+                        <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+                            {group.fields.map((f: any, fIdx: number) => (
+                                <div key={fIdx} className="space-y-1">
+                                    <p className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase opacity-60">{f.label}</p>
+                                    <p className={`text-xs font-bold ${f.mono ? 'font-mono opacity-80' : 'text-[var(--wdd-black)]'}`}>{f.value}</p>
+                                </div>
+                            ))}
                         </div>
-                    );
-                })}
-            </div>
+                    </div>
+                ))}
 
-            {/* Raw JSON */}
-            <div className="mt-12 pt-4 border-t border-[var(--wdd-border)]">
-                <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-widest">Metadata</span>
-                    <button
-                        onClick={copyRaw}
-                        className="text-xs text-[var(--wdd-red)] hover:underline"
-                    >
-                        {copied ? '✓ Copied!' : 'Copy JSON'}
-                    </button>
+                {/* Tags Strip */}
+                {(lead.tags || []).length > 0 && (
+                    <div className="space-y-3">
+                        <h4 className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-widest">Platform Tags</h4>
+                        <div className="flex flex-wrap gap-2">
+                            {lead.tags?.map((t: string) => (
+                                <span key={t} className="px-3 py-1 bg-white border border-[var(--wdd-border)] rounded-full text-[10px] font-bold text-[var(--wdd-black)] hover:border-[var(--wdd-red)] transition-colors cursor-default">
+                                    #{t.toUpperCase()}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* Technical Meta */}
+                <div className="pt-8 border-t border-[var(--wdd-border)]">
+                    <div className="flex items-center justify-between mb-4">
+                        <span className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-widest">Telemetry Metadata</span>
+                        <button onClick={copyRaw} className="text-[10px] font-bold text-[var(--wdd-red)] hover:opacity-70 transition-opacity">
+                            {copied ? 'COPIED TO CLIPBOARD' : 'COPY RAW JSON'}
+                        </button>
+                    </div>
+                    <pre className="p-4 bg-[var(--wdd-surface)] border border-[var(--wdd-border)] rounded-xl text-[10px] font-mono text-[var(--wdd-muted)] max-h-40 overflow-y-auto whitespace-pre-wrap">
+                        {JSON.stringify(lead, null, 4)}
+                    </pre>
                 </div>
-                <pre className="bg-[var(--wdd-surface)] border border-[var(--wdd-border)] rounded-lg p-3 text-[10px] text-[var(--wdd-muted)] overflow-x-auto whitespace-pre-wrap break-all font-mono max-h-[150px] overflow-y-auto">
-                    {JSON.stringify(lead, null, 2)}
-                </pre>
             </div>
         </Drawer>
     );

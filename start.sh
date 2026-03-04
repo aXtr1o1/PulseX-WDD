@@ -38,13 +38,13 @@ fi
 success "Docker OK"
 
 # ── 2. Stop any existing PulseX containers ────────────────────
-info "Hard-resetting Docker project state (Project: PulseX-WDD)..."
+info "Hard-resetting Docker project state (Project: pulsex_master)..."
 # Defensive ghost-kill for the specific ID corrupting the daemon metadata
 docker rm -f 1ed41d6a385b991b71662b5f0584aadcc89bb9b3dd91bbf5cabd5aad3b396573 2>/dev/null || true
 # Deep scrub of standard service names to flush daemon mappings
 docker stop pulsex_api pulsex_web api web 2>/dev/null || true
 docker rm -f pulsex_api pulsex_web api web 2>/dev/null || true
-$COMPOSE down -v --remove-orphans --timeout 0 2>/dev/null || true
+$COMPOSE -p pulsex_master down -v --remove-orphans --timeout 0 2>/dev/null || true
 
 # ── 3. Free ports 8081 and 3001 if occupied ───────────────────
 free_port() {
@@ -131,12 +131,12 @@ success "Runtime ready"
 
 # ── 6. Build images ───────────────────────────────────────────
 info "Building Docker images (may take ~2 min on first run)..."
-$COMPOSE build
+$COMPOSE -p pulsex_master build
 success "Images built"
 
 # ── 7. Start services ─────────────────────────────────────────
 info "Starting containers..."
-$COMPOSE up -d
+$COMPOSE -p pulsex_master up -d
 success "Containers started"
 
 # ── 8. Wait for API health ────────────────────────────────────
@@ -166,6 +166,6 @@ echo -e "  📖  API docs (Swagger):  ${CYAN}http://localhost:8081/docs${RESET}"
 echo ""
 [ -n "$ADMIN_PASS" ] && echo -e "  Admin password: ${YELLOW}${ADMIN_PASS}${RESET}"
 echo ""
-  echo -e "  View logs:  ${BOLD}docker compose logs -f${RESET}"
-  echo -e "  Stop:       ${BOLD}docker compose down${RESET}"
+  echo -e "  View logs:  ${BOLD}docker compose -p pulsex_master logs -f${RESET}"
+  echo -e "  Stop:       ${BOLD}docker compose -p pulsex_master down${RESET}"
 echo ""
