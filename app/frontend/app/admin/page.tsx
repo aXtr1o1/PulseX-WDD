@@ -28,14 +28,14 @@ export default function AdminPage() {
 
     const loadStats = useCallback(async () => {
         setStatsLoading(true);
-        try { setStats(await fetchAdminStats()); } catch { /* noop */ }
+        try { setStats(await fetchAdminStats(timeFilter)); } catch { /* noop */ }
         finally { setStatsLoading(false); }
-    }, []);
+    }, [timeFilter]);
 
     const loadLeads = useCallback(async () => {
         setLeadsLoading(true);
         try {
-            const res = await fetchLeads({ time_filter: timeFilter });
+            const res = await fetchLeads({ range: timeFilter });
             setLeads(res.leads);
             setLeadsTotal(res.total);
         } catch { /* noop */ }

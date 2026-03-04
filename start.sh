@@ -121,8 +121,8 @@ mkdir -p "$REPO/runtime/index" "$REPO/runtime/leads" "$REPO/runtime/exports"
 LEADS_CSV="$REPO/runtime/leads/leads.csv"
 AUDIT_CSV="$REPO/runtime/leads/audit.csv"
 
-LEADS_HDR="timestamp,session_id,name,phone,interest_projects,preferred_region,unit_type,budget_min,budget_max,purpose,timeline,next_step,lead_summary,tags,kb_version_hash"
-AUDIT_HDR="timestamp,session_id,user_message,router_intent,retrieved_projects,similarity_scores,kb_version,fields_used"
+LEADS_HDR="timestamp,lead_id,session_id,name,phone,email,interest_projects,interest_projects_display,preferred_region,unit_type,budget_min,budget_max,budget_band,purpose,timeline,contact_channel,consent_contact,confirmed_by_user,lead_temperature,reason_codes,reason_codes_display,tags,tags_display,lead_summary,raw_json,kb_version_hash"
+AUDIT_HDR="timestamp,session_id,intent,empty_retrieval,top_entities_json,latency_ms,status,error_reason"
 
 [ ! -f "$LEADS_CSV" ] && echo "$LEADS_HDR" > "$LEADS_CSV"
 [ ! -f "$AUDIT_CSV" ] && echo "$AUDIT_HDR" > "$AUDIT_CSV"

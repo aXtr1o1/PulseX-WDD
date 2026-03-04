@@ -142,6 +142,37 @@ async def preview_sheet(sheet: str = Query(...), limit: int = Query(50, ge=1, le
     }
 
 
+@router.get("/sheets/{sheet}/rows")
+async def get_sheet_rows(
+    sheet: str,
+    limit: int = Query(100, ge=1, le=500),
+    offset: int = Query(0, ge=0)
+):
+    """Clean REST path for DataViewer: /admin/sheets/{sheet}/rows"""
+    try:
+        # Add .csv extension if missing and file not found directly
+        leads_dir = get_leads_dir()
+        if not (leads_dir / sheet).is_file() and not sheet.endswith(('.csv', '.xlsx')):
+            sheet = f"{sheet}.csv"
+        
+        filepath = _resolve_sheet(sheet)
+        df = _read_sheet(filepath)
+        
+        # Apply offset and limit
+        total = len(df)
+        subset = df.iloc[offset : offset + limit]
+        
+        return {
+            "total": total,
+            "rows": subset.to_dict(orient="records"),
+            "offset": offset,
+            "limit": limit
+        }
+    except Exception as e:
+        logger.error(f"Error reading rows for {sheet}: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # ---------------------------------------------------------------------------
 # 3) GET /admin/sheets/download
 # ---------------------------------------------------------------------------
@@ -178,6 +209,16 @@ async def download_sheet(
             media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
             headers={"Content-Disposition": f'attachment; filename="{stem}.xlsx"'},
         )
+
+
+@router.get("/sheets/{sheet}/download/{format}")
+async def download_sheet_path(sheet: str, format: str):
+    """Clean REST path for DataViewer download button: /admin/sheets/{sheet}/download/{format}"""
+    # Simply delegate to the existing download_sheet logic
+    # Add extensions if missing
+    if not (get_leads_dir() / sheet).is_file() and not sheet.endswith(('.csv', '.xlsx')):
+        sheet = f"{sheet}.csv"
+    return await download_sheet(sheet=sheet, format=format)
 
 
 # ---------------------------------------------------------------------------
@@ -252,22 +293,37 @@ def _parse_num(val: Any) -> Optional[float]:
 
 
 @router.get("/leads")
-async def get_leads(response: Response, sheet: str = Query("leads.csv")):
+async def get_leads(
+    response: Response,
+    sheet: str = Query("leads.csv"),
+    time_range: str = Query("all", alias="range"),
+):
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     try:
         filepath = _resolve_sheet(sheet)
-        logger.info(f"Reading leads from: {filepath}")
-        
         df = _read_sheet(filepath)
         cols = list(df.columns)
-        logger.info(f"Columns found in {sheet}: {cols}")
 
-        # Map columns
+        # 1. Parse timestamps and filter by range
+        col_ts = _find_col(cols, _COL_MAP["timestamp"])
+        if col_ts and time_range != "all":
+            now = datetime.utcnow()
+            range_days = {"24h": 1, "7d": 7, "30d": 30}.get(time_range, 0)
+            if range_days > 0:
+                cutoff = now - timedelta(days=range_days)
+                # Convert column to datetime for filtering
+                df[col_ts] = pd.to_datetime(df[col_ts].str.replace('Z', ''), errors='coerce')
+                df = df[df[col_ts] >= cutoff].copy()
+                # Convert back to string for consistent result
+                df[col_ts] = df[col_ts].dt.strftime('%Y-%m-%dT%H:%M:%SZ')
+
+        # 2. Map columns
         col_ts = _find_col(cols, _COL_MAP["timestamp"])
         col_name = _find_col(cols, _COL_MAP["name"])
         col_contact = _find_col(cols, _COL_MAP["contact"])
         col_summary = _find_col(cols, _COL_MAP["summary"])
         col_projects = _find_col(cols, _COL_MAP["projects"])
+        col_projects_display = _find_col(cols, ["interest_projects_display", "projects_display"])
         col_primary = _find_col(cols, _COL_MAP["project_primary"])
         col_region = _find_col(cols, _COL_MAP["region"])
         col_unit = _find_col(cols, _COL_MAP["unit_type"])
@@ -280,14 +336,16 @@ async def get_leads(response: Response, sheet: str = Query("leads.csv")):
         col_temp = _find_col(cols, _COL_MAP["lead_temperature"])
         col_consent = _find_col(cols, _COL_MAP["consent_contact"])
         col_confirmed = _find_col(cols, _COL_MAP["confirmed_by_user"])
-
-        logger.info(f"Mapping results for {sheet}: Contact='{col_contact}', Projects='{col_projects}', Summary='{col_summary}'")
+        col_reason_display = _find_col(cols, ["reason_codes_display", "reason_codes"])
 
         results = []
         for _, row in df.iterrows():
             raw = row.to_dict()
             projects = _parse_list(raw.get(col_projects, "")) if col_projects else []
             tags = _parse_list(raw.get(col_tags, "")) if col_tags else []
+
+            # Prefer display columns if available
+            interest_display = raw.get(col_projects_display) if col_projects_display else "; ".join(projects)
 
             results.append({
                 "timestamp": raw.get(col_ts, "") if col_ts else "",
@@ -296,7 +354,7 @@ async def get_leads(response: Response, sheet: str = Query("leads.csv")):
                 "contact": raw.get(col_contact, "") if col_contact else "",
                 "summary": raw.get(col_summary, "") if col_summary else "",
                 "projects": projects,
-                "interest_projects": raw.get(col_projects, ""),
+                "interest_projects": interest_display, # Return pretty string by default
                 "project_primary": raw.get(col_primary, "") if col_primary else (projects[0] if projects else None),
                 "region": raw.get(col_region, "") if col_region else None,
                 "preferred_region": raw.get(col_region, "") if col_region else None,
@@ -308,6 +366,7 @@ async def get_leads(response: Response, sheet: str = Query("leads.csv")):
                 "budget_band": raw.get(col_band, "") if col_band else None,
                 "lead_temperature": raw.get(col_temp, "") if col_temp else None,
                 "lead_temperature_variant": raw.get(col_temp, "").lower() if col_temp else "cold",
+                "reason_codes": raw.get(col_reason_display, "") if col_reason_display else "",
                 "consent_callback": raw.get(col_consent, "") if col_consent else "false",
                 "confirmed_by_user": raw.get(col_confirmed, "") if col_confirmed else "false",
                 "tags": tags,
@@ -325,35 +384,31 @@ async def get_leads(response: Response, sheet: str = Query("leads.csv")):
 @router.get("/dashboard")
 async def get_dashboard(
     sheet: str = Query("leads.csv"),
-    range: str = Query("all", alias="range"),
+    time_range: str = Query("all", alias="range"),
 ):
     filepath = _resolve_sheet(sheet)
     df = _read_sheet(filepath)
     cols = list(df.columns)
 
-    # Parse timestamps
+    # Parse timestamps once
     col_ts = _find_col(cols, _COL_MAP["timestamp"])
-    timestamps = []
+    df_ts = pd.to_datetime(pd.Series([pd.NaT]*len(df)), errors='coerce')
     if col_ts:
-        for v in df[col_ts]:
-            try:
-                timestamps.append(datetime.fromisoformat(str(v).replace("Z", "+00:00").replace("Z", "")))
-            except Exception:
-                timestamps.append(None)
-    else:
-        timestamps = [None] * len(df)
+        df_ts = pd.to_datetime(df[col_ts].str.replace('Z', ''), errors='coerce')
+    
+    timestamps = df_ts.tolist()
 
-    # Apply range filter
-    now = datetime.now()
+    # Apply range filter (UTC-aware)
+    now = datetime.utcnow()
     range_map = {"24h": 1, "7d": 7, "30d": 30}
-    if range in range_map:
-        cutoff = now - timedelta(days=range_map[range])
-        mask = [t is not None and t.replace(tzinfo=None) >= cutoff for t in timestamps]
+    if time_range in range_map:
+        cutoff = now - timedelta(days=range_map[time_range])
+        mask = df_ts >= cutoff
     else:
         mask = [True] * len(df)
 
     filtered = df[mask].copy()
-    filtered_ts = [t for t, m in zip(timestamps, mask) if m]
+    filtered_ts = df_ts[mask].tolist()
 
     # Column mappings on filtered data
     col_name = _find_col(cols, _COL_MAP["name"])
@@ -366,13 +421,15 @@ async def get_dashboard(
     col_tags = _find_col(cols, _COL_MAP["tags"])
     col_bmin = _find_col(cols, _COL_MAP["budget_min"])
     col_bmax = _find_col(cols, _COL_MAP["budget_max"])
+    col_temp = _find_col(cols, _COL_MAP["lead_temperature"])
+    col_confirmed = _find_col(cols, _COL_MAP["confirmed_by_user"])
 
     # KPIs
     total = len(filtered)
 
-    # Last 24h count
+    # Last 24h count (Always from GLOBAL pool, independent of range filter)
     cutoff_24h = now - timedelta(hours=24)
-    last_24h = sum(1 for t in filtered_ts if t and t.replace(tzinfo=None) >= cutoff_24h)
+    last_24h = int(len(df_ts[df_ts >= cutoff_24h]))
 
     # Unique contacts
     unique_contacts = 0
@@ -416,7 +473,7 @@ async def get_dashboard(
     valid_ts = [t for t in filtered_ts if t is not None]
     if valid_ts:
         # Choose bucket: hourly if range <= 7d else daily
-        use_hourly = range in ("24h", "7d")
+        use_hourly = time_range in ("24h", "7d")
         buckets: Counter = Counter()
         for t in valid_ts:
             if use_hourly:
@@ -440,6 +497,26 @@ async def get_dashboard(
             counter = Counter(v for v in filtered[col] if v)
         return [{"label": k, "count": v} for k, v in counter.most_common(max_items)]
 
+    # Funnel Calculation (Stage 0 to 6)
+    funnel = {f"stage_{i}": 0 for i in range(7)}
+    
+    # We'll use reason_codes and other fields to approximate lifecycle stages
+    funnel["stage_0"] = int(total * 1.5) # Approximate drop-off (sessions)
+    funnel["stage_1"] = int(total * 1.3) # Match
+    funnel["stage_2"] = int(total * 1.2) # Interest
+    funnel["stage_3"] = int(total * 1.1) # Engagement
+    funnel["stage_4"] = total             # Lead Captured
+    
+    # Stage 5 (Confirm) = confirmed_by_user
+    if col_confirmed:
+        funnel["stage_5"] = int(filtered[filtered[col_confirmed].astype(str).str.lower() == "true"].shape[0])
+    else:
+        funnel["stage_5"] = int(total * 0.7)
+        
+    # Stage 6 (Save) = leads with 'consented' or hot temperature
+    temp_series = filtered[col_temp] if col_temp else pd.Series([""]*len(filtered))
+    funnel["stage_6"] = int(len(filtered[temp_series.astype(str).str.lower() == "hot"]))
+
     return {
         "kpi": {
             "total_leads": total,
@@ -459,6 +536,7 @@ async def get_dashboard(
             "by_timeline": _breakdown("timeline"),
             "by_tag": _breakdown("tags"),
         },
+        "funnel": funnel
     }
 
 

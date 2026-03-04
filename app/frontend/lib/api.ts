@@ -198,12 +198,13 @@ export async function adminLogout(): Promise<void> {
     await apiFetch('/api/admin/logout', { method: 'POST' });
 }
 
-export async function fetchAdminStats(): Promise<AdminDashboard> {
-    return apiFetch<AdminDashboard>('/api/admin/dashboard');
+export async function fetchAdminStats(range: string = 'all'): Promise<AdminDashboard> {
+    return apiFetch<AdminDashboard>(`/api/admin/dashboard?range=${range}`);
 }
 
 export interface LeadFilter {
     time_filter?: '24h' | '7d' | '30d' | 'all';
+    range?: '24h' | '7d' | '30d' | 'all';
     project?: string;
     region?: string;
     unit_type?: string;

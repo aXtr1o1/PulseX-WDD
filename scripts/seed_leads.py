@@ -3,225 +3,278 @@ import json
 import os
 import random
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 # --- Configuration & Paths ---
 REPO_ROOT = Path("/Volumes/ReserveDisk/codeBase/PulseX-WDD")
 KB_PATH = REPO_ROOT / "engine-KB/PulseX-WDD_buyerKB.csv"
-RUNTIME_LEADS_DIR = REPO_ROOT / "runtime/leads"
-EXPORT_DIR = RUNTIME_LEADS_DIR / "exports"
+RUNTIME_DIR = REPO_ROOT / "runtime"
+RUNTIME_LEADS_DIR = RUNTIME_DIR / "leads"
 
-LEADS_FILE = RUNTIME_LEADS_DIR / "leads.csv"
 LEADS_SEED_FILE = RUNTIME_LEADS_DIR / "leads_seed.csv"
+LEADS_LIVE_FILE = RUNTIME_LEADS_DIR / "leads.csv"
 AUDIT_FILE = RUNTIME_LEADS_DIR / "audit.csv"
-SESSIONS_FILE = RUNTIME_LEADS_DIR / "sessions.csv"
+SESSIONS_FILE = RUNTIME_DIR / "sessions.csv"
 
-# Deterministic Seed
-random.seed(42)
-
-# --- Data Rules ---
+# --- Constants & Rules ---
 TOTAL_LEADS = 473
-AUDIT_RATIO = 2.5 # ~2.5 audit rows per lead
-DAYS_BACK = 30
+RNG_SEED = 42
+random.seed(RNG_SEED)
 
-H_DIST = {
-    "12-22": 0.75, # 75% of traffic
-    "07-11": 0.20, # 20% of traffic
-    "00-06": 0.05  # 5% of traffic
+# Distribution targets
+REGIONS_TARGET = {
+    "East Cairo": 0.35,
+    "Cairo": 0.20,
+    "Ain El Sokhna": 0.20,
+    "North Coast": 0.15,
+    "West Cairo": 0.05,
+    "Red Sea": 0.05
 }
 
-# --- 1. Read KB & Portfolio ---
-def load_portfolio():
+# --- 1. Load KnowledgeBase ---
+def load_kb_projects():
     projects = []
-    regions = set()
     with open(KB_PATH, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
             if row['current_sales_status'] == 'selling':
-                p_name = row['project_name'].strip()
-                region = row['region'].strip()
-                projects.append({"name": p_name, "region": region, "id": row['project_id']})
-                regions.add(region)
-    return projects, sorted(list(regions))
+                projects.append({
+                    "id": row['project_id'],
+                    "name": row['project_name'].strip(),
+                    "region": row['region'].strip(),
+                    "unit_types": json.loads(row['unit_types_offered_json']) if row['unit_types_offered_json'] else ["apartment"]
+                })
+    return projects
 
-PROJECTS, REGIONS = load_portfolio()
+PROJECTS = load_kb_projects()
+SELLING_REGIONS = list(set(p['region'] for p in PROJECTS))
 
-# --- 2. Generation Helpers ---
-def get_random_timestamp():
-    # Last 30 days distribution
+# --- 2. Realism Helpers ---
+
+# Transliterated Arabic/Egyptian names + common Western/English names
+NAME_POOL_ARABIC = [
+    "Ahmed Mansour", "Mohamed Zaki", "Tarek Ebeid", "Yasmine Salem", "Laila Mahmoud",
+    "Sherif Hassan", "Omar Fayed", "Mona Kamel", "Sara El-Ghazaly", "Hassan Radwan",
+    "Nour El-Din", "Dina Hegazi", "Khaled Abbas", "Amira Soliman", "Bassem Youssef",
+    "Rania El-Sayed", "Mostafa Ghandour", "Hend Sabry", "Adel Imam", "Maha Ahmed"
+]
+NAME_POOL_WESTERN = [
+    "John Smith", "David Doe", "Sarah Emma", "Michael Johnson", "Emma Williams",
+    "Robert Brown", "Linda Davis", "James Miller", "Mary Wilson", "Patricia Moore"
+]
+
+def get_realistic_name():
+    if random.random() < 0.25: # 25% Arabic mix
+        return random.choice(NAME_POOL_ARABIC)
+    return random.choice(NAME_POOL_WESTERN)
+
+def get_egyptian_phone():
+    prefix = random.choice(["10", "11", "12", "15"])
+    num = "".join([str(random.randint(0, 9)) for _ in range(8)])
+    return f"+20{prefix}{num}"
+
+def get_realistic_timestamp(now):
+    # 60% in last 7 days, 25% in 8-15, 15% in 16-30
     r = random.random()
-    if r < 0.60: # 60% in last 7 days
-        days = random.randint(0, 7)
-    elif r < 0.85: # 25% in days 8-15
-        days = random.randint(8, 15)
-    else: # 15% in days 16-30
-        days = random.randint(16, 30)
+    if r < 0.60: days = random.randint(0, 7)
+    elif r < 0.85: days = random.randint(8, 15)
+    else: days = random.randint(16, 30)
     
-    # Hour distribution
+    # Hour distribution: 12:00-22:00 weighted
     hr_r = random.random()
-    if hr_r < H_DIST["12-22"]:
-        hour = random.randint(12, 22)
-    elif hr_r < H_DIST["12-22"] + H_DIST["07-11"]:
-        hour = random.randint(7, 11)
-    else:
-        hour = random.randint(0, 6)
+    if hr_r < 0.70: hour = random.randint(12, 21)
+    elif hr_r < 0.90: hour = random.randint(7, 11)
+    else: hour = random.choice([0,1,2,3,4,5,6,22,23])
+    
+    ts = now - timedelta(days=days, hours=hour, minutes=random.randint(0, 59), seconds=random.randint(0, 59))
+    return ts.replace(microsecond=0, tzinfo=timezone.utc).isoformat().replace('+00:00', 'Z')
+
+# --- 3. Lead Generation Logic ---
+
+def generate_dataset():
+    leads = []
+    sessions = []
+    audits = []
+    
+    now = datetime.now(timezone.utc)
+    
+    # Phone pool for dedupe realism (12-18% repeat)
+    repeat_leads_count = int(TOTAL_LEADS * random.uniform(0.12, 0.18))
+    contacts = []
+    for _ in range(TOTAL_LEADS - repeat_leads_count):
+        contacts.append({"name": get_realistic_name(), "phone": get_egyptian_phone()})
+    
+    # Fill the rest with repeats
+    for _ in range(repeat_leads_count):
+        contacts.append(random.choice(contacts[:int(len(contacts)*0.5)]))
+    
+    random.shuffle(contacts)
+    
+    for i, contact in enumerate(contacts):
+        # 1. Basics
+        ts = get_realistic_timestamp(now)
+        session_id = str(uuid.uuid4())
+        lead_id = f"WDDPX-{ts[2:4]}{ts[5:7]}{ts[8:10]}-{(i+1):04d}"
         
-    ts = datetime.now() - timedelta(days=days, hours=hour, minutes=random.randint(0, 59))
-    return ts.isoformat()
-
-def generate_phone():
-    return f"+201{random.randint(0, 2)}{random.randint(1000000, 9999999)}"
-
-NAME_START = ["Ahmed", "Mohamed", "Tarek", "Yasmine", "Laila", "Sherif", "Omar", "Hassan", "Mona", "Sara", "John", "David", "Sarah", "Emma", "Michael"]
-NAME_END = ["Mansour", "Zaki", "Ebeid", "Salem", "Smith", "Doe", "Johnson", "Williams", "Brown"]
-
-def generate_name():
-    return f"{random.choice(NAME_START)} {random.choice(NAME_END)}"
-
-BUDGET_BANDS = {
-    "low": (1500000, 3000000),
-    "mid": (3000000, 6000000),
-    "high": (6000000, 10000000),
-    "ultra": (10000000, 18000000)
-}
-
-# --- 3. Generate Leads ---
-leads = []
-sessions = []
-audit_logs = []
-
-# For repeat leads simulation
-phone_pool = []
-
-for i in range(TOTAL_LEADS):
-    is_repeat = random.random() < 0.15 and len(phone_pool) > 10
-    if is_repeat:
-        base_lead = random.choice(phone_pool)
-        phone = base_lead['phone']
-        name = base_lead['name']
-    else:
-        phone = generate_phone()
-        name = generate_name()
-    
-    ts = get_random_timestamp()
-    session_id = str(uuid.uuid4())
-    lead_id = f"WDDPX-{ts[:10].replace('-', '')}-{i:04d}"
-    
-    # Portfolio selection
-    proj = random.choice(PROJECTS)
-    region = proj['region']
-    
-    purpose = random.choices(["Buy", "Invest", "Weekend", "Rent"], weights=[40, 35, 20, 5])[0]
-    unit_type = random.choices(["apartment", "villa", "chalet", "townhouse", "duplex"], weights=[35, 20, 20, 15, 10])[0]
-    
-    # Budget logic
-    if "Coast" in region or "Sokhna" in region:
-        band = random.choices(["mid", "high", "ultra"], weights=[40, 40, 20])[0]
-    else:
-        band = random.choices(["low", "mid", "high"], weights=[30, 50, 20])[0]
-    
-    bmin, bmax = BUDGET_BANDS[band]
-    budget_min = random.randint(bmin, bmax - 500000)
-    budget_max = budget_min + random.randint(500000, 2000000)
-    
-    timeline = random.choices(["Immediate", "0-3 months", "3-6 months", "Exploring"], weights=[15, 30, 25, 30])[0]
-    
-    consent = random.random() < 0.70
-    confirmed = random.random() < 0.75 if consent else False
-    
-    # Temperature Logic
-    temp = "Cold"
-    reason_codes = ["low_signal"]
-    tags = []
-    
-    if consent and confirmed:
-        if timeline in ["Immediate", "0-3 months"]:
+        # 2. Region & Project (80/20 rule)
+        # Select region based on weighted target
+        pref_region = random.choices(
+            list(REGIONS_TARGET.keys()), 
+            weights=list(REGIONS_TARGET.values())
+        )[0]
+        # Adjust if region not in KB
+        if pref_region not in SELLING_REGIONS:
+            pref_region = random.choice(SELLING_REGIONS)
+            
+        region_projects = [p for p in PROJECTS if p['region'] == pref_region]
+        other_projects = [p for p in PROJECTS if p['region'] != pref_region]
+        
+        # 1-3 interest projects
+        num_projs = random.choices([1, 2, 3], weights=[70, 20, 10])[0]
+        interest_projs = []
+        for _ in range(num_projs):
+            if (random.random() < 0.8 or not other_projects) and region_projects:
+                p = random.choice(region_projects)
+            else:
+                p = random.choice(other_projects)
+            if p['name'] not in interest_projs:
+                interest_projs.append(p['name'])
+        
+        # 3. Attributes
+        purpose = random.choices(["Buy", "Invest", "Weekend", "Rent"], weights=[40, 35, 20, 5])[0]
+        # Restrict Rent if not coastal/residential
+        if purpose == "Rent" and pref_region not in ["Cairo", "East Cairo", "North Coast"]:
+            purpose = "Invest"
+            
+        # Match unit type to first project if possible
+        unit_type = "apartment" # Global fallback
+        for p in PROJECTS:
+            if p['name'] == interest_projs[0]:
+                u_types = p.get('unit_types', [])
+                if not u_types: u_types = ["apartment", "chalet"]
+                unit_type = random.choice(u_types)
+                break
+        
+        # Timeline
+        timeline = random.choices(["Immediate", "0-3 months", "3-6 months", "Exploring"], weights=[15, 30, 25, 30])[0]
+        
+        # Budget
+        band = random.choices(["LOW", "MID", "HIGH", "ULTRA"], weights=[30, 40, 20, 10])[0]
+        # Coastal spikes budgets
+        if pref_region in ["Ain El Sokhna", "North Coast"] and band == "LOW":
+            band = "MID"
+            
+        ranges = {"LOW": (1.5, 3), "MID": (3, 6), "HIGH": (6, 10), "ULTRA": (10, 18)}
+        b_min_raw, b_max_raw = ranges[band]
+        pixel_budget_min = int(b_min_raw * 1_000_000)
+        pixel_budget_max = int(b_max_raw * 1_000_000)
+        
+        budget_min = random.randint(pixel_budget_min, pixel_budget_max - 500_000)
+        budget_max = budget_min + random.randint(500_000, 2_000_000)
+        
+        # 4. Gating (Consent/Confirm)
+        consent = random.random() < 0.70
+        confirmed = (random.random() < 0.75) if consent else False
+        
+        # 5. Temperature & Reason Codes
+        is_hot = (purpose in ["Buy", "Invest", "Weekend"]) and (timeline in ["Immediate", "0-3 months"]) and consent and confirmed
+        
+        if is_hot:
             temp = "Hot"
-            reason_codes = ["high_intent", "short_timeline", "consented", "confirmed"]
-            tags.append("urgent")
-        else:
+            r_codes = ["high_intent", "short_timeline", "budget_present", "project_selected", "consented"]
+        elif consent and (not confirmed or timeline == "Exploring"):
             temp = "Warm"
-            reason_codes = ["consent_pending", "timeline_6mo"]
-    
-    if budget_max > 10000000:
-        tags.append("high_budget")
-    if random.random() < 0.10:
-        tags.append("international")
-    
-    summary = f"Interested in {proj['name']} ({unit_type}) for {purpose.lower()}. Timeline: {timeline}."
-    
-    lead_row = {
-        "timestamp": ts,
-        "lead_id": lead_id,
-        "session_id": session_id,
-        "name": name,
-        "phone": phone,
-        "email": f"{name.lower().replace(' ', '.')}@example.com",
-        "interest_projects": json.dumps([proj['name']]),
-        "preferred_region": region,
-        "unit_type": unit_type,
-        "budget_min": budget_min,
-        "budget_max": budget_max,
-        "budget_band": band,
-        "purpose": purpose,
-        "timeline": timeline,
-        "contact_channel": "WhatsApp" if random.random() > 0.3 else "Phone",
-        "consent_contact": str(consent).lower(),
-        "confirmed_by_user": str(confirmed).lower(),
-        "lead_temperature": temp,
-        "reason_codes": json.dumps(reason_codes),
-        "tags": json.dumps(tags),
-        "lead_summary": summary,
-        "raw_json": json.dumps({"source": "seed_v1", "agent": "Gemini-3-Flash"}),
-        "kb_version_hash": "v1.0"
-    }
-    
-    leads.append(lead_row)
-    if not is_repeat:
-        phone_pool.append({"phone": phone, "name": name})
+            r_codes = ["budget_missing"] if random.random() > 0.5 else ["timeline_long"]
+        else:
+            temp = "Cold"
+            r_codes = ["browsing_only", "low_signal"] if not consent else ["consent_declined"]
+            
+        tags = []
+        if band in ["HIGH", "ULTRA"]: tags.append("high_budget")
+        if timeline == "Immediate": tags.append("urgent")
+        if i % 8 == 0: tags.append("callback")
         
-    # Sessions
-    sessions.append({
-        "session_id": session_id,
-        "started_at": ts,
-        "last_seen_at": (datetime.fromisoformat(ts) + timedelta(minutes=random.randint(5, 20))).isoformat(),
-        "entry_page": random.choice(["/", "/widget", "/concierge"]),
-        "locale": "en"
-    })
-    
-    # Audit Logs (multiple per session)
-    num_audits = random.randint(2, 4)
-    for _ in range(num_audits):
-        audit_logs.append({
-            "timestamp": (datetime.fromisoformat(ts) + timedelta(minutes=random.randint(1, 10))).isoformat(),
+        # 6. Display Columns (The Dashboard Polish)
+        lead_row = {
+            "timestamp": ts,
+            "lead_id": lead_id,
             "session_id": session_id,
-            "user_message": "Interested in WDD projects",
-            "router_intent": random.choices(["discovery", "sales", "brochure_request"], weights=[45, 45, 10])[0],
-            "retrieved_projects": json.dumps([p['name'] for p in random.sample(PROJECTS, k=random.randint(1, 3))]),
-            "similarity_scores": json.dumps([round(random.uniform(0.7, 0.95), 3) for _ in range(3)]),
-            "kb_version": "v1.0",
-            "fields_used": "all"
+            "name": contact['name'],
+            "phone": contact['phone'],
+            "email": f"{contact['name'].lower().replace(' ', '.')}@example.com" if random.random() < 0.4 else "None",
+            "interest_projects": json.dumps(interest_projs),
+            "interest_projects_display": "; ".join(interest_projs),
+            "preferred_region": pref_region,
+            "unit_type": unit_type,
+            "budget_min": budget_min,
+            "budget_max": budget_max,
+            "budget_band": band,
+            "purpose": purpose,
+            "timeline": timeline,
+            "contact_channel": random.choice(["WhatsApp", "WhatsApp", "Phone"]),
+            "consent_contact": str(consent).lower(),
+            "confirmed_by_user": str(confirmed).lower(),
+            "lead_temperature": temp,
+            "reason_codes": json.dumps(r_codes),
+            "reason_codes_display": "; ".join(r_codes),
+            "tags": json.dumps(tags),
+            "tags_display": "; ".join(tags),
+            "lead_summary": f"Concierge identified interest in {', '.join(interest_projs)}. Intent: {purpose}. Budget: {band}.",
+            "raw_json": "{}",
+            "kb_version_hash": "v1.1-palmx"
+        }
+        leads.append(lead_row)
+        
+        # Session Data
+        sessions.append({
+            "session_id": session_id,
+            "started_at": ts,
+            "last_seen_at": (datetime.fromisoformat(ts.replace('Z', '+00:00')) + timedelta(minutes=random.randint(2, 15))).isoformat().replace('+00:00', 'Z'),
+            "page_hint": "/concierge",
+            "focused_project": interest_projs[0]
         })
+        
+        # Audit Data (2x ratio)
+        for _ in range(random.randint(1, 4)):
+            audits.append({
+                "timestamp": ts,
+                "session_id": session_id,
+                "intent": random.choices(["discovery", "sales", "brochure_request", "other"], weights=[45, 35, 15, 5])[0],
+                "empty_retrieval": "false" if random.random() > 0.1 else "true",
+                "top_entities_json": json.dumps(interest_projs),
+                "latency_ms": random.randint(120, 2200),
+                "status": "ok",
+                "error_reason": "None"
+            })
 
-# --- 4. Write Files ---
-def write_csv(path, data, headers):
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, 'w', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=headers)
-        writer.writeheader()
-        writer.writerows(data)
+    return leads, sessions, audits
 
-# Backup existing if any
-if LEADS_FILE.exists():
-    os.makedirs(EXPORT_DIR, exist_ok=True)
-    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    os.rename(LEADS_FILE, EXPORT_DIR / f"leads_backup_{stamp}.csv")
+# --- 4. Main Execution ---
+def main():
+    print(f"--- WDD PulseX Seeding (PalmX-Grade) ---")
+    leads, sessions, audits = generate_dataset()
+    
+    # Save Files
+    def save_csv(path, data):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(path, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=data[0].keys())
+            writer.writeheader()
+            writer.writerows(data)
+        print(f"Saved {len(data)} rows to {path}")
 
-write_csv(LEADS_SEED_FILE, leads, list(leads[0].keys()))
-write_csv(LEADS_FILE, leads, list(leads[0].keys()))
-write_csv(SESSIONS_FILE, sessions, list(sessions[0].keys()))
-write_csv(AUDIT_FILE, audit_logs, list(audit_logs[0].keys()))
+    save_csv(LEADS_SEED_FILE, leads)
+    save_csv(LEADS_LIVE_FILE, leads)
+    save_csv(SESSIONS_FILE, sessions)
+    save_csv(AUDIT_FILE, audits)
+    
+    print("\nVerification Stats:")
+    print(f"Total Leads: {len(leads)}")
+    unique_phones = len(set(l['phone'] for l in leads))
+    print(f"Unique Contacts: {unique_phones} ({round(100 - (unique_phones/len(leads)*100), 1)}% repeat)")
+    print(f"Regions Coverage: {set(l['preferred_region'] for l in leads)}")
+    print("Done.")
 
-print(f"Generated {len(leads)} leads, {len(sessions)} sessions, and {len(audit_logs)} audit rows.")
-print(f"Files saved to: {RUNTIME_LEADS_DIR}")
+if __name__ == "__main__":
+    main()
