@@ -250,7 +250,7 @@ export default function ChatWidget({ initialProject, embedded = false }: ChatWid
                             <button
                                 onClick={() => handleSend()}
                                 disabled={!input.trim()}
-                                className="ml-3 mb-0.5 w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-none bg-[#E5E5E5] text-[#1a1a1a] hover:bg-[var(--wdd-red)] hover:text-white disabled:opacity-50 transition-colors cursor-pointer"
+                                className="ml-3 mb-0.5 w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-none bg-[#E5E5E5] text-[#1a1a1a] hover:bg-[var(--wdd-red)] hover:text-white disabled:opacity-50 disabled:hover:bg-[#E5E5E5] disabled:hover:text-[#1a1a1a] disabled:cursor-not-allowed transition-colors cursor-pointer"
                                 aria-label="Send message"
                             >
                                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none">

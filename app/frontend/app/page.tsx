@@ -66,7 +66,7 @@ export default function ConciergePage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => gtm.customEvent('click_request_call')}
-                            className="text-[10px] tracking-[0.15em] font-bold bg-[#1a1a1a] text-white px-6 py-3 rounded-none hover:bg-black transition-all hidden md:block inline-block"
+                            className="text-[10px] tracking-[0.15em] font-bold bg-[#1a1a1a] text-white px-6 py-3 rounded-none hover:bg-[var(--wdd-red)] hover:text-white transition-all hidden md:block inline-block cursor-pointer"
                         >
                             REQUEST A SALES CALL
                         </a>

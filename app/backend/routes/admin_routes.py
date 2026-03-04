@@ -85,6 +85,57 @@ async def admin_health():
 
 
 # ---------------------------------------------------------------------------
+# 0.5) GET /admin/sources — KB details for frontend Data Transparency
+# ---------------------------------------------------------------------------
+@router.get("/sources")
+async def get_sources():
+    from app.backend.services.kb_service import kb_service
+    from app.backend.config import Config
+    
+    filepath = Path(Config.KB_CSV_PATH)
+    kb_health = {
+        "filename": filepath.name if filepath.exists() else "Unknown",
+        "kb_hash": "Pending...",
+        "last_indexed_at": datetime.utcnow().isoformat() + "Z",
+        "schema_strict": True, # WDD data rules strictly mandate active master sheet
+        "total_entities": len(kb_service.projects)
+    }
+
+    if filepath.exists():
+        stat = filepath.stat()
+        kb_health["last_indexed_at"] = datetime.fromtimestamp(stat.st_mtime).isoformat() + "Z"
+        
+        hasher = hashlib.sha256()
+        try:
+            with open(filepath, 'rb') as f:
+                # read chunk for consistent hash without heavy memory
+                buf = f.read(1024 * 1024) 
+                hasher.update(buf)
+            kb_health["kb_hash"] = hasher.hexdigest()
+        except:
+            pass
+
+    # Group projects by region
+    regions_map = defaultdict(list)
+    for p in kb_service.projects.values():
+        region = p.region if p.region and p.region.strip() else "Other"
+        regions_map[region].append(p.project_name)
+
+    regions_list = []
+    # Sort for deterministic presentation
+    for r, projs in sorted(regions_map.items()):
+        regions_list.append({
+            "region": r,
+            "projects": sorted(list(set(projs)))
+        })
+
+    return {
+        "kb_health": kb_health,
+        "regions": regions_list
+    }
+
+
+# ---------------------------------------------------------------------------
 # 1) GET /admin/sheets — list all files in runtime/leads
 # ---------------------------------------------------------------------------
 @router.get("/sheets")
