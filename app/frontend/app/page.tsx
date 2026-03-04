@@ -42,7 +42,7 @@ export default function ConciergePage() {
                     {/* Center: Absolute Centered Branding */}
                     <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex flex-col items-center gap-1.5">
                         <div className="flex items-center gap-3">
-                            <Image src="/brand/WDD_fullLogo.png" width={160} height={42} alt="Wadi Degla Developments" className="object-contain h-7 w-auto" />
+                            <Image src="/brand/WDD_fullLogo.png" width={180} height={48} alt="Wadi Degla Developments" className="object-contain h-9 w-auto" />
                         </div>
                         <span className="text-[9px] font-bold text-[var(--wdd-red)] tracking-[0.2em] uppercase">PULSEX AI</span>
                     </div>
@@ -61,12 +61,15 @@ export default function ConciergePage() {
                         <div className="w-[1px] h-3 bg-gray-200 hidden md:block"></div>
 
                         {/* Black Action Button */}
-                        <button
-                            onClick={() => { gtm.customEvent('click_request_call'); setMenuOpen(true); }}
-                            className="text-[10px] tracking-[0.15em] font-bold bg-[#1a1a1a] text-white px-6 py-3 rounded-none hover:bg-black transition-all hidden md:block"
+                        <a
+                            href="https://wadidegladevelopments.com/contact-us/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => gtm.customEvent('click_request_call')}
+                            className="text-[10px] tracking-[0.15em] font-bold bg-[#1a1a1a] text-white px-6 py-3 rounded-none hover:bg-black transition-all hidden md:block inline-block"
                         >
                             REQUEST A SALES CALL
-                        </button>
+                        </a>
                     </nav>
                 </div>
             </header>
