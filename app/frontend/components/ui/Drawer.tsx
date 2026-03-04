@@ -67,8 +67,8 @@ export default function Drawer({
             >
                 {/* Header */}
                 {title && (
-                    <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--wdd-border)]">
-                        <h2 className="text-base font-semibold text-[var(--wdd-black)]">{title}</h2>
+                    <div className="flex items-center justify-between px-8 py-6 border-b border-[var(--wdd-border)]">
+                        <h2 className="text-[22px] font-semibold text-[var(--wdd-black)] tracking-tight">{title}</h2>
                         <button
                             onClick={onClose}
                             className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--wdd-surface)] text-[var(--wdd-icon-grey)] transition-colors"
@@ -82,7 +82,7 @@ export default function Drawer({
                 )}
 
                 {/* Body */}
-                <div className="flex-1 overflow-y-auto px-6 py-5">{children}</div>
+                <div className="flex-1 overflow-y-auto px-8 py-8">{children}</div>
             </div>
         </>
     );
