@@ -23,7 +23,6 @@ export default function WidgetPage() {
                     embedded={true}
                     initialProject={project}
                     initialRegion={region}
-                    headerLangToggle={false}
                 />
             )}
         </main>

@@ -1180,3 +1180,11 @@ timestamp,session_id,intent,empty_retrieval,top_entities_json,latency_ms,status,
 2026-03-01T21:41:05Z,b885ddcd-7f50-4588-ba9b-762452c2f3d2,project_query,false,"[""Murano""]",140,ok,
 2026-03-01T21:41:05Z,b885ddcd-7f50-4588-ba9b-762452c2f3d2,compare,false,"[""Murano""]",458,ok,
 2026-03-01T15:31:05Z,3668c195-b0f9-4763-92fc-4e0e949507b9,list_projects,false,"[""Neo""]",860,ok,
+2026-03-05T15:54:51.638175Z,sess_mmbwjjyw9nxt4,DISCOVERY,GREETING,false,hi,,[],true,,ok
+2026-03-05T15:55:11.253580Z,sess_mmbwjjyw9nxt4,DISCOVERY,GENERAL_QA,false,am planing to invest,,"[""Murano"", ""Living Community"", ""Horizon""]",false,,ok
+2026-03-05T15:55:26.994097Z,sess_mmbwjjyw9nxt4,DISCOVERY,LIST_PORTFOLIO,false,List me down all the Projects you have,,"[""Murano"", ""Clubtown"", ""Neo"", ""Vero"", ""Promenade New Cairo"", ""Living Community"", ""Waterside"", ""Floating Islands"", ""Ojo"", ""Neo Lakes"", ""Neo Gardens"", ""Breeze"", ""Horizon"", ""Edge"", ""Vyon""]",false,,ok
+2026-03-05T15:56:01.798441Z,sess_mmbwjjyw9nxt4,DISCOVERY,GENERAL_QA,false,"am actually from India
+
+englighten me",,"[""Breeze"", ""Living Community"", ""Ojo""]",false,,ok
+2026-03-05T15:56:21.088325Z,sess_mmbwjjyw9nxt4,DISCOVERY,LIST_PORTFOLIO,false,list me down properties in cairo,,"[""Murano"", ""Clubtown"", ""Neo"", ""Vero"", ""Promenade New Cairo"", ""Living Community"", ""Waterside"", ""Floating Islands"", ""Ojo"", ""Neo Lakes"", ""Neo Gardens"", ""Breeze"", ""Horizon"", ""Edge"", ""Vyon""]",false,,ok
+2026-03-05T15:57:02.462317Z,sess_mmbwjjyw9nxt4,DISCOVERY,PROJECT_DISCOVERY,false,Tell me more on Clubtown,Clubtown,"[""Clubtown""]",false,,ok

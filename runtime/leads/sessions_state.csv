@@ -1,0 +1,2 @@
+session_id,started_at,last_seen_at,state_json
+sess_mmbwjjyw9nxt4,2026-03-05T15:54:51.632388Z,2026-03-05T15:57:00.975676Z,"{""greeted"": true, ""stage"": ""DISCOVERY"", ""slots"": {""purpose"": ""Invest"", ""region"": ""Cairo"", ""unit_type"": null, ""budget_min"": null, ""budget_max"": null, ""budget_band"": null, ""timeline"": null, ""interest_projects"": [""Clubtown""], ""name"": null, ""phone"": null, ""confirmed_by_user"": false, ""consent_contact"": false}, ""focused_project"": ""Clubtown"", ""turn_count"": 6}"

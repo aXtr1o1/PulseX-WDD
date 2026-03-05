@@ -94,7 +94,7 @@ export default function ConciergePage() {
 
             {/* 4. Full Page Chat Area */}
             <section className="flex-1 flex flex-col w-full min-h-0 relative">
-                <ChatWidget embedded={true} headerLangToggle={false} />
+                <ChatWidget embedded={true} />
             </section>
         </main>
     );
