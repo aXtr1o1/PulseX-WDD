@@ -21,7 +21,7 @@ class RAGService:
         self._load_index()
 
     def _compute_kb_hash(self) -> str:
-        """SHA-256 of the KB CSV file — if this changes, the index is stale."""
+        """SHA-256 of the active KB CSV file — if this changes, the index is stale."""
         h = hashlib.sha256()
         try:
             with open(Config.KB_CSV_PATH, 'rb') as f:

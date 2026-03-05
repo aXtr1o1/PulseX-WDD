@@ -19,7 +19,9 @@ class KBService:
             logger.error(f"KB CSV not found at {Config.KB_CSV_PATH}")
             return
 
-        with open(Config.KB_CSV_PATH, 'r', encoding='utf-8') as f:
+        logger.info(f"Loading finalized KB from: {Config.KB_CSV_PATH}")
+
+        with open(Config.KB_CSV_PATH, 'r', encoding='utf-8-sig') as f:
             reader = csv.DictReader(f)
             for row in reader:
                 # Clean row
@@ -27,20 +29,23 @@ class KBService:
                 
                 # Parse JSON fields
                 for k, v in clean_row.items():
-                    if k.endswith('_json'):
+                    # Support both original and cleaned JSON field names
+                    if k.endswith('_json') or k in ['canon_unit_types', 'canon_quality_flags']:
                         clean_row[k] = self._parse_json(v)
 
                 # Create Project object
                 try:
-                    pid = clean_row.get('project_id')
+                    # Prefer canon_ fields for ID/Name/etc if they exist (they should now)
+                    pid = clean_row.get('canon_project_slug', clean_row.get('project_id'))
                     if not pid: continue
                     
+                    p_name = clean_row.get('canon_project_name', clean_row.get('project_name', 'Unknown'))
+                    region = clean_row.get('canon_region', clean_row.get('region'))
+                    p_type = clean_row.get('canon_project_type', clean_row.get('project_type'))
+                    p_status = clean_row.get('canon_project_status', clean_row.get('project_status'))
                     # Manual mapping for key amenities from json + flags
                     amenities = clean_row.get('key_amenities_json', [])
-                    if isinstance(amenities, list):
-                        amenities = [a for a in amenities if isinstance(a, str)]
-                    else:
-                        amenities = []
+                    if not isinstance(amenities, list): amenities = []
                         
                     # Add flag-based amenities
                     flags = ['golf', 'beach_access', 'lagoons', 'clubhouse', 'pools', 'gym']
@@ -61,20 +66,20 @@ class KBService:
                     except: pass
 
                     # Normalizing status for safer checks
-                    p_status = clean_row.get('price_status')
-                    if p_status: p_status = p_status.lower()
+                    price_status = clean_row.get('price_status')
+                    if price_status: price_status = price_status.lower()
 
                     proj = Project(
                         project_id=pid,
-                        project_name=clean_row.get('project_name', 'Unknown'),
-                        brand_family=clean_row.get('brand_family'),
-                        official_project_url=clean_row.get('official_project_url'),
-                        region=clean_row.get('region'),
-                        city_area=clean_row.get('city_area'),
-                        project_type=clean_row.get('project_type'),
-                        project_status=clean_row.get('project_status'),
+                        project_name=p_name or 'Unknown',
+                        brand_family=clean_row.get('canon_brand_family', clean_row.get('brand_family')),
+                        official_project_url=clean_row.get('canon_primary_url', clean_row.get('official_project_url')),
+                        region=region,
+                        city_area=clean_row.get('canon_city_area', clean_row.get('city_area')),
+                        project_type=p_type,
+                        project_status=p_status,
                         starting_price_value=price_int,
-                        price_status=clean_row.get('price_status'),
+                        price_status=price_status,
                         key_amenities=amenities,
                         raw_data=clean_row
                     )

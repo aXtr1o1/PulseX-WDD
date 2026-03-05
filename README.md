@@ -43,8 +43,8 @@ make index
 # 3. Seed demo leads
 make seed
 
-# 4. Validate KB
-make validate
+# 4. Refresh KnowledgeBase (Governance cleanup)
+make kb-refresh
 
 # 5. Run backend + frontend (two concurrent processes)
 make dev
@@ -104,7 +104,13 @@ PulseX-WDD/
 │   ├── build_index.py        Build SQLite FTS5 + FAISS indices
 │   ├── validate_kb.py        Validate buyerKB.csv
 │   └── seed_leads.py         PalmX-grade Lead & Telemetry Generator (Deterministic)
-├── engine-KB/                PulseX-WDD_buyerKB.csv
+├── engine-KB/                
+│   ├── PulseX-WDD_buyerKB.csv   (Raw Source)
+│   ├── backups/                 (Timestamped backups)
+│   └── processed/               
+│       ├── PulseX-WDD_buyerKB.cleaned.csv (Governance-cleaned)
+│       ├── PulseX-WDD_buyerKB.drop.csv    (Dropped rows audit)
+│       └── wdd_kb_cleanup_report.json     (Stats & details)
 ├── runtime/                  leads.csv, audit.csv, sessions.csv, leads_seed.csv
 ├── indices/                  keyword_index.db, vectors.faiss, metadata.json (generated)
 ├── docs/                     ARCHITECTURE.md, RAG_GATING.md, SECURITY.md
@@ -173,9 +179,9 @@ make setup      # Install all deps
 make dev        # Run API + Web concurrently
 make api        # Run backend only (:8000)
 make web        # Run frontend only (:3000)
-make index      # Build FTS5 + FAISS indices
+make kb-refresh # Clean and Validate KnowledgeBase (recommended)
+make index      # Build FTS5 + FAISS indices (from cleaned KB)
 make seed       # Seed leads.csv from leads_seed.csv
-make validate   # Validate buyerKB.csv
 make test       # Run pytest + Next lint
 make build      # Build Next.js production bundle
 make up         # Docker Compose up
