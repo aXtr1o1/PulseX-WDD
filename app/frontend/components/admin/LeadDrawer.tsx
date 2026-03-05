@@ -59,7 +59,7 @@ export default function LeadDrawer({ lead, open, onClose }: LeadDrawerProps) {
             open={open}
             onClose={onClose}
             title="Lead Detail"
-            width="w-full xl:w-[600px] md:w-[40vw] min-w-[500px]"
+            width="w-full xl:w-[600px] md:w-[40vw] md:min-w-[500px]"
         >
             <div className="flex flex-col pb-20 pt-2 lg:px-2">
                 {/* Profile Header (Vertical) */}

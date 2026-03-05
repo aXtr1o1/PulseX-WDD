@@ -36,18 +36,19 @@ export default function QualityPage() {
         <div className="min-h-screen bg-[var(--wdd-surface)] font-isidora">
             {/* Header */}
             <header className="sticky top-0 z-30 bg-white border-b border-[var(--wdd-border)]">
-                <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                        <Link href="/">
-                            <Image src="/brand/WDD_fullLogo.png" width={140} height={36} alt="WDD" className="h-7 w-auto object-contain hover:opacity-80 transition-opacity" />
+                <div className="max-w-[1200px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                        <Link href="/" className="flex items-center gap-2 group">
+                            <span className="p-1.5 rounded-full bg-[var(--wdd-surface)] text-[var(--wdd-black)] group-hover:bg-[var(--wdd-red)] group-hover:text-white transition-all">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m15 18-6-6 6-6" /></svg>
+                            </span>
+                            <Image src="/brand/WDD_fullLogo.png" width={140} height={36} alt="WDD" className="h-6 sm:h-7 w-auto object-contain hover:opacity-80 transition-opacity hidden xs:block" />
+                            <Image src="/brand/WDD_blockLogo.png" width={40} height={40} alt="WDD" className="h-6 w-auto object-contain xs:hidden" />
                         </Link>
-                        <div className="flex items-center gap-2 border-l border-[var(--wdd-border)] pl-4">
-                            <span className="text-xs font-semibold text-[var(--wdd-black)] tracking-wider">RETRIEVAL QUALITY</span>
+                        <div className="flex items-center gap-2 border-l border-[var(--wdd-border)] pl-3 sm:pl-4">
+                            <span className="text-[10px] sm:text-xs font-semibold text-[var(--wdd-black)] tracking-wider whitespace-nowrap">QUALITY</span>
                         </div>
                     </div>
-                    <Link href="/" className="text-xs font-semibold text-[var(--wdd-muted)] hover:text-[var(--wdd-black)] transition-colors">
-                        ← Back to Concierge
-                    </Link>
                 </div>
             </header>
 

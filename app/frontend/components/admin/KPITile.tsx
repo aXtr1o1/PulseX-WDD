@@ -33,7 +33,7 @@ export default function KPITile({ label, value, icon, accent, suffix }: KPITileP
     return (
         <div
             className={clsx(
-                'relative overflow-hidden rounded-[var(--wdd-radius-lg)] border p-5 bg-white',
+                'relative overflow-hidden rounded-[var(--wdd-radius-lg)] border p-4 sm:p-5 bg-white',
                 'transition-shadow duration-200 hover:shadow-[var(--wdd-shadow)]',
                 accent
                     ? 'border-[var(--wdd-red)] bg-[#FFF8F8]'

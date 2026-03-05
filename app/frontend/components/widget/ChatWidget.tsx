@@ -166,7 +166,7 @@ export default function ChatWidget({ initialProject, embedded = false }: ChatWid
     };
 
     const containerClass = embedded
-        ? "w-full h-full flex flex-col bg-white"
+        ? "w-full flex-1 min-h-0 flex flex-col bg-white"
         : "w-full max-w-4xl mx-auto h-[70vh] min-h-[500px] flex flex-col bg-white rounded-2xl shadow-[var(--wdd-shadow-lg)] border border-[var(--wdd-border)]";
 
     return (
@@ -198,7 +198,7 @@ export default function ChatWidget({ initialProject, embedded = false }: ChatWid
             )}
 
             {/* Chat Body */}
-            <div className={`flex-1 overflow-y-auto ${!embedded ? 'scroll-smooth' : ''} ${embedded ? 'w-full' : ''}`}>
+            <div className={`flex-1 min-h-0 overflow-y-auto ${!embedded ? 'scroll-smooth' : ''} ${embedded ? 'w-full' : ''}`}>
                 <div className="px-4 md:px-8 py-8 space-y-8 max-w-4xl mx-auto w-full">
                     {messages.map((msg, i) => (
                         <MessageBubble
@@ -213,7 +213,7 @@ export default function ChatWidget({ initialProject, embedded = false }: ChatWid
 
             {/* New Chat button for embedded mode */}
             {embedded && messages.length > 2 && (
-                <div className="flex justify-center py-1">
+                <div className="flex-none flex justify-center py-1">
                     <button
                         onClick={handleNewChat}
                         className="text-[10px] font-semibold text-[var(--wdd-muted)] hover:text-[var(--wdd-red)] transition-colors tracking-wider uppercase"
@@ -224,7 +224,7 @@ export default function ChatWidget({ initialProject, embedded = false }: ChatWid
             )}
 
             {/* Input Dock */}
-            <div className={`w-full bg-white pt-2 pb-6 md:pb-10 ${embedded ? 'px-4' : 'px-4 md:px-8'}`}>
+            <div className={`flex-none w-full bg-white pt-2 pb-6 md:pb-10 ${embedded ? 'px-4' : 'px-4 md:px-8'}`}>
                 <div className={`w-full relative ${embedded ? 'max-w-4xl mx-auto' : ''}`}>
                     <div className="flex items-end bg-[#f9f9f9] rounded-none px-5 py-3 transition-all duration-300 border border-transparent focus-within:bg-white focus-within:border-[var(--wdd-red)] focus-within:shadow-[0_0_12px_rgba(203,32,48,0.15)]">
                         <textarea

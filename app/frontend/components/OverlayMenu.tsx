@@ -32,7 +32,7 @@ export default function OverlayMenu({ open, onClose }: OverlayMenuProps) {
 
     return (
         <div
-            className="fixed inset-0 z-[90] text-white flex flex-col md:flex-row animate-fade-in font-isidora overflow-y-auto hide-scrollbar [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
+            className="fixed inset-0 z-[90] text-white flex flex-col md:flex-row animate-fade-in font-isidora overflow-y-auto"
             style={{ background: 'linear-gradient(135deg, #6C192E 0%, #3B0E19 100%)' }}
             dir="ltr"
         >
@@ -48,7 +48,7 @@ export default function OverlayMenu({ open, onClose }: OverlayMenuProps) {
             </button>
 
             {/* Left Column: Routes & Scope */}
-            <div className="flex-1 flex flex-col justify-center px-10 md:px-24 pt-24 md:pt-0 border-b md:border-b-0 md:border-r border-white/20 min-h-screen md:min-h-0 relative">
+            <div className="flex-none md:flex-1 flex flex-col md:justify-center px-8 md:px-24 pt-20 pb-12 md:py-0 border-b md:border-b-0 md:border-r border-white/20 relative">
                 <div className="mb-12">
                     <h4 className="text-[10px] font-bold tracking-[0.3em] text-white/50 uppercase mb-8 ml-1">
                         System Routes
@@ -61,7 +61,7 @@ export default function OverlayMenu({ open, onClose }: OverlayMenuProps) {
                                     key={l.href}
                                     href={l.href}
                                     onClick={onClose}
-                                    className={`text-5xl md:text-[5rem] leading-[1.05] tracking-tight transition-colors inline-block w-fit font-light ${isActive ? 'text-white font-medium' : 'text-white/60 hover:text-white'
+                                    className={`text-4xl sm:text-5xl md:text-[5rem] leading-[1.05] tracking-tight transition-colors inline-block w-fit font-light ${isActive ? 'text-white font-medium' : 'text-white/60 hover:text-white'
                                         }`}
                                 >
                                     {l.label}
@@ -97,7 +97,7 @@ export default function OverlayMenu({ open, onClose }: OverlayMenuProps) {
             </div>
 
             {/* Right Column: System Info */}
-            <div className="flex-1 flex flex-col justify-center px-10 md:px-24 py-16 md:py-0 min-h-screen md:min-h-0 relative">
+            <div className="flex-none md:flex-1 flex flex-col md:justify-center px-8 md:px-24 py-16 md:py-0 relative">
                 <div className="max-w-md">
                     <div className="w-8 h-[2px] bg-white mb-8"></div>
                     <h4 className="text-[11px] font-bold tracking-[0.3em] text-white uppercase mb-6">

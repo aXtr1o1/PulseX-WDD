@@ -44,17 +44,21 @@ export default function SourcesPage() {
         <div className="min-h-screen bg-white text-[var(--wdd-black)] font-isidora selection:bg-[var(--wdd-black)] selection:text-white">
 
             {/* Header */}
-            <header className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-40 border-b border-[var(--wdd-border)] px-6 md:px-12 h-[88px] grid grid-cols-3 items-center">
-                <Link href="/" className="flex items-center gap-4 group justify-self-start">
-                    <div className="w-10 h-10 bg-white border border-[var(--wdd-border)] rounded-full flex items-center justify-center text-[var(--wdd-black)] group-hover:bg-[var(--wdd-black)] group-hover:text-white transition-colors duration-300">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M19 12H5M5 12L12 19M5 12L12 5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
+            <header className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-40 border-b border-[var(--wdd-border)] px-4 sm:px-12 h-16 md:h-[88px] flex items-center justify-between">
+                <div className="flex items-center gap-3 sm:gap-4 justify-self-start">
+                    <Link href="/" className="flex items-center gap-2 group">
+                        <span className="p-1.5 rounded-full bg-[var(--wdd-surface)] text-[var(--wdd-black)] group-hover:bg-[var(--wdd-red)] group-hover:text-white transition-all">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m15 18-6-6 6-6" /></svg>
+                        </span>
+                        <Image src="/brand/WDD_fullLogo.png" width={140} height={36} alt="WDD" className="h-6 sm:h-7 w-auto object-contain hover:opacity-80 transition-opacity hidden xs:block" />
+                        <Image src="/brand/WDD_blockLogo.png" width={40} height={40} alt="WDD" className="h-6 w-auto object-contain xs:hidden" />
+                    </Link>
+                    <div className="flex items-center gap-2 border-l border-[var(--wdd-border)] pl-3 sm:pl-4">
+                        <span className="text-[10px] sm:text-xs font-semibold text-[var(--wdd-black)] tracking-wider whitespace-nowrap">SOURCES</span>
                     </div>
-                    <span className="text-xs tracking-widest font-bold text-[var(--wdd-black)] uppercase hidden md:block group-hover:translate-x-1 transition-transform duration-300">Back to Concierge</span>
-                </Link>
+                </div>
 
-                <div className="flex flex-col items-center justify-center justify-self-center">
+                <div className="flex-col items-center justify-center hidden md:flex">
                     <div className="flex items-center gap-3 mb-2">
                         <Image src="/brand/WDD_fullLogo.png" width={140} height={36} alt="WDD" className="h-[22px] w-auto object-contain" />
                     </div>

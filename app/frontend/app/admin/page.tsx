@@ -123,61 +123,61 @@ export default function AdminPage() {
 
             {/* Segment A: Header / Command Bar */}
             <header className="sticky top-0 z-30 bg-white border-b border-[var(--wdd-border)]">
-                <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                        <Link href="/"><Image src="/brand/WDD_fullLogo.png" width={140} height={36} alt="WDD" className="h-7 w-auto object-contain hover:opacity-80 transition-opacity" /></Link>
-                        <div className="flex items-center gap-2 border-l border-[var(--wdd-border)] pl-4">
-                            <span className="text-xs font-semibold tracking-wider">LEAD INTELLIGENCE</span>
+                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                        <Link href="/" className="flex items-center gap-2 group">
+                            <span className="p-1.5 rounded-full bg-[var(--wdd-surface)] text-[var(--wdd-black)] group-hover:bg-[var(--wdd-red)] group-hover:text-white transition-all">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m15 18-6-6 6-6" /></svg>
+                            </span>
+                            <Image src="/brand/WDD_fullLogo.png" width={140} height={36} alt="WDD" className="h-6 sm:h-7 w-auto object-contain hover:opacity-80 transition-opacity hidden xs:block" />
+                            <Image src="/brand/WDD_blockLogo.png" width={40} height={40} alt="WDD" className="h-6 w-auto object-contain xs:hidden" />
+                        </Link>
+                        <div className="flex items-center gap-2 border-l border-[var(--wdd-border)] pl-3 sm:pl-4">
+                            <span className="text-[10px] sm:text-xs font-semibold tracking-wider whitespace-nowrap">DASHBOARD</span>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-4">
-                        {/* Status Pills */}
-                        <div className="hidden lg:flex items-center gap-2 mr-4">
-                            <span className={`w-2 h-2 rounded-full ${loading ? 'bg-orange-400 animate-pulse' : 'bg-green-500'}`} />
-                            <span className="text-[10px] font-bold text-[var(--wdd-muted)] uppercase tracking-tighter">Live Dataset</span>
-                        </div>
-
+                    <div className="flex items-center gap-2 sm:gap-4">
                         {/* Sheet Selection */}
                         <select
                             value={activeSheet}
                             onChange={(e) => setActiveSheet(e.target.value)}
-                            className="bg-[var(--wdd-surface)] border border-[var(--wdd-border)] text-xs font-bold rounded-full px-4 py-1.5 focus:outline-none"
+                            className="bg-[var(--wdd-surface)] border border-[var(--wdd-border)] text-[10px] sm:text-xs font-bold rounded-full px-2 sm:px-4 py-1 sm:py-1.5 focus:outline-none max-w-[80px] xs:max-w-none"
                         >
                             {sheets.map(s => <option key={s.name} value={s.name}>{s.name}</option>)}
                         </select>
 
                         {/* Range Pills */}
-                        <div className="flex bg-[var(--wdd-surface)] border border-[var(--wdd-border)] rounded-full p-1">
+                        <div className="flex bg-[var(--wdd-surface)] border border-[var(--wdd-border)] rounded-full p-0.5 sm:p-1">
                             {(['all', '24h', '7d', '30d'] as const).map(r => (
                                 <button
                                     key={r}
                                     onClick={() => setTimeRange(r)}
-                                    className={`px-3 py-1 text-[11px] font-bold rounded-full transition-all ${timeRange === r ? 'bg-white text-[var(--wdd-black)] shadow-sm' : 'text-[var(--wdd-muted)] hover:text-[var(--wdd-black)]'}`}
+                                    className={`px-1.5 sm:px-3 py-0.5 sm:py-1 text-[9px] sm:text-[11px] font-bold rounded-full transition-all ${timeRange === r ? 'bg-white text-[var(--wdd-black)] shadow-sm' : 'text-[var(--wdd-muted)] hover:text-[var(--wdd-black)]'}`}
                                 >
                                     {r.toUpperCase()}
                                 </button>
                             ))}
                         </div>
 
-                        <button onClick={loadAll} className="p-2 hover:bg-[var(--wdd-surface)] rounded-full transition-colors">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.92-10.26l5.08 5.08" /></svg>
+                        <button onClick={loadAll} className="p-1.5 sm:p-2 hover:bg-[var(--wdd-surface)] rounded-full transition-colors hidden xs:block">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.92-10.26l5.08 5.08" /></svg>
                         </button>
 
-                        <Link href="/">
-                            <button className="bg-[var(--wdd-black)] text-white text-[10px] font-bold px-4 py-1.5 rounded-full hover:brightness-125 transition-all tracking-widest">
-                                CONCIERGE
+                        <Link href="/" className="hidden lg:block">
+                            <button className="bg-[var(--wdd-black)] text-white text-[10px] font-bold px-4 py-1.5 rounded-full hover:brightness-125 transition-all tracking-widest uppercase">
+                                Concierge
                             </button>
                         </Link>
                     </div>
                 </div>
             </header>
 
-            <main className="max-w-[1400px] mx-auto px-6 py-8 space-y-12 animate-fade-in">
+            <main className="max-w-[1400px] mx-auto px-4 sm:px-6 py-4 sm:py-8 space-y-8 sm:space-y-12 animate-fade-in">
 
                 {/* Segment B: KPI Strip */}
                 <section>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
                         <KPITile label="Total leads" value={activeMetrics?.totalLeads} accent />
                         <KPITile label="Last 24h" value={activeMetrics ? (activeMetrics as any).intake24 : 0} />
                         <KPITile label="Unique contacts" value={activeMetrics?.uniqueContacts} />
@@ -287,7 +287,7 @@ export default function AdminPage() {
                     </div>
                     <div className="p-2">
                         <LeadTable
-                            leads={filteredLeads}
+                            leads={typeof window !== 'undefined' && window.innerWidth < 768 ? filteredLeads.slice(0, 25) : filteredLeads}
                             loading={loading}
                             onSelect={(l) => { setSelectedLead(l); setDrawerOpen(true); }}
                         />
