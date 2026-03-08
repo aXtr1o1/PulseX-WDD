@@ -1188,3 +1188,32 @@ timestamp,session_id,intent,empty_retrieval,top_entities_json,latency_ms,status,
 englighten me",,"[""Breeze"", ""Living Community"", ""Ojo""]",false,,ok
 2026-03-05T15:56:21.088325Z,sess_mmbwjjyw9nxt4,DISCOVERY,LIST_PORTFOLIO,false,list me down properties in cairo,,"[""Murano"", ""Clubtown"", ""Neo"", ""Vero"", ""Promenade New Cairo"", ""Living Community"", ""Waterside"", ""Floating Islands"", ""Ojo"", ""Neo Lakes"", ""Neo Gardens"", ""Breeze"", ""Horizon"", ""Edge"", ""Vyon""]",false,,ok
 2026-03-05T15:57:02.462317Z,sess_mmbwjjyw9nxt4,DISCOVERY,PROJECT_DISCOVERY,false,Tell me more on Clubtown,Clubtown,"[""Clubtown""]",false,,ok
+2026-03-07T21:52:15.146571Z,sess_mmguzl2ovcglo,DISCOVERY,GREETING,false,Hi,,[],true,,ok
+2026-03-07T21:52:30.669688Z,sess_mmguzl2ovcglo,DISCOVERY,GENERAL_QA,false,Am looking for to Invest,,"[""Ojo"", ""Living Community"", ""Horizon""]",false,,ok
+2026-03-07T21:52:56.343160Z,sess_mmguzl2ovcglo,DISCOVERY,GENERAL_QA,false,What are the Projects you have,,"[""Clubtown"", ""Breeze"", ""Neo""]",false,,ok
+2026-03-07T21:53:21.101262Z,sess_mmguzl2ovcglo,DISCOVERY,GENERAL_QA,false,"Am from India, So enlighten me",,"[""Living Community"", ""Edge"", ""Clubtown""]",false,,ok
+2026-03-07T21:53:25.840389Z,sess_mmguzl2ovcglo,DISCOVERY,PROJECT_DISCOVERY,false,Tell me more about Living Community,Living Community,"[""Living Community""]",false,,ok
+2026-03-07T22:02:15.982915Z,sess_mmguzl2ovcglo,DISCOVERY,GENERAL_QA,false,so tell me more,Living Community,"[""Living Community""]",false,,ok
+2026-03-07T22:02:38.534968Z,sess_mmguzl2ovcglo,DISCOVERY,LIST_PORTFOLIO,false,List me down all teh Properties you have,Living Community,"[""Murano"", ""Clubtown"", ""Neo"", ""Vero"", ""Promenade New Cairo"", ""Living Community"", ""Waterside"", ""Floating Islands"", ""Ojo"", ""Neo Lakes"", ""Neo Gardens"", ""Breeze"", ""Horizon"", ""Edge"", ""Vyon""]",false,,ok
+2026-03-07T22:03:10.996742Z,sess_mmguzl2ovcglo,DISCOVERY,GENERAL_QA,false,"am not sure with the potential 
+
+so suggest me teh place",Living Community,[],true,,ok
+2026-03-07T22:03:22.763443Z,sess_mmguzl2ovcglo,DISCOVERY,GENERAL_QA,false,anything else,Living Community,"[""Living Community""]",false,,ok
+2026-03-07T22:03:31.721223Z,sess_mmguzl2ovcglo,DISCOVERY,GENERAL_QA,false,lets go for it,Living Community,"[""Living Community""]",false,,ok
+2026-03-07T22:03:41.361780Z,sess_mmguzl2ovcglo,DISCOVERY,GENERAL_QA,false,yepp,Living Community,[],true,,ok
+2026-03-07T22:04:01.844244Z,sess_mmguzl2ovcglo,DISCOVERY,GENERAL_QA,false,473847386747,Living Community,[],true,,ok
+2026-03-07T22:04:13.529457Z,sess_mmguzl2ovcglo,DISCOVERY,GENERAL_QA,false,fuck youu,Living Community,[],true,,ok
+2026-03-07T22:10:08.706987,test-session-193f31e4,"Hi, I'm looking for a luxury property.",lead_capture,[],[],v1.0,all
+2026-03-07T22:10:12.243409,test-session-193f31e4,"I want a villa in Murano, looking to buy immediately for my family. Budget around 10 Million.",lead_capture,[],[],v1.0,all
+2026-03-07T22:10:15.814157,test-session-193f31e4,That sounds perfect. How do we proceed?,lead_capture,[],[],v1.0,all
+2026-03-07T22:10:19.078548,test-session-193f31e4,"My name is Ahmed Hassan and my phone is +20 1012345678. Yes, please WhatsApp me.",lead_capture,[],[],v1.0,all
+2026-03-07T22:10:22.617919,test-session-193f31e4,"Yes, that's correct.",lead_capture,[],[],v1.0,all
+2026-03-08T12:14:29.457666,sess_mmgvf7m5hirl0,Hi,support_contact,[],[],v1.0,all
+2026-03-08T12:14:44.044153,sess_mmgvf7m5hirl0,Am looking for Properties,list_projects,"[""tijan_maadi"", ""tijan_zahraa_el_maadi"", ""murano""]",[],v1.0,all
+2026-03-08T12:14:59.431942,sess_mmgvf7m5hirl0,List me down all all the projects you have,list_projects,"[""tijan_maadi"", ""tijan_zahraa_el_maadi"", ""murano""]",[],v1.0,all
+2026-03-08T12:15:20.330213,sess_mmgvf7m5hirl0,"Am actually from India, So 
+
+enlighten me",list_projects,"[""tijan_maadi"", ""tijan_zahraa_el_maadi"", ""murano""]",[],v1.0,all
+2026-03-08T12:15:46.313834,sess_mmgvf7m5hirl0,Tell me more about Murano project in Ain El Sokhna,project_query,[],[],v1.0,all
+2026-03-08T12:15:58.977101,sess_mmgvf7m5hirl0,sure,lead_capture,[],[],v1.0,all
+2026-03-08T12:16:17.044168,sess_mmgvf7m5hirl0,Sid & (091) 9994566311,lead_capture,[],[],v1.0,all

@@ -21,34 +21,17 @@ export interface ChatPayload {
     locale: string;
 }
 
-export interface EvidenceItem {
-    project_id: string;
-    project_name: string;
-    region?: string;
-    city_area?: string;
-    url?: string;
-    has_brochure: boolean;
-    price_status?: string;
-    unit_types: string[];
-    amenities_short: string[];
-    source: string;
-}
-
 export interface ChatResponse {
     message: string;
     retrieved_projects: string[];
-    evidence: EvidenceItem[];
     mode: 'concierge' | 'lead_capture';
-    stage?: string;
 }
 
 /** Done frame emitted at end of SSE stream */
 export interface StreamDoneFrame {
     done: true;
     retrieved_projects: string[];
-    evidence: EvidenceItem[];
     mode: 'concierge' | 'lead_capture';
-    stage?: string;
 }
 
 // ── Admin types (unchanged) ─────────────────────────────────────────────────
@@ -176,13 +159,11 @@ export function streamChat(
                         const parsed = JSON.parse(dataStr);
 
                         if (parsed.done === true) {
-                            // Done frame with metadata + evidence
+                            // Done frame with metadata
                             callbacks.onDone?.({
                                 done: true,
                                 retrieved_projects: parsed.retrieved_projects ?? [],
-                                evidence: parsed.evidence ?? [],
                                 mode: parsed.mode ?? 'concierge',
-                                stage: parsed.stage ?? '',
                             });
                             return;
                         }

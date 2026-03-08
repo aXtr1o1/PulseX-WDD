@@ -1,7 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { streamChat, type ChatMessage, type StreamDoneFrame, type EvidenceItem } from '@/lib/api';
+import { streamChat, type ChatMessage, type StreamDoneFrame } from '@/lib/api';
 import { gtm } from '@/lib/gtm';
 import MessageBubble, { type Msg } from './MessageBubble';
 import Spinner from '@/components/ui/Spinner';
@@ -41,6 +41,7 @@ interface ChatWidgetProps {
     initialProject?: string;
     initialRegion?: string;
     embedded?: boolean;
+    headerLangToggle?: boolean;
 }
 
 export default function ChatWidget({ initialProject, embedded = false }: ChatWidgetProps) {
@@ -127,9 +128,7 @@ export default function ChatWidget({ initialProject, embedded = false }: ChatWid
                                 role: 'assistant',
                                 content: finalContent,
                                 retrievedProjects: meta?.retrieved_projects ?? [],
-                                evidence: meta?.evidence ?? [],
                                 mode: meta?.mode ?? 'concierge',
-                                stage: meta?.stage ?? '',
                                 streaming: false,
                             };
                         }
