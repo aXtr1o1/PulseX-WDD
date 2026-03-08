@@ -7,7 +7,7 @@ const nextConfig = {
         // In local dev: 'http://localhost:8000'
         const apiBase = process.env.NODE_ENV === 'production'
             ? 'http://pulsex_api:8000'
-            : 'http://localhost:8000';
+            : 'http://localhost:8081';
         return [
             {
                 source: '/api/:path*',

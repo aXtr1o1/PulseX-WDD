@@ -37,7 +37,7 @@ def _read_sheet(filepath: Path) -> pd.DataFrame:
         return _df_cache[cache_key]
 
     if filepath.suffix.lower() == ".csv":
-        df = pd.read_csv(filepath, dtype=str, keep_default_na=False)
+        df = pd.read_csv(filepath, dtype=str, keep_default_na=False, on_bad_lines='skip')
     elif filepath.suffix.lower() == ".xlsx":
         df = pd.read_excel(filepath, dtype=str, keep_default_na=False)
     else:

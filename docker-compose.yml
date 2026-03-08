@@ -10,6 +10,7 @@ services:
       - PYTHONPATH=/code
       - PALMX_RUNTIME_DIR=/code/runtime
     volumes:
+      - ./app/backend:/code/app/backend
       - ./runtime:/code/runtime
       - ./engine-KB:/code/engine-KB:ro
     ports:
@@ -29,6 +30,9 @@ services:
       dockerfile: app/frontend/Dockerfile
     environment:
       - NODE_ENV=production
+    volumes:
+      - ./app/frontend:/code/app/frontend
+      - /code/app/frontend/node_modules
     ports:
       - "3001:3000"
     depends_on:

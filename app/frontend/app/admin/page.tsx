@@ -37,9 +37,18 @@ export default function AdminPage() {
         setLoading(true);
         try {
             const [lData, auData, sData] = await Promise.all([
-                fetchLeads({ range: 'all' }),
-                fetchSheetRows('audit', 500),
-                fetchSheets()
+                fetchLeads({ range: 'all' }).catch(err => {
+                    console.error('Leads fetch failed:', err);
+                    return { total: 0, leads: [] };
+                }),
+                fetchSheetRows('audit', 500).catch(err => {
+                    console.error('Audit fetch failed:', err);
+                    return { rows: [], total: 0, offset: 0, limit: 500, columns: [] };
+                }),
+                fetchSheets().catch(err => {
+                    console.error('Sheets fetch failed:', err);
+                    return [];
+                })
             ]);
             setLeads(lData.leads);
             setAudit(auData.rows);

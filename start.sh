@@ -164,7 +164,7 @@ echo -e "  🔌  Widget iframe:       ${CYAN}http://localhost:3001/widget${RESET
 echo -e "  📡  API (health check):  ${CYAN}http://localhost:8081/api/health${RESET}"
 echo -e "  📖  API docs (Swagger):  ${CYAN}http://localhost:8081/docs${RESET}"
 echo ""
-[ -n "$ADMIN_PASS" ] && echo -e "  Admin password: ${YELLOW}${ADMIN_PASS}${RESET}"
+[ -n "$ADMIN_PASS" ] && echo -e " If needed, Admin password: ${YELLOW}${ADMIN_PASS}${RESET}"
 echo ""
   echo -e "  View logs:  ${BOLD}docker compose -p pulsex_master logs -f${RESET}"
   echo -e "  Stop:       ${BOLD}docker compose -p pulsex_master down${RESET}"
