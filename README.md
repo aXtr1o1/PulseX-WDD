@@ -1,216 +1,98 @@
-# PulseX-WDD
+# PulseX-WDD: Luxury Real Estate Sales Concierge & Lead Intelligence
 
 **Production-grade Web Concierge + Hybrid RAG Knowledge Engine + Lead Intelligence Admin Dashboard**
 Built for **Wadi Degla Developments (WDD)**.
 
 ---
 
-## System Components
+## 🌟 System Overview
 
-| Component | Tech | Port |
-|-----------|------|------|
-| FastAPI backend | Python 3.11 + uvicorn | 8000 |
-| Next.js frontend | Next.js 14 App Router + TypeScript | 3000 |
-| Retrieval engine | SQLite FTS5 + FAISS (hybrid) | — |
-| Data layer | CSV-first (portalocker-safe) | — |
+PulseX-WDD is a sophisticated "Sales Concierge" platform that transforms passive web traffic into high-intent leads. Unlike traditional chatbots, PulseX follows a strict 6-stage sales funnel grounded in the WDD KnowledgeBase, ensuring zero hallucinations and deterministic lead qualification.
+
+### The Intelligence Layer (Sales Funnel)
+The system uses a stateful conversation logic that guides users through:
+1.  **Stage 1: Research & Discovery** — Answering property-specific queries (location, amenities, delivery).
+2.  **Stage 2: Interest Mapping** — Identifying specific projects (e.g., Vyon, Neo, Murano).
+3.  **Stage 3: Unit Selection** — Extracting preferred unit types (Villa, Apartment, Penthouse).
+4.  **Stage 4: Budget & Timeline** — Extracting numeric budgets (EGP/USD) and purchase windows.
+5.  **Stage 5: Recap & Verification** — Presenting a summary for user confirmation.
+6.  **Stage 6: Consent-Gated Handoff** — Capturing verified WhatsApp/Phone with explicit callback consent.
 
 ---
 
-## Prerequisites
+## 🏗️ Technical Architecture
 
-- Python 3.11 (`python3.11`)
-- Node.js 18+
-- A valid `.env` file (copy from `.env.example`)
+| Component | Technology | Role |
+|-----------|------------|------|
+| **Backend** | FastAPI + Python 3.11 | High-performance async API with Pydantic v2 validation. |
+| **Frontend** | Next.js 14 + Tailwind | Modern, responsive dashboard and embeddable chat widget. |
+| **Hybrid RAG** | SQLite FTS5 + FAISS | Dual-index retrieval: Keyword (FTS5) + Semantic (FAISS). |
+| **Data Layer** | Portalocker-Safe CSV | Concurrency-safe, human-readable leads and audit logs. |
+
+---
+
+## ⚡ Execution & Deployment
+
+### One-Shot Startup (Recommended)
+The `start.sh` script automates the entire Docker-based lifecycle including thermal cleanup of stale networks and volume mounting for live development.
 
 ```bash
-cp .env.example .env
-# Edit .env and add:
-# AZURE_OPENAI_API_KEY, AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_CHAT_DEPLOYMENT
-# AZURE_OPENAI_EMBED_DEPLOYMENT, ADMIN_PASSWORD
+# 1. Clone and enter directory
+cd PulseX-WDD
+
+# 2. Run the one-shot starter
+bash start.sh
 ```
 
----
-
-## Quick Start (Local)
-
+### Manual Docker Control
 ```bash
-# 1. Install all dependencies
-make setup
-
-# 2. Build retrieval indices (requires valid embedding API key)
-make index
-
-# 3. Seed demo leads
-make seed
-
-# 4. Refresh KnowledgeBase (Governance cleanup)
-make kb-refresh
-
-# 5. Run backend + frontend (two concurrent processes)
-make dev
-# Or run separately:
-#   Terminal 1: make api    → http://localhost:8000
-#   Terminal 2: make web    → http://localhost:3000
+docker compose -p pulsex_master up -d    # Start services
+docker compose -p pulsex_master logs -f    # Tail logs
+docker compose -p pulsex_master down       # Stop and cleanup
 ```
 
-Open:
-- 🌐 **Landing + Widget**: http://localhost:3000
-- 🔑 **Admin Dashboard**: http://localhost:3000/admin
-- 📦 **Widget embed demo**: http://localhost:3000/widget
-- 📡 **API docs** (dev only): http://localhost:8000/api/docs
+### Port Mappings
+| Service | Internal | External | Description |
+|---------|----------|----------|-------------|
+| `pulsex_api` | 8000 | **8081** | Backend Service |
+| `pulsex_web` | 3000 | **3001** | Dashboard & Widget |
 
 ---
 
-## Docker Compose
+## 📊 Data Features & Nuances
 
+### Lead De-duplication (Upsert Logic)
+The `LeadsService` implements a **session-based upsert mechanism**. If a lead with the same `session_id` already exists (e.g., user updates their preferences), the system updates the existing row instead of appending duplicates. This ensures the 29-column `leads.csv` remains clean and actionable.
+
+### Intelligent Extraction
+- **Budget Formatting**: Numeric values (e.g., "18,600,000 EGP") are automatically extracted and indexed for the dashboard KPIs.
+- **Next Action Mapping**: Technical enums are converted to human-readable CTAs (e.g., "Send Project Brochures & Details").
+- **Dashboard Resilience**: The admin loader skips malformed CSV lines (`on_bad_lines='skip'`) to ensure the dashboard never crashes on dirty data.
+
+---
+
+## 🔧 Developer Workflow
+
+### Refreshing KnowledgeBase
+If you update the `engine-KB/PulseX-WDD_buyerKB.csv`, run:
 ```bash
-# Build and start
-make up          # → api:8000 + web:3000
-
-# Stop
-make down
+make kb-refresh   # Cleans and validates data rules
+make index        # Rebuilds SQLite and FAISS indices
 ```
 
----
-
-## Project Structure
-
-```
-PulseX-WDD/
-├── apps/
-│   ├── api/                  FastAPI backend
-│   │   ├── app/
-│   │   │   ├── config.py     Settings (pydantic-settings)
-│   │   │   ├── main.py       App factory + lifespan
-│   │   │   ├── routers/      chat.py, lead.py, admin.py
-│   │   │   ├── services/     answer.py, retrieval.py, router.py, lead.py, audit.py
-│   │   │   ├── middleware/   auth.py (cookie session)
-│   │   │   ├── schemas/      models.py (Pydantic v2)
-│   │   │   └── utils/        csv_io.py, kb_loader.py
-│   │   ├── requirements.txt
-│   │   └── Dockerfile
-│   └── web/                  Next.js 14 App Router
-│       ├── app/              layout.tsx, page.tsx, admin/page.tsx, widget/page.tsx
-│       ├── components/
-│       │   ├── widget/       ChatWidget, MessageBubble, LeadForm, IntentChips, ConsentBlock
-│       │   ├── admin/        KPITile, Charts, LeadTable, LeadDrawer, DataViewer
-│       │   └── ui/           Button, Card, Drawer, Badge, Spinner
-│       ├── lib/              api.ts, i18n.ts, gtm.ts
-│       ├── public/
-│       │   ├── brand/        WDD_blockLogo.png, WDD_fullLogo.png
-│       │   └── widget.js     Embeddable script
-│       └── Dockerfile
-├── scripts/
-│   ├── build_index.py        Build SQLite FTS5 + FAISS indices
-│   ├── validate_kb.py        Validate buyerKB.csv
-│   └── seed_leads.py         PalmX-grade Lead & Telemetry Generator (Deterministic)
-├── engine-KB/                
-│   ├── PulseX-WDD_buyerKB.csv   (Raw Source)
-│   ├── backups/                 (Timestamped backups)
-│   └── processed/               
-│       ├── PulseX-WDD_buyerKB.cleaned.csv (Governance-cleaned)
-│       ├── PulseX-WDD_buyerKB.drop.csv    (Dropped rows audit)
-│       └── wdd_kb_cleanup_report.json     (Stats & details)
-├── runtime/                  leads.csv, audit.csv, sessions.csv, leads_seed.csv
-├── indices/                  keyword_index.db, vectors.faiss, metadata.json (generated)
-├── docs/                     ARCHITECTURE.md, RAG_GATING.md, SECURITY.md
-├── Makefile
-├── docker-compose.yml
-├── .env.example
-└── README.md
-```
+### Environment Configuration
+Key variables in `.env`:
+- `AZURE_OPENAI_API_KEY`: Required for LLM and Embeddings.
+- `ADMIN_PASSWORD`: For dashboard access (`http://localhost:3001/admin`).
+- `KB_VERSION_HASH`: Controlled versioning of the active KnowledgeBase.
 
 ---
 
-## Embedding Widget on WDD Website
-
-```html
-<script
-  src="https://your-pulsex-domain.com/widget.js"
-  data-project="murano"
-  data-region="ain-sokhna"
-  data-lang="en"
-  defer
-></script>
-```
-
-**Attributes:**
-- `data-project` — slug of the project page (gates retrieval to that project)
-- `data-region` — region context hint
-- `data-lang` — `en` or `ar` (auto-selected by language picker in widget)
+## 🔒 Security & Performance
+- **Zero Hallucination**: Strict RAG gating ensures the AI only speaks from WDD-approved data.
+- **Concurrency**: `portalocker` prevents file corruption during simultaneous lead captures.
+- **Resilience**: Frontend utilizes `Promise.allSettled` patterns to load dashboards even if partial API services are down.
 
 ---
 
-## API Reference
-
-| Method | Path | Auth | Description |
-|--------|------|------|-------------|
-| POST | `/api/chat` | — | Non-streaming chat |
-| POST | `/api/chat/stream` | — | SSE streaming chat |
-| POST | `/api/lead` | — | Submit lead |
-| POST | `/api/admin/login` | — | Admin login (sets cookie) |
-| POST | `/api/admin/logout` | Cookie | Admin logout |
-| GET | `/api/admin/dashboard` | Cookie | KPIs + trends |
-| GET | `/api/admin/leads` | Cookie | Filtered leads list |
-| GET | `/api/admin/sheets/{sheet}/rows` | Cookie | Sheet rows (paginated) |
-| GET | `/api/admin/sheets/{sheet}/download/csv` | Cookie | Download CSV |
-| GET | `/api/admin/sheets/{sheet}/download/xlsx` | Cookie | Download XLSX |
-| GET | `/api/health` | — | Health check |
-
----
-
-## GTM Events
-
-| Event | Trigger |
-|-------|---------|
-| `pulseX_session_start` | Widget opened, language selected |
-| `pulseX_intent_selected` | User taps an intent chip |
-| `pulseX_lead_qualified` | Lead form submitted |
-| `pulseX_handoff_success` | Sales handoff completed |
-| `pulseX_callback_requested` | "Request a Sales Call" tapped |
-| `pulseX_consent_opt_in` | Consent checkboxes submitted |
-
----
-
-## Makefile Targets
-
-```bash
-make setup      # Install all deps
-make dev        # Run API + Web concurrently
-make api        # Run backend only (:8000)
-make web        # Run frontend only (:3000)
-make kb-refresh # Clean and Validate KnowledgeBase (recommended)
-make index      # Build FTS5 + FAISS indices (from cleaned KB)
-make seed       # Seed leads.csv from leads_seed.csv
-make test       # Run pytest + Next lint
-make build      # Build Next.js production bundle
-make up         # Docker Compose up
-make down       # Docker Compose down
-make clean      # Remove generated indices + pycache
-```
-
----
-
-## Runtime CSVs
-
-All appends are concurrency-safe via `portalocker`.
-
-| File | Purpose |
-|------|---------|
-| `runtime/leads.csv` | Captured leads (append-only) |
-| `runtime/audit.csv` | Every chat request (cost, latency, model) |
-| `runtime/sessions.csv` | Session metadata |
-| `runtime/leads_seed.csv` | Demo seed data |
-
----
-
-## Security
-
-- Admin password: `ADMIN_PASSWORD` in `.env` (never hardcoded)
-- Admin sessions: itsdangerous signed cookies, configurable TTL
-- Input sanitization: Pydantic v2 strict validation on all inputs
-- Phone/email normalized server-side before persistence
-- Hallucination prevention: grounded-only LLM prompts + hard KB gating
-- No inventory availability claimed unless KB explicitly states it
-
-See `docs/SECURITY.md` and `docs/RAG_GATING.md` for details.
+**© 2026 Wadi Degla Developments. All Rights Reserved.**
