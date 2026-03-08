@@ -60,7 +60,9 @@ export default function LeadTable({ leads, onSelect, loading }: LeadTableProps) 
                                     <div className="text-[10px] text-[var(--wdd-muted)] capitalize">{l.unit_type || 'Residential'}</div>
                                 </td>
                                 <td className="px-3 sm:px-6 py-4 hidden md:table-cell">
-                                    <div className="text-xs font-bold text-[var(--wdd-black)]">{l.budget_band || '—'}</div>
+                                    <div className="text-xs font-bold text-[var(--wdd-black)]">
+                                        {l.budget_band || (l.budget_min ? `${(l.budget_min / 1e6).toFixed(1)}M` : '—')}
+                                    </div>
                                     <div className="text-[10px] text-[var(--wdd-muted)] uppercase">{l.purpose || 'INVEST'}</div>
                                 </td>
                                 <td className="px-3 sm:px-6 py-4 hidden lg:table-cell">

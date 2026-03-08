@@ -23,14 +23,26 @@ export default function LeadDrawer({ lead, open, onClose }: LeadDrawerProps) {
         const band = lead.budget_band || '';
         const min = (lead as any).budget_min;
         const max = (lead as any).budget_max;
+
         if (min && max) {
-            return `${(Number(min) / 1e6).toFixed(1)}M – ${(Number(max) / 1e6).toFixed(1)}M`;
+            return `${(Number(min) / 1e6).toFixed(1)}M – ${(Number(max) / 1e6).toFixed(1)}M EGP`;
+        }
+        if (min) {
+            return `${(Number(min) / 1e6).toFixed(1)}M EGP`;
         }
         return band || '—';
     };
 
+    const nextActionMap: Record<string, string> = {
+        'send_details': 'Send Project Brochures & Details',
+        'callback': 'Schedule Immediate Callback',
+        'site_visit': 'Arrange Site Visit & Tour',
+    };
+
+    const displayNextAction = nextActionMap[lead.next_action || ''] || lead.next_action;
+
     const formatDate = () => {
-        const dateStr = lead.timestamp || lead.created_at;
+        const dateStr = lead.timestamp || (lead as any).created_at;
         if (!dateStr) return '—';
         try {
             return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -138,7 +150,7 @@ export default function LeadDrawer({ lead, open, onClose }: LeadDrawerProps) {
                         <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.15em] mb-4">Next Action</h4>
                         <div className="p-4 rounded-[10px] bg-[#FFF6F6] border border-red-50">
                             <p className="text-[14px] font-medium leading-relaxed text-red-700">
-                                → {lead.next_action}
+                                → {displayNextAction}
                             </p>
                         </div>
                     </div>

@@ -295,44 +295,50 @@ async def chat_stream_endpoint(request: ChatRequest):
         # 4. Stream tokens
         def generate():
             full_response = ""
+            lead_saved = False
             for chunk in llm_service.stream_answer_completion(
-                full_system_msg, request.messages, tools=TOOLS
+                full_system_msg, request.messages, tools=TOOLS if router_out.intent == "lead_capture" else []
             ):
                 if "__TOOL_CALLS__" in chunk:
                     tc_json = chunk.split("__TOOL_CALLS__")[1]
-                    tool_calls = json.loads(tc_json)
-                    for tc in tool_calls:
-                        if tc["function"]["name"] == "save_lead":
-                            args = json.loads(tc["function"]["arguments"])
-                            lead = Lead(
-                                session_id=session_id,
-                                name=args.get('name'),
-                                phone=args.get('phone'),
-                                email=args.get('email'),
-                                interest_projects=args.get('interest_projects', '').split(',') if args.get('interest_projects') else [],
-                                preferred_region=args.get('preferred_region'),
-                                unit_type=args.get('unit_type'),
-                                budget_min=args.get('budget_min'),
-                                budget_max=args.get('budget_max'),
-                                purpose=args.get('purpose'),
-                                timeline=args.get('timeline'),
-                                next_step=args.get('next_step'),
-                                next_action=args.get('next_action'),
-                                lead_summary=args.get('lead_summary'),
-                                customer_summary=args.get('customer_summary'),
-                                executive_summary=args.get('executive_summary'),
-                                reason_codes=args.get('reason_codes', '').split(',') if args.get('reason_codes') else [],
-                                tags=args.get('tags', '').split(',') if args.get('tags') else [],
-                                lead_temperature=args.get('lead_temperature'),
-                                consent_contact=args.get('consent_contact'),
-                                kb_version_hash=args.get('kb_version_hash', 'v1.0')
-                            )
-                            leads_service.save_lead(lead)
-                            confirm_msg = f"Thank you {lead.name}. Your details have been saved. A sales representative will contact you at {lead.phone} shortly."
-                            yield f"data: {json.dumps({'token': confirm_msg})}\n\n"
+                    try:
+                        tool_calls = json.loads(tc_json)
+                        for tc in tool_calls:
+                            if tc["function"]["name"] == "save_lead" and not lead_saved:
+                                args = json.loads(tc["function"]["arguments"])
+                                lead = Lead(
+                                    session_id=session_id,
+                                    name=args.get('name'),
+                                    phone=args.get('phone'),
+                                    email=args.get('email'),
+                                    interest_projects=args.get('interest_projects', '').split(',') if args.get('interest_projects') else [],
+                                    preferred_region=args.get('preferred_region'),
+                                    unit_type=args.get('unit_type'),
+                                    budget_min=args.get('budget_min'),
+                                    budget_max=args.get('budget_max'),
+                                    purpose=args.get('purpose'),
+                                    timeline=args.get('timeline'),
+                                    next_step=args.get('next_step'),
+                                    next_action=args.get('next_action'),
+                                    lead_summary=args.get('lead_summary'),
+                                    customer_summary=args.get('customer_summary'),
+                                    executive_summary=args.get('executive_summary'),
+                                    reason_codes=args.get('reason_codes', '').split(',') if args.get('reason_codes') else [],
+                                    tags=args.get('tags', '').split(',') if args.get('tags') else [],
+                                    lead_temperature=args.get('lead_temperature'),
+                                    consent_contact=args.get('consent_contact'),
+                                    kb_version_hash=args.get('kb_version_hash', 'v1.0')
+                                )
+                                leads_service.save_lead(lead)
+                                lead_saved = True
+                                confirm_msg = f"Thank you {lead.name}. Your details have been saved. A sales representative will contact you at {lead.phone} shortly."
+                                yield f"data: {json.dumps({'token': confirm_msg})}\n\n"
+                    except Exception as e:
+                        logger.error(f"Tool parse error: {e}")
                 else:
-                    full_response += chunk
-                    yield f"data: {json.dumps({'token': chunk})}\n\n"
+                    if not lead_saved:
+                        full_response += chunk
+                        yield f"data: {json.dumps({'token': chunk})}\n\n"
             
             yield f"data: {json.dumps({'done': True, 'retrieved_projects': [p.project_name for p in retrieved_docs], 'mode': 'lead_capture' if router_out.intent == 'lead_capture' else 'concierge'})}\n\n"
             

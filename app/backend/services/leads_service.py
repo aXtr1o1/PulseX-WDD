@@ -57,44 +57,77 @@ class LeadsService:
         import uuid
         lead_id = f"WDDPX-{uuid.uuid4().hex[:8].upper()}"
         
-        row = [
+        new_row = [
             datetime.now().isoformat(),
-            lead_id, # lead_id
+            lead_id,
             lead.session_id,
             lead.name,
             lead.phone,
-            lead.email or "", # email
-            ",".join(lead.interest_projects), # interest_projects
-            ", ".join(lead.interest_projects), # interest_projects_display
+            lead.email or "",
+            ",".join(lead.interest_projects),
+            ", ".join(lead.interest_projects),
             lead.preferred_region or "",
             lead.unit_type or "",
             lead.budget_min or "",
             lead.budget_max or "",
-            "", # budget_band (inferred later or by seed)
+            "",
             lead.purpose or "",
             lead.timeline or "",
-            "AI Concierge", # contact_channel
-            str(lead.consent_contact).lower() if lead.consent_contact is not None else "false", # consent_contact
-            "true", # confirmed_by_user (AI explicitly asks)
-            lead.lead_temperature or "Warm", # lead_temperature
-            ",".join(lead.reason_codes) if hasattr(lead, 'reason_codes') else "", # reason_codes
-            ", ".join(lead.reason_codes) if hasattr(lead, 'reason_codes') else "", # reason_codes_display
-            ",".join(lead.tags) if hasattr(lead, 'tags') else "", # tags
-            ", ".join(lead.tags) if hasattr(lead, 'tags') else "", # tags_display
-            lead.lead_summary or "", # lead_summary
-            lead.customer_summary or "", # customer_summary
-            lead.executive_summary or "", # executive_summary
-            lead.next_action or lead.next_step or "Sales Call", # next_action
-            "", # raw_json
+            "AI Concierge",
+            str(lead.consent_contact).lower() if lead.consent_contact is not None else "false",
+            "true",
+            lead.lead_temperature or "Warm",
+            ",".join(lead.reason_codes) if hasattr(lead, 'reason_codes') else "",
+            ", ".join(lead.reason_codes) if hasattr(lead, 'reason_codes') else "",
+            ",".join(lead.tags) if hasattr(lead, 'tags') else "",
+            ", ".join(lead.tags) if hasattr(lead, 'tags') else "",
+            lead.lead_summary or "",
+            lead.customer_summary or "",
+            lead.executive_summary or "",
+            lead.next_action or lead.next_step or "Sales Call",
+            "",
             lead.kb_version_hash or "v1.0"
         ]
         
         try:
-            with open(Config.LEADS_PATH, 'a', newline='', encoding='utf-8') as f:
+            rows = []
+            updated = False
+            
+            # Read existing rows
+            if os.path.exists(Config.LEADS_PATH):
+                with open(Config.LEADS_PATH, 'r', newline='', encoding='utf-8') as f:
+                    portalocker.lock(f, portalocker.LOCK_SH)
+                    reader = csv.reader(f)
+                    header = next(reader, None)
+                    if header:
+                        rows.append(header)
+                        # Find session_id column index
+                        try:
+                            sid_idx = header.index("session_id")
+                        except ValueError:
+                            sid_idx = 2 # Best guess if index fails
+                        
+                        for r in reader:
+                            if len(r) > sid_idx and r[sid_idx] == lead.session_id:
+                                # Preserve lead_id and original timestamp if updating
+                                new_row[1] = r[1] if len(r) > 1 else lead_id
+                                new_row[0] = r[0] if len(r) > 0 else new_row[0]
+                                rows.append(new_row)
+                                updated = True
+                            else:
+                                rows.append(r)
+                    portalocker.unlock(f)
+
+            if not updated:
+                rows.append(new_row)
+
+            # Write back
+            with open(Config.LEADS_PATH, 'w', newline='', encoding='utf-8') as f:
                 portalocker.lock(f, portalocker.LOCK_EX)
                 writer = csv.writer(f)
-                writer.writerow(row)
+                writer.writerows(rows)
                 portalocker.unlock(f)
+            
             return True
         except Exception as e:
             logger.error(f"Failed to save lead: {e}")
