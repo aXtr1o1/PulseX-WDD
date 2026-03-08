@@ -121,6 +121,12 @@ class RAGService:
         filtered = []
         for c in candidates:
             p = c['project']
+            
+            # --- HARD FILTER: Never recommend non-selling projects ---
+            base_status = (p.project_status or '').lower()
+            if "not selling" in base_status:
+                continue
+
             if filters:
                 # Region Filter (Check both region and city_area)
                 if filters.get('region'):

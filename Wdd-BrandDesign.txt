@@ -1,0 +1,483 @@
+WDD Brand + Design Language + UI Principles + Color Palette
+Source-of-truth Context Pack for building WDD PulseX (PalmX-inspired, WDD-native)
+A) Brand Theme & Positioning (WDD digital expression)
+1) Brand theme (what WDD sells emotionally)
+
+WDD’s digital brand reads as premium community living for modern families with an emphasis on:
+
+family comfort + belonging
+
+integrated community lifestyle
+
+quality facilities + landscapes
+
+trust and reliability through legacy + scale + accessibility
+Evidence: homepage/about copy stresses “modern families”, “uncompromising quality of facilities”, “stunning landscapes”, “diverse housing options (apartments → villas)”, and geographic breadth (East/West Cairo, Red Sea, North Coast). 
+
+
+
+2) Positioning language (what they want to be)
+
+WDD positions as:
+
+“Leading real estate in Egypt” (SEO/meta positioning)
+
+“Trusted real estate company” framing
+
+“20 years expertise” type credibility language (meta/SEO)
+This matters: PulseX must present as enterprise-grade + trust-first, not “AI gimmick.” 
+
+
+
+3) Brand tone of voice (copywriting style)
+
+Warm, reassuring, premium but readable
+
+Minimal jargon, non-technical
+
+Conversion oriented but not aggressive
+PulseX microcopy should match: concierge, guided, polite, confident.
+
+B) Information Architecture (IA) — WDD’s business lanes (what the nav reveals)
+
+WDD top-level nav lanes (core customer journeys):
+
+Home
+
+Projects
+
+Grow The Family (community/referral loop)
+
+Ever Stay (dropdown → Rent your unit)
+
+Hotels
+
+About Us
+
+Blogs
+
+Contact Us
+This indicates WDD’s ecosystem is multi-journey, not only “buy a unit.” 
+
+
+
+PulseX IA implication
+
+WDD PulseX should be route-aware (multi-intent):
+
+Sales/Pre-sales
+
+Payment services / finance queries
+
+Complaints / customer care routing
+
+Gate access / resident service categories (even if only as routing in v1)
+
+Referral program support
+
+Hotels/rental as optional lanes
+
+C) Exact WDD Color Palette (PROVEN from website source)
+1) Primary Brand Color (confirmed)
+
+✅ WDD Primary Red: #CB2030
+This appears explicitly as:
+
+link color in main content (a color)
+
+selection background ::selection
+So this is the true brand primary action color. 
+
+
+
+2) Neutrals (confirmed)
+
+✅ Background White: #FFFFFF / #FFF 
+
+
+
+
+✅ Body Text Dark: #191919 
+
+
+
+
+✅ Page Title Black: #000000 
+
+
+
+
+✅ Icon / Social Grey: #55575A (SVG icon fill observed) 
+
+
+
+
+✅ Selection text: #FFFFFF (selection foreground) 
+
+
+
+3) “Not brand” colors (important nuance)
+
+WordPress preset palette includes bootstrap/system defaults like #0d6efd, #198754, etc. These are framework defaults, not WDD brand tokens. Do NOT treat them as brand palette. 
+
+
+
+Copy-paste: WDD proven tokens (use in PulseX now)
+WDD_PRIMARY_RED      = #CB2030
+WDD_BG_WHITE         = #FFFFFF
+WDD_TEXT_DARK        = #191919
+WDD_TEXT_BLACK       = #000000
+WDD_ICON_GREY        = #55575A
+WDD_SELECTION_BG     = #CB2030
+WDD_SELECTION_TEXT   = #FFFFFF
+WDD_LINK_COLOR       = #CB2030
+Extended palette (required for product UI)
+
+WDD source dump confirms primary + core neutrals, but not full semantic palette (borders, surfaces, muted text, charts).
+For PulseX, define additions conservatively:
+
+Surface gray, border gray, muted text gray — keep close to #191919 scale
+
+Status colors (success/warn/error) muted and distinct from brand red
+
+D) Typography (PROVEN from website source)
+1) Primary font (confirmed)
+
+✅ Isidora Sans is enforced across Elementor scope:
+.elementor * { font-family: "Isidora Sans"; } and body default uses the same family.
+This is WDD’s UI brand font for web experience. 
+
+
+
+2) Body typography (confirmed)
+
+font-weight: 400
+
+line-height: ~1.428571
+
+text color: #191919
+
+background: white
+Use this as the baseline in PulseX.
+
+3) Secondary fonts (present but not necessarily brand)
+
+Roboto and Roboto Slab appear in Elementor local font CSS (likely defaults / selective usage).
+Treat Isidora Sans as the canonical WDD UI font unless WDD gives a brandbook.
+
+PulseX typography rules
+
+Use Isidora Sans for all UI text
+
+Use consistent hierarchy: H1/H2/H3 + body + caption
+
+For Arabic: you need an Arabic-compatible font pairing (RTL-ready) that doesn’t break the WDD Latin font feel.
+
+E) Layout + Component System (WDD design primitives)
+1) Header design language
+
+Sticky header behavior (sticky-header, header__fixed)
+
+Minimal clean nav
+
+Mobile menu toggle
+
+Logo as modern image format (webp)
+PulseX should preserve: sticky top bar + minimal nav + primary CTA zone. 
+
+
+
+2) Hero pattern
+
+YouTube background video used in hero
+
+Dark overlay class bg-dark-overlay-50 (~50% overlay)
+
+Arabic campaign title appears in the hero video context (Ramadan campaign)
+This indicates WDD is comfortable with:
+
+cinematic hero
+
+seasonal campaign swaps
+
+bilingual campaign assets
+PulseX should borrow: hero + overlay + high contrast headline, but avoid heavy video inside product UI (optional for marketing landing only). 
+
+
+
+3) Trust metric counter pattern (native KPI language)
+
+WDD uses animated counters (countTo) for:
+
+Land Bank
+
+Total Units
+
+Delivered Units
+
+Projects
+PulseX executive dashboards can safely use count-up KPI tiles — it matches WDD’s native trust-building UI pattern. 
+
+
+
+4) Section heading style
+
+WDD uses a “colored title” emphasis pattern:
+
+section titles often have color-primary / red accent highlight
+This indicates: emphasis is via color + weight, not decorative graphics. 
+
+
+
+5) Project card component (core UI primitive)
+
+WDD uses a repeating project card structure:
+
+project-card card-box
+
+image + figcaption
+
+title + short description
+
+CTA text: “View Project” / “View Phase”
+
+CTA includes a right-arrow SVG icon (black fill)
+They also use scripts for:
+
+equal-height grids
+
+sliders (Swiper)
+PulseX should reuse this exact primitive for:
+
+project recommendations
+
+lead cards
+
+intent mini-cards
+
+comparison cards
+Keep the black arrow icon as a WDD micro-signature.
+
+6) Ever Stay section (inverted variant style)
+
+WDD has a visually distinct band:
+
+bg-rose text-white
+
+strong image background
+
+CTA btn btn-white btn-lg
+Meaning: WDD uses inverted color sections for highlight moments.
+PulseX can use:
+
+default white surfaces
+
+occasional inverted highlight bands (for key CTAs) — but sparingly. 
+
+
+
+7) App feature taxonomy (icon + label)
+
+WDD app section lists service categories with icon + label:
+
+Project Orientation
+
+News & Events
+
+Complaints
+
+Payment Services
+
+Directories
+
+Private Services Reservation
+
+Gate Access
+PulseX intents/routing should map to these same buckets because it matches how WDD already thinks operationally. 
+
+
+
+F) Forms, Conversion, Consent (highly important nuance)
+1) Lead form pattern (CF7)
+
+Homepage lead form:
+
+Name, Phone, Email
+
+placeholder-first fields
+
+CF7 semantic attributes (aria-required/invalid)
+
+simple submit CTA
+PulseX should implement progressive profiling but keep the “simple + familiar” feel.
+
+2) Newsletter consent pattern (explicit)
+
+Footer newsletter includes:
+
+email capture
+
+explicit checkbox consent: “I agree to receive marketing emails…”
+
+hidden fields: page-title, page-url set by scripts
+
+captures viewport dimensions vx_width, vx_height and URL
+This is a strong signal:
+
+WDD already cares about consent and attribution metadata
+PulseX should:
+
+store consent state with timestamp
+
+store source page/campaign metadata
+
+store channel + session attributes
+
+G) Motion/Interaction Language (WDD “feel”)
+
+WDD uses modern but controlled motion libraries:
+
+AOS fade-up/fade-down
+
+sticky header
+
+count-up counters
+
+Swiper carousels
+
+YouTube background hero
+
+popups (Magnific)
+
+local scroll helpers
+
+GSAP included
+PulseX should translate motion as:
+
+subtle fades
+
+count-up KPI
+
+smooth drawers
+
+minimal streaming typing effect
+Avoid flashy animation.
+
+H) Tracking/Instrumentation Cues (how WDD measures)
+
+WDD uses:
+
+Google Tag Manager
+
+Google Analytics
+
+Meta Pixel
+PulseX should integrate with GTM events (if embedded on site):
+
+pulseX_session_start
+
+pulseX_intent_selected
+
+pulseX_lead_qualified
+
+pulseX_handoff_success
+
+pulseX_callback_requested
+
+pulseX_consent_opt_in
+
+This aligns to WDD’s attribution-aware forms.
+
+I) WDD “Design Principles” distilled (strict rules for PulseX)
+1) Visual principles
+
+White base + strong whitespace
+
+WDD red used for primary actions only (not everywhere)
+
+Dark text #191919 for readability
+
+Minimal chrome, premium calm
+
+Card-based content (project card grammar)
+
+CTA clarity > visual decoration
+
+2) UX principles
+
+Trust-first (source references + timestamps for sensitive answers)
+
+Conversion-first (guided steps, minimal friction)
+
+Route-aware (sales vs complaints vs payments vs support)
+
+Consent captured explicitly (especially for callbacks/marketing)
+
+Operational state transparency (pending/success/failure statuses)
+
+3) Content principles
+
+Warm, clear, non-technical tone
+
+Reassuring “concierge” language
+
+Avoid AI jargon
+
+J) PalmX-inspired UX → WDD PulseX translation (how to keep it “near-same” but tailored)
+Keep near-same (PalmX DNA)
+
+Concierge-first experience
+
+Progressive profiling
+
+Structured lead packet extraction
+
+Lead intelligence dashboard + detail drawer
+
+Data transparency / verified intelligence concept
+
+Quality telemetry surfaces
+
+Tailor hard for WDD
+
+Use WDD UI tokens: Isidora Sans + #CB2030 + #191919 + #FFFFFF
+
+Map intents to WDD lanes (Projects / Complaints / Payment Services / Gate Access)
+
+Maintain WDD conversion style: simple, familiar, consent-aware
+
+Add WDD trust micro-patterns: hotline visibility, official document links (refund policy/newsletter)
+
+Bilingual readiness is required (Arabic campaign presence)
+
+K) Recommended WDD PulseX “look & feel” (final one-liner)
+
+Premium real estate intelligence layer that is:
+
+calm and whitespace-rich
+
+WDD red action-led
+
+Isidora Sans typography
+
+card-based and conversion-oriented
+
+evidence-first and operationally transparent
+
+bilingual-ready
+
+L) Fast “design token starter pack” (CSS vars, ready to use)
+:root{
+  --wdd-red: #CB2030;
+  --wdd-bg: #FFFFFF;
+  --wdd-text: #191919;
+  --wdd-black: #000000;
+  --wdd-icon-grey: #55575A;
+  --wdd-selection-bg: #CB2030;
+  --wdd-selection-text: #FFFFFF;
+
+  /* product-required neutrals (define internally; keep conservative) */
+  --wdd-surface: #FAFAFA;
+  --wdd-border: #E6E6E6;
+  --wdd-muted: #6B6B6B;
+}

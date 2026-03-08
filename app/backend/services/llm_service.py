@@ -192,7 +192,8 @@ class LLMService:
                 stream=True
             )
             
-            tool_calls_buffer = {}  # Accumulate tool call chunks
+            tool_calls_buffer = {}
+            has_yielded_text = False
             
             for chunk in response:
                 delta = chunk.choices[0].delta if chunk.choices else None
@@ -201,6 +202,7 @@ class LLMService:
                     
                 # Text content
                 if delta.content:
+                    has_yielded_text = True
                     yield delta.content
                 
                 # Tool call chunks (accumulated)
@@ -223,6 +225,8 @@ class LLMService:
             # If tool calls were accumulated, yield them as a special marker
             if tool_calls_buffer:
                 yield f"\n__TOOL_CALLS__{json.dumps(list(tool_calls_buffer.values()))}"
+            elif not has_yielded_text:
+                yield "I'm here to help you find the perfect property. Could you provide a little more detail so I can assist you better?"
                 
         except Exception as e:
             logger.error(f"Stream answer completion failed: {e}")
