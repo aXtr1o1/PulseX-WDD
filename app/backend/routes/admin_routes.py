@@ -406,12 +406,36 @@ async def get_leads(
         col_next_action = _find_col(cols, _COL_MAP["next_action"])
 
         results = []
+        results = []
         for _, row in df.iterrows():
             raw = row.to_dict()
             projects = _parse_list(raw.get(col_projects, "")) if col_projects else []
             tags = _parse_list(raw.get(col_tags, "")) if col_tags else []
 
-            # Prefer display columns if available
+            # Robust Numeric Budget Parsing
+            bmin = _parse_num(raw.get(col_bmin, "")) if col_bmin else None
+            bmax = _parse_num(raw.get(col_bmax, "")) if col_bmax else None
+            band = raw.get(col_band, "") if col_band else None
+            
+            # Infer band if missing but numeric budget exists
+            if not band and (bmin or bmax):
+                ref = bmin or bmax
+                if ref >= 20000000: band = "ULTRA"
+                elif ref >= 10000000: band = "HIGH"
+                elif ref >= 5000000: band = "MID"
+                else: band = "LOW"
+
+            # Fallback for Interest Projects: check summaries if list is empty
+            if not projects:
+                # Try to extract from summary strings or display column
+                disp = str(raw.get(col_projects_display, ""))
+                if any(p in disp for p in ("Neo", "ClubTown", "Murano", "Vero", "Edge")):
+                    projects = [p for p in ("Neo", "ClubTown", "Murano", "Vero", "Edge") if p in disp]
+                else:
+                    exec_sum = str(raw.get(col_exec_summary, ""))
+                    if any(p in exec_sum for p in ("Neo", "ClubTown", "Murano", "Vero", "Edge")):
+                        projects = [p for p in ("Neo", "ClubTown", "Murano", "Vero", "Edge") if p in exec_sum]
+
             interest_display = raw.get(col_projects_display) if col_projects_display else "; ".join(projects)
 
             results.append({
@@ -423,16 +447,16 @@ async def get_leads(
                 "session_id": raw.get(col_session, "") if col_session else "",
                 "summary": raw.get(col_summary, "") if col_summary else "",
                 "projects": projects,
-                "interest_projects": interest_display, # Return pretty string by default
+                "interest_projects": interest_display or "—", 
                 "project_primary": raw.get(col_primary, "") if col_primary else (projects[0] if projects else None),
                 "region": raw.get(col_region, "") if col_region else None,
                 "preferred_region": raw.get(col_region, "") if col_region else None,
                 "unit_type": raw.get(col_unit, "") if col_unit else None,
                 "purpose": raw.get(col_purpose, "") if col_purpose else None,
-                "budget_min": _parse_num(raw.get(col_bmin, "")) if col_bmin else None,
-                "budget_max": _parse_num(raw.get(col_bmax, "")) if col_bmax else None,
+                "budget_min": bmin,
+                "budget_max": bmax,
                 "timeline": raw.get(col_timeline, "") if col_timeline else None,
-                "budget_band": raw.get(col_band, "") if col_band else None,
+                "budget_band": band,
                 "lead_temperature": raw.get(col_temp, "") if col_temp else None,
                 "lead_temperature_variant": raw.get(col_temp, "").lower() if col_temp else "cold",
                 "reason_codes": raw.get(col_reason_display, "") if col_reason_display else "",
