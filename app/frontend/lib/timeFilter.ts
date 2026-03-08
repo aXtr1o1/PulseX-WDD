@@ -74,13 +74,60 @@ export function computeLeadAnalytics(leads: any[]) {
         // Projects
         (l.projects || []).forEach((p: string) => distributions.projects[p] = (distributions.projects[p] || 0) + 1);
 
-        // Fields
-        if (l.region) distributions.regions[l.region] = (distributions.regions[l.region] || 0) + 1;
-        if (l.unit_type) distributions.unitTypes[l.unit_type] = (distributions.unitTypes[l.unit_type] || 0) + 1;
-        if (l.purpose) distributions.purposes[l.purpose] = (distributions.purposes[l.purpose] || 0) + 1;
-        if (l.timeline) distributions.timelines[l.timeline] = (distributions.timelines[l.timeline] || 0) + 1;
-        if (l.lead_temperature) distributions.temperatures[l.lead_temperature] = (distributions.temperatures[l.lead_temperature] || 0) + 1;
-        if (l.budget_band) distributions.budgetBands[l.budget_band] = (distributions.budgetBands[l.budget_band] || 0) + 1;
+        // Fields with Normalization
+        if (l.region) {
+            const reg = String(l.region).trim();
+            distributions.regions[reg] = (distributions.regions[reg] || 0) + 1;
+        }
+
+        // Unit type splitting (Handle "Villa, Apartment")
+        if (l.unit_type) {
+            const types = String(l.unit_type).split(',').map(t => t.trim()).filter(Boolean);
+            types.forEach(t => {
+                const norm = t.toLowerCase();
+                distributions.unitTypes[norm] = (distributions.unitTypes[norm] || 0) + 1;
+            });
+        }
+
+        if (l.purpose) {
+            const purp = String(l.purpose).trim();
+            distributions.purposes[purp] = (distributions.purposes[purp] || 0) + 1;
+        }
+
+        // Timeline Normalization
+        if (l.timeline) {
+            let tl = String(l.timeline).toLowerCase().trim();
+            let normTl = 'Exploring'; // Default
+
+            if (tl.includes('immediate') || tl.includes('now') || tl.includes('asap')) {
+                normTl = 'Immediate';
+            } else if (tl.includes('3 month') || tl.includes('0-3') || (tl.match(/\b[1-3]\b/) && tl.includes('month'))) {
+                normTl = '0-3 months';
+            } else if (tl.includes('6 month') || tl.includes('3-6')) {
+                normTl = '3-6 months';
+            } else if (tl.includes('12 month') || tl.includes('6-12')) {
+                normTl = '6-12 months';
+            } else if (tl.includes('year') || tl.includes('12+') || tl.includes('24')) {
+                normTl = '1 year+';
+            } else if (tl.includes('exploring') || tl.includes('just looking')) {
+                normTl = 'Exploring';
+            } else {
+                // Fallback attempt to group anything else reasonable
+                if (tl.includes('invest') || tl.includes('buy')) normTl = 'Exploring';
+                else normTl = tl.charAt(0).toUpperCase() + tl.slice(1);
+            }
+
+            distributions.timelines[normTl] = (distributions.timelines[normTl] || 0) + 1;
+        }
+
+        if (l.lead_temperature) {
+            const temp = l.lead_temperature;
+            distributions.temperatures[temp] = (distributions.temperatures[temp] || 0) + 1;
+        }
+
+        if (l.budget_band) {
+            distributions.budgetBands[l.budget_band] = (distributions.budgetBands[l.budget_band] || 0) + 1;
+        }
 
         // Tags
         (l.tags || []).forEach((t: string) => distributions.tags[t] = (distributions.tags[t] || 0) + 1);

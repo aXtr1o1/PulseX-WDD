@@ -50,7 +50,7 @@ export default function LeadTable({ leads, onSelect, loading }: LeadTableProps) 
                                 </td>
                                 <td className="px-3 sm:px-6 py-4">
                                     <div className="text-xs font-medium text-[var(--wdd-black)]">{l.phone || l.contact || '—'}</div>
-                                    <div className="text-[10px] text-[var(--wdd-muted)] truncate max-w-[120px]">{l.email || 'No Email'}</div>
+                                    <div className="text-[10px] text-[var(--wdd-muted)] truncate max-w-[120px]">{l.email || ''}</div>
                                 </td>
                                 <td className="px-3 sm:px-6 py-4">
                                     <div className="flex items-center gap-1.5">
