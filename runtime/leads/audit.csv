@@ -1217,3 +1217,16 @@ enlighten me",list_projects,"[""tijan_maadi"", ""tijan_zahraa_el_maadi"", ""mura
 2026-03-08T12:15:46.313834,sess_mmgvf7m5hirl0,Tell me more about Murano project in Ain El Sokhna,project_query,[],[],v1.0,all
 2026-03-08T12:15:58.977101,sess_mmgvf7m5hirl0,sure,lead_capture,[],[],v1.0,all
 2026-03-08T12:16:17.044168,sess_mmgvf7m5hirl0,Sid & (091) 9994566311,lead_capture,[],[],v1.0,all
+2026-03-08T18:17:59.136838,sess_mmhq7lryfw7tr,Hi,support_contact,[],[],v1.0,all
+2026-03-08T18:18:16.186187,sess_mmhq7lryfw7tr,am looking for Properties,list_projects,"[""tijan_maadi"", ""tijan_zahraa_el_maadi"", ""murano""]",[],v1.0,all
+2026-03-08T18:18:34.469725,sess_mmhq7lryfw7tr,I'd prefer a Villa,list_projects,"[""ojo"", ""living_community"", ""murano""]",[],v1.0,all
+2026-03-08T18:18:53.252466,sess_mmhq7lryfw7tr,I want it for investment,lead_capture,[],[],v1.0,all
+2026-03-08T18:19:13.918286,sess_mmhq7lryfw7tr,"Actually am from India
+
+I have no idea",list_projects,"[""ojo"", ""living_community"", ""floating_islands""]",[],v1.0,all
+2026-03-08T18:19:33.719517,sess_mmhq7lryfw7tr,list me all all the Projects you have,list_projects,"[""ojo"", ""living_community"", ""murano""]",[],v1.0,all
+2026-03-08T18:20:13.621162,sess_mmhq7lryfw7tr,"am okay with Living Community & Murano
+
+tell me more on it",project_query,[],[],v1.0,all
+2026-03-08T18:20:35.898335,sess_mmhq7lryfw7tr,yepp,lead_capture,[],[],v1.0,all
+2026-03-08T18:20:55.740155,sess_mmhq7lryfw7tr,Am sid and (091) 99945 66311,lead_capture,[],[],v1.0,all

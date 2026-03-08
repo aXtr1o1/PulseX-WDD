@@ -28,10 +28,11 @@ async def test_funnel():
     # Turn 2: answers qualification
     # Turn 3: likes a project, gives phone
     turns = [
-        "I'm looking for a summer house, maybe a chalet.",
-        "My budget is around 5 million EGP, I prefer the Red Sea area like Sokhna.",
-        "Murano sounds great. Yes, please send the brochures to my WhatsApp. My name is Ahmed and number is 01012345678.",
-        "Yes, please."
+        "Hi, I'm looking for a property.",
+        "I want a Villa for my family to use in the summers. My budget is 15-20 million EGP. I'm hoping to buy in the next 3 months.",
+        "The North Coast would be amazing.",
+        "Yes, please send the official brochures to my WhatsApp. I'm Ahmed. Number: 01012345678. email: ahmed@example.com",
+        "Yes, the details are correct. Thank you."
     ]
     
     print("\n--- Starting Conversation ---")

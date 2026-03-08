@@ -63,7 +63,7 @@ class LeadsService:
             lead.session_id,
             lead.name,
             lead.phone,
-            "", # email (not collected by AI)
+            lead.email or "", # email
             ",".join(lead.interest_projects),
             lead.preferred_region or "",
             lead.unit_type or "",

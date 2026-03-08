@@ -48,6 +48,7 @@ class ChatResponse(BaseModel):
 class Lead(BaseModel):
     name: str
     phone: str
+    email: Optional[str] = None
     interest_projects: List[str] = Field(default_factory=list) # Renamed to match request if needed, but keeping list
     preferred_region: Optional[str] = None
     unit_type: Optional[str] = None # Apartment, Villa, etc.
