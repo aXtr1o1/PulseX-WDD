@@ -17,11 +17,11 @@ class LeadsService:
         # Leads CSV
         expected_headers = [
             "timestamp", "lead_id", "session_id", "name", "phone", "email",
-            "interest_projects", "preferred_region", "unit_type", 
+            "interest_projects", "interest_projects_display", "preferred_region", "unit_type", 
             "budget_min", "budget_max", "budget_band", "purpose", "timeline", 
             "contact_channel", "consent_contact", "confirmed_by_user",
-            "lead_temperature", "reason_codes", "tags", "lead_summary", 
-            "raw_json", "kb_version_hash"
+            "lead_temperature", "reason_codes", "reason_codes_display", "tags", "tags_display", "lead_summary", 
+            "customer_summary", "executive_summary", "next_action", "raw_json", "kb_version_hash"
         ]
         
         if not os.path.exists(Config.LEADS_PATH):
@@ -64,7 +64,8 @@ class LeadsService:
             lead.name,
             lead.phone,
             lead.email or "", # email
-            ",".join(lead.interest_projects),
+            ",".join(lead.interest_projects), # interest_projects
+            ", ".join(lead.interest_projects), # interest_projects_display
             lead.preferred_region or "",
             lead.unit_type or "",
             lead.budget_min or "",
@@ -76,9 +77,14 @@ class LeadsService:
             str(lead.consent_contact).lower() if lead.consent_contact is not None else "false", # consent_contact
             "true", # confirmed_by_user (AI explicitly asks)
             lead.lead_temperature or "Warm", # lead_temperature
-            "", # reason_codes
-            ",".join(lead.tags),
-            lead.lead_summary or "",
+            ",".join(lead.reason_codes) if hasattr(lead, 'reason_codes') else "", # reason_codes
+            ", ".join(lead.reason_codes) if hasattr(lead, 'reason_codes') else "", # reason_codes_display
+            ",".join(lead.tags) if hasattr(lead, 'tags') else "", # tags
+            ", ".join(lead.tags) if hasattr(lead, 'tags') else "", # tags_display
+            lead.lead_summary or "", # lead_summary
+            lead.customer_summary or "", # customer_summary
+            lead.executive_summary or "", # executive_summary
+            lead.next_action or lead.next_step or "Sales Call", # next_action
             "", # raw_json
             lead.kb_version_hash or "v1.0"
         ]

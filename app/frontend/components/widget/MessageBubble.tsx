@@ -44,8 +44,8 @@ export default function MessageBubble({ message, onChipClick }: MessageBubblePro
                             .replace(/^###\s+(.*$)/gim, '<h3 class="text-base font-bold text-[var(--wdd-black)] mt-3 mb-1">$1</h3>')
                             .replace(/^##\s+(.*$)/gim, '<h2 class="text-lg font-bold text-[var(--wdd-black)] mt-4 mb-1">$1</h2>')
                             .replace(/^#\s+(.*$)/gim, '<h1 class="text-xl font-bold text-[var(--wdd-black)] mt-4 mb-2">$1</h1>')
-                            // styling important keywords with a premium highlight
-                            .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-[var(--wdd-red)] bg-[#C0262C]/5 px-1 py-0.5 rounded-sm inline-block">$1</strong>')
+                            // styling important keywords with a premium highlight using exact #CB2030
+                            .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-[var(--wdd-red)] bg-[#CB2030]/5 px-1 py-0.5 rounded-sm inline-block">$1</strong>')
                             // newlines
                             .replace(/\n/g, '<br/>')
                     }}

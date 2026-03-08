@@ -90,12 +90,14 @@ class LLMService:
         - compare: "compare project X and Y".
         - pricing: "how much is...", "what is the price of..." (if no explicit lead intent yet).
         - support_contact: "phone number", "complaint", "direct contact".
+        - out_of_domain: Any question or topic completely unrelated to Wadi Degla Developments, real estate, or acquiring property (e.g., history, food, unrelated companies).
         
         Output Strict JSON:
         - intent: matches one of the above.
         - needs: list of fields user is asking for.
         - filters: {{project_type, project_status, region}}. 
           (Maintain filters from history if not overridden. e.g. if user previously said 'commercial', project_type should be 'commercial').
+          CRITICAL REGION RULE: "Region" refers ONLY to geographical areas (e.g. Cairo, East Cairo, West Cairo, North Coast, Red Sea, Ain El Sokhna). NEVER extract a specific Project Name (like Vyon, Clubtown, Murano, Edge) as a 'region'. If they only say "Vyon", region is null.
         - query_rewrite: clean, standalone search query that incorporates context from history if needed. 
           (e.g., if history shows 'commercial properties' and current message is 'West Cairo', rewrite to 'commercial properties in West Cairo').
           (If the message is broad like 'list all', keep the rewrite broad e.g. 'all properties').

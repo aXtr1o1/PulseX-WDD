@@ -123,23 +123,26 @@ class RAGService:
             p = c['project']
             
             # --- HARD FILTER: Never recommend non-selling projects ---
-            base_status = (p.project_status or '').lower()
-            if "not selling" in base_status:
+            base_status = str(p.project_status or '').lower()
+            sales_status = str(p.raw_data.get('current_sales_status') or '').lower()
+            canon_sales_status = str(p.raw_data.get('canon_sales_status') or '').lower()
+            
+            if "not selling" in base_status or "not_selling" in sales_status or "not_selling" in canon_sales_status or "not selling" in sales_status:
                 continue
 
             if filters:
                 # Region Filter (Check both region and city_area)
                 if filters.get('region'):
-                    region_val = (p.region or '').lower()
-                    city_val = (p.city_area or '').lower()
-                    target_region = filters['region'].lower()
+                    region_val = str(p.region or '').lower()
+                    city_val = str(p.city_area or '').lower()
+                    target_region = str(filters['region']).lower()
                     if target_region not in region_val and target_region not in city_val and region_val not in target_region:
                         continue
                 
                 # Project Type Filter
                 if filters.get('project_type'):
-                    p_type = (p.project_type or '').lower()
-                    target_type = filters['project_type'].lower()
+                    p_type = str(p.project_type or '').lower()
+                    target_type = str(filters['project_type']).lower()
                     if target_type == 'commercial' and p_type != 'commercial':
                         continue
                     if target_type == 'residential' and p_type != 'residential':
@@ -147,8 +150,8 @@ class RAGService:
 
                 # Project Status Filter
                 if filters.get('project_status'):
-                    status_val = (p.project_status or '').lower()
-                    target_status = filters['project_status'].lower()
+                    status_val = str(p.project_status or '').lower()
+                    target_status = str(filters['project_status']).lower()
                     if target_status not in status_val:
                         continue
 
@@ -160,7 +163,20 @@ class RAGService:
     def _fallback_search(self, query: str, k: int) -> List[Dict[str, Any]]:
         # Simple name text search using kb_service
         matches = kb_service.search_projects(query)
-        return [{"project": p, "score": 1.0, "source": "basic"} for p in matches[:k]]
+        filtered = []
+        for p in matches:
+            base_status = str(p.project_status or '').lower()
+            sales_status = str(p.raw_data.get('current_sales_status') or '').lower()
+            canon_sales_status = str(p.raw_data.get('canon_sales_status') or '').lower()
+            
+            if "not selling" in base_status or "not_selling" in sales_status or "not_selling" in canon_sales_status or "not selling" in sales_status:
+                continue
+                
+            filtered.append({"project": p, "score": 1.0, "source": "basic"})
+            if len(filtered) >= k:
+                break
+                
+        return filtered
 
     def build_index(self):
         """

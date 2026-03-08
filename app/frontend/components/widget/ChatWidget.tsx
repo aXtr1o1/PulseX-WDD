@@ -235,12 +235,16 @@ export default function ChatWidget({ initialProject, embedded = false }: ChatWid
                                 e.target.style.height = 'auto';
                                 e.target.style.height = Math.min(e.target.scrollHeight, 150) + 'px';
                             }}
-                            onKeyDown={handleKeyDown}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' && !e.shiftKey) {
+                                    e.preventDefault();
+                                    if (!loading) handleSend();
+                                }
+                            }}
                             placeholder="The journey to your dream starts here..."
                             className="flex-1 bg-transparent text-[15px] font-medium text-[#1a1a1a] placeholder:text-gray-400 outline-none resize-none min-h-[24px] max-h-[150px] py-1 hide-scrollbar caret-[var(--wdd-red)]"
                             rows={1}
                             dir="ltr"
-                            disabled={loading}
                         />
                         {loading ? (
                             <div className="pl-3 pb-0.5 animate-fade-in flex items-center justify-center">

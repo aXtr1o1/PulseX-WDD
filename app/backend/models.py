@@ -57,7 +57,11 @@ class Lead(BaseModel):
     purpose: Optional[str] = None # Investment, Primary Home
     timeline: Optional[str] = None # Immediate, 6 months
     next_step: Optional[str] = None # Call, Visit
+    next_action: Optional[str] = None
     lead_summary: Optional[str] = None # Conversation summary
+    customer_summary: Optional[str] = None
+    executive_summary: Optional[str] = None
+    reason_codes: List[str] = Field(default_factory=list)
     tags: List[str] = Field(default_factory=list) # e.g. "High Value", "Urgent"
     lead_temperature: Optional[str] = None # Hot, Warm, Cold
     consent_contact: Optional[bool] = None # True if user explicitly consented
