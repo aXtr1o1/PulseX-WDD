@@ -5,7 +5,7 @@ Built for **Wadi Degla Developments (WDD)**.
 
 ---
 
-## 🌟 System Overview
+## System Overview
 
 PulseX-WDD is a sophisticated "Sales Concierge" platform that transforms passive web traffic into high-intent leads. Unlike traditional chatbots, PulseX follows a strict 6-stage sales funnel grounded in the WDD KnowledgeBase, ensuring zero hallucinations and deterministic lead qualification.
 
@@ -20,18 +20,40 @@ The system uses a stateful conversation logic that guides users through:
 
 ---
 
-## 🏗️ Technical Architecture
+## Technical Architecture
 
 | Component | Technology | Role |
 |-----------|------------|------|
 | **Backend** | FastAPI + Python 3.11 | High-performance async API with Pydantic v2 validation. |
 | **Frontend** | Next.js 14 + Tailwind | Modern, responsive dashboard and embeddable chat widget. |
-| **Hybrid RAG** | SQLite FTS5 + FAISS | Dual-index retrieval: Keyword (FTS5) + Semantic (FAISS). |
+| **Hybrid RAG** | FAISS + RapidFuzz | Dual-index retrieval: Semantic (FAISS) + Keyword (RapidFuzz). |
 | **Data Layer** | Portalocker-Safe CSV | Concurrency-safe, human-readable leads and audit logs. |
+
+### The Hybrid RAG Engine
+The core intelligence of PulseX-WDD relies on a sophisticated hybrid retrieval system to ensure high-accuracy property matching:
+
+1.  **Semantic Retrieval (FAISS)**: Converts properties and user queries into high-dimensional vectors. This allows the system to understand intent (e.g., "quiet coastal retreat") even if specific keywords aren't used.
+2.  **Keyword Matching (RapidFuzz)**: Uses fuzzy string matching to ensure specific project names (e.g., "ClubTown", "Edge") are prioritized even with typos or incomplete entries.
+3.  **Hard Gating & Filtering**: 
+    - **Sales Status Gating**: Automatically excludes projects marked as "not selling" in the KnowledgeBase.
+    - **Entity Filtering**: Forces results to match extracted filters like `Region`, `Unit Type`, or `Project Type` (Residential/Commercial).
+4.  **Zero-Latency Rebuilds**: Uses a SHA-256 file hashing mechanism (`kb_hash.txt`) to bypass index rebuilding on startup if the KnowledgeBase hasn't changed, saving OpenAI API cost and startup time.
 
 ---
 
-## ⚡ Execution & Deployment
+### KnowledgeBase Governance & Schema
+The system operates on a strictly governed CSV-based KnowledgeBase, ensuring that the AI only recommends verified WDD properties.
+
+1.  **Canonical Identity**: Every project uses a `canon_project_slug` (ID) and `canon_project_name` for consistent cross-system referencing.
+2.  **Pricing Intelligence**: Supports multi-state pricing:
+    - **Official**: Displays precise `starting_price_value`.
+    - **On Request**: Suppresses pricing and forces a lead capture intent.
+3.  **Amenity Aggregation**: Automatically merges list-based amenities with high-level boolean flags (e.g., `golf_flag`, `beach_access_flag`) into a unified project profile.
+4.  **Context Construction**: The `kb_service` dynamically builds "Project Cards"—normalized text summaries—used to generate FAISS embeddings for semantic search.
+
+---
+
+## Execution & Deployment
 
 ### One-Shot Startup (Recommended)
 The `start.sh` script automates the entire Docker-based lifecycle including thermal cleanup of stale networks and volume mounting for live development.
@@ -59,19 +81,19 @@ docker compose -p pulsex_master down       # Stop and cleanup
 
 ---
 
-## 📊 Data Features & Nuances
+## Data Features & Intelligence
 
-### Lead De-duplication (Upsert Logic)
-The `LeadsService` implements a **session-based upsert mechanism**. If a lead with the same `session_id` already exists (e.g., user updates their preferences), the system updates the existing row instead of appending duplicates. This ensures the 29-column `leads.csv` remains clean and actionable.
+### Lead Lifecycle & De-duplication
+PulseX implements a sophisticated lead management system optimized for the WDD sales pipeline:
 
-### Intelligent Extraction
-- **Budget Formatting**: Numeric values (e.g., "18,600,000 EGP") are automatically extracted and indexed for the dashboard KPIs.
-- **Next Action Mapping**: Technical enums are converted to human-readable CTAs (e.g., "Send Project Brochures & Details").
-- **Dashboard Resilience**: The admin loader skips malformed CSV lines (`on_bad_lines='skip'`) to ensure the dashboard never crashes on dirty data.
+- **Session-Matched Upserts**: The system uses `session_id` to detect repeat interactions. If a user provides more info (e.g., updates their budget), the existing record is updated in-place instead of creating a duplicate entry.
+- **Audit Trails**: Every user query and AI response is logged in `audit.csv` with intent classification and similarity scores for quality monitoring.
+- **Budget Tiering**: Automatically classifies leads into segmentations (**ULTRA** >20M, **HIGH** 10-20M, **MID** 5-10M, **LOW** <5M) to help sales prioritize high-value prospect follow-ups.
+- **Fault-Tolerant Parsing**: The Admin dashboard utilizes robust numeric parsing and "on bad lines skip" logic to handle manual CSV edits or dirty data without impacting system uptime.
 
 ---
 
-## 🔧 Developer Workflow
+## Developer Workflow
 
 ### Refreshing KnowledgeBase
 If you update the `engine-KB/PulseX-WDD_buyerKB.csv`, run:
@@ -88,7 +110,7 @@ Key variables in `.env`:
 
 ---
 
-## 🔒 Security & Performance
+## Security & Performance
 - **Zero Hallucination**: Strict RAG gating ensures the AI only speaks from WDD-approved data.
 - **Concurrency**: `portalocker` prevents file corruption during simultaneous lead captures.
 - **Resilience**: Frontend utilizes `Promise.allSettled` patterns to load dashboards even if partial API services are down.
