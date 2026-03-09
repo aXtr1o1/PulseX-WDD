@@ -370,7 +370,9 @@ async def create_lead(lead: Lead):
         raise HTTPException(status_code=500, detail="Failed to save lead")
     return {"status": "success", "message": "Lead captured"}
 
-
+@app.get("/")
+def root():
+    return {"status": "PulseX API running"}
 @app.get("/health")
 async def health():
     return {"status": "ok", "rag_ready": rag_service.is_ready}
