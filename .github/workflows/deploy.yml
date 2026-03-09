@@ -1,0 +1,41 @@
+name: Deploy PulseX to Azure VM
+
+on:
+push:
+branches:
+- main
+
+jobs:
+deploy:
+runs-on: ubuntu-latest
+
+
+steps:
+  - name: Checkout repository
+    uses: actions/checkout@v4
+
+  - name: Deploy to Azure VM
+    uses: appleboy/ssh-action@v1.0.3
+    with:
+      host: ${{ secrets.AZURE_HOST }}
+      username: ${{ secrets.AZURE_USER }}
+      key: ${{ secrets.AZURE_SSH_KEY }}
+      port: 22
+      script: |
+        cd /home/azureuser/var/www/app/PulseX-WDD
+
+        echo "Pulling latest code..."
+        git pull origin main
+
+        echo "Installing dependencies..."
+        source /home/azureuser/venv/bin/activate
+        pip install -r requirements.txt
+
+        echo "Rebuilding RAG index (if needed)..."
+        python3 -m app.backend.retrieval.build_index || true
+
+        echo "Restarting FastAPI service..."
+        sudo systemctl restart app
+
+        echo "Deployment complete!"
+```
