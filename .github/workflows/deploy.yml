@@ -38,4 +38,4 @@ steps:
         sudo systemctl restart app
 
         echo "Deployment complete!"
-```
+
