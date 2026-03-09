@@ -30,8 +30,7 @@ jobs:
             echo "Activating virtualenv"
             source /home/azureuser/venv/bin/activate
     
-            echo "Installing dependencies"
-            pip install -r requirements.txt
+
     
             echo "Rebuilding index"
             python3 -m app.backend.retrieval.build_index || true
